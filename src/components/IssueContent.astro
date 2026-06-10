@@ -4,6 +4,7 @@ import CategorySection from './CategorySection.astro';
 import PostCard from './PostCard.astro';
 import IssueNav from './IssueNav.astro';
 import DateFilter from './DateFilter.astro';
+import { slugify } from '../utils/slugify';
 
 interface Props {
   issue: CollectionEntry<'issues'>['data'];
@@ -17,6 +18,8 @@ const totalPapers = Object.values(issue.papersByCategory).reduce(
   (sum, papers) => sum + papers.length,
   0,
 );
+
+const categories = Object.keys(issue.papersByCategory);
 
 const dateFormatter = new Intl.DateTimeFormat('en-US', {
   month: 'long',
@@ -35,22 +38,42 @@ const endLabel = dateFormatter.format(new Date(issue.dateRange.end));
   </p>
 </div>
 
-{totalPapers > 0 && (
-  <section>
-    <h2 class="section-heading">Papers</h2>
-    <DateFilter />
-    <p id="no-results" class="no-results" hidden>No papers match this date range.</p>
-    {Object.entries(issue.papersByCategory).map(([category, papers]) => (
-      <CategorySection category={category} papers={papers} />
-    ))}
-  </section>
-)}
+<div class="issue-layout">
+  {(categories.length > 0 || issue.labPosts.length > 0) && (
+    <aside class="toc">
+      <div class="toc-sticky">
+        <p class="toc-title">Jump to</p>
+        <ul>
+          {categories.map((category) => (
+            <li><a href={`#${slugify(category)}`}>{category}</a></li>
+          ))}
+          {issue.labPosts.length > 0 && (
+            <li><a href="#lab-announcements">Lab Announcements</a></li>
+          )}
+        </ul>
+      </div>
+    </aside>
+  )}
 
-{issue.labPosts.length > 0 && (
-  <section>
-    <h2 class="section-heading">Lab Announcements</h2>
-    {issue.labPosts.map((post) => <PostCard post={post} />)}
-  </section>
-)}
+  <div class="issue-main">
+    {totalPapers > 0 && (
+      <section>
+        <h2 class="section-heading">Papers</h2>
+        <DateFilter />
+        <p id="no-results" class="no-results" hidden>No papers match this date range.</p>
+        {Object.entries(issue.papersByCategory).map(([category, papers]) => (
+          <CategorySection category={category} papers={papers} />
+        ))}
+      </section>
+    )}
 
-<IssueNav prev={prev} next={next} />
+    {issue.labPosts.length > 0 && (
+      <section id="lab-announcements">
+        <h2 class="section-heading">Lab Announcements</h2>
+        {issue.labPosts.map((post) => <PostCard post={post} />)}
+      </section>
+    )}
+
+    <IssueNav prev={prev} next={next} />
+  </div>
+</div>

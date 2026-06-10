@@ -1,6 +1,7 @@
 ---
 import type { NormalizedItem } from '../../pipeline/types';
 import PaperCard from './PaperCard.astro';
+import { slugify } from '../utils/slugify';
 
 interface Props {
   category: string;
@@ -10,7 +11,7 @@ interface Props {
 const { category, papers } = Astro.props;
 ---
 
-<div class="category-section">
+<div class="category-section" id={slugify(category)}>
   <h3 class="category-heading">{category}</h3>
   {papers.map((paper) => <PaperCard paper={paper} />)}
 </div>
