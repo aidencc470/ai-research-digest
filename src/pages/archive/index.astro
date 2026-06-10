@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const issues = await getCollection('issues');
+const sorted = [...issues].sort((a, b) => b.data.slug.localeCompare(a.data.slug));
+
+const dateFormatter = new Intl.DateTimeFormat('en-US', {
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric',
+});
+---
+
+<BaseLayout title="Archive — AI Research Digest">
+  <div class="issue-header">
+    <h1>Archive</h1>
+    <p class="issue-meta">All past issues of AI Research Digest.</p>
+  </div>
+
+  <ul class="archive-list">
+    {sorted.map((entry) => {
+      const totalPapers = Object.values(entry.data.papersByCategory).reduce(
+        (sum, papers) => sum + papers.length,
+        0,
+      );
+      return (
+        <li>
+          <div class="archive-title">
+            <a href={`/issues/${entry.data.slug}`}>{entry.data.title}</a>
+          </div>
+          <div class="archive-stats">
+            {dateFormatter.format(new Date(entry.data.dateRange.end))} ·{' '}
+            {totalPapers} papers · {entry.data.labPosts.length} lab posts
+          </div>
+        </li>
+      );
+    })}
+  </ul>
+</BaseLayout>

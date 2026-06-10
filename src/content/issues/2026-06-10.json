@@ -1,0 +1,645 @@
+{
+  "slug": "2026-06-10",
+  "title": "Weekly AI Digest — June 10, 2026",
+  "dateRange": {
+    "start": "2026-06-03T19:29:34.976Z",
+    "end": "2026-06-10T19:29:34.976Z"
+  },
+  "papersByCategory": {
+    "Machine Learning": [
+      {
+        "id": "2606.11190",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "When to Align, When to Predict: A Phase Diagram for Multimodal Learning",
+        "authors": [
+          "Ilay Kamai",
+          "Hugues Van Assel",
+          "Aviv Regev",
+          "Hagai B. Perets",
+          "Randall Balestriero"
+        ],
+        "summary": "Cross-modal alignment (CA) and cross-modal prediction (CP) are the dominant paradigms for multimodal representation learning, yet there is no systematic understanding of when each succeeds, when each fails, and when cross-modal training helps at all -- a gap that leaves practitioners, especially in scientific domains like biomedicine or astrophysics, with heterogeneous instruments and multiple levels of organization and measurement, unable to diagnose why standard methods underperform the best single modality. We develop a unified linear framework that addresses both questions. Under a spiked signal-plus-noise model with structured cross-modal nuisance correlation, we derive separation ratios for both objectives that expose complementary failure modes: alignment whitens each modality and fails when nuisance is strongly correlated across views; prediction encodes whatever is cross-predictable through a one-sided whitening, with recovery governed by source-modality quality. The resulting phase diagram partitions multimodal problems into four regimes: Both, CA only, CP only, and Neither. We present a data-driven procedure to locate real-world datasets in this diagram using a small labeled subsample, identifying the preferred objective and prediction direction before any cross-modal training. Experiments on synthetic data, stereo-vision benchmarks, image-caption pairs, and real astrophysical data validate the predictions in the nonlinear regime, including the Neither regime where cross-modal training is actively harmful. Our framework lets practitioners diagnose their multimodal problem and choose the right objective before committing to training. Code to reproduce the results is available at https://github.com/IlayMalinyak/mm_align_vs_pred.",
+        "url": "https://arxiv.org/abs/2606.11190v1",
+        "pdfUrl": "https://arxiv.org/pdf/2606.11190v1",
+        "publishedDate": "2026-06-09T17:59:58.000Z",
+        "tags": [
+          "cs.LG"
+        ]
+      },
+      {
+        "id": "2606.11182",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "EEVEE: Towards Test-time Prompt Learning in the Real World for Self-Improving Agents",
+        "authors": [
+          "Weixian Xu",
+          "Shilong Liu",
+          "Mengdi Wang"
+        ],
+        "summary": "In this paper, we propose EEVEE, the first multi-dataset test-time prompt learning framework for LLM agents, enabling test-time prompt learning under real-world task streams. Existing methods are largely designed for single-dataset settings, while real-world applications require models to handle heterogeneous input streams drawn from multiple datasets, domains, and task distributions, limiting their practical applicability. To mitigate cross-dataset interference, EEVEE introduces a router that partitions incoming inputs into task clusters and assigns them to suitable prompt configurations. This design is optimized via a router-prompt co-evolution strategy, which employs interleaved router and prompt learning phases to address their mutual dependency. Experiments across multiple datasets demonstrate that the framework improves robustness under heterogeneous data streams while maintaining single-benchmark learning capability and efficiency. Specifically, EEVEE improves average multi-benchmark scores by 10.38 and 24.32 points over Qwen3-4B-Instruct and DeepSeek-V3.2, surpassing SOTA methods GEPA and ACE by up to 37.2% and 48.2%.",
+        "url": "https://arxiv.org/abs/2606.11182v1",
+        "pdfUrl": "https://arxiv.org/pdf/2606.11182v1",
+        "publishedDate": "2026-06-09T17:57:16.000Z",
+        "tags": [
+          "cs.LG",
+          "cs.AI"
+        ]
+      },
+      {
+        "id": "2606.11173",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "The Role of Feedback Alignment in Self-Distillation",
+        "authors": [
+          "Semih Kara",
+          "Oğuzhan Ersoy"
+        ],
+        "summary": "Conditioning a language model on additional context, such as feedback on a previous attempt, typically improves its response. Self-distillation trains the model to retain this improvement when the context is not present. The method works by matching the model's output distribution under two settings: a student that sees only the question, and a self-teacher that also sees the context. What the model learns therefore depends on what context the self-teacher receives, yet the design of this context remains largely unexplored. We study context design for self-distillation by training a solver on feedback from a frozen critic. We compare three conditions: (i) a binary reward (GRPO), (ii) the reference solution, and (iii) a step-by-step critique aligned to the solver's reasoning trace. Step-aligned critique yields the largest gains, outperforming GRPO by 16.11 points and reference-solution-conditioned self-distillation by 5.27 points (Avg@12). Per-token advantage analysis reveals why: step-aligned feedback targets only the tokens where reasoning fails, leaving correct behavior intact. Conditioning on the reference solution, by contrast, pressures the model to change its behavior at every token (even correct steps) because an alternative derivation inevitably differs in phrasing and approach. This suggests that structural alignment between feedback and the solver's reasoning is a key driver of self-distillation effectiveness.",
+        "url": "https://arxiv.org/abs/2606.11173v1",
+        "pdfUrl": "https://arxiv.org/pdf/2606.11173v1",
+        "publishedDate": "2026-06-09T17:50:09.000Z",
+        "tags": [
+          "cs.AI",
+          "cs.LG"
+        ]
+      },
+      {
+        "id": "2606.11172",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Predicting Future Behaviors in Reasoning Models Enables Better Steering",
+        "authors": [
+          "Evgenii Kortukov",
+          "Piotr Komorowski",
+          "Florian Klein",
+          "Paula Engl",
+          "Gabriele Sarti",
+          "Seong Joon Oh",
+          "Sebastian Lapuschkin",
+          "Wojciech Samek"
+        ],
+        "summary": "Deployed large reasoning models (LRMs) often behave unexpectedly. Test-time steering controls LRM outputs by intervening on their hidden representations, but it can degrade output quality. We argue that prior steering work implicitly relies on internal features that detect behavior in already generated text. We show that these detection features are poor predictors of future behavioral outcomes, and thus not the natural intervention target. Instead, we train activation probes to predict future behavior likelihoods from intermediate reasoning steps. These probes predict the most likely behavior with 64%-91% accuracy, revealing a separate type of internal prediction features. Building on these prediction features, we introduce a text-level steering method, Future Probe Controlled Generation. FPCG samples multiple candidate sentences and chooses the best one according to a probe predicting the future behavior likelihood. This enables steering with almost no output quality degradation. FPCG also enables steering in several evaluations where activation steering fails. These results show that distinguishing detection and prediction features enables a more nuanced approach to controlling LRM behaviors.",
+        "url": "https://arxiv.org/abs/2606.11172v1",
+        "pdfUrl": "https://arxiv.org/pdf/2606.11172v1",
+        "publishedDate": "2026-06-09T17:49:24.000Z",
+        "tags": [
+          "cs.LG"
+        ]
+      },
+      {
+        "id": "2606.11171",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Algorithmic and Minimax Complexities in Kernel Bandits",
+        "authors": [
+          "Yunbei Xu"
+        ],
+        "summary": "Gaussian-process upper confidence bound (GP-UCB) and decision-estimation-coefficient (DEC) methods may appear, at first sight, to belong to different theories. This paper places the two viewpoints in a common algorithmic-information language for frequentist RKHS bandits. GP-UCB fixes an algorithmic, rather than true, Gaussian-process prior and exploits realized-trajectory complexity together with computational tractability, whereas MAMS optimizes a robust class-wide MAIR/DEC envelope. Through the unified MAIR framework and heterogeneous positive-semidefinite algorithmic priors, we generalize both the GP-UCB analysis and the MAMS algorithm, propose a safeguarded master that combines their advantages, and provide a kernel-bandit construction showing that algorithmic complexity can be more informative than class-wide minimax or DEC certificates in overparameterized models. The resulting message is that algorithmic information and class-wide minimax coefficients answer different questions and can lead to different gaps; kernel bandits provide a clean setting in which this distinction becomes mathematically visible.",
+        "url": "https://arxiv.org/abs/2606.11171v1",
+        "pdfUrl": "https://arxiv.org/pdf/2606.11171v1",
+        "publishedDate": "2026-06-09T17:49:09.000Z",
+        "tags": [
+          "cs.LG",
+          "cond-mat.stat-mech",
+          "cs.IT",
+          "math.OC",
+          "math.ST"
+        ]
+      },
+      {
+        "id": "2606.11162",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "COGENT: Continuous Graph Emulators with Neural Ordinary Differential Equations for Long-Term Physical Forecasting",
+        "authors": [
+          "Zesheng Liu",
+          "Maryam Rahnemoonfar"
+        ],
+        "summary": "In this work, we present COGENT, a continuous graph emulator with Neural Ordinary Differential Equations for long-term physical forecasting on irregular geospatial meshes. COGENT encodes a finite history of system states and associated forcing fields and external forcings with a graph-based history encoder, producing node-wise context vectors that capture both local spatial interactions and temporal evolution. These context vectors initialize and condition a latent Neural Ordinary Differential Equation whose dynamics are driven by interpolated future forcings and explicit relative rollout time. By modeling the forecast trajectory as a continuous latent dynamical system, COGENT can generate predictions at arbitrary future times rather than being restricted to a fixed temporal discretization. A residual decoder maps the resulting latent trajectories back to future physical states, enabling direct multi-step forecasting without repeatedly feeding predicted states back into the model. This formulation combines graph-based spatial representation, history-conditioned latent dynamics, and continuous-time rollout in a unified framework for mesh-based physical simulation emulation. In order to stabilize training with long-horizon supervision, we also propose effective rollout-horizon sampling and a progressive rollout-horizon scheduling strategy. We evaluate COGENT on transient ice-sheet simulations generated by the Ice-sheet and Sea-level System Model, demonstrating improved long-range stability over autoregressive graph baselines. These results suggest that continuous graph Neural ODEs provide a promising methodology for scalable physical forecasting on irregular geospatial meshes, particularly in applications that require stable long-horizon predictions and the ability to query system states at arbitrary times.",
+        "url": "https://arxiv.org/abs/2606.11162v1",
+        "pdfUrl": "https://arxiv.org/pdf/2606.11162v1",
+        "publishedDate": "2026-06-09T17:43:30.000Z",
+        "tags": [
+          "cs.LG"
+        ]
+      },
+      {
+        "id": "2606.11156",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Itô maps for any-step SDEs",
+        "authors": [
+          "Zhengkai Pan",
+          "Peter Potaptchik",
+          "Wenxi Yao",
+          "Michael S. Albergo",
+          "Jakiw Pidstrigach"
+        ],
+        "summary": "Recent one-step generative models accelerate sampling by learning deterministic flow maps of the underlying dynamics. These methods rely on learning from ordinary differential equations, leaving open how to define an exact distillation procedure for stochastic dynamics. We introduce the Itô map, an any-step stochastic flow map that takes an intermediate state and Brownian path and predicts future states in a single pass. The Itô map formulation yields novel estimators for inference-time control by providing cheap, differentiable access to posterior samples. Empirically, Itô maps produce diverse, conditionally valid endpoint samples from fixed intermediate states and support strong steering performance on synthetic and image-generation benchmarks. These results establish any-step SDE integration as a useful primitive for posterior sampling and stochastic control.",
+        "url": "https://arxiv.org/abs/2606.11156v1",
+        "pdfUrl": "https://arxiv.org/pdf/2606.11156v1",
+        "publishedDate": "2026-06-09T17:39:22.000Z",
+        "tags": [
+          "stat.ML",
+          "cs.LG"
+        ]
+      }
+    ],
+    "LLMs & Language": [
+      {
+        "id": "2606.11189",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "A Unifying Lens on Supervised Fine-Tuning Through Target Distribution Design",
+        "authors": [
+          "Tong Xie",
+          "Yuanhao Ban",
+          "Yunqi Hong",
+          "Sohyun An",
+          "Yihang Chen",
+          "Cho-Jui Hsieh"
+        ],
+        "summary": "Supervised fine-tuning (SFT) typically maximizes the likelihood of every token in a demonstrated trajectory. However, an observed token can be non-unique, noisy, or misaligned with the model prior. Strictly fitting toward this one-hot target may be suboptimal, especially when the pretrained model encodes a rich knowledge prior. In this work, we reinterpret SFT as target distribution design: instead of studying only the loss objective, we analyze the token-level target that the loss drives the model to match. We introduce the Q-target framework, which decomposes SFT supervision into two explicit choices: (1) how strongly to rely on the observed token, and (2) how to allocate the remaining probability mass over alternatives. This perspective unifies many existing SFT variants as implicit choices of the target distribution Q. Building on this view, we propose Target-SFT which constructs the training objective directly from the desired target distribution. This method consistently outperforms across the ten reasoning dataset-model settings evaluated, showing the effectiveness of this target-based approach. Overall, our formulation reveals a more fundamental design principle for SFT training and opens a broader search space for SFT objectives.",
+        "url": "https://arxiv.org/abs/2606.11189v1",
+        "pdfUrl": "https://arxiv.org/pdf/2606.11189v1",
+        "publishedDate": "2026-06-09T17:59:54.000Z",
+        "tags": [
+          "cs.LG",
+          "cs.AI",
+          "cs.CL"
+        ]
+      },
+      {
+        "id": "2606.11176",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Data Journalist Agent: Transforming Data into Verifiable Multimodal Stories",
+        "authors": [
+          "Kevin Qinghong Lin",
+          "Batu EI",
+          "Yuhong Shi",
+          "Pan Lu",
+          "Philip Torr",
+          "James Zou"
+        ],
+        "summary": "Data tells stories that shape society; the data journalist's job is to turn raw information into stories non-experts can trust. A high-quality news feature takes a newsroom team weeks: hunting for context, running statistics, choosing an angle, and designing visuals. Recent agents handle individual steps well: data-science agents close the analysis loop, while design agents synthesize beautiful websites. But can an agent serve as a data journalist end to end? We introduce Data Journalist Agent (Data2Story), a multi-agent framework that orchestrates specialized roles into a single virtual newsroom. Data2Story contributes two innovations. (i) Claims are evidence-grounded: an Inspector links every number, angle, and asset back to data, code, or an external reference. (ii) Articles are multimodally generative: rather than defaulting to plain text and static charts, Data2Story reasons about what readers will want to see, then deploys multimodal tools, such as interactive maps for geography and audio for music. We evaluate Data2Story on 18 articles, each paired with the originally published expert piece, along four axes: (a) human-agent angle coverage; (b) rubric evaluation with 53 participants across five dimensions; (c) computer-use agents as judges, a cost-saving proxy for how readers navigate interactive articles; and (d) verifiability, where a coding verifier re-executes statements against the data and checks claims against references. Data2Story produces competitive, evidence-traceable multimedia stories, with particular strength in transparency and auditability. Human articles retain an edge in editorial angle, creative design, and presentation. We position Data2Story as a collaborator for journalists, enabling more evidence-based, transparent, and verifiable reporting. Code and demos are available at https://data2story.github.io.",
+        "url": "https://arxiv.org/abs/2606.11176v1",
+        "pdfUrl": "https://arxiv.org/pdf/2606.11176v1",
+        "publishedDate": "2026-06-09T17:51:55.000Z",
+        "tags": [
+          "cs.CV",
+          "cs.CL",
+          "cs.CY",
+          "cs.HC"
+        ]
+      },
+      {
+        "id": "2606.11167",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Multi-Faceted Interactivity Alignment in Full-Duplex Speech Models",
+        "authors": [
+          "Atsumoto Ohashi",
+          "Neil Zeghidour",
+          "Alexandre Défossez",
+          "Eugene Kharitonov"
+        ],
+        "summary": "Full-duplex spoken dialogue models can listen and speak simultaneously, making them a promising architecture for natural conversation. However, current models are trained solely with supervised learning through token-level likelihood maximization, which does not directly optimize interaction-level behaviors, causing interactivity issues such as excessive silence and ill-timed turn-taking. Recent work has applied reinforcement learning (RL) to improve interactivity, but existing methods address only a limited set of interactive behaviors in their rewards. In this work, we propose a post-training alignment method that comprehensively improves the interactivity of full-duplex spoken dialogue models through RL. We address the four canonical axes of interactivity: pause handling, turn-taking, backchanneling, and user interruption. For each axis, we extract short audio segments from human conversation corpora and optimize the model with axis-specific reward functions. An extra LLM-based reward for response quality prevents semantic degradation. We apply our method to two open-source models, Moshi and PersonaPlex, demonstrating consistent improvements in interactivity on both offline evaluation with pre-recorded audio and real-time multi-turn dialogue evaluation.",
+        "url": "https://arxiv.org/abs/2606.11167v1",
+        "pdfUrl": "https://arxiv.org/pdf/2606.11167v1",
+        "publishedDate": "2026-06-09T17:46:55.000Z",
+        "tags": [
+          "cs.CL",
+          "eess.AS"
+        ]
+      }
+    ],
+    "Computer Vision": [
+      {
+        "id": "2606.11188",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "ARM: An AutoRegressive Large Multimodal Model with Unified Discrete Representations",
+        "authors": [
+          "Junke Wang",
+          "Xiao Wang",
+          "Jiacheng Pan",
+          "Xuefeng Hu",
+          "Feng Li",
+          "Jingxiang Sun",
+          "Chaorui Deng",
+          "Zilong Chen",
+          "Yunpeng Chen",
+          "Kaibin Tian",
+          "Matthew Gwilliam",
+          "Hao Chen",
+          "Danhui Guan",
+          "Kun Xu",
+          "Weilin Huang",
+          "Zuxuan Wu",
+          "Haoqi Fan",
+          "Yu-Gang Jiang",
+          "Zhenheng Yang"
+        ],
+        "summary": "This paper introduces ARM, a discrete representation-based AutoRegressive Model that unifies image understanding, generation, and editing within a next-token prediction framework. ARM is built on three efforts: first, we train a discrete semantic visual tokenizer that maps images into compact token sequences. Our tokenizer is supervised with multiple objectives that jointly promote semantic discriminability, language alignment and faithful reconstruction, thereby supporting diverse tasks in a shared latent space. With this, we train a 7B autoregressive model over large-scale text and image token sequences, seamlessly developing vision-language perception and generation capabilities. Finally, to further improve preference-aligned behavior for text-to-image generation and instruction-guided editing, ARM applies reinforcement learning (RL) to optimize task-level objectives such as visual quality, instruction adherence, and edit consistency. Surprisingly, the results show that RL not only substantially improves performance on the target tasks (e.g., raising WISE overall from 0.50 to 0.56, GEdit-Bench-EN G_O from 5.75 to 6.68), but also induces cross-task synergy between text-to-image generation and editing. Collectively, these findings highlight autoregressive modeling, when paired with strong representations and preference optimization, as a scalable foundation for multimodal intelligence. Code: https://github.com/wdrink/ARM.",
+        "url": "https://arxiv.org/abs/2606.11188v1",
+        "pdfUrl": "https://arxiv.org/pdf/2606.11188v1",
+        "publishedDate": "2026-06-09T17:59:28.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2606.11187",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Next Forcing: Causal World Modeling with Multi-Chunk Prediction",
+        "authors": [
+          "Gangwei Xu",
+          "Qihang Zhang",
+          "Jiaming Zhou",
+          "Xing Zhu",
+          "Yujun Shen",
+          "Xin Yang",
+          "Yinghao Xu"
+        ],
+        "summary": "Autoregressive video generation has emerged as a powerful paradigm for World Action Models (WAMs). However, existing approaches suffer from slow training convergence and limited converged accuracy, particularly at high frame rates, as the training supervision is confined to the current chunk without explicit signals about future dynamics; they also suffer from slow inference due to iterative video denoising. In this paper, we present Next Forcing, a multi-chunk prediction (MCP) framework for causal world modeling that enables faster training, higher accuracy, and accelerated inference. Inspired by multi-token prediction in large language models, Next Forcing introduces an MCP training objective that augments the main model with lightweight auxiliary MCP modules to simultaneously denoise video chunks at multiple future temporal horizons (next$^1$, next$^2$, next$^3$ chunks). These MCP modules form a causal chain across prediction depths, where intermediate features fused from multiple layers of the main model are leveraged to predict future dynamics, allowing near-future predictions to inform farther-future ones and providing dense multi-scale temporal supervision back to the main model. During training, the MCP modules significantly accelerate convergence and improve converged accuracy, especially at high frame rates: at 50 fps, Next Forcing achieves a 93.1% relative improvement over LingBot-VA at 5k training steps and 2.3x faster convergence, and establishes new state-of-the-art results on the RoboTwin benchmark (94.1/93.5% on Clean/Random). At inference, the MCP modules can be retained to predict the next video chunk in parallel with the current one, achieving 2x inference acceleration. Next Forcing also demonstrates significant improvements on PhyWorld, a benchmark evaluating adherence to physical laws in video generation, and over 50% FVD reduction on general video pretraining.",
+        "url": "https://arxiv.org/abs/2606.11187v1",
+        "pdfUrl": "https://arxiv.org/pdf/2606.11187v1",
+        "publishedDate": "2026-06-09T17:59:22.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2606.11186",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "AnyMod-LLVE: Low-Light Video Enhancement with Modality-Agnostic Inference",
+        "authors": [
+          "Hangfeng Liang",
+          "Yutao Hu",
+          "Yanhan Hu",
+          "Xiaohan Wu",
+          "Wenqi Shao",
+          "Ying Fu"
+        ],
+        "summary": "Low-light video enhancement (LLVE) remains a challenging task due to severe information degradation under low-illumination conditions. Recent multimodal approaches have significantly improved enhancement performance by incorporating auxiliary modalities, such as event streams and infrared images. However, these methods typically assume the availability of these modalities at inference, which is often not feasible in real-world scenarios. To solve this problem, in this work, we propose AMNet, a unified multimodal framework for LLVE, to support flexible modality-agnostic inference, where auxiliary modalities may be unavailable. To address the issue of modality absence, we introduce a Spatial-Spectral Dual-Gated Translator that learns the correspondence between auxiliary modalities and RGB inputs, producing implicit auxiliary representations to support the robust enhancement. Additionally, to fully facilitate the learning of cross-modal correspondence, we conduct large-scale multimodal pretraining based on the RGB-only dataset with synthetic auxiliary modalities. Extensive experiments demonstrate that AMNet could handle arbitrary inference-time modality combinations and exhibits superior performance for LLVE under modality absence conditions. Code and models are available on the project page.",
+        "url": "https://arxiv.org/abs/2606.11186v1",
+        "pdfUrl": "https://arxiv.org/pdf/2606.11186v1",
+        "publishedDate": "2026-06-09T17:59:05.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2606.11180",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Lip Forcing: Few-Step Autoregressive Diffusion for Real-time Lip Synchronization",
+        "authors": [
+          "Paul Hyunbin Cho",
+          "Jinhyuk Jang",
+          "SeokYoung Lee",
+          "Joungbin Lee",
+          "Siyoon Jin",
+          "Heeseong Shin",
+          "Jung Yi",
+          "Yunjin Park",
+          "Chulmin Park",
+          "Seungryong Kim"
+        ],
+        "summary": "Diffusion-based lip synchronization models achieve strong visual quality and audio-visual alignment, but full-sequence bidirectional attention and many denoising steps make them impractical for real-time inference. We present Lip Forcing, to our knowledge the first autoregressive diffusion method for video-to-video (V2V) lip synchronization, which distills a 14B audio-conditioned bidirectional video diffusion teacher into causal students. At inference, the students generate each chunk in only two denoising steps without inference-time CFG, enabling real-time lip synchronization. A lip-sync-specific teacher-trajectory analysis reveals a CFG fidelity-sync tradeoff: no-CFG predictions favor reference fidelity, whereas CFG-guided predictions favor synchronization within a mid-trajectory band. Lip Forcing translates this finding into three analysis-derived components: Sync-Window DMD, a two-step inference schedule, and a SyncNet-based reward. We validate Lip Forcing at two student scales, both distilled from the 14B teacher. The 1.3B student crosses into real-time streaming at 31 FPS, $17.6\\times$ faster than its same-scale bidirectional model. The 14B student, the largest diffusion model reported for V2V lip synchronization, runs $39.8\\times$ faster than its teacher at comparable reference fidelity. Time-to-first-frame is sub-millisecond at both scales, far below every diffusion baseline.",
+        "url": "https://arxiv.org/abs/2606.11180v1",
+        "pdfUrl": "https://arxiv.org/pdf/2606.11180v1",
+        "publishedDate": "2026-06-09T17:56:36.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2606.11155",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Mean Flow Distillation: Robust and Stable Distillation for Flow Matching Models",
+        "authors": [
+          "An Zhao",
+          "Shengyuan Zhang",
+          "Zhongjian Sun",
+          "Yixiang Zhou",
+          "Zejian Li",
+          "Ling Yang",
+          "Tianrun Chen",
+          "Lingyun Sun"
+        ],
+        "summary": "Flow Matching models have demonstrated strong performance across a wide range of generative tasks. However, their reliance on ODE-based iterative sampling incurs substantial computational overhead in inference, which limits their applicability in real-time scenes. While distillation is a promising solution, existing approaches largely borrow from diffusion-based score matching, often failing to exploit the intrinsic geometric structure of flows and suffering from training instability, high variance, and degraded generation quality. In this paper, we propose Mean Flow Distillation (MFD), a novel distillation framework tailored for flow matching models. We theoretically demonstrate that MFD acts as a temporal low-pass filter, effectively suppressing the high-frequency optimization noise inherent in variational score distillation (VSD) while ensuring global trajectory consistency. We further prove the Mean Flow Matching Theorem, establishing that matching expected average velocities is sufficient for strict distribution alignment. Empirically, on challenging tasks of high-dimensional manifolds including 4D occupancy forecasting and text-to-image generation, MFD achieves state-of-the-art performance, enabling high-fidelity single-step generation.",
+        "url": "https://arxiv.org/abs/2606.11155v1",
+        "pdfUrl": "https://arxiv.org/pdf/2606.11155v1",
+        "publishedDate": "2026-06-09T17:39:19.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2606.11152",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "P3D-Bench: Benchmarking MLLMs for Parametric 3D Generation and Structural Reasoning",
+        "authors": [
+          "Yikang Yang",
+          "Zhanpeng Hu",
+          "Youtian Lin",
+          "Mengqi Zhou",
+          "Jingxi Xu",
+          "Feihu Zhang",
+          "Jiaheng Liu",
+          "Yao Yao"
+        ],
+        "summary": "Multimodal large language models can write code to produce complex programs as well as use programs to do 3D modeling, which opens up a new avenue for 3D generation powered by their priors, world knowledge and reasoning. Yet existing benchmarks rarely evaluate 3D modeling through code. Such modeling demands more than runnable code: from a text or visual specification, a model must generate a parametric 3D program that is geometrically precise, semantically aligned and assembly-consistent. We introduce P3D-Bench, a benchmark for parametric 3D generation. Unlike a 3D mesh, a parametric 3D program exposes explicit dimensions, construction operations and part relations, revealing whether a model recovers a design's structure, not just its appearance. Under a unified protocol, P3D-Bench covers three task families (Text-to-3D, Image-to-3D and Assembly-3D) and scores each output for executability, geometric fidelity, topology, text-grounded constraints, multiview semantic alignment and part-level structure. We evaluate frontier MLLMs and text-only LLMs on 400 text cases, 400 image cases and 203 annotated assemblies, with domain-specific models as reference points. Our extensive evaluation yields three findings. First, assemblies are the hardest setting, where models still fail to compose multiple parts into a coherent structure. Second, models can often recover the global shape and semantic identity of the target object, yet fail to reproduce the precise parametric geometry specified by the input. Third, part-level modeling remains weak on assemblies, where models recover neither the geometry of each part nor the right number of parts. These results position P3D-Bench as a benchmark for evaluating precise parametric geometry and part-level structure in parametric 3D generation.",
+        "url": "https://arxiv.org/abs/2606.11152v1",
+        "pdfUrl": "https://arxiv.org/pdf/2606.11152v1",
+        "publishedDate": "2026-06-09T17:36:34.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      }
+    ],
+    "AI & Agents": [
+      {
+        "id": "2606.11169",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Piper: A Programmable Distributed Training System",
+        "authors": [
+          "Megan Frisella",
+          "Shubham Tiwari",
+          "Andy Ruan",
+          "Yi Pan",
+          "Parker Gustafson",
+          "Mat Jacob",
+          "Gilbert Bernstein",
+          "Stephanie Wang"
+        ],
+        "summary": "Large-scale model training increasingly relies on composing multiple parallelism strategies, such as data, pipeline, and expert parallelism, together with memory-saving optimizations like ZeRO. Deployed systems for foundation model pretraining often rely on human experts to manually design a high-level parallelism strategy then implement the corresponding low-level execution strategy, making it difficult to adapt the system to new strategies. Meanwhile, many general-purpose frameworks are more flexible but their implementations are still tied to a fixed set of common parallelism strategies, making it challenging to integrate state-of-the-art strategies. We present Piper, a user-controllable distributed training system that decouples the strategy from the runtime implementation. Piper allows users to declare a comprehensive distributed training strategy with a small set of model annotations and scheduling directives. Each directive applies a transformation on Piper's intermediate representation (IR), a unified global training DAG that represents all computation and communication. Using this IR, Piper compiles per-device execution plans and executes them with a distributed runtime agnostic to the strategy. We show that the combined system maintains performance parity on commonly available strategies such as ZeRO, while also enabling additional performance and memory efficiency gains through joint scheduling of compute and communication in composed parallelism strategies such as DeepSeek-V3's DualPipe.",
+        "url": "https://arxiv.org/abs/2606.11169v1",
+        "pdfUrl": "https://arxiv.org/pdf/2606.11169v1",
+        "publishedDate": "2026-06-09T17:48:41.000Z",
+        "tags": [
+          "cs.DC",
+          "cs.AI"
+        ]
+      },
+      {
+        "id": "2606.11166",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Flaws in the LLM Automation Narrative",
+        "authors": [
+          "George Perrett",
+          "Javae Elliott",
+          "Jennifer Hill",
+          "Marc Scott"
+        ],
+        "summary": "Large Language Models (LLMs) are increasingly described as performing at the level of human experts on knowledge economy tasks. These claims are primarily based on how LLMs perform on benchmarking tasks that measure average performance across standardized datasets. Primary limitations of many benchmarking tasks are that they often measure performance based on content directly included in LLM training data, and they frequently do not assess the reliability of LLM performance or the magnitude of LLM errors. However, in high stakes contexts, these qualities are critically important. Through a novel LLM benchmarking task that requires writing computer code to complete a data analysis task, we compare the performance of a frontier LLM against submissions from human experts and explicitly measure the variance of responses and the magnitude of errors. Our study reveals that the human experts perform better on average on a range of metrics and demonstrate less variability in performance. Our results provide evidence that LLMs do not consistently perform at the level of human experts and demonstrate the importance of measuring variance and assessing error magnitude in LLM benchmark evaluations.",
+        "url": "https://arxiv.org/abs/2606.11166v1",
+        "pdfUrl": "https://arxiv.org/pdf/2606.11166v1",
+        "publishedDate": "2026-06-09T17:46:10.000Z",
+        "tags": [
+          "stat.OT",
+          "cs.AI"
+        ]
+      },
+      {
+        "id": "2606.11164",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "ReasonAlloc: Hierarchical Decoding-Time KV Cache Budget Allocation for Reasoning Models",
+        "authors": [
+          "Wenhao Liu",
+          "Hao Shi",
+          "Yunhe Li",
+          "Weizhi Fei",
+          "Xiangyuan Wang",
+          "Mengzhe Ruan",
+          "Hanxu Hou",
+          "Peisong Wang",
+          "Linqi Song",
+          "Shuang Qiu"
+        ],
+        "summary": "Long chain-of-thought (CoT) trajectories in large language model (LLM) reasoning cause severe inference bottlenecks due to rapid key-value (KV) cache growth. Current decoding-time compression methods mitigate this issue via token eviction, but typically assume a uniform budget distribution across all layers and heads. In contrast, existing non-uniform budget allocation methods are predominantly designed for the static prompt prefill phase, and they do not capture the stepwise context demands of autoregressive reasoning. To bridge this gap, we propose ReasonAlloc, a training-free framework that recasts decoding-time KV compression as a hierarchical budget allocation problem. ReasonAlloc operates at two complementary levels: an offline layer-wise preallocation strategy captures an architecture-driven demand pattern which we call ``\\textit{Reasoning Wave}'', while an online head-wise strategy reallocates resources during decoding to information-rich heads based on real-time utility. Evaluations on mathematical reasoning benchmarks (MATH-500, AIME~2024) using DeepSeek-R1-Distill-Llama-8B, DeepSeek-R1-Distill-Qwen-14B, and AceReason-14B show that ReasonAlloc outperforms uniform-budget R-KV, SnapKV, and Pyramid-RKV (a baseline enforcing a static, monotonically decreasing layer budget), with the largest gains at small budgets (128-512 tokens). ReasonAlloc is plug-and-play with existing token-eviction policies and introduces negligible inference-time overhead.",
+        "url": "https://arxiv.org/abs/2606.11164v1",
+        "pdfUrl": "https://arxiv.org/pdf/2606.11164v1",
+        "publishedDate": "2026-06-09T17:44:23.000Z",
+        "tags": [
+          "cs.AI"
+        ]
+      },
+      {
+        "id": "2606.11150",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "ABC-Bench: An Agentic Bio-Capabilities Benchmark for Biosecurity",
+        "authors": [
+          "Andrew Bo Liu",
+          "Samira Nedungadi",
+          "Bryce Cai",
+          "Alex Kleinman",
+          "Harmon Bhasin",
+          "Seth Donoughe"
+        ],
+        "summary": "Large language models (LLMs) are rapidly acquiring capabilities relevant to biological research, from literature synthesis to interpretation of experimental data. Increasingly, LLM agents can also perform in silico biology tasks that previously required experienced human biologists. These emerging AI capabilities offer new opportunities for scientific discovery and biomedical advances, but they also shift the landscape of biosecurity risks. To address this, we introduce the Agentic Bio-Capabilities Benchmark (ABC-Bench), a suite of tasks to measure agentic biosecurity-relevant capabilities. ABC-Bench evaluates LLM agents on both benign and dual-use biology tasks: writing code to operate liquid handling robots, designing DNA fragments for in vitro assembly, and evading DNA synthesis screening. These tasks require a combination of biology and software expertise. All tested LLM agents outperformed the median expert human baseliner on all three tasks. Agents performed highly on tasks drawing on published knowledge and well-documented protocols, and more weakly on a task requiring novel bioinformatics reasoning. In three wet-lab validation experiments, we found that OpenAI's o4-mini-high produced scripts that, when run on an OpenTrons liquid handling robot, successfully assembled DNA with expected sequences.",
+        "url": "https://arxiv.org/abs/2606.11150v1",
+        "pdfUrl": "https://arxiv.org/pdf/2606.11150v1",
+        "publishedDate": "2026-06-09T17:35:37.000Z",
+        "tags": [
+          "cs.AI",
+          "cs.CY"
+        ]
+      }
+    ]
+  },
+  "labPosts": [
+    {
+      "id": "deepmind-297462871",
+      "type": "blog_post",
+      "source": "deepmind",
+      "title": "DiffusionGemma: 4x faster text generation",
+      "authors": [],
+      "summary": "",
+      "url": "https://deepmind.google/blog/diffusiongemma-4x-faster-text-generation/",
+      "publishedDate": "2026-06-10T16:24:11.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-1486004511",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "From data to decisions: how LSEG is scaling trusted AI",
+      "authors": [],
+      "summary": "See how LSEG uses OpenAI to scale trusted AI across its global business, accelerating insights, shrinking release cycles, and empowering 4,000 employees.",
+      "url": "https://openai.com/index/lseg",
+      "publishedDate": "2026-06-10T00:00:00.000Z",
+      "tags": []
+    },
+    {
+      "id": "deepmind-1038079586",
+      "type": "blog_post",
+      "source": "deepmind",
+      "title": "Fluid, natural voice translation with Gemini 3.5 Live Translate",
+      "authors": [],
+      "summary": "Gemini 3.5 Live Translate brings near real-time, natural speech translation to Google AI Studio, Google Translate and Google Meet.",
+      "url": "https://deepmind.google/blog/fluid-natural-voice-translation-with-gemini-35-live-translate/",
+      "publishedDate": "2026-06-09T15:16:25.000Z",
+      "tags": []
+    },
+    {
+      "id": "deepmind-918755122",
+      "type": "blog_post",
+      "source": "deepmind",
+      "title": "Introducing Gemma 4 12B: a unified, encoder-free multimodal model",
+      "authors": [],
+      "summary": "",
+      "url": "https://deepmind.google/blog/introducing-gemma-4-12b-a-unified-encoder-free-multimodal-model/",
+      "publishedDate": "2026-06-09T14:10:19.000Z",
+      "tags": []
+    },
+    {
+      "id": "deepmind-1432298595",
+      "type": "blog_post",
+      "source": "deepmind",
+      "title": "Powering the future of robotics in Europe",
+      "authors": [],
+      "summary": "",
+      "url": "https://deepmind.google/blog/powering-the-future-of-robotics-in-europe/",
+      "publishedDate": "2026-06-09T14:02:33.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-1852738457",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "How engineers at Nextdoor use Codex to build without limits",
+      "authors": [],
+      "summary": "How engineers at Nextdoor use Codex with GPT-5.5 to investigate hard-to-reproduce issues, build across platforms, and focus on product outcomes.",
+      "url": "https://openai.com/index/nextdoor",
+      "publishedDate": "2026-06-09T12:00:00.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-2067176243",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "What Codex unlocks for Notion",
+      "authors": [],
+      "summary": "How Notion uses Codex to one-shot specs, build AI Voice Input for the web, and multiply engineering power across small teams.",
+      "url": "https://openai.com/index/notion",
+      "publishedDate": "2026-06-09T10:00:00.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-77956784",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Industrial policy for the Intelligence Age",
+      "authors": [],
+      "summary": "Explore our ambitious, people-first industrial policy ideas for the AI era—focused on expanding opportunity, sharing prosperity, and building resilient institutions as advanced intelligence evolves.",
+      "url": "https://openai.com/index/industrial-policy-for-the-intelligence-age",
+      "publishedDate": "2026-06-09T00:00:00.000Z",
+      "tags": [
+        "Global Affairs"
+      ]
+    },
+    {
+      "id": "openai-739064889",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Confidential submission of draft S-1 to the SEC",
+      "authors": [],
+      "summary": "OpenAI confirms a confidential S-1 submission to the SEC and has not yet determined timing for further action.",
+      "url": "https://openai.com/index/openai-submits-confidential-s-1",
+      "publishedDate": "2026-06-08T14:00:00.000Z",
+      "tags": [
+        "Company"
+      ]
+    },
+    {
+      "id": "deepmind-2018339233",
+      "type": "blog_post",
+      "source": "deepmind",
+      "title": "Measuring the impact of learning with AI in Sierra Leone and beyond",
+      "authors": [],
+      "summary": "Results from a randomized controlled trial show the potential of Gemini’s Guided Learning feature to boost engagement and accelerate learning.",
+      "url": "https://deepmind.google/blog/measuring-the-impact-of-learning-with-ai-in-sierra-leone-and-beyond/",
+      "publishedDate": "2026-06-08T13:04:59.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-1826500597",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Built to benefit everyone: our plan",
+      "authors": [],
+      "summary": "A vision for the future of AI, focusing on access, safety, and shared prosperity as OpenAI works to ensure AGI benefits everyone.",
+      "url": "https://openai.com/index/built-to-benefit-everyone-our-plan",
+      "publishedDate": "2026-06-08T01:30:00.000Z",
+      "tags": [
+        "Company"
+      ]
+    },
+    {
+      "id": "openai-168748363",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Introducing the OpenAI Economic Research Exchange",
+      "authors": [],
+      "summary": "OpenAI launches the Economic Research Exchange to study AI’s impact on jobs, productivity, and the economy. Applications are now open for selected research projects.",
+      "url": "https://openai.com/index/economic-research-exchange",
+      "publishedDate": "2026-06-08T00:00:00.000Z",
+      "tags": [
+        "Company"
+      ]
+    },
+    {
+      "id": "openai-861715906",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "How Endava is redesigning software delivery around AI agents",
+      "authors": [],
+      "summary": "Learn how Endava is using AI agents, ChatGPT Enterprise, and Codex to accelerate software delivery, automate workflows, and build an AI-native culture across the enterprise.",
+      "url": "https://openai.com/index/endava-frontiers",
+      "publishedDate": "2026-06-04T12:00:00.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-1298992985",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Dreaming: Better memory for a more helpful ChatGPT",
+      "authors": [],
+      "summary": "ChatGPT introduces a new memory system to better remember preferences, keeping context fresh and relevant across conversations.",
+      "url": "https://openai.com/index/chatgpt-memory-dreaming",
+      "publishedDate": "2026-06-04T09:00:00.000Z",
+      "tags": [
+        "Research"
+      ]
+    },
+    {
+      "id": "openai-2115767208",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Biodefense in the Intelligence Age",
+      "authors": [],
+      "summary": "An action plan for AI-powered biological resilience",
+      "url": "https://openai.com/index/biodefense-in-the-intelligence-age",
+      "publishedDate": "2026-06-04T00:00:00.000Z",
+      "tags": [
+        "Global Affairs"
+      ]
+    }
+  ],
+  "stats": {
+    "totalPapersScanned": 200,
+    "totalPostsScanned": 15
+  }
+}

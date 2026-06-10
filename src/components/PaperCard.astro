@@ -1,0 +1,28 @@
+---
+import type { NormalizedItem } from '../../pipeline/types';
+
+interface Props {
+  paper: NormalizedItem;
+}
+
+const { paper } = Astro.props;
+
+function truncate(text: string, maxLength: number): string {
+  if (text.length <= maxLength) return text;
+  return `${text.slice(0, maxLength).trimEnd()}…`;
+}
+---
+
+<article class="card">
+  <h3><a href={paper.url} target="_blank" rel="noopener">{paper.title}</a></h3>
+  <p class="card-meta">
+    {paper.authors.slice(0, 4).join(', ')}{paper.authors.length > 4 ? ', et al.' : ''}
+    · arXiv {paper.tags.join(', ')}
+    {paper.citationCount !== undefined && ` · ${paper.citationCount} citations`}
+  </p>
+  {paper.summary && <p class="card-summary">{truncate(paper.summary, 280)}</p>}
+  <p class="card-links">
+    <a href={paper.url} target="_blank" rel="noopener">Read paper →</a>
+    {paper.pdfUrl && <a href={paper.pdfUrl} target="_blank" rel="noopener">PDF</a>}
+  </p>
+</article>

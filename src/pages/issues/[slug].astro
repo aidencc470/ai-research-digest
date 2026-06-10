@@ -1,0 +1,27 @@
+---
+import { getCollection } from 'astro:content';
+import IssueLayout from '../../layouts/IssueLayout.astro';
+
+export async function getStaticPaths() {
+  const issues = await getCollection('issues');
+  const sorted = [...issues].sort((a, b) => b.data.slug.localeCompare(a.data.slug));
+
+  return sorted.map((entry, index) => {
+    const older = sorted[index + 1];
+    const newer = sorted[index - 1];
+
+    return {
+      params: { slug: entry.data.slug },
+      props: {
+        issue: entry.data,
+        prev: older ? { slug: older.data.slug, title: older.data.title } : undefined,
+        next: newer ? { slug: newer.data.slug, title: newer.data.title } : undefined,
+      },
+    };
+  });
+}
+
+const { issue, prev, next } = Astro.props;
+---
+
+<IssueLayout issue={issue} prev={prev} next={next} />

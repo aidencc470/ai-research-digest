@@ -1,0 +1,33 @@
+---
+import type { NormalizedItem } from '../../pipeline/types';
+
+interface Props {
+  post: NormalizedItem;
+}
+
+const { post } = Astro.props;
+
+const SOURCE_LABELS: Record<string, string> = {
+  openai: 'OpenAI',
+  deepmind: 'Google DeepMind',
+  anthropic: 'Anthropic',
+  microsoft_research: 'Microsoft Research',
+};
+
+function truncate(text: string, maxLength: number): string {
+  if (text.length <= maxLength) return text;
+  return `${text.slice(0, maxLength).trimEnd()}…`;
+}
+---
+
+<article class="card">
+  <h3>
+    <a href={post.url} target="_blank" rel="noopener">
+      {SOURCE_LABELS[post.source] ?? post.source} — {post.title}
+    </a>
+  </h3>
+  {post.summary && <p class="card-summary">{truncate(post.summary, 280)}</p>}
+  <p class="card-links">
+    <a href={post.url} target="_blank" rel="noopener">Read →</a>
+  </p>
+</article>

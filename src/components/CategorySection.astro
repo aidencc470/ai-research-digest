@@ -1,0 +1,16 @@
+---
+import type { NormalizedItem } from '../../pipeline/types';
+import PaperCard from './PaperCard.astro';
+
+interface Props {
+  category: string;
+  papers: NormalizedItem[];
+}
+
+const { category, papers } = Astro.props;
+---
+
+<div class="category-section">
+  <h3 class="category-heading">{category}</h3>
+  {papers.map((paper) => <PaperCard paper={paper} />)}
+</div>

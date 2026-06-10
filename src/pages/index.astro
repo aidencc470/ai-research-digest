@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+import IssueLayout from '../layouts/IssueLayout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const issues = await getCollection('issues');
+const sorted = [...issues].sort((a, b) => b.data.slug.localeCompare(a.data.slug));
+const latest = sorted[0];
+const previous = sorted[1];
+---
+
+{
+  latest ? (
+    <IssueLayout
+      issue={latest.data}
+      prev={previous ? { slug: previous.data.slug, title: previous.data.title } : undefined}
+    />
+  ) : (
+    <BaseLayout title="AI Research Digest">
+      <div class="issue-header">
+        <h1>AI Research Digest</h1>
+        <p class="issue-meta">No issues have been published yet. Check back soon.</p>
+      </div>
+    </BaseLayout>
+  )
+}
