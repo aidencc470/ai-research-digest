@@ -1,0 +1,55 @@
+---
+---
+
+<div class="date-filter">
+  <label>
+    From
+    <input type="date" id="filter-from" />
+  </label>
+  <label>
+    To
+    <input type="date" id="filter-to" />
+  </label>
+  <button type="button" id="filter-apply">Filter</button>
+  <button type="button" id="filter-reset">Reset</button>
+</div>
+
+<script>
+  const fromInput = document.getElementById('filter-from') as HTMLInputElement;
+  const toInput = document.getElementById('filter-to') as HTMLInputElement;
+  const applyButton = document.getElementById('filter-apply');
+  const resetButton = document.getElementById('filter-reset');
+  const noResults = document.getElementById('no-results');
+
+  function applyFilter() {
+    const from = fromInput.value ? new Date(fromInput.value) : null;
+    const to = toInput.value ? new Date(toInput.value) : null;
+    if (to) to.setHours(23, 59, 59, 999);
+
+    const sections = document.querySelectorAll<HTMLElement>('.category-section');
+    let anySectionVisible = false;
+
+    sections.forEach((section) => {
+      let anyCardVisible = false;
+
+      section.querySelectorAll<HTMLElement>('.card[data-published]').forEach((card) => {
+        const published = new Date(card.dataset.published!);
+        const visible = (!from || published >= from) && (!to || published <= to);
+        card.style.display = visible ? '' : 'none';
+        if (visible) anyCardVisible = true;
+      });
+
+      section.style.display = anyCardVisible ? '' : 'none';
+      if (anyCardVisible) anySectionVisible = true;
+    });
+
+    if (noResults) noResults.hidden = anySectionVisible;
+  }
+
+  applyButton?.addEventListener('click', applyFilter);
+  resetButton?.addEventListener('click', () => {
+    fromInput.value = '';
+    toInput.value = '';
+    applyFilter();
+  });
+</script>

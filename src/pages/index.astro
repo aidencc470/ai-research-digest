@@ -1,26 +1,42 @@
 ---
 import { getCollection } from 'astro:content';
-import IssueLayout from '../layouts/IssueLayout.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import IssueContent from '../components/IssueContent.astro';
+import HighlightCard from '../components/HighlightCard.astro';
 
 const issues = await getCollection('issues');
 const sorted = [...issues].sort((a, b) => b.data.slug.localeCompare(a.data.slug));
 const latest = sorted[0];
 const previous = sorted[1];
+
+const topPapers = latest
+  ? Object.values(latest.data.papersByCategory)
+      .flat()
+      .sort((a, b) => new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime())
+      .slice(0, 3)
+  : [];
 ---
 
-{
-  latest ? (
-    <IssueLayout
-      issue={latest.data}
-      prev={previous ? { slug: previous.data.slug, title: previous.data.title } : undefined}
-    />
-  ) : (
-    <BaseLayout title="AI Research Digest">
+<BaseLayout title={latest ? latest.data.title : 'AI Research Digest'}>
+  {
+    latest ? (
+      <>
+        {topPapers.length > 0 && (
+          <section>
+            <h2 class="section-heading">Latest Findings</h2>
+            {topPapers.map((paper, index) => <HighlightCard paper={paper} rank={index + 1} />)}
+          </section>
+        )}
+        <IssueContent
+          issue={latest.data}
+          prev={previous ? { slug: previous.data.slug, title: previous.data.title } : undefined}
+        />
+      </>
+    ) : (
       <div class="issue-header">
         <h1>AI Research Digest</h1>
         <p class="issue-meta">No issues have been published yet. Check back soon.</p>
       </div>
-    </BaseLayout>
-  )
-}
+    )
+  }
+</BaseLayout>

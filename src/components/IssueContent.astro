@@ -1,0 +1,56 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import CategorySection from './CategorySection.astro';
+import PostCard from './PostCard.astro';
+import IssueNav from './IssueNav.astro';
+import DateFilter from './DateFilter.astro';
+
+interface Props {
+  issue: CollectionEntry<'issues'>['data'];
+  prev?: { slug: string; title: string };
+  next?: { slug: string; title: string };
+}
+
+const { issue, prev, next } = Astro.props;
+
+const totalPapers = Object.values(issue.papersByCategory).reduce(
+  (sum, papers) => sum + papers.length,
+  0,
+);
+
+const dateFormatter = new Intl.DateTimeFormat('en-US', {
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric',
+});
+
+const startLabel = dateFormatter.format(new Date(issue.dateRange.start));
+const endLabel = dateFormatter.format(new Date(issue.dateRange.end));
+---
+
+<div class="issue-header">
+  <h1>{issue.title}</h1>
+  <p class="issue-meta">
+    {startLabel} – {endLabel} · {totalPapers} papers · {issue.labPosts.length} lab posts
+  </p>
+</div>
+
+{totalPapers > 0 && (
+  <section>
+    <h2 class="section-heading">Papers</h2>
+    <DateFilter />
+    <p id="no-results" class="no-results" hidden>No papers match this date range.</p>
+    {Object.entries(issue.papersByCategory).map(([category, papers]) => (
+      <CategorySection category={category} papers={papers} />
+    ))}
+  </section>
+)}
+
+{issue.labPosts.length > 0 && (
+  <section>
+    <h2 class="section-heading">Lab Announcements</h2>
+    {issue.labPosts.map((post) => <PostCard post={post} />)}
+  </section>
+)}
+
+<IssueNav prev={prev} next={next} />

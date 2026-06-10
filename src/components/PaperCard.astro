@@ -13,7 +13,7 @@ function truncate(text: string, maxLength: number): string {
 }
 ---
 
-<article class="card">
+<article class="card" data-published={paper.publishedDate}>
   <h3><a href={paper.url} target="_blank" rel="noopener">{paper.title}</a></h3>
   <p class="card-meta">
     {paper.authors.slice(0, 4).join(', ')}{paper.authors.length > 4 ? ', et al.' : ''}

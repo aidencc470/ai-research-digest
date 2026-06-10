@@ -1,9 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
-import CategorySection from '../components/CategorySection.astro';
-import PostCard from '../components/PostCard.astro';
-import IssueNav from '../components/IssueNav.astro';
+import IssueContent from '../components/IssueContent.astro';
 
 interface Props {
   issue: CollectionEntry<'issues'>['data'];
@@ -12,45 +10,8 @@ interface Props {
 }
 
 const { issue, prev, next } = Astro.props;
-
-const totalPapers = Object.values(issue.papersByCategory).reduce(
-  (sum, papers) => sum + papers.length,
-  0,
-);
-
-const dateFormatter = new Intl.DateTimeFormat('en-US', {
-  month: 'long',
-  day: 'numeric',
-  year: 'numeric',
-});
-
-const startLabel = dateFormatter.format(new Date(issue.dateRange.start));
-const endLabel = dateFormatter.format(new Date(issue.dateRange.end));
 ---
 
 <BaseLayout title={issue.title}>
-  <div class="issue-header">
-    <h1>{issue.title}</h1>
-    <p class="issue-meta">
-      {startLabel} – {endLabel} · {totalPapers} papers · {issue.labPosts.length} lab posts
-    </p>
-  </div>
-
-  {totalPapers > 0 && (
-    <section>
-      <h2 class="section-heading">Papers</h2>
-      {Object.entries(issue.papersByCategory).map(([category, papers]) => (
-        <CategorySection category={category} papers={papers} />
-      ))}
-    </section>
-  )}
-
-  {issue.labPosts.length > 0 && (
-    <section>
-      <h2 class="section-heading">Lab Announcements</h2>
-      {issue.labPosts.map((post) => <PostCard post={post} />)}
-    </section>
-  )}
-
-  <IssueNav prev={prev} next={next} />
+  <IssueContent issue={issue} prev={prev} next={next} />
 </BaseLayout>

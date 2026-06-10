@@ -148,6 +148,80 @@ a:hover {
   font-weight: 600;
 }
 
+.highlight-card {
+  display: flex;
+  gap: 0.85rem;
+  background: #fff8ec;
+  border-color: #f0d9a8;
+}
+
+.highlight-rank {
+  flex-shrink: 0;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.highlight-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.date-filter {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 0 0 1.25rem;
+  padding: 0.85rem 1rem;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.date-filter label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  color: var(--color-muted);
+}
+
+.date-filter input[type='date'] {
+  font: inherit;
+  padding: 0.3rem 0.4rem;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+}
+
+.date-filter button {
+  font: inherit;
+  font-weight: 600;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--color-text);
+  border-radius: 4px;
+  background: var(--color-text);
+  color: #fff;
+  cursor: pointer;
+}
+
+.date-filter button#filter-reset {
+  background: transparent;
+  color: var(--color-text);
+}
+
+.no-results {
+  color: var(--color-muted);
+  font-style: italic;
+}
+
 .issue-nav {
   display: flex;
   justify-content: space-between;
