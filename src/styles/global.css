@@ -148,11 +148,31 @@ a:hover {
   font-weight: 600;
 }
 
+.highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 700px) {
+  .highlights-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .highlight-card {
   display: flex;
-  gap: 0.85rem;
+  flex-direction: column;
+  gap: 0.5rem;
   background: #fff8ec;
   border-color: #f0d9a8;
+  margin-bottom: 0;
+}
+
+.highlight-card h3 {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.35;
 }
 
 .highlight-rank {
@@ -167,11 +187,6 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.highlight-body {
-  flex: 1;
-  min-width: 0;
 }
 
 .date-filter {

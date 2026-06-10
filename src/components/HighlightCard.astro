@@ -8,24 +8,21 @@ interface Props {
 
 const { paper, rank } = Astro.props;
 
-function truncate(text: string, maxLength: number): string {
-  if (text.length <= maxLength) return text;
-  return `${text.slice(0, maxLength).trimEnd()}…`;
+function firstSentence(text: string, maxLength = 200): string {
+  const match = text.match(/^.*?[.!?](?=\s|$)/);
+  let sentence = match ? match[0] : text;
+  if (sentence.length > maxLength) {
+    sentence = `${sentence.slice(0, maxLength).trimEnd()}…`;
+  }
+  return sentence;
 }
 ---
 
 <article class="card highlight-card">
   <span class="highlight-rank">{rank}</span>
-  <div class="highlight-body">
-    <h3><a href={paper.url} target="_blank" rel="noopener">{paper.title}</a></h3>
-    <p class="card-meta">
-      {paper.authors.slice(0, 3).join(', ')}{paper.authors.length > 3 ? ', et al.' : ''}
-      · arXiv {paper.tags.join(', ')}
-    </p>
-    {paper.summary && <p class="card-summary">{truncate(paper.summary, 180)}</p>}
-    <p class="card-links">
-      <a href={paper.url} target="_blank" rel="noopener">Read paper →</a>
-      {paper.pdfUrl && <a href={paper.pdfUrl} target="_blank" rel="noopener">PDF</a>}
-    </p>
-  </div>
+  <h3><a href={paper.url} target="_blank" rel="noopener">{paper.title}</a></h3>
+  {paper.summary && <p class="card-summary">{firstSentence(paper.summary)}</p>}
+  <p class="card-links">
+    <a href={paper.url} target="_blank" rel="noopener">Read paper →</a>
+  </p>
 </article>

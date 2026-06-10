@@ -24,7 +24,9 @@ const topPapers = latest
         {topPapers.length > 0 && (
           <section>
             <h2 class="section-heading">Latest Findings</h2>
-            {topPapers.map((paper, index) => <HighlightCard paper={paper} rank={index + 1} />)}
+            <div class="highlights-grid">
+              {topPapers.map((paper, index) => <HighlightCard paper={paper} rank={index + 1} />)}
+            </div>
           </section>
         )}
         <IssueContent
