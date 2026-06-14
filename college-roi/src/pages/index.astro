@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import schools from '../data/schools.json';
+import majors from '../data/majors.json';
+
+const sorted = [...schools].sort((a, b) => a.name.localeCompare(b.name));
+const sortedMajors = [...majors].sort((a, b) => a.name.localeCompare(b.name));
+---
+
+<BaseLayout title="Compare College Costs vs. Earnings">
+  <h1 class="page-title">Is college worth it? Depends where, and in what.</h1>
+  <p class="page-subtitle">
+    Pick a school to see what it actually costs to attend, the jobs students with each major
+    typically land, and how long it takes those earnings to pay off the degree &mdash;
+    with your own financial aid and scholarships factored in.
+  </p>
+
+  <div class="disclaimer">
+    <strong>Heads up:</strong> all numbers here are estimates for exploration, built from published
+    cost-of-attendance figures and national salary averages by major. They won't match your exact
+    financial aid letter or job offer &mdash; use this to compare options, not to plan your finances.
+  </div>
+
+  <input
+    type="text"
+    class="search-input"
+    id="school-search"
+    placeholder="Search schools (e.g. Columbia, Michigan, Berkeley)..."
+    autocomplete="off"
+  />
+
+  <div class="filters-row">
+    <div class="filter">
+      <label for="major-filter">Major</label>
+      <select id="major-filter">
+        <option value="">All majors</option>
+        {sortedMajors.map((major) => (
+          <option value={major.id}>{major.name}</option>
+        ))}
+      </select>
+    </div>
+    <div class="filter">
+      <label for="sort-select">Sort by</label>
+      <select id="sort-select">
+        <option value="name">Name (A&ndash;Z)</option>
+        <option value="cost-asc">Annual cost: low to high</option>
+        <option value="cost-desc">Annual cost: high to low</option>
+      </select>
+    </div>
+  </div>
+
+  <p class="result-count" id="result-count"></p>
+
+  <div class="grid" id="school-grid">
+    {sorted.map((school) => {
+      const minCost = Math.min(school.tuitionInState, school.tuitionOutState) + school.roomBoardOther;
+      const maxCost = Math.max(school.tuitionInState, school.tuitionOutState) + school.roomBoardOther;
+      const avgCost = Math.round((school.tuitionInState + school.tuitionOutState) / 2 + school.roomBoardOther);
+      return (
+        <a
+          class="card"
+          href={`/schools/${school.id}/`}
+          data-name={school.name.toLowerCase()}
+          data-location={school.location.toLowerCase()}
+          data-majors={school.majors.join(' ')}
+          data-cost={avgCost}
+        >
+          <span class="badge">{school.type}</span>
+          <h3>{school.name}</h3>
+          <p class="meta">{school.location}</p>
+          <p class="stat">
+            Annual cost: <strong>${minCost.toLocaleString()}</strong>
+            {minCost !== maxCost && <> &ndash; <strong>${maxCost.toLocaleString()}</strong></>}
+          </p>
+          <p class="stat">{school.majors.length} majors covered</p>
+        </a>
+      );
+    })}
+  </div>
+
+  <script>
+    const input = document.getElementById('school-search') as HTMLInputElement;
+    const majorFilter = document.getElementById('major-filter') as HTMLSelectElement;
+    const sortSelect = document.getElementById('sort-select') as HTMLSelectElement;
+    const grid = document.getElementById('school-grid') as HTMLDivElement;
+    const resultCount = document.getElementById('result-count') as HTMLParagraphElement;
+    const cards = Array.from(grid.querySelectorAll<HTMLAnchorElement>('.card'));
+
+    function applyFilters() {
+      const query = input.value.trim().toLowerCase();
+      const major = majorFilter.value;
+      let visibleCount = 0;
+
+      for (const card of cards) {
+        const name = card.dataset.name ?? '';
+        const location = card.dataset.location ?? '';
+        const cardMajors = (card.dataset.majors ?? '').split(' ');
+        const matchesQuery = !query || name.includes(query) || location.includes(query);
+        const matchesMajor = !major || cardMajors.includes(major);
+        const visible = matchesQuery && matchesMajor;
+        card.style.display = visible ? '' : 'none';
+        if (visible) visibleCount++;
+      }
+
+      resultCount.textContent = `${visibleCount} school${visibleCount === 1 ? '' : 's'}`;
+    }
+
+    function applySort() {
+      const mode = sortSelect.value;
+      const sortedCards = [...cards].sort((a, b) => {
+        if (mode === 'cost-asc') return Number(a.dataset.cost) - Number(b.dataset.cost);
+        if (mode === 'cost-desc') return Number(b.dataset.cost) - Number(a.dataset.cost);
+        return (a.dataset.name ?? '').localeCompare(b.dataset.name ?? '');
+      });
+      for (const card of sortedCards) grid.appendChild(card);
+    }
+
+    input.addEventListener('input', applyFilters);
+    majorFilter.addEventListener('change', applyFilters);
+    sortSelect.addEventListener('change', applySort);
+
+    applyFilters();
+  </script>
+</BaseLayout>

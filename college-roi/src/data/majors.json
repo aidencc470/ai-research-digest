@@ -1,0 +1,184 @@
+[
+  {
+    "id": "computer-science",
+    "name": "Computer Science",
+    "jobs": [
+      { "title": "Software Engineer", "share": 0.45, "startingSalary": 95000, "growthRate": 0.035 },
+      { "title": "Data Scientist / Analyst", "share": 0.15, "startingSalary": 90000, "growthRate": 0.035 },
+      { "title": "IT / Systems Analyst", "share": 0.15, "startingSalary": 72000, "growthRate": 0.03 },
+      { "title": "Cybersecurity Analyst", "share": 0.17, "startingSalary": 88000, "growthRate": 0.035 },
+      { "title": "Product Manager", "share": 0.08, "startingSalary": 95000, "growthRate": 0.04 }
+    ]
+  },
+  {
+    "id": "economics",
+    "name": "Economics",
+    "jobs": [
+      { "title": "Financial Analyst", "share": 0.24, "startingSalary": 70000, "growthRate": 0.04 },
+      { "title": "Business / Data Analyst", "share": 0.20, "startingSalary": 65000, "growthRate": 0.038 },
+      { "title": "Management Consultant", "share": 0.15, "startingSalary": 85000, "growthRate": 0.045 },
+      { "title": "Underwriting Analyst", "share": 0.16, "startingSalary": 60000, "growthRate": 0.032 },
+      { "title": "Accountant", "share": 0.13, "startingSalary": 58000, "growthRate": 0.03 },
+      { "title": "Paralegal / Law School Track", "share": 0.12, "startingSalary": 50000, "growthRate": 0.03 }
+    ]
+  },
+  {
+    "id": "finance",
+    "name": "Finance",
+    "jobs": [
+      { "title": "Financial Analyst", "share": 0.26, "startingSalary": 72000, "growthRate": 0.04 },
+      { "title": "Financial Advisor", "share": 0.18, "startingSalary": 58000, "growthRate": 0.04 },
+      { "title": "Accountant / Auditor", "share": 0.18, "startingSalary": 60000, "growthRate": 0.03 },
+      { "title": "Commercial Banking Analyst", "share": 0.16, "startingSalary": 62000, "growthRate": 0.035 },
+      { "title": "Insurance / Risk Analyst", "share": 0.12, "startingSalary": 62000, "growthRate": 0.03 },
+      { "title": "Investment Banking Analyst", "share": 0.10, "startingSalary": 100000, "growthRate": 0.05 }
+    ]
+  },
+  {
+    "id": "business-administration",
+    "name": "Business Administration",
+    "jobs": [
+      { "title": "Operations Manager", "share": 0.22, "startingSalary": 62000, "growthRate": 0.035 },
+      { "title": "Sales Representative", "share": 0.20, "startingSalary": 58000, "growthRate": 0.04 },
+      { "title": "Management Trainee / Consultant", "share": 0.16, "startingSalary": 65000, "growthRate": 0.04 },
+      { "title": "Supply Chain / Logistics Analyst", "share": 0.15, "startingSalary": 58000, "growthRate": 0.035 },
+      { "title": "Marketing Coordinator", "share": 0.14, "startingSalary": 54000, "growthRate": 0.035 },
+      { "title": "Human Resources Specialist", "share": 0.13, "startingSalary": 55000, "growthRate": 0.03 }
+    ]
+  },
+  {
+    "id": "biology",
+    "name": "Biology",
+    "jobs": [
+      { "title": "Lab Technician / Research Assistant", "share": 0.25, "startingSalary": 48000, "growthRate": 0.03 },
+      { "title": "Medical / Clinical Assistant", "share": 0.15, "startingSalary": 55000, "growthRate": 0.03 },
+      { "title": "Pharmaceutical Sales Representative", "share": 0.10, "startingSalary": 65000, "growthRate": 0.04 },
+      { "title": "Environmental / Field Scientist", "share": 0.10, "startingSalary": 52000, "growthRate": 0.03 },
+      { "title": "Medical / Dental / PA School Track", "share": 0.40, "startingSalary": 45000, "growthRate": 0.03 }
+    ]
+  },
+  {
+    "id": "psychology",
+    "name": "Psychology",
+    "jobs": [
+      { "title": "Case Manager / Social Services", "share": 0.22, "startingSalary": 45000, "growthRate": 0.03 },
+      { "title": "Human Resources Specialist", "share": 0.18, "startingSalary": 52000, "growthRate": 0.03 },
+      { "title": "Behavioral Therapist / ABA Technician", "share": 0.16, "startingSalary": 42000, "growthRate": 0.03 },
+      { "title": "Sales / Account Representative", "share": 0.16, "startingSalary": 50000, "growthRate": 0.035 },
+      { "title": "Counseling / Grad School Track", "share": 0.16, "startingSalary": 45000, "growthRate": 0.03 },
+      { "title": "Research Assistant", "share": 0.12, "startingSalary": 42000, "growthRate": 0.03 }
+    ]
+  },
+  {
+    "id": "mechanical-engineering",
+    "name": "Mechanical Engineering",
+    "jobs": [
+      { "title": "Mechanical Engineer", "share": 0.50, "startingSalary": 78000, "growthRate": 0.035 },
+      { "title": "Manufacturing / Process Engineer", "share": 0.20, "startingSalary": 74000, "growthRate": 0.035 },
+      { "title": "Quality / Test Engineer", "share": 0.18, "startingSalary": 72000, "growthRate": 0.033 },
+      { "title": "Project Engineer", "share": 0.12, "startingSalary": 76000, "growthRate": 0.035 }
+    ]
+  },
+  {
+    "id": "electrical-computer-engineering",
+    "name": "Electrical & Computer Engineering",
+    "jobs": [
+      { "title": "Electrical Engineer", "share": 0.40, "startingSalary": 80000, "growthRate": 0.035 },
+      { "title": "Hardware / Firmware Engineer", "share": 0.25, "startingSalary": 90000, "growthRate": 0.04 },
+      { "title": "Controls / Automation Engineer", "share": 0.20, "startingSalary": 82000, "growthRate": 0.035 },
+      { "title": "Systems Engineer", "share": 0.15, "startingSalary": 82000, "growthRate": 0.035 }
+    ]
+  },
+  {
+    "id": "nursing",
+    "name": "Nursing",
+    "jobs": [
+      { "title": "Registered Nurse", "share": 0.70, "startingSalary": 75000, "growthRate": 0.03 },
+      { "title": "Travel Nurse", "share": 0.12, "startingSalary": 85000, "growthRate": 0.025 },
+      { "title": "Nurse Case Manager", "share": 0.10, "startingSalary": 72000, "growthRate": 0.03 },
+      { "title": "Public Health / Clinical Research", "share": 0.08, "startingSalary": 60000, "growthRate": 0.03 }
+    ]
+  },
+  {
+    "id": "communications",
+    "name": "Communications",
+    "jobs": [
+      { "title": "Marketing / PR Specialist", "share": 0.26, "startingSalary": 50000, "growthRate": 0.035 },
+      { "title": "Media / Content Producer", "share": 0.18, "startingSalary": 48000, "growthRate": 0.03 },
+      { "title": "Sales Representative", "share": 0.16, "startingSalary": 52000, "growthRate": 0.04 },
+      { "title": "Social Media Manager", "share": 0.14, "startingSalary": 50000, "growthRate": 0.035 },
+      { "title": "Account Coordinator", "share": 0.14, "startingSalary": 46000, "growthRate": 0.03 },
+      { "title": "Event Coordinator", "share": 0.12, "startingSalary": 45000, "growthRate": 0.03 }
+    ]
+  },
+  {
+    "id": "marketing",
+    "name": "Marketing",
+    "jobs": [
+      { "title": "Marketing Coordinator / Specialist", "share": 0.30, "startingSalary": 55000, "growthRate": 0.035 },
+      { "title": "Market Research Analyst", "share": 0.25, "startingSalary": 58000, "growthRate": 0.035 },
+      { "title": "Sales Representative", "share": 0.20, "startingSalary": 58000, "growthRate": 0.04 },
+      { "title": "Digital Marketing / SEO Analyst", "share": 0.15, "startingSalary": 56000, "growthRate": 0.035 },
+      { "title": "Brand / Product Marketing", "share": 0.10, "startingSalary": 62000, "growthRate": 0.04 }
+    ]
+  },
+  {
+    "id": "political-science",
+    "name": "Political Science",
+    "jobs": [
+      { "title": "Paralegal / Legal Assistant", "share": 0.21, "startingSalary": 48000, "growthRate": 0.03 },
+      { "title": "Law School Track", "share": 0.20, "startingSalary": 48000, "growthRate": 0.035 },
+      { "title": "Nonprofit / Govt Program Coordinator", "share": 0.19, "startingSalary": 45000, "growthRate": 0.03 },
+      { "title": "Policy / Legislative Analyst", "share": 0.16, "startingSalary": 50000, "growthRate": 0.035 },
+      { "title": "Compliance Analyst", "share": 0.12, "startingSalary": 58000, "growthRate": 0.035 },
+      { "title": "Campaign / Public Affairs Associate", "share": 0.12, "startingSalary": 42000, "growthRate": 0.035 }
+    ]
+  },
+  {
+    "id": "chemistry",
+    "name": "Chemistry",
+    "jobs": [
+      { "title": "Quality Control / Lab Chemist", "share": 0.25, "startingSalary": 52000, "growthRate": 0.03 },
+      { "title": "Pharmaceutical / Biotech Research Associate", "share": 0.20, "startingSalary": 62000, "growthRate": 0.035 },
+      { "title": "Medical / Pharmacy School Track", "share": 0.25, "startingSalary": 45000, "growthRate": 0.03 },
+      { "title": "Process Engineer", "share": 0.10, "startingSalary": 70000, "growthRate": 0.035 },
+      { "title": "Environmental / Regulatory Scientist", "share": 0.10, "startingSalary": 55000, "growthRate": 0.03 },
+      { "title": "Science Teacher", "share": 0.10, "startingSalary": 48000, "growthRate": 0.025 }
+    ]
+  },
+  {
+    "id": "mathematics-statistics",
+    "name": "Mathematics & Statistics",
+    "jobs": [
+      { "title": "Data Analyst / Data Scientist", "share": 0.28, "startingSalary": 75000, "growthRate": 0.04 },
+      { "title": "Quantitative / Financial Analyst", "share": 0.18, "startingSalary": 72000, "growthRate": 0.04 },
+      { "title": "Software Engineer", "share": 0.15, "startingSalary": 92000, "growthRate": 0.035 },
+      { "title": "Actuary", "share": 0.15, "startingSalary": 70000, "growthRate": 0.045 },
+      { "title": "Operations Research Analyst", "share": 0.12, "startingSalary": 68000, "growthRate": 0.035 },
+      { "title": "Math Teacher / Grad School Track", "share": 0.12, "startingSalary": 48000, "growthRate": 0.025 }
+    ]
+  },
+  {
+    "id": "civil-engineering",
+    "name": "Civil Engineering",
+    "jobs": [
+      { "title": "Civil / Structural Engineer", "share": 0.45, "startingSalary": 72000, "growthRate": 0.035 },
+      { "title": "Construction Project Engineer", "share": 0.22, "startingSalary": 70000, "growthRate": 0.04 },
+      { "title": "Transportation / Traffic Engineer", "share": 0.13, "startingSalary": 70000, "growthRate": 0.035 },
+      { "title": "Environmental Engineer", "share": 0.10, "startingSalary": 68000, "growthRate": 0.035 },
+      { "title": "Geotechnical / Surveying Engineer", "share": 0.10, "startingSalary": 66000, "growthRate": 0.03 }
+    ]
+  },
+  {
+    "id": "sociology",
+    "name": "Sociology",
+    "jobs": [
+      { "title": "Case Manager / Social Services", "share": 0.24, "startingSalary": 44000, "growthRate": 0.03 },
+      { "title": "Human Resources Specialist", "share": 0.18, "startingSalary": 52000, "growthRate": 0.03 },
+      { "title": "Nonprofit / Community Program Coordinator", "share": 0.16, "startingSalary": 42000, "growthRate": 0.03 },
+      { "title": "Law School / Social Work Grad Track", "share": 0.16, "startingSalary": 46000, "growthRate": 0.03 },
+      { "title": "Market Research / Survey Analyst", "share": 0.14, "startingSalary": 55000, "growthRate": 0.035 },
+      { "title": "Sales / Account Representative", "share": 0.12, "startingSalary": 50000, "growthRate": 0.035 }
+    ]
+  }
+]

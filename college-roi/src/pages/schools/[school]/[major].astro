@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ROICalculator from '../../../components/ROICalculator';
+import schools from '../../../data/schools.json';
+import majors from '../../../data/majors.json';
+
+export function getStaticPaths() {
+  const majorLookup = new Map(majors.map((m) => [m.id, m]));
+  const paths = [];
+  for (const school of schools) {
+    for (const majorId of school.majors) {
+      const major = majorLookup.get(majorId);
+      if (!major) continue;
+      paths.push({
+        params: { school: school.id, major: major.id },
+        props: { school, major },
+      });
+    }
+  }
+  return paths;
+}
+
+const { school, major } = Astro.props;
+---
+
+<BaseLayout title={`${major.name} at ${school.name}`}>
+  <p class="breadcrumb">
+    <a href="/">Schools</a> / <a href={`/schools/${school.id}/`}>{school.name}</a> / {major.name}
+  </p>
+  <h1 class="page-title">{major.name} at {school.name}</h1>
+  <p class="page-subtitle">
+    Adjust your aid, scholarships, and loan terms to see how the cost of this major stacks up
+    against typical post-grad earnings &mdash; and how long it takes to come out ahead.
+  </p>
+
+  <ROICalculator client:load school={school} major={major} />
+</BaseLayout>

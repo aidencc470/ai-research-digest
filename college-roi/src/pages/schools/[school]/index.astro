@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import schools from '../../../data/schools.json';
+import majors from '../../../data/majors.json';
+
+export function getStaticPaths() {
+  return schools.map((school) => ({
+    params: { school: school.id },
+    props: { school },
+  }));
+}
+
+const { school } = Astro.props;
+
+const majorLookup = new Map(majors.map((m) => [m.id, m]));
+const isPublic = school.type === 'public';
+const tuitionDiffers = school.tuitionInState !== school.tuitionOutState;
+---
+
+<BaseLayout title={school.name}>
+  <p class="breadcrumb"><a href="/">Schools</a> / {school.name}</p>
+  <h1 class="page-title">{school.name}</h1>
+  <p class="page-subtitle">{school.location} &middot; {school.type === 'public' ? 'Public' : 'Private'} university</p>
+
+  <div class="school-hero">
+    {isPublic && tuitionDiffers ? (
+      <>
+        <div class="stat-box">
+          <div class="label">In-state tuition</div>
+          <div class="value">${school.tuitionInState.toLocaleString()}/yr</div>
+        </div>
+        <div class="stat-box">
+          <div class="label">Out-of-state tuition</div>
+          <div class="value">${school.tuitionOutState.toLocaleString()}/yr</div>
+        </div>
+      </>
+    ) : (
+      <div class="stat-box">
+        <div class="label">Tuition & fees</div>
+        <div class="value">${school.tuitionInState.toLocaleString()}/yr</div>
+      </div>
+    )}
+    <div class="stat-box">
+      <div class="label">Room, board & other</div>
+      <div class="value">${school.roomBoardOther.toLocaleString()}/yr</div>
+    </div>
+    <div class="stat-box">
+      <div class="label">Avg. need-based aid</div>
+      <div class="value">${Math.max(school.needAidInState, school.needAidOutState).toLocaleString()}/yr</div>
+    </div>
+    <div class="stat-box">
+      <div class="label">Avg. merit scholarship</div>
+      <div class="value">${school.meritAid.toLocaleString()}/yr</div>
+    </div>
+  </div>
+
+  <h2>Popular majors at {school.name}</h2>
+  <p class="page-subtitle">
+    Pick a major to see typical first jobs, projected lifetime earnings, and how aid or
+    scholarships change your break-even point.
+  </p>
+
+  <div class="grid">
+    {school.majors.map((majorId: string) => {
+      const major = majorLookup.get(majorId);
+      if (!major) return null;
+      const topJob = [...major.jobs].sort((a, b) => b.share - a.share)[0];
+      return (
+        <a class="card" href={`/schools/${school.id}/${major.id}/`}>
+          <h3>{major.name}</h3>
+          <p class="meta">Most common first job</p>
+          <p class="stat">
+            <strong>{topJob.title}</strong> &mdash; ~${topJob.startingSalary.toLocaleString()} starting
+            ({Math.round(topJob.share * 100)}% of grads)
+          </p>
+        </a>
+      );
+    })}
+  </div>
+</BaseLayout>

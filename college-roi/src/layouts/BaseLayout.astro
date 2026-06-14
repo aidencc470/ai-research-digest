@@ -1,0 +1,42 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Compare the cost of college majors against projected lifetime earnings.' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title} | PayoffU</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <a class="logo" href="/">Payoff<span>U</span></a>
+        <nav>
+          <a href="/">Schools</a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <div class="container">
+        <slot />
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="container">
+        Figures are illustrative estimates for educational purposes only, based on published
+        institutional cost-of-attendance data and national salary averages by major (NACE, BLS).
+        They are not guarantees of cost, aid, or future earnings.
+      </div>
+    </footer>
+  </body>
+</html>
