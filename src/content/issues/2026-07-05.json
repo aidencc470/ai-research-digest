@@ -1,0 +1,569 @@
+{
+  "slug": "2026-07-05",
+  "title": "Weekly AI Digest — July 5, 2026",
+  "dateRange": {
+    "start": "2026-06-28T16:38:27.838Z",
+    "end": "2026-07-05T16:38:27.838Z"
+  },
+  "papersByCategory": {
+    "Computer Vision": [
+      {
+        "id": "2607.02517",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "WorldDirector: Building Controllable World Simulators with Persistent Dynamic Memory",
+        "authors": [
+          "Hanlin Wang",
+          "Hao Ouyang",
+          "Qiuyu Wang",
+          "Wen Wang",
+          "Qingyan Bai",
+          "Ka Leong Cheng",
+          "Yue Yu",
+          "Yixuan Li",
+          "Yihao Meng",
+          "Zichen Liu",
+          "Yanhong Zeng",
+          "Yujun Shen",
+          "Qifeng Chen"
+        ],
+        "summary": "We present WorldDirector, a highly controllable video world model framework designed for persistent dynamic object memory and unrestricted viewpoint exploration. Unlike existing world models that entangle physical dynamics with pixel rendering and rely on continuous visual observation to sustain motion, our framework explicitly decouples semantic motion orchestration from visual generation. By leveraging an LLM to coordinate 3D trajectories with camera movements and subsequently employing these orchestrated trajectories as control signals for video generation, our approach ensures strict physical logic and appearance stability, successfully preserving the exact visual identities of dynamic entities even when they re-enter the scene after prolonged periods out of view. Experimental results demonstrate that our method supports the synthesis of complex and extended events with unprecedented controllability and persistent dynamic object memory. Project Page: https://worlddirector.github.io/",
+        "url": "https://arxiv.org/abs/2607.02517v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.02517v1",
+        "publishedDate": "2026-07-02T17:59:59.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2607.02516",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Alignment Is All You Need For X-to-4D Generation",
+        "authors": [
+          "Qiaowei Miao",
+          "Kehan Li",
+          "Yawei Luo",
+          "Yi Yang"
+        ],
+        "summary": "Generative diffusion models excel at synthesizing high-quality images, videos, and 3D content under multimodal control. However, arbitrary user-defined modality-to-4D (X-to-4D) generation remains challenging due to the high cost of constructing diverse datasets and the limited scalability of existing methods. This paper presents Align4D, a flexible framework that translates any-modal input into coherent video-3D pairs, using video to guide 4D motion and 3D data to shape 4D geometry. Align4D introduces three key techniques: (1) Object Distance Alignment, which searches Video-Aligned and Multiview-Aligned Object Distances (VAOD/MAOD), respectively, to reconcile 4D renderings with video and the priors of multiview diffusion models; (2) Motion-Geometry Joint Alignment, which constrains known and unknown views through synchronized video and 3D inputs, ensuring consistent 4D generation; and (3) Asynchronous Optimization, which decouples Gaussian attribute and deformation network training to enhance motion and geometry fidelity. We further propose the X4D dataset, which integrates prompt, image, video, and 3D data for benchmarking. Experiments on X4D and Consistent4D demonstrate that Align4D achieves state-of-the-art quality and consistency in X-to-4D generation. Project page: https://miaoqiaowei.github.io/Align4D/.",
+        "url": "https://arxiv.org/abs/2607.02516v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.02516v1",
+        "publishedDate": "2026-07-02T17:59:57.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2607.02515",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "PointDiT: Pixel-Space Diffusion for Monocular Geometry Estimation",
+        "authors": [
+          "Haofei Xu",
+          "Rundi Wu",
+          "Philipp Henzler",
+          "Nikolai Kalischek",
+          "Michael Oechsle",
+          "Fabian Manhardt",
+          "Marc Pollefeys",
+          "Andreas Geiger",
+          "Federico Tombari",
+          "Michael Niemeyer"
+        ],
+        "summary": "State-of-the-art single-image 3D reconstruction methods often rely on complex hybrid architectures and loss functions, or compress geometry into latent spaces in order to leverage pre-trained latent diffusion models. In this work, we show that such architectural overhead and intricate loss formulations are unnecessary. We introduce a minimalist pixel-space Diffusion Transformer, built on a plain ViT, that operates directly on raw 3D point map patches and is conditioned on image tokens from a pre-trained DINOv3. Unlike existing latent diffusion approaches, we train our diffusion backbone entirely from scratch, eliminating the need for point map tokenizers. Despite its simplicity, our approach surpasses complex latent-based diffusion models while remaining significantly simpler than hybrid alternatives. Notably, it produces sharper geometric structure and is more robust in highly ambiguous regions, such as transparent objects.",
+        "url": "https://arxiv.org/abs/2607.02515v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.02515v1",
+        "publishedDate": "2026-07-02T17:59:56.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2607.02508",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "From SRA to Self-Flow: Data Augmentation or Self-Supervision?",
+        "authors": [
+          "Dengyang Jiang",
+          "Mengmeng Wang",
+          "Harry Yang",
+          "Jingdong Wang"
+        ],
+        "summary": "Representation alignment has become an effective way to accelerate diffusion transformer training and improve generation quality. Recent self-alignment methods, such as SRA and Self-Flow, further remove the dependency on external pretrained encoders by constructing alignment within the diffusion model itself. However, the mechanism behind the improvement from SRA to Self-Flow, dual-time scheduling, remains under-examined: Self-Flow attributes its gain to interactions between tokens at different noise levels, where cleaner tokens help infer noisier ones. In this work, we revisit this explanation and ask whether the gain instead comes from data augmentation along the noise dimension. To disentangle these factors, we introduce Attention Separation, which preserves the same dual-timestep input as Self-Flow while blocking attention between tokens assigned to different noise levels. Surprisingly, removing such interaction does not degrade performance and can even improve it, suggesting that the improvement from SRA to Self-Flow mainly comes from data augmentation. Furthermore,We show that Attention Separation itself provides an augmentation effect by splitting a single image into multiple effective training parts to expand the training data. Based on these observations, we combine self-representation alignment with dual-timestep and attention-separation augmentation, and demonstrate the effectiveness of this design on ImageNet.",
+        "url": "https://arxiv.org/abs/2607.02508v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.02508v1",
+        "publishedDate": "2026-07-02T17:59:25.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2607.02501",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Embodied.cpp: A Portable Inference Runtime of Embodied AI Models on Heterogeneous Robots",
+        "authors": [
+          "Ling Xu",
+          "Chuyu Han",
+          "Borui Li",
+          "Hao Wu",
+          "Shiqi Jiang",
+          "Ting Cao",
+          "Chuanyou Li",
+          "Sheng Zhong",
+          "Shuai Wang"
+        ],
+        "summary": "Embodied AI models now span vision-language-action (VLA) models and world-action models (WAMs), but practical deployment remains fragmented across model-specific Python stacks, backend assumptions, and robot-side glue code, especially on heterogeneous edge devices. Existing inference runtimes are designed mainly for request-response serving and therefore do not satisfy the runtime contract of embodied deployment: multi-rate execution inside closed-loop control, latency-first batch-1 inference on heterogeneous hardware, and extensible embodied interfaces beyond fixed token I/O. We present Embodied.cpp, a portable C++ inference runtime for embodied models. Based on an architectural analysis of representative VLA models and WAMs, Embodied.cpp captures a shared execution path and organizes it into five layers: input adapters, sequence builders, backbone execution, head plugins, and deployment adapters. The runtime provides modular multi-rate execution, latency-first fused inference, and extensible operator and I/O support, enabling deployment across heterogeneous devices, robots, and simulators through one backend abstraction. We evaluate Embodied.cpp on two VLA models, HY-VLA and pi0.5, and on a preliminary WAM benchmark using a LingBot-VA Transformer block. The VLA deployments achieve successful closed-loop execution with 100.0% and 91.0% task success rates, respectively. The WAM benchmark reduces block memory from 312.2 MiB to 88.1 MiB. These results show that Embodied.cpp improves deployment efficiency while preserving high accuracy across diverse embodied model architectures.",
+        "url": "https://arxiv.org/abs/2607.02501v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.02501v1",
+        "publishedDate": "2026-07-02T17:58:28.000Z",
+        "tags": [
+          "cs.RO",
+          "cs.CV",
+          "cs.OS"
+        ]
+      },
+      {
+        "id": "2607.02497",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Seek to Segment: Active Perception for Panoramic Referring Segmentation",
+        "authors": [
+          "Song Tang",
+          "Shuming Hu",
+          "Xincheng Shuai",
+          "Henghui Ding",
+          "Yu-Gang Jiang"
+        ],
+        "summary": "Existing referring segmentation models passively process static images captured from fixed perspectives, limiting their applicability in Embodied AI, where agents must perform active perception in the continuous 360$^\\circ$ environments. To bridge this gap, we introduce a novel task: Active Panoramic Referring Segmentation (APRS). In this setting, an agent is required to adjust its viewing direction ($Δθ, Δφ$) to explore the 360$^\\circ$ environment, seeking the object specified by a user instruction for segmentation. To tackle this challenging task, we propose PanoSeeker, a memory-augmented agent for efficient APRS. Rather than relying on heuristic scanning, PanoSeeker integrates a Vision-Language Model (VLM) with EgoSphere, an explicit spatial visual memory. By progressively integrating sequential local observations into a unified 360$^\\circ$ representation, EgoSphere enables the agent to plan efficient and non-redundant search trajectories. Once the target is found, the agent performs active viewpoint alignment and outputs the segmentation mask. Furthermore, we curate an expert-annotated search trajectory dataset with memory timelines for Supervised Fine-Tuning, followed by Reinforcement Learning post-training to explicitly optimize PanoSeeker's exploration efficiency. Extensive experiments on our newly established APRS benchmark demonstrate that PanoSeeker achieves superior search efficiency and segmentation accuracy, significantly outperforming adapted state-of-the-art baselines.",
+        "url": "https://arxiv.org/abs/2607.02497v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.02497v1",
+        "publishedDate": "2026-07-02T17:56:49.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2607.02486",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "GeoMix: Descriptor-Free Visual Localization via Global Context and Multi-Detector Training",
+        "authors": [
+          "Yejun Zhang",
+          "Xinjue Wang",
+          "Zihan Wang",
+          "Esa Rahtu",
+          "Juho Kannala"
+        ],
+        "summary": "Descriptor-free visual localization eliminates high-dimensional descriptor storage, preserves scene privacy, and simplifies map maintenance, yet its accuracy still lags far behind descriptor-based pipelines. We identify this gap to insufficient geometric discriminability in geometry-only matching. Without visual appearance, current methods underutilize local geometry cues, lack the global context among keypoints, and overfit to a single keypoint detector. We further observe that descriptor-free matching naturally enables multi-detector training, as heterogeneous keypoints can be optimized in a shared geometry-only space without aligning descriptor spaces. Building on these insights, we propose GeoMix, a descriptor-free 2D-3D matching framework that strengthens geometric discriminability at three levels. Locally, directional and distance-aware embeddings enrich neighborhood aggregation with fine-grained spatial structure. Globally, learnable context nodes aggregate and redistribute scene-wide information via cross-attention to resolve ambiguities beyond local receptive fields. At the training level, Mix-Training exploits this detector-agnostic geometry space to learn representations across multiple keypoint detectors. Extensive experiments on MegaDepth, Cambridge Landmarks, 7Scenes, and Aachen Day-Night show that GeoMix sets a new state of the art among descriptor-free methods, reducing 75th-percentile rotation error by 89\\% and translation error by up to 90\\% over the previous best, while generalizing zero-shot to unseen detectors and narrowing the gap to descriptor-based pipelines. Code is available at $\\href{https://github.com/YejunZhang/Geomix}{\\text{this links}}$.",
+        "url": "https://arxiv.org/abs/2607.02486v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.02486v1",
+        "publishedDate": "2026-07-02T17:52:41.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      }
+    ],
+    "AI & Agents": [
+      {
+        "id": "2607.02514",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Distributed Attacks in Persistent-State AI Control",
+        "authors": [
+          "Josh Hills",
+          "Ida Caspary",
+          "Asa Cooper Stickland"
+        ],
+        "summary": "As AI coding agents become more autonomous, they increasingly ship code iteratively, with the codebase persisting across sessions. This persistence creates a new attack surface: a misaligned or prompt-injected agent can distribute attacks across pull requests (PRs) and time its payload for the PR with the best natural cover. To study the resulting dynamics, we introduce Iterative VibeCoding, a setting for AI control, the study of safely deploying capable but potentially untrusted AI. In Iterative VibeCoding, a coding agent builds software over a sequence of PRs in a persistent codebase while pursuing a covert side task. Our benchmark includes two task families: CLI tools and Flask web services, across 20 total task variations. We use Claude Sonnet 4.5 as the attack agent and GPT-4o as the monitor. We compare gradual attacks, which distribute the side task across PRs, against non-gradual attacks concentrated in a single PR. No single monitor is robust to both: which strategy evades best (success while evading the monitor) depends on the monitor type, so a defender cannot close off both gradual and non-gradual attacks with any one monitor. High evasion (>= 65%) generalizes across model attack agent backends (Sonnet 4.5, Gemini 3.1 Pro, Kimi K2.5), confirming this is a property of the persistent-state attack surface rather than a single model's capability. Evasion also remains high across state-of-the-art monitor models and the gap between gradual and non-gradual evasion widens for more capable models. We introduce a stateful link-tracker monitor that tracks suspicious buildup across PRs. On both task families, it detects gradual attacks substantially better than diff monitors that merely see more accumulated history. Combining this stronger monitor with trajectory monitors in a four-monitor ensemble reduces gradual-attack evasion from 93% under the weakest standard diff monitor to 47%.",
+        "url": "https://arxiv.org/abs/2607.02514v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.02514v1",
+        "publishedDate": "2026-07-02T17:59:56.000Z",
+        "tags": [
+          "cs.AI"
+        ]
+      },
+      {
+        "id": "2607.02509",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "ReContext: Recursive Evidence Replay as LLM Harness for Long-Context Reasoning",
+        "authors": [
+          "Yanjun Zhao",
+          "Ruizhong Qiu",
+          "Tianxin Wei",
+          "Yuanchen Bei",
+          "Zhining Liu",
+          "Lingjie Chen",
+          "Ismini Lourentzou",
+          "Hanghang Tong",
+          "Jingrui He"
+        ],
+        "summary": "Understanding and reasoning over long contexts has become a key requirement for deploying large language models (LLMs) in realistic applications. Although recent LLMs support increasingly long context windows, they often fail to use relevant evidence that is already present in the input, revealing a gap between context access and effective context utilization. In this work, we propose Recursive Evidence Replay as LLM Harness for Long-Context Reasoning (RECONTEXT), a training-free inference method for improving long-context reasoning. RECONTEXT uses model-internal relevance signals to construct a query-conditioned evidence pool and replays it before final generation while preserving the full original context. This recursive selection process separates evidence organization from answer generation without training, external memory, or context pruning. We also provide a theoretical analysis based on associative memory, which characterizes the context as a memory store, the question as a retrieval cue, attention as cue-trace association, and replay as trace reactivation. Experiments on eight long-context datasets with 128K context length show that RECONTEXT consistently improves evidence utilization across Qwen3-4B, Qwen3-8B, and Llama3-8B, achieving the best average rank on all three backbones. Code is available at https://github.com/Yanjun-Zhao/ReContext.",
+        "url": "https://arxiv.org/abs/2607.02509v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.02509v1",
+        "publishedDate": "2026-07-02T17:59:26.000Z",
+        "tags": [
+          "cs.AI"
+        ]
+      },
+      {
+        "id": "2607.02491",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "G-RRM: Guiding Symbolic Solvers with Recurrent Reasoning Models",
+        "authors": [
+          "Timo Bertram",
+          "Sidhant Bhavnani",
+          "Richard Freinschlag",
+          "Erich Kobler",
+          "Andreas Mayr",
+          "Günter Klambauer"
+        ],
+        "summary": "In this work, we focus on SE-RRMs, a symbol-equivariant instantiation of RRMs that exhibits improved extrapolation to larger problem sizes. We propose a neuro-symbolic approach, ``Guiding with Recurrent Reasoning Models'' (G-RRM), which integrates SE-RRMs with symbolic solvers for constraint satisfaction problems. SE-RRMs act as neural solvers that generate full solution proposals and guide classical symbolic solvers, such as backtracking or SAT-based methods like Glucose 4.1 and CaDiCaL 3.0.0, that produce globally correct solutions. Centrally, we investigate when neural guidance with G-RRM improves the search efficiency of symbolic solvers. % Our experiments show that the efficacy of G-RRM depends on two conditions: first, the problem instances must have an expansive combinatorial search space to expose potential gains, and second, the solver architecture must be capable of dynamically overwriting its branching choices to recover when neural hints are imperfect. When these conditions hold, guidance drives median conflict counts to zero and yields significant wall-clock speedups: on $9\\times9$ Sudoku, where the SE-RRM correctly solves $91.1\\%$ of instances, backtracking accelerates by $33.3\\times$ and Glucose 4.1 by $1.70\\times$ (median, $p<0.001$), with Glucose 4.1 retaining a $1.17\\times$ speedup on perfect-hint $25\\times25$ grids. In contrast, CaDiCaL 3.0.0, whose runtime is overhead-dominated and which always respects the injected branching hints rather than overwriting them, shows no significant speedup (median $1.02\\times$, n.s.) and even a small significant mean slowdown ($0.90\\times$) on $9\\times9$. These results delineate the regimes in which neural guidance translates into practical speedups.",
+        "url": "https://arxiv.org/abs/2607.02491v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.02491v1",
+        "publishedDate": "2026-07-02T17:53:31.000Z",
+        "tags": [
+          "cs.AI"
+        ]
+      }
+    ],
+    "LLMs & Language": [
+      {
+        "id": "2607.02513",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "LACUNA: A Testbed for Evaluating Localization Precision for LLM Unlearning",
+        "authors": [
+          "Matteo Boglioni",
+          "Thibault Rousset",
+          "Siva Reddy",
+          "Marius Mosbach",
+          "Verna Dankers"
+        ],
+        "summary": "LLMs memorize sensitive training data, including personally identifiable information (PII), creating a pressing need for reliable post hoc removal methods. Unlearning has emerged as a promising solution, with state-of-the-art(SOTA) methods often following a localize-first, unlearn-second paradigm that targets specific model parameters. However, existing benchmarks evaluate unlearning solely at the output level, leaving open the question of whether unlearning truly erases knowledge from a model's parameters or merely obfuscates it, a concern reinforced by the success of resurfacing attacks. To bridge this gap, we introduce LACUNA: the first unlearning testbed with ground-truth parameter-level localization. LACUNA injects PII of synthetic individuals into predefined parameters of 1B and 7B OLMo-based models via masked continual pretraining, enabling direct evaluation of whether unlearning targets the weights responsible for knowledge storage. We use LACUNA to benchmark current SOTA unlearning methods and find that, despite strong output-level performance, existing methods are highly imprecise and susceptible to resurfacing attacks. We further show that when localization is successful, even a simple gradient-based unlearning method achieves strong erasure and robustness to resurfacing attacks, highlighting the importance of precise unlearning. We release LACUNA to complement behavioral evaluations and drive further advances in robust, localization-based unlearning.",
+        "url": "https://arxiv.org/abs/2607.02513v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.02513v1",
+        "publishedDate": "2026-07-02T17:59:52.000Z",
+        "tags": [
+          "cs.CL",
+          "cs.AI",
+          "cs.LG"
+        ]
+      },
+      {
+        "id": "2607.02512",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Program-as-Weights: A Programming Paradigm for Fuzzy Functions",
+        "authors": [
+          "Wentao Zhang",
+          "Liliana Hotsko",
+          "Woojeong Kim",
+          "Pengyu Nie",
+          "Stuart Shieber",
+          "Yuntian Deng"
+        ],
+        "summary": "Many everyday programming tasks resist clean rule-based implementation, such as alerting on important log lines, repairing malformed JSON, or ranking search results by intent, and are increasingly outsourced to large language model APIs at the cost of locality, reproducibility, and price. We propose fuzzy-function programming: compiling such a function from a natural-language specification into a compact, locally-executable neural artifact. We instantiate this paradigm with Program-as-Weights (PAW), in which a 4B compiler trained on FuzzyBench, a 10M-example dataset we release, emits parameter-efficient adapters for a frozen, lightweight interpreter. A 0.6B Qwen3 interpreter executing PAW programs matches the performance of direct prompting of Qwen3-32B, while using roughly one fiftieth of the inference memory and running at 30 tokens/s on a MacBook M3. PAW reframes the foundation model from a per-input problem solver into a tool builder: invoked once per function definition, it produces a small reusable artifact whose subsequent calls per function application are cheap and offline.",
+        "url": "https://arxiv.org/abs/2607.02512v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.02512v1",
+        "publishedDate": "2026-07-02T17:59:50.000Z",
+        "tags": [
+          "cs.LG",
+          "cs.AI",
+          "cs.CL"
+        ]
+      },
+      {
+        "id": "2607.02510",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Online Safety Monitoring for LLMs",
+        "authors": [
+          "Mona Schirmer",
+          "Metod Jazbec",
+          "Alexander Timans",
+          "Christian Naesseth",
+          "Maja Waldron",
+          "Eric Nalisnick"
+        ],
+        "summary": "Despite alignment training, LLMs remain prone to generating unsafe outputs at deployment time. Monitoring outputs online and raising an alarm when safety can no longer be assumed is therefore critical. We study a simple real-time monitor that turns a verifier signal from an external model into an alarm decision by thresholding, with the threshold calibrated via risk control. In experiments on mathematical reasoning and red teaming datasets, we show that this simple design is competitive with more advanced monitors based on sequential hypothesis testing.",
+        "url": "https://arxiv.org/abs/2607.02510v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.02510v1",
+        "publishedDate": "2026-07-02T17:59:43.000Z",
+        "tags": [
+          "cs.AI",
+          "cs.CL",
+          "cs.LG",
+          "stat.AP",
+          "stat.ML"
+        ]
+      },
+      {
+        "id": "2607.02507",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "What LLM Agents Say When No One Is Watching: Social Structure and Latent Objective Emergence in Multi-Agent Debates",
+        "authors": [
+          "Arman Ghaffarizadeh",
+          "Danyal Mohaddes",
+          "Aliakbar Izadkhah",
+          "Shahriar Noroozizadeh"
+        ],
+        "summary": "LLM agents will increasingly act in socially structured settings where role, audience, and relational context can shape what is advantageous or costly to say. We study whether such social structure, without any explicit objective in the prompt, changes what an agent expresses publicly relative to an off-the-record (OTR) channel elicited under the same condition. We introduce a dual-channel debate framework in which agents produce public utterances that enter the shared history alongside OTR responses that are recorded but never shown to the other participant. Across 10 models, 3 scenarios, and 5 variations within each scenario, alignment-inducing settings produce systematic public-OTR divergence in the targeted agent, with its decision divergence rising from a $\\sim$3% baseline to roughly 40%. The effect is consistent across four aggregate analyses: stance, semantic similarity, natural language inference, and survey responses. In some cases, the OTR response explicitly attributes public accommodation to relational pressures, such as career risk or sponsorship obligation. The findings suggest that agent evaluation should extend beyond explicit goals and detect emergent objectives. We present a dual-channel evaluation framework and complementary behavioral measures that operationalize this assessment.",
+        "url": "https://arxiv.org/abs/2607.02507v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.02507v1",
+        "publishedDate": "2026-07-02T17:59:23.000Z",
+        "tags": [
+          "cs.AI",
+          "cs.CL",
+          "cs.LG",
+          "cs.MA"
+        ]
+      },
+      {
+        "id": "2607.02504",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Reasoning LLM Improves Speaker Recognition in Long-form TV Dramas",
+        "authors": [
+          "Yuxuan Li",
+          "Lingxi Xie",
+          "Xinyue Huo",
+          "Jihao Qiu",
+          "Jiacheng Shao",
+          "Pengfei Chen",
+          "Jiannan Ge",
+          "Kaiwen Duan",
+          "Qi Tian"
+        ],
+        "summary": "Long-form TV dramas present a formidable challenge for comprehensive video understanding, where deciphering complex storyline often relies on \\textbf{speaker recognition}, the task of accurately attributing each spoken utterance to its respective character. In this paper, we advance this field through two primary contributions. (1) We introduce \\textbf{DramaSR-532K}, a large-scale benchmark comprising 532K annotated dialogue lines across more than 900 unique characters, necessitating the integration of auditory, linguistic, and visual cues for speaker recognition. (2) We propose \\textbf{DramaSR-LRM}, a robust approach built upon a large reasoning model (LRM). DramaSR-LRM is designed to autonomously aggregate contextual evidence via multimodal tool-use, synthesizing diverse inputs to achieve high-fidelity attribution. Experimental results demonstrate that DramaSR-LRM significantly outperforms existing baselines, particularly on short utterances where acoustic biometrics are inherently unreliable. \\textit{All the data and code will be made publicly available at the project page: https://www.github.com/198808xc/DramaSR-LRM.}",
+        "url": "https://arxiv.org/abs/2607.02504v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.02504v1",
+        "publishedDate": "2026-07-02T17:58:52.000Z",
+        "tags": [
+          "cs.CL",
+          "cs.AI",
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2607.02494",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Towards Robustness against Typographic Attack with Training-free Concept Localization",
+        "authors": [
+          "Bohan Liu",
+          "Wenqian Ye",
+          "Guangzhi Xiong",
+          "Zhenghao He",
+          "Sanchit Sinha",
+          "Aidong Zhang"
+        ],
+        "summary": "Models trained via Contrastive Language-Image Pretraining (CLIP) serve as the foundational vision encoders for most modern Large Vision Language Models (LVLMs). Despite their widespread adoption, CLIP models exhibit a critical yet underexplored failure mode: irrelevant text appearing within images confounds visual representations, biasing them toward lexical meaning rather than true visual semantics. This robustness issue, commonly described as a Typographic Attack (TA), exposes a vulnerability that poses a significant risk to safety-critical applications such as autonomous driving. To achieve interpretable and effective robustness against TA, we propose a novel, training-free mechanistic interpretability method. Our method provides sampling-based interpretations of hidden state representations and quantitatively attributes semantic versus lexical focus to individual attention heads. Through probabilistic analysis and circuit mining, we isolate specific Vision Transformer (ViT) components that disproportionately encode lexical information, thereby identifying the mechanistic source of TA. We further show that simple interventions applied directly to the identified circuits, without any additional training, can substantially improve robustness against Typographic Attacks in object classification. These interventions, such as selective adjustment of attention weights, also outperform both supervised and training-free defense methods. Our experiments demonstrate that applying the proposed intervention to the vision encoders of several state-of-the-art LVLMs yields substantial gains in Visual Question Answering accuracy under Typographic Attack interference on RIO-Bench. These results confirm both the efficacy and the generalizability of our mechanistic approach. Code is released at https://github.com/Liu-524/SamplingTAR.",
+        "url": "https://arxiv.org/abs/2607.02494v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.02494v1",
+        "publishedDate": "2026-07-02T17:55:24.000Z",
+        "tags": [
+          "cs.CV",
+          "cs.CL"
+        ]
+      },
+      {
+        "id": "2607.02490",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Visually Grounded Self-Reflection for Vision-Language Models via Reinforcement Learning",
+        "authors": [
+          "Liyan Tang",
+          "Fangcong Yin",
+          "Greg Durrett"
+        ],
+        "summary": "Large vision-language models can reason over multimodal inputs by generating textual chains of thought (CoT). A key capability exhibited in CoT reasoning is self-reflection: revisiting earlier decisions and correcting previous errors. However, existing LVLMs often fail to properly attend to visual inputs during reflection, limiting their ability to translate feedback into grounded corrections, especially for out-of-distribution images. To address this issue, we propose a novel reinforcement learning training framework VRRL, with two components explicitly designed to elicit visually grounded self-reflection. First, we randomly mask trajectory prefixes during training to emphasize recovery from incorrect intermediate predictions rather than making early mistakes. Second, we introduce buffered roll-ins from an experience replay buffer to expose the model to diverse failure states that it must learn to correct. We evaluate our approach on visual grounding tasks involving tables and charts, as well as spatial navigation benchmarks. While off-the-shelf and conventionally fine-tuned models degrade substantially under distribution shift, our method substantially improves average out-of-distribution accuracy over standard RL and reflection-oriented fine-tuning baselines by using self-reflection effectively.",
+        "url": "https://arxiv.org/abs/2607.02490v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.02490v1",
+        "publishedDate": "2026-07-02T17:53:15.000Z",
+        "tags": [
+          "cs.CL",
+          "cs.CV"
+        ]
+      }
+    ],
+    "Machine Learning": [
+      {
+        "id": "2607.02502",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "DemoPSD: Disagreement-Modulated Policy Self-Distillation",
+        "authors": [
+          "Yunhe Li",
+          "Hao Shi",
+          "Wenhao Liu",
+          "Mengzhe Ruan",
+          "Hanxu Hou",
+          "Zhongxiang Dai",
+          "Shuang Qiu",
+          "Linqi Song"
+        ],
+        "summary": "On-policy self-distillation (OPSD) has emerged as a practical method for training large language models (LLMs) to reason, where a single model acts as both the teacher and the student with different levels of information access. However, recent studies have found that the teacher's dense token-level supervision, conditioned on privileged information, can lead to overfitting to in-domain patterns, suppress exploration, and hurt cross-domain generalization, while also introducing a more fundamental issue: *privileged information leakage*, where the student encodes answer-dependent shortcuts that are unavailable at test time. We introduce **DemoPSD**, a novel framework that resolves such problems through the idea of *selective adoption of teacher guidance*. Instead of fitting the full teacher distribution, DemoPSD steers the student toward a *reverse-KL barycenter target*, a weighted geometric combination of the teacher and student distributions, that naturally balances learning from the teacher with preserving the student's own reasoning capacity. We measure the difference between their distributions and use such a discrepancy to adaptively control the blending at each token position. We provably show that DemoPSD achieves **(1)** *leakage attenuation*, i.e., effective mitigation of privileged information leakage; and **(2)** *exploration preservation*, i.e., preservation of exploration capacity under dense token-level distillation. Extensive experiments on SciKnowEval across four scientific fields show that DemoPSD outperforms both GRPO and SDPO while maintaining higher training entropy and robustly generalizing to out-of-distribution GPQA benchmarks.",
+        "url": "https://arxiv.org/abs/2607.02502v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.02502v1",
+        "publishedDate": "2026-07-02T17:58:29.000Z",
+        "tags": [
+          "cs.LG",
+          "cs.AI"
+        ]
+      },
+      {
+        "id": "2607.02499",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Beyond Adam: SOAP and Muon for Faster, Label-Efficient Training of Machine Learning Interatomic Potentials",
+        "authors": [
+          "Gil Harari",
+          "Yoel Zimmermann",
+          "Ola Tangen Kulseng",
+          "Laura Zichi",
+          "Chuin Wei Tan",
+          "Marc L. Descoteaux",
+          "Boris Kozinsky"
+        ],
+        "summary": "Machine learning interatomic potentials (MLIPs) have become a hallmark of AI for scientific simulation. While efforts on new architectures and datasets have led to increasingly accurate and general models, the choice of optimizer for training has largely remained unexplored, defaulting to Adam and its variants in the community. Here, we implement and systematically compare a class of recently proposed matrix-structured optimizers, including Muon, SOAP, and the hybrid SOAP-Muon, for training NequIP and Allegro MLIP models. We find that these optimizers can substantially outperform Adam in both convergence speed and final accuracy. SOAP and SOAP-Muon emerge as robust and consistently strong methods, while Muon only provides partial gains relative to Adam. The improvements are particularly pronounced under partial force supervision. Our results indicate that optimizer choice is an overlooked yet impactful design axis for MLIPs.",
+        "url": "https://arxiv.org/abs/2607.02499v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.02499v1",
+        "publishedDate": "2026-07-02T17:57:31.000Z",
+        "tags": [
+          "cs.LG",
+          "cs.AI",
+          "physics.chem-ph",
+          "physics.comp-ph"
+        ]
+      },
+      {
+        "id": "2607.02496",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Controllable Sim Agents with Behavior Latents",
+        "authors": [
+          "Juanwu Lu",
+          "Junyu Zhu",
+          "Ziran Wang"
+        ],
+        "summary": "Realistic traffic simulation requires agents that imitate logged behavior and can also be steered along interpretable axes. Such controllability enables engineers to isolate variables, reproduce specific edge cases, and test autonomous systems without real-world risk. We introduce Controllable Neural Variational Agents (CNeVA), a controllable simulated-agent framework that learns to infer a per-agent Gaussian behavior latent from per-channel discounted returns via a closed-form conjugate variational update, conditioning a rectified-flow trajectory generator trained on a mixed channel-mask curriculum for classifier-free guidance. To tackle scarcity in reward signals, we propose soft eligibility gates that replace hard binary thresholds with smooth exponential decay, preserving the gradient signal for near-threshold agents. On the Waymo Open Motion Dataset, CNeVA attains competitive realism on the benchmark while exposing per-channel controllability that the higher-ranked imitation models lack. Speed- and acceleration-based steering produces monotone responses without stall-induced reward hacking. Safety controllability is monotone and substantial with the introduction of soft eligibility. We manage to achieve steerable map compliance under a context-residual return measure. Furthermore, our experiment demonstrates that steering metrics must be read alongside physical-plausibility guardrails to avoid reward-hacking confounds.",
+        "url": "https://arxiv.org/abs/2607.02496v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.02496v1",
+        "publishedDate": "2026-07-02T17:55:39.000Z",
+        "tags": [
+          "cs.RO",
+          "cs.LG"
+        ]
+      }
+    ]
+  },
+  "labPosts": [
+    {
+      "id": "deepmind-2099547887",
+      "type": "blog_post",
+      "source": "deepmind",
+      "title": "Google DeepMind and A24 announce first-of-its-kind research partnership",
+      "authors": [],
+      "summary": "",
+      "url": "https://deepmind.google/blog/google-deepmind-and-a24-announce-first-of-its-kind-research-partnership/",
+      "publishedDate": "2026-07-03T14:25:43.000Z",
+      "tags": []
+    },
+    {
+      "id": "deepmind-917900715",
+      "type": "blog_post",
+      "source": "deepmind",
+      "title": "Start building with Nano Banana 2 Lite and Gemini Omni Flash",
+      "authors": [],
+      "summary": "",
+      "url": "https://deepmind.google/blog/start-building-with-nano-banana-2-lite-and-gemini-omni-flash/",
+      "publishedDate": "2026-06-30T16:02:40.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-1763444658",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "How ChatGPT adoption has expanded",
+      "authors": [],
+      "summary": "New OpenAI Signals data shows how ChatGPT adoption is growing globally, with users increasing usage, exploring more capabilities, and driving growth across regions and languages.",
+      "url": "https://openai.com/index/how-chatgpt-adoption-has-expanded",
+      "publishedDate": "2026-06-30T09:00:00.000Z",
+      "tags": [
+        "Global Affairs"
+      ]
+    },
+    {
+      "id": "openai-2011863434",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Inside Genebench-Pro",
+      "authors": [],
+      "summary": "",
+      "url": "https://openai.com/index/genebench-pro/case-studies",
+      "publishedDate": "2026-06-30T00:00:00.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-2113664846",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Introducing GeneBench-Pro",
+      "authors": [],
+      "summary": "Introducing GeneBench-Pro, a new benchmark testing AI performance in genomics, biology, and scientific research using complex, real-world datasets.",
+      "url": "https://openai.com/index/introducing-genebench-pro",
+      "publishedDate": "2026-06-30T00:00:00.000Z",
+      "tags": [
+        "Research"
+      ]
+    },
+    {
+      "id": "openai-1815949300",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Core dump epidemiology: fixing an 18-year-old bug",
+      "authors": [],
+      "summary": "OpenAI engineers used large-scale core dump analysis to debug rare infrastructure crashes, uncovering both a hardware fault and a long-standing software bug.",
+      "url": "https://openai.com/index/core-dump-epidemiology-data-infrastructure-bug",
+      "publishedDate": "2026-06-30T00:00:00.000Z",
+      "tags": [
+        "Engineering"
+      ]
+    },
+    {
+      "id": "openai-1304285567",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Mapping Europe’s AI Workforce Opportunity",
+      "authors": [],
+      "summary": "A new OpenAI report maps how AI could reshape jobs across the EU, highlighting which occupations may face automation, growth, or workflow changes.",
+      "url": "https://openai.com/index/mapping-ai-jobs-transition-eu",
+      "publishedDate": "2026-06-29T07:00:00.000Z",
+      "tags": [
+        "Global Affairs"
+      ]
+    },
+    {
+      "id": "openai-1315428209",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "HP Inc. launches Frontier strategic partnership with OpenAI",
+      "authors": [],
+      "summary": "HP Inc. scales its OpenAI Frontier partnership to deploy AI across customer experiences, software development, and enterprise operations.",
+      "url": "https://openai.com/index/hp-frontier-partnership",
+      "publishedDate": "2026-06-28T17:00:00.000Z",
+      "tags": [
+        "Company"
+      ]
+    }
+  ],
+  "stats": {
+    "totalPapersScanned": 200,
+    "totalPostsScanned": 8
+  }
+}
