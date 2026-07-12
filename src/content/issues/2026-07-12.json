@@ -1,0 +1,587 @@
+{
+  "slug": "2026-07-12",
+  "title": "Weekly AI Digest — July 12, 2026",
+  "dateRange": {
+    "start": "2026-07-05T16:15:15.979Z",
+    "end": "2026-07-12T16:15:15.979Z"
+  },
+  "papersByCategory": {
+    "Computer Vision": [
+      {
+        "id": "2607.08772",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Wat3R: Underwater 3D Geometry Learning without Annotations",
+        "authors": [
+          "Jiangwei Ren",
+          "Xingyu Jiang",
+          "Zijie Song",
+          "Wei Xu",
+          "Hongkai Lin",
+          "Dingkang Liang",
+          "Xiang Bai"
+        ],
+        "summary": "Estimating 3D geometry in underwater environments presents unique challenges due to light attenuation, scattering, and the absence of large-scale, high-quality 3D annotations. Pioneering methods rely on massive dense annotations that are impractical in underwater settings. In this paper, we propose Wat3R, a cross-domain semi-supervised learning framework designed to adapt feed-forward 3D reconstruction models from air to underwater scenes. Uniquely, our method eliminates the need for any annotated underwater data following a teacher-student architecture, that learns robust geometry representations merely on abundant unlabeled real underwater video footage. We also design a cross-view consistency loss that leverages geometric cues from other views to compensate for the information degradation in the current view caused by water attenuation and scattering. Furthermore, considering the lack of comprehensive evaluation benchmarks, we construct Water3D, a diverse dataset covering various water bodies and underwater scenarios, designed for geometric task evaluation. Experimental results demonstrate that Wat3R outperforms current state-of-the-art methods in underwater multi-view depth estimation and point cloud reconstruction. The dataset and code are available at https://github.com/LSXI7/Wat3R .",
+        "url": "https://arxiv.org/abs/2607.08772v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.08772v1",
+        "publishedDate": "2026-07-09T17:59:58.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2607.08771",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "ZipDepth: Bringing Lightweight Zero-Shot Monocular Depth Anywhere, on Any Device",
+        "authors": [
+          "Fabio Tosi",
+          "Luca Bartolomei",
+          "Matteo Poggi",
+          "Stefano Mattoccia"
+        ],
+        "summary": "Monocular depth estimation has seen remarkable progress through foundation models achieving robust zero-shot generalization, yet their computational demands place them far beyond the reach of embedded and mobile platforms. Lightweight alternatives exist, but have been developed almost exclusively within single-domain, self-supervised paradigms, failing silently under domain shift. We present ZipDepth, a compact monocular depth network that bridges this gap by combining an efficient reparameterizable encoder-decoder with large-scale knowledge distillation from a foundation model over a large multi-domain training set. Comprising just 6.1M parameters, ZipDepth runs at real-time rates from server GPUs to power-constrained devices, achieving the best trade-off between zero-shot accuracy and deployment efficiency among lightweight models across five benchmarks, taking a significant step towards the accuracy of foundation models with 50x more parameters.",
+        "url": "https://arxiv.org/abs/2607.08771v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.08771v1",
+        "publishedDate": "2026-07-09T17:59:58.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2607.08770",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "LongE2V: Long-Horizon Event-based Video Reconstruction, Prediction, and Frame Interpolation with Video Diffusion Models",
+        "authors": [
+          "Cheng-De Fan",
+          "Chun-Wei Tuan Mu",
+          "Chen-Wei Chang",
+          "Chin-Yang Lin",
+          "Kun-Ru Wu",
+          "Yu-Chee Tseng",
+          "Yu-Lun Liu"
+        ],
+        "summary": "Recovering high-quality video from sparse event streams is a challenging task. Regression methods often blur textures, while existing generative models struggle with long-term stability. We propose LongE2V, a novel approach that leverages pre-trained video diffusion priors to jointly handle event-based video reconstruction, prediction, and frame interpolation. By fine-tuning a foundational video model, our approach achieves high data efficiency and superior perceptual quality. We introduce Autoregressive Unrolling and Adaptive Context Switching to mitigate temporal drift in extremely long sequences. We also propose Reencoding Alignment with Cross Residual Correction to ensure precise bidirectional consistency during frame interpolation. Furthermore, Event Voxel Density Augmentation ensures robustness across varying sensor resolutions. Extensive experiments on real-world benchmarks demonstrate that LongE2V outperforms state-of-the-art methods across all three tasks, exhibiting exceptional temporal coherence and zero-shot generalization. Project page: https://cdfan0627.github.io/LongE2V-page/",
+        "url": "https://arxiv.org/abs/2607.08770v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.08770v1",
+        "publishedDate": "2026-07-09T17:59:52.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2607.08769",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Geometry and Gradient-based Partitioning for Panoramic Outdoor Reconstruction",
+        "authors": [
+          "Weijian Chen",
+          "Weibo Yao",
+          "Yuhang Zhang",
+          "Xiaolin Tang",
+          "Guo Wang",
+          "Weijun Zhang",
+          "Xitong Gao",
+          "Yihao Chen",
+          "Hongde Qin",
+          "Lu Qi"
+        ],
+        "summary": "Scaling 3D Gaussian Splatting (3DGS) to large outdoor scenes is costly in both data acquisition and computation. Adopting panoramic images with equirectangular projection (ERP) can reduce capture effort via their full $360^{\\circ}$ field of view, yet the resulting omnipresent visibility invalidates existing partitioning strategies that rely on local camera frustums, causing block-wise optimization to degenerate into global training. Thus, we propose PanoLOG, a two-stage coarse-to-fine framework equipped with a Geometry and Gradient-based Partitioning Strategy tailored for large-scale panoramic 3DGS reconstruction. In the global coarse stage, PanoLOG leverages sky-sphere modeling and panoramic monocular depth supervision for reliable geometry, while in the refinement stage, G$^2$PS builds adaptive bounding volumes via parallax-driven uncertainty and assigns cameras via gradient-based importance scoring. Furthermore, we construct Pano360, the first benchmark on large-scale panoramic dataset for outdoor scene reconstruction. Extensive experiments demonstrate that G$^2$PS achieves state-of-the-art rendering quality while maintaining scalable, block-parallel training. Our models, training code, and dataset are publicly available.",
+        "url": "https://arxiv.org/abs/2607.08769v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.08769v1",
+        "publishedDate": "2026-07-09T17:59:43.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2607.08766",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "OPSD-V: On-Policy Self-Distillation for Post-Training Few-Step Autoregressive Video Generators",
+        "authors": [
+          "Hongyu Liu",
+          "Chun Wang",
+          "Feng Gao",
+          "Xuanhua He",
+          "Yue Ma",
+          "Ziyu Wan",
+          "Yong Zhang",
+          "Xiaoming Wei",
+          "Qifeng Chen"
+        ],
+        "summary": "We propose OPSD-V, an on-policy self-distillation paradigm for post-training few-step autoregressive (AR) video diffusion models. Existing few-step AR video generators can produce long videos with low latency, but still suffer from error accumulation and weakened motion dynamics during long autoregressive rollout. OPSD-V reduces long-horizon degradation while preserving the original few-step inference path. The key idea is to introduce real long-video data as temporal context during training and use it to provide dense trajectory-level supervision. Specifically, the student follows the exact inference-time rollout, generating each chunk conditioned on its own previously generated KV cache. In parallel, the teacher is evaluated at the same student-visited denoising states, but uses a cleaner AR-consistent temporal cache in which older history can be replaced by real-video context. This provides dense denoising-level corrective targets under on-policy AR cache dynamics, without changing the sampler, number of denoising steps, or inference-time cache mechanism. We apply OPSD-V to representative few-step AR video models, including Self-Forcing and LongLive. Experiments show consistent improvements in visual quality, motion dynamics, and VBenchLong scores. A user study with 10 participants comparing 20 video pairs shows that OPSD-V is preferred over the base models in 66.0% of overall-preference judgments (82.5% excluding ties).",
+        "url": "https://arxiv.org/abs/2607.08766v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.08766v1",
+        "publishedDate": "2026-07-09T17:59:11.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2607.08765",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Enhancing In-context Panoramic Generation via Geometric-aware Pretraining",
+        "authors": [
+          "Haoran Feng",
+          "Ruiyang Zhang",
+          "Longyi Zhang",
+          "Dizhe Zhang",
+          "Lu Qi"
+        ],
+        "summary": "In this work, we present Canvas360, a two-stage framework for in-context panoramic generation that combines geometry-aware pretraining with downstream task-specific fine-tuning. To address the lack of large-scale, high-quality training data tailored to in-context panoramic tasks, we propose Canvas360Dataset, a collection of 1M high-quality paired panoramic samples for style transfer, inpainting, outpainting, and editing, enabling effective supervision across diverse in-context generation scenarios. On the modeling side, Canvas360 enhances text-to-panorama generation through parallel depth generation, velocity circular padding, and similarity loss regularization, enabling the model to learn geometry-aware representations, capture object distortion details, and improve geometric consistency and global coherence. Furthermore, empowered by strong panoramic priors, Canvas360 enables a unified in-context panoramic generation framework that supports diverse downstream tasks via token-level concatenation, surpassing prior methods in both task coverage and modeling flexibility. Extensive experiments show that Canvas360 improves panoramic image fidelity, achieving particularly strong performance on the panorama-specific FAED metric and competitive or leading results across the reported quantitative evaluations. More information can be found on our project page: https://zry000.github.io/Canvas360/",
+        "url": "https://arxiv.org/abs/2607.08765v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.08765v1",
+        "publishedDate": "2026-07-09T17:59:06.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2607.08763",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "OpenCoF: Learning to Reason Through Video Generation",
+        "authors": [
+          "Xinyan Chen",
+          "Ziyu Guo",
+          "Renrui Zhang",
+          "Dongzhi Jiang",
+          "Hongsheng Li"
+        ],
+        "summary": "Reasoning has become a core capability for large models, especially when reliable decisions require understanding logical consequences. Recent video generation models offer a reasoning path distinct from previous Chain-of-Thought (CoT): reasoning can unfold through temporally connected frames, known as Chain-of-Frame (CoF) reasoning. However, existing video generators are primarily trained on general video corpora, still lacking diverse supervision and dedicated designs for CoF reasoning. To address this gap, we introduce OpenCoF, a framework comprising the OpenCoF-17K dataset, a reasoning video dataset spanning 11 task families, and Wan-CoF, a fine-tuned video model for studying whether diverse temporal supervision improves CoF behavior. Across four video reasoning benchmarks, Wan-CoF achieves considerable gains over the Wan2.2-I2V-A14B baseline. Building on this, we empirically explore more advanced designs for CoF capabilities, i.e., equipping the model with visual and textual reasoning tokens. This mechanism respectively captures low-level visual cues and high-level semantic priors for spatial and temporal reasoning. Through performance comparisons and attention analysis, we examine how these tokens contribute across model depth, denoising steps, space, and time. Our results suggest that stronger video reasoning requires both broad temporal supervision and explicit mechanisms for organizing intermediate reasoning state. We open-source the dataset, model, and code to facilitate future research on reasoning-oriented video generation.",
+        "url": "https://arxiv.org/abs/2607.08763v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.08763v1",
+        "publishedDate": "2026-07-09T17:58:29.000Z",
+        "tags": [
+          "cs.CV",
+          "cs.AI"
+        ]
+      },
+      {
+        "id": "2607.08745",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "AUTOPILOT VQA: Benchmarking Vision-Language Models for Incident-Centric Dashcam Understanding",
+        "authors": [
+          "Siddharth Damodharan",
+          "Radhika Gupta",
+          "Ali Alshami",
+          "Ryan Rabinowitz",
+          "Jugal Kalita"
+        ],
+        "summary": "Recent advances in Vision-Language Models, Large Language Models, and Multimodal Large Language Models have improved autonomous driving tasks such as scene understanding, decision making, trajectory prediction, and visual question answering. However, evaluating whether these models can reliably reason about safety-critical incidents remains challenging. To address this gap, we present AUTOPILOT-VQA, an incident-centric visual question answering benchmark for dashcam video understanding. The dataset evaluates different systems through structured questions designed around real-world driving incidents and near-incidents. The benchmark covers diverse safety-relevant categories, including weather and lighting conditions, traffic environment, road layout, road surface state, signage, involved entities, accident occurrence, impact location, and avoidability-related reasoning. By requiring models to answer grounded questions about both contextual scene properties and event-level incident details, AUTOPILOT-VQA moves beyond object recognition toward temporally grounded, safety-aware reasoning. The dataset is released as part of the AUTOPILOT CVPR 2026 competition and provides a standardized benchmark for assessing the reliability of autonomous driving systems in different scenarios. Our benchmark support developments for more interpretable, robust, and safety-conscious vision-language systems for real-world autonomous driving.",
+        "url": "https://arxiv.org/abs/2607.08745v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.08745v1",
+        "publishedDate": "2026-07-09T17:46:24.000Z",
+        "tags": [
+          "cs.AI",
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2607.08741",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "ARDY: Autoregressive Diffusion with Hybrid Representation for Interactive Human Motion Generation",
+        "authors": [
+          "Kaifeng Zhao",
+          "Mathis Petrovich",
+          "Haotian Zhang",
+          "Tingwu Wang",
+          "Siyu Tang",
+          "Davis Rempe"
+        ],
+        "summary": "Generating realistic 3D human motions in real-time within interactive applications is key for animation, simulation, and humanoid robotics. While recent offline motion generation approaches offer precise control via text and kinematic constraints, they lack the inference speed required for interactive settings. Conversely, existing online methods enable real-time synthesis but often sacrifice controllability or struggle with complex text semantics and long-horizon goals due to limited context windows. In this work, we introduce ARDY, a streaming generation framework that bridges this gap by enabling high-fidelity motion generation controllable via online text prompts and flexible kinematic constraints. ARDY employs a hybrid representation that combines explicit root features with a latent body embedding, balancing precise trajectory control with efficient generative learning. We propose a two-stage autoregressive transformer denoiser that features variable history context and supports conditioning on flexible, long-horizon kinematic constraints. By training on a large-scale motion capture dataset and being directly conditioned on text labels and kinematic constraints sampled from ground truth poses, ARDY natively learns controllable generation that supports online prompting and flexible long-horizon goals. Extensive evaluations on the HumanML3D benchmark and the large-scale, high-fidelity Bones Rigplay dataset demonstrate ARDY's high motion quality and constraint adherence, validating the efficacy of our key architectural decisions. Finally, we demonstrate the method's practical versatility through an interactive demo featuring dynamic text control, diverse keyframe pose constraints, path following, and interactive locomotion control via mouse and keyboard. Supplementary video results, code, and model releases can be found at https://research.nvidia.com/labs/sil/projects/ardy/.",
+        "url": "https://arxiv.org/abs/2607.08741v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.08741v1",
+        "publishedDate": "2026-07-09T17:41:49.000Z",
+        "tags": [
+          "cs.GR",
+          "cs.CV",
+          "cs.LG",
+          "cs.RO"
+        ]
+      }
+    ],
+    "LLMs & Language": [
+      {
+        "id": "2607.08768",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "UniClawBench: A Universal Benchmark for Proactive Agents on Real-World Tasks",
+        "authors": [
+          "Zhekai Chen",
+          "Chengqi Duan",
+          "Kaiyue Sun",
+          "Bohao Li",
+          "Yuqing Wang",
+          "Manyuan Zhang",
+          "Xihui Liu"
+        ],
+        "summary": "The rapid development of large language models and multimodal large language models has accelerated the emergence of proactive agents capable of operating everyday tools and assisting users in real-world environments. However, existing benchmarks struggle to evaluate such agents effectively, as they often rely on sandboxed environments and single-turn evaluation paradigms. Moreover, their scenario-based task taxonomies mix multiple model capabilities within the same task category, making it difficult to identify the root causes of agent failures. To address these limitations, we introduce UniClawBench, the first capability-driven benchmark designed to evaluate proactive agents in dynamic, real-world settings. UniClawBench is built around five foundational model capabilities: Skill Usage, Exploration, Long-Context Reasoning, Multimodal Understanding, and Cross-Platform Coordination. Based on these capabilities, we design 400 bilingual real-world tasks. Unlike previous benchmarks that rely on static, pre-recorded answers, our benchmark evaluates agents in live Docker containers using fine-grained, step-by-step completion checkpoints. Furthermore, we design a closed-loop evaluation strategy comprising an executor agent, a hidden supervisor agent, and a user agent to simulate realistic multi-turn human feedback without leaking grading criteria. To disentangle base model capabilities from framework-level design choices, we evaluate state-of-the-art models under multiple agent frameworks. Through comprehensive comparisons across both models and frameworks, we show how base model capabilities and agent framework designs jointly shape performance in real-world environments. To facilitate future research, we make our benchmark and code publicly available at https://github.com/HKU-MMLab/UniClawBench.",
+        "url": "https://arxiv.org/abs/2607.08768v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.08768v1",
+        "publishedDate": "2026-07-09T17:59:32.000Z",
+        "tags": [
+          "cs.CL"
+        ]
+      },
+      {
+        "id": "2607.08731",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Validity of LLMs as data annotators: AMALIA on authority",
+        "authors": [
+          "Manuel Pita"
+        ],
+        "summary": "A national language model offers a linguistic community its own instrument for measuring what its citizens say and value. Portugal's AMALIA, a publicly funded 9B-parameter model for European Portuguese, appears competitive on agreement alone: asked to code the moral foundation of authority, it agrees with trained human coders to within six F1 points of open models eight to thirteen times its size. Yet agreement is reliability, not validity. For theoretical constructs that must be inferred rather than read from surface features, the question is whether the model follows the construct's theory or reaches the right code by correlated shortcuts. We test this with the recovery gap: the loss in performance when a holistic prompt is decomposed into the codebook's atomic clauses and recombined by the theory's explicit rule. If calibration closes that gap, some portability should survive across models and languages; where it does not, the construct-model instrument is the likely locus of failure. We ask whether a calibrated English instrument transfers to AMALIA-9B and to European Portuguese. For one construct and one corpus, it does not. Decomposition recovers only about half of AMALIA's holistic performance, and error analysis suggests reliance on surface correlates, especially moral outrage near authority figures. An open multilingual LLM closes the gap on the same Portuguese corpus under the same instructions, pointing away from the corpus as the main explanation. AMALIA can still screen and pre-code at scale, but it cannot yet measure this construct well enough to stand alone. The study is a single counterexample, not a verdict on national models; it argues that sovereign-LLM benchmark batteries should test not only agreement with human coders, but the evidential route by which that agreement is warranted.",
+        "url": "https://arxiv.org/abs/2607.08731v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.08731v1",
+        "publishedDate": "2026-07-09T17:34:25.000Z",
+        "tags": [
+          "cs.CL",
+          "cs.AI",
+          "cs.CY"
+        ]
+      }
+    ],
+    "AI & Agents": [
+      {
+        "id": "2607.08758",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Ideas Have Genomes: Benchmarking Scientific Lineage Reasoning and Lineage-Grounded Idea Generation",
+        "authors": [
+          "Yifan Zhou",
+          "Qihao Yang",
+          "Yan Li",
+          "Donggang Li",
+          "Xiru Hu",
+          "Hokin Deng",
+          "Ziyang Gong",
+          "Xuanyi Zhou",
+          "Huacan Wang",
+          "Xiangchao Yan",
+          "Wanghan Xu",
+          "Wenlong Zhang",
+          "Shaofeng Zhang",
+          "Yue Zhou",
+          "Yifan Yang",
+          "Zhihang Zhong",
+          "Xue Yang"
+        ],
+        "summary": "Scientific ideas rarely start from a blank page. They inherit mechanisms, repair known limitations, and recombine pieces of earlier work, much like biological genomes. Current benchmarks still say little about whether AI systems can follow this inheritance structure. We present IdeaGene-Bench (IG-Bench), a benchmark for scientific lineage reasoning and lineage-grounded idea generation. IG-Bench is organized around the IdeaGene framework: each paper or proposal is represented as a set of minimal, typed, evidence-grounded Idea Genome objects, and a GenomeDiff aligns these objects to record inheritance, mutation, loss, external import, and novel insertion under six operational evolutionary dynamics. The benchmark contains 1,961 golden lineage traces, 1,085 curated Idea Genome objects, and 920 pairwise GenomeDiff records across 10 scientific domains. It supports two evaluations. IG-Exam (42 task types, 1,029 instances) tests closed-form lineage reasoning across Idea Genome abstraction, inheritance tracing, evolutionary reasoning, and lineage verification. IG-Arena evaluates generation with a lineage-conditioned Population-Evolution Score(PES), asking whether a proposal can be inserted as a coherent descendant of a given lineage population: it should inherit the right Idea Genome objects, vary meaningfully from nearby work, and offer selection value for future research. Experiments on 14 LLM-based scientists expose a compositional bottleneck. The strongest system reaches only 27.3% exact accuracy on lineage reasoning, and structured lineage context reshuffles system rankings rather than helping every participant uniformly.",
+        "url": "https://arxiv.org/abs/2607.08758v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.08758v1",
+        "publishedDate": "2026-07-09T17:55:53.000Z",
+        "tags": [
+          "cs.AI"
+        ]
+      },
+      {
+        "id": "2607.08748",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Using AI-based Learning Assistants in Higher Education: A Large-Scale Descriptive Analysis",
+        "authors": [
+          "Kristina Schaaff",
+          "Quintus Stierstorfer",
+          "Valerie Heckel"
+        ],
+        "summary": "In this study, we present a large-scale descriptive analysis of the use of an AI-based learning assistant (Syntea) in higher education. Based on objective log data from 77,543 students enrolled in distance studies, we examine usage patterns across gender, age group, study cluster, degree, and study mode. To date, existing research on educational chatbots has largely relied on comparatively small samples and self-reported survey data, while large-scale evidence on actual usage behavior remains limited. Our findings show that Syntea is already embedded in the study routines of many learners, but that usage differs across demographic and structural contexts. By identifying these patterns, our study provides an empirical basis for the further development of AI-based learning support and contributes a large-scale analysis of educational chatbot usage in higher education.",
+        "url": "https://arxiv.org/abs/2607.08748v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.08748v1",
+        "publishedDate": "2026-07-09T17:49:14.000Z",
+        "tags": [
+          "cs.AI",
+          "cs.HC"
+        ]
+      },
+      {
+        "id": "2607.08740",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Workflow as Knowledge: Semantic Persistence for LLM-Mediated Workflows",
+        "authors": [
+          "Emanuele Quinto",
+          "Carlo Andrea Rozzi",
+          "Francesco Zanitti"
+        ],
+        "summary": "Large language model (LLM) applications increasingly use explicit workflows for tool use, retrieval, branching, checkpointing, and human approval. Existing workflow systems already address many execution concerns. This paper proposes a Lisp-inspired but language-independent conceptual model: symbolic forms, object identity, and live-image thinking are used as explanatory lenses, not implementation commitments. In this model, workflow definitions, workflow instances, inference records, context snapshots, and dependency relations are represented as persistent knowledge objects in a shared knowledge substrate. Its central semantic distinction is between derive and infer: derive is deterministic computation over available state; infer is mediated LLM judgment under declared context and executor-controlled capability policy. The result is a preliminary conceptual account of semantic persistence: workflows do not merely produce knowledge and leave traces, but can themselves be represented as inspectable, resumable, and reviewable knowledge objects, while formal transition semantics remain future work.",
+        "url": "https://arxiv.org/abs/2607.08740v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.08740v1",
+        "publishedDate": "2026-07-09T17:40:46.000Z",
+        "tags": [
+          "cs.AI",
+          "cs.PL",
+          "cs.SE"
+        ]
+      },
+      {
+        "id": "2607.08734",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "The Illusion of Equivalency: Statistical Characterization of Quantization Effects in LLMs",
+        "authors": [
+          "Baha Rababah",
+          "Cuneyt Gurcan Akcora",
+          "Carson K. Leung"
+        ],
+        "summary": "Post-training quantization is widely used to deploy large language models in resource-constrained settings, yet its evaluation relies almost exclusively on accuracy and perplexity. We show that these metrics fail to capture behavioral changes induced by quantization. We introduce correctness agreement, a decision-level metric that measures overlap in correct predictions between a base model and its quantized variants, independent of absolute accuracy. Across multiple models and quantization schemes from 8-bit to 2-bit, we find that behavioral divergence emerges under moderate quantization even when task performance appears preserved. To explain this effect, we analyze quantization as a structural operator on attention weights and quantify layer-wise distortions using statistical and distributional measures. Our results reveal non-linear breakpoints at low bit-widths and show that query and key projections are consistently more sensitive than value and output projections. These findings expose an illusion of equivalence between base and quantized models and motivate behavioral evaluation beyond conventional performance metrics.",
+        "url": "https://arxiv.org/abs/2607.08734v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.08734v1",
+        "publishedDate": "2026-07-09T17:35:02.000Z",
+        "tags": [
+          "cs.AI"
+        ]
+      }
+    ],
+    "Machine Learning": [
+      {
+        "id": "2607.08757",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Score Accuracy Along the Forward Diffusion Does Not Certify Numerical Stability in Diffusion Sampling",
+        "authors": [
+          "Yiwei Zhou"
+        ],
+        "summary": "Score matching controls average error under the forward marginals, but a discretized reverse-time sampler evaluates the learned score along its own trajectory. We show that small forward-marginal error does not guarantee numerical stability. We construct a single smooth score field with arbitrarily small forward-marginal $L^2$ error. The learned reverse-time process is nonexplosive, has moments of every order, and can be arbitrarily close to the exact reverse-time process in path-space total variation. Yet its Euler--Maruyama discretizations converge in probability while every positive moment diverges. Thus weak convergence can hold even though every Wasserstein distance $W_p$, $p\\ge1$, diverges. The same failure can occur within one fixed finite neural architecture. We construct a family of bounded, globally Lipschitz denoisers for which both the forward-marginal error and the path-space total variation distance tend to zero, while their Euler--Maruyama endpoints diverge in every $W_p$. For compactly supported data, we also give a simple positive result. Projecting the learned denoiser onto a known bounded closed convex set containing the support preserves pointwise accuracy, gives grid-uniform moment bounds, and yields Wasserstein convergence under mild local regularity. Experiments with a small fixed DiT-style network show large growth along rare numerical trajectories and its suppression by denoiser projection, while overall trajectory errors remain small.",
+        "url": "https://arxiv.org/abs/2607.08757v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.08757v1",
+        "publishedDate": "2026-07-09T17:55:52.000Z",
+        "tags": [
+          "stat.ML",
+          "cs.LG",
+          "math.NA",
+          "math.PR"
+        ]
+      },
+      {
+        "id": "2607.08756",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "MulTTiPop: A Multitrack Transcription Dataset for Pop Music",
+        "authors": [
+          "Nathan Pruyne",
+          "Benjamin Stoler",
+          "William Chen",
+          "Chien-yu Huang",
+          "Shinji Watanabe",
+          "Chris Donahue"
+        ],
+        "summary": "We present MulTTiPop, a dataset of pop music segments and their associated multitrack MIDI recordings for the evaluation of automatic music transcription models. MulTTiPop contains 572 segments of popular music totaling 3.5 hours of audio, and contains songs from diverse genres and decades from the 1930s to 2000s. To collect this dataset, we perform metadata-based matching on song segments from the Lakh MIDI and TheoryTab datasets, manually identify an anchor beat between the audio and MIDI, then use beat tracking on the audio and warp the MIDI to match its tempo and timing. We evaluate state-of-the-art automatic music transcription models on MulTTiPop and find substantial room for improvement, with the best model achieving 38% Onset F1. More details and sound examples of MulTTiPop are available at https://gclef-cmu.org/multtipop.",
+        "url": "https://arxiv.org/abs/2607.08756v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.08756v1",
+        "publishedDate": "2026-07-09T17:55:33.000Z",
+        "tags": [
+          "cs.SD",
+          "cs.LG"
+        ]
+      },
+      {
+        "id": "2607.08754",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "SLORR: Simple and Efficient In-Training Low-Rank Regularization",
+        "authors": [
+          "David González-Martínez",
+          "Shiwei Liu"
+        ],
+        "summary": "Low-rank factorization is widely used to compress neural networks, but modern models are often not naturally amenable to aggressive factorization without significant accuracy loss. Existing training-time low-rank regularizers can improve compressibility, but they often require SVDs of large weight matrices, modify the model architecture (introducing additional trainable parameters), or rely on stateful cached quantities. To address these limitations, we introduce SLORR, a simple, stateless, and architecture-preserving framework for in-training low-rank regularization, instantiated with two main variants based on the Hoyer sparsity metric and the nuclear norm. SLORR directly regularizes the original weight matrices using GPU-friendly approximations for the forward and backward passes of the regularizers, for which we provide approximation guarantees. We first evaluate SLORR on ImageNet-1K across short-horizon continued training of ResNet-50, ViT-B/16, and ViT-L/16, and pretraining of ResNet-18, where SLORR induces compressibility while introducing less than 8% training overhead. We further evaluate SLORR-Hoyer in LLM pretraining at 135M and 560M scales: SLORR-trained compressed models preserve performance substantially better than unregularized models while adding less than 1% average training overhead.",
+        "url": "https://arxiv.org/abs/2607.08754v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.08754v1",
+        "publishedDate": "2026-07-09T17:51:50.000Z",
+        "tags": [
+          "cs.LG",
+          "cs.AI"
+        ]
+      },
+      {
+        "id": "2607.08746",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Dimensionality Reduction Meets Network Science: Sensemaking on UMAP's kNN Graph",
+        "authors": [
+          "Duen Horng Chau",
+          "Donghao Ren",
+          "Fred Hohman",
+          "Dominik Moritz"
+        ],
+        "summary": "While UMAP is widely used for exploring high-dimensional data, typical workflows focus on its lower-dimensional embedding, largely overlooking the rich k-nearest-neighbor (kNN) graph that UMAP constructs internally. This graph encodes the data manifold in its original high-dimensional space, before the distortion that UMAP's 2D projection introduces. We demonstrate the untapped potential of this internal representation, showing how standard graph algorithms applied to this graph enhance data sensemaking: (1) PageRank identifies representative data points, (2) k-core decomposition reveals dense core regions versus sparse periphery, and (3) clustering coefficient detects tight-knit neighborhoods with highly-similar data points. Through quantitative and qualitative evaluation on MNIST and Fashion MNIST, we show that these graph-based analyses are not only practical but also competitive with or complementary to purpose-built methods (e.g., k-medoids for exemplar selection, HDBSCAN for density-based clustering).",
+        "url": "https://arxiv.org/abs/2607.08746v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.08746v1",
+        "publishedDate": "2026-07-09T17:47:08.000Z",
+        "tags": [
+          "cs.LG",
+          "cs.AI",
+          "cs.DS",
+          "cs.HC"
+        ]
+      },
+      {
+        "id": "2607.08733",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Super Weights in LLMs and the Failure of Selective Training",
+        "authors": [
+          "Shreyas Subramanian",
+          "Adewale Akinfaderin",
+          "Akarsha Sehwag"
+        ],
+        "summary": "Recent work identified Super Weights, individual parameters whose removal degrades model performance by orders of magnitude. We show that this degradation due to pruning Super Weights does not universally apply to all LLMs. Furthermore, if these parameters are so important, Super Weight-aware training should be effective. We show the opposite. Training Super Weights in isolation (100 to 8,192 parameters) drops accuracy to random-guessing levels on both OLMo-1B and OLMo-7B, and expanding to local neighborhoods of up to 36K parameters provides no improvement. The failure is specific to Super Weight coordinates: training an equal number of randomly chosen positions in the same down_proj layers instead improves over the baseline, so the collapse comes from targeting Super Weights, not from sparsity itself. Vanilla LoRA, updating every position in attention weight matrices through low-rank structure, succeeds with only 0.16% of parameters, and applying the same low-rank update to down_proj succeeds as well. A 10-seed ablation confirms that constraining LoRA updates at positions corresponding to Super Weight coordinates yields statistically indistinguishable results. These findings establish that parameter importance does not imply parameter trainability in isolation, and that effective fine-tuning relies on structured decompositions over entire layers rather than targeting individually important weights.",
+        "url": "https://arxiv.org/abs/2607.08733v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.08733v1",
+        "publishedDate": "2026-07-09T17:35:00.000Z",
+        "tags": [
+          "cs.LG"
+        ]
+      }
+    ]
+  },
+  "labPosts": [
+    {
+      "id": "openai-1595599241",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "How Deutsche Telekom is rewiring telecommunications with AI",
+      "authors": [],
+      "summary": "How Deutsche Telekom is becoming an AI-native telco with OpenAI-transforming customer service, employee workflows, network operations, and the future of voice.",
+      "url": "https://openai.com/index/deutsche-telekom",
+      "publishedDate": "2026-07-10T07:00:00.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-1019944921",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "GPT-5.6 is now the preferred model in Microsoft 365 Copilot",
+      "authors": [],
+      "summary": "Learn how GPT-5.6 powers Microsoft 365 Copilot with stronger AI capabilities across Word, Excel, PowerPoint, Chat, and Cowork for faster, higher-quality work.",
+      "url": "https://openai.com/index/gpt-5-6-preferred-model-microsoft-365-copilot",
+      "publishedDate": "2026-07-09T13:00:00.000Z",
+      "tags": [
+        "Product"
+      ]
+    },
+    {
+      "id": "openai-1548728572",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "GPT-5.6: Frontier intelligence that scales with your ambition",
+      "authors": [],
+      "summary": "More intelligence from every token, stronger performance per dollar, and more capability on demand for your hardest work.",
+      "url": "https://openai.com/index/gpt-5-6",
+      "publishedDate": "2026-07-09T10:00:00.000Z",
+      "tags": [
+        "Product"
+      ]
+    },
+    {
+      "id": "openai-1699540001",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "ChatGPT is now a partner for your most ambitious work",
+      "authors": [],
+      "summary": "ChatGPT Work is an agent that can take action across your apps and files, stay with a project for hours if needed, and turn a goal into finished work.",
+      "url": "https://openai.com/index/chatgpt-for-your-most-ambitious-work",
+      "publishedDate": "2026-07-09T10:00:00.000Z",
+      "tags": [
+        "Product"
+      ]
+    },
+    {
+      "id": "openai-1412188289",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "GPT-5.5 Bio Bug Bounty",
+      "authors": [],
+      "summary": "Details about the OpenAI Bio Bounty program",
+      "url": "https://openai.com/index/bio-bug-bounty",
+      "publishedDate": "2026-07-09T10:00:00.000Z",
+      "tags": [
+        "Safety"
+      ]
+    },
+    {
+      "id": "openai-1142685339",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Our approach to government and national security partnerships",
+      "authors": [],
+      "summary": "Learn how OpenAI approaches government and national security partnerships, with principles for responsible AI use, democratic accountability, and public safety.",
+      "url": "https://openai.com/index/government-national-security-partnerships",
+      "publishedDate": "2026-07-08T13:30:00.000Z",
+      "tags": [
+        "Global Affairs"
+      ]
+    },
+    {
+      "id": "openai-109873702",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Separating signal from noise in coding evaluations",
+      "authors": [],
+      "summary": "A new analysis from OpenAI reveals issues in SWE-Bench Pro, a popular coding benchmark, raising concerns about reliability and accuracy in evaluating AI models.",
+      "url": "https://openai.com/index/separating-signal-from-noise-coding-evaluations",
+      "publishedDate": "2026-07-08T13:00:00.000Z",
+      "tags": [
+        "Research"
+      ]
+    },
+    {
+      "id": "openai-571495529",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Helping K–12 educators build practical AI skills",
+      "authors": [],
+      "summary": "OpenAI Academy and the Walton Family Foundation are bringing hands-on AI Skills Jams to help K–12 educators build practical AI skills for the classroom.",
+      "url": "https://openai.com/index/k-12-educators-practical-skills",
+      "publishedDate": "2026-07-08T10:00:00.000Z",
+      "tags": [
+        "Global Affairs"
+      ]
+    },
+    {
+      "id": "openai-1182914519",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Introducing GPT-Live",
+      "authors": [],
+      "summary": "A new generation of voice models for natural human-AI interaction, now powering ChatGPT Voice.",
+      "url": "https://openai.com/index/introducing-gpt-live",
+      "publishedDate": "2026-07-08T00:00:00.000Z",
+      "tags": [
+        "Product"
+      ]
+    },
+    {
+      "id": "openai-1485972767",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "MUFG aims to become AI-native with OpenAI",
+      "authors": [],
+      "summary": "MUFG uses ChatGPT Enterprise to build an AI-native organization, improve workflows, and deliver new AI-powered financial services at scale.",
+      "url": "https://openai.com/index/mufg",
+      "publishedDate": "2026-07-07T00:00:00.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-306844179",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Australian Payments Plus moves faster with ChatGPT and Codex",
+      "authors": [],
+      "summary": "See how Australian Payments Plus uses ChatGPT Enterprise and Codex to move faster through payments complexity. AP+ saves time, improves quality, and keeps human judgment central.",
+      "url": "https://openai.com/index/australian-payments-plus",
+      "publishedDate": "2026-07-07T00:00:00.000Z",
+      "tags": []
+    }
+  ],
+  "stats": {
+    "totalPapersScanned": 200,
+    "totalPostsScanned": 11
+  }
+}
