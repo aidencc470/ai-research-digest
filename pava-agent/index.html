@@ -262,6 +262,33 @@ function getTopMatches(proposed, n = 5) {
   return [...sameCat, ...fill];
 }
 
+// ── Recency weighting ──────────────────────────────────────────────────────────
+// Older events (e.g. a 2022 cleanup with a one-off 160-volunteer turnout) shouldn't
+// carry the same weight as a recent one when predicting future attendance. Weight
+// decays per year relative to the most recent year present in the dataset, so this
+// stays correct regardless of when the tool is actually opened.
+let latestDataYear = new Date().getFullYear();
+
+function computeLatestDataYear() {
+  latestDataYear = rawEvents.reduce((max, e) => Math.max(max, new Date(e.date).getFullYear()), 0)
+    || new Date().getFullYear();
+}
+
+function recencyWeight(dateStr) {
+  const yearsAgo = Math.max(0, latestDataYear - new Date(dateStr).getFullYear());
+  return Math.pow(0.6, yearsAgo); // each year back, an event counts for 60% as much
+}
+
+function weightedAverage(events) {
+  let sumWeight = 0, sumWeighted = 0;
+  events.forEach(e => {
+    const w = recencyWeight(e.date);
+    sumWeight += w;
+    sumWeighted += w * e.volunteers;
+  });
+  return sumWeight > 0 ? sumWeighted / sumWeight : 0;
+}
+
 // ── Category / location insight text (computed live from rawEvents) ──────────
 let categoryInsightMap = {};
 let locationInsightMap = {};
@@ -283,24 +310,22 @@ function describeStat(name, avg, count, rank, total, kind) {
 }
 
 function buildInsightMaps() {
-  const catStats = {}, locStats = {};
+  const catGroups = {}, locGroups = {};
   rawEvents.forEach(e => {
-    const c = catStats[e.category] || (catStats[e.category] = { sum: 0, count: 0 });
-    c.sum += e.volunteers; c.count++;
-    const l = locStats[e.location] || (locStats[e.location] = { sum: 0, count: 0 });
-    l.sum += e.volunteers; l.count++;
+    (catGroups[e.category] || (catGroups[e.category] = [])).push(e);
+    (locGroups[e.location] || (locGroups[e.location] = [])).push(e);
   });
 
-  const rankedCats = Object.entries(catStats)
-    .map(([cat, s]) => ({ cat, avg: +(s.sum / s.count).toFixed(1), count: s.count }))
+  const rankedCats = Object.entries(catGroups)
+    .map(([cat, evts]) => ({ cat, avg: +weightedAverage(evts).toFixed(1), count: evts.length }))
     .sort((a, b) => b.avg - a.avg);
   categoryInsightMap = {};
   rankedCats.forEach((r, i) => {
     categoryInsightMap[r.cat] = describeStat(r.cat, r.avg, r.count, i, rankedCats.length, 'category');
   });
 
-  const rankedLocs = Object.entries(locStats)
-    .map(([loc, s]) => ({ loc, avg: +(s.sum / s.count).toFixed(1), count: s.count }))
+  const rankedLocs = Object.entries(locGroups)
+    .map(([loc, evts]) => ({ loc, avg: +weightedAverage(evts).toFixed(1), count: evts.length }))
     .sort((a, b) => b.avg - a.avg);
   const mostActive = rankedLocs.reduce((m, r) => r.count > m.count ? r : m, rankedLocs[0]);
   locationInsightMap = {};
@@ -359,16 +384,15 @@ function surveyInsight(cat) {
 function generateTips(proposed) {
   const tips = [];
   const catEvents = rawEvents.filter(e => e.category === proposed.category);
-  const catAvg = catEvents.length ? catEvents.reduce((s, e) => s + e.volunteers, 0) / catEvents.length : 0;
+  const catAvg = weightedAverage(catEvents);
 
   // 1. Better location for this category
   const byLoc = {};
   catEvents.forEach(e => {
-    const l = byLoc[e.location] || (byLoc[e.location] = { sum: 0, count: 0 });
-    l.sum += e.volunteers; l.count++;
+    (byLoc[e.location] || (byLoc[e.location] = [])).push(e);
   });
   const locStats = Object.entries(byLoc)
-    .map(([loc, s]) => ({ loc, avg: s.sum / s.count, count: s.count }))
+    .map(([loc, evts]) => ({ loc, avg: weightedAverage(evts), count: evts.length }))
     .filter(s => s.count >= 2)
     .sort((a, b) => b.avg - a.avg);
   const bestLoc = locStats[0];
@@ -380,11 +404,10 @@ function generateTips(proposed) {
   const byMonth = {};
   catEvents.forEach(e => {
     const m = new Date(e.date).getMonth() + 1;
-    const b = byMonth[m] || (byMonth[m] = { sum: 0, count: 0 });
-    b.sum += e.volunteers; b.count++;
+    (byMonth[m] || (byMonth[m] = [])).push(e);
   });
   const monthStats = Object.entries(byMonth)
-    .map(([m, s]) => ({ m: +m, avg: s.sum / s.count, count: s.count }))
+    .map(([m, evts]) => ({ m: +m, avg: weightedAverage(evts), count: evts.length }))
     .filter(s => s.count >= 2)
     .sort((a, b) => b.avg - a.avg);
   const bestMonth = monthStats[0];
@@ -397,11 +420,10 @@ function generateTips(proposed) {
   const byRelatedCat = {};
   rawEvents.forEach(e => {
     if (categoryGroup(e.category) !== group || e.category === proposed.category) return;
-    const c = byRelatedCat[e.category] || (byRelatedCat[e.category] = { sum: 0, count: 0 });
-    c.sum += e.volunteers; c.count++;
+    (byRelatedCat[e.category] || (byRelatedCat[e.category] = [])).push(e);
   });
   const relatedStats = Object.entries(byRelatedCat)
-    .map(([cat, s]) => ({ cat, avg: s.sum / s.count, count: s.count }))
+    .map(([cat, evts]) => ({ cat, avg: weightedAverage(evts), count: evts.length }))
     .filter(s => s.count >= 3)
     .sort((a, b) => b.avg - a.avg);
   if (relatedStats.length && relatedStats[0].avg > catAvg * 1.15) {
@@ -428,7 +450,7 @@ function generateTips(proposed) {
 
 // ── Template-based response generation (no API) ───────────────────────────────
 function generateResponse(proposed, matches) {
-  const avg = matches.reduce((s, e) => s + e.volunteers, 0) / matches.length;
+  const avg = weightedAverage(matches);
   const low  = Math.max(5, Math.round(avg * 0.8));
   const high = Math.round(avg * 1.2);
 
@@ -1026,6 +1048,7 @@ async function init() {
     consolidatedEvents = deduplicateEvents(await consolidatedRes.json());
     surveyResponses    = await surveyRes.json();
     filteredConsolidated = [...consolidatedEvents];
+    computeLatestDataYear();
     buildInsightMaps();
     buildSurveyInsightMap();
     populateFilters();
