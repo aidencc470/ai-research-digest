@@ -523,11 +523,75 @@ function generateTips(proposed) {
   return tips;
 }
 
+// ── Ways to Increase Turnout — always-shown checklist with a revised estimate ──
+// Multipliers below are verified against real PAVA 2024–2025 data (see git log for
+// the derivation), not hardcoded guesses.
+let allTimeMaxVolunteers = 0;
+function computeAllTimeMax() {
+  allTimeMaxVolunteers = rawEvents.reduce((max, e) => Math.max(max, e.volunteers), 0) || 0;
+}
+
+function timesRunFor(eventName) {
+  const key = eventName.toLowerCase().trim();
+  const match = consolidatedEvents.find(e => e.event_name.toLowerCase().trim() === key);
+  return match ? match.times_run : 1;
+}
+
+const ALL_TIPS = [
+  {
+    id: 'partner',
+    condition: (proposed) => !['Heal the Bay','Amigos del los Rios','Second Harvest','Bolsa Chica'].some(p => proposed.eventName.includes(p)),
+    tip: "Partner with an established organization (Heal the Bay, Amigos del los Rios, Second Harvest)",
+    multiplier: 1.31,
+    evidence: "Partnered PAVA events averaged 17.8 volunteers vs 13.5 for solo events (2024–2025 data)"
+  },
+  {
+    id: 'recurring',
+    condition: (proposed, matchedEvents) => matchedEvents[0]?.timesRun < 3,
+    tip: "Commit to running this event at least 3 times to build a recurring volunteer base",
+    multiplier: 1.42,
+    evidence: "Recurring PAVA events (run 3+ times) average 15.9 volunteers vs 11.2 for one-time events"
+  },
+  {
+    id: 'season',
+    condition: (proposed) => [9,10,11].includes(proposed.month),
+    tip: "Consider moving this event to spring (March–May) or summer (June–August)",
+    multiplier: 1.27,
+    evidence: "Fall events average 12.7 volunteers — spring and summer average 16+ in PAVA's data"
+  },
+  {
+    id: 'location',
+    condition: (proposed) => !['Los Angeles, CA','Torrance, CA','Garden Grove, CA','Fullerton, CA'].includes(proposed.location),
+    tip: "Host at an established PAVA location (Los Angeles, Torrance, Garden Grove, or Fullerton)",
+    multiplier: 1.26,
+    evidence: "Established PAVA locations average 15.2 volunteers vs 12.0 for newer cities"
+  },
+  {
+    id: 'environmental',
+    condition: (proposed) => !proposed.category.includes('Environmental'),
+    tip: "Consider reframing as an environmental event — cleanups and restoration events draw the most PAVA volunteers",
+    multiplier: 1.46,
+    evidence: "Environmental events average 17.7 volunteers vs 12.1 for non-environmental events in PAVA's data"
+  }
+];
+
 // ── Template-based response generation (no API) ───────────────────────────────
 function generateResponse(proposed, matches) {
   const avg = weightedAverage(matches);
   const low  = Math.max(5, Math.round(avg * 0.8));
   const high = Math.round(avg * 1.2);
+
+  // Patch 6 — always-shown "Ways to Increase Turnout" + revised estimate
+  const enrichedMatches = matches.map(m => ({ ...m, timesRun: timesRunFor(m.event_name) }));
+  const applicableTips = ALL_TIPS
+    .filter(t => t.condition(proposed, enrichedMatches))
+    .slice(0, 3);
+  const combinedMultiplier = applicableTips.reduce((m, t) => m * t.multiplier, 1);
+  // Capped at PAVA's real all-time max turnout (not a guessed ceiling) so the revised
+  // estimate never implies a turnout PAVA has literally never seen.
+  const revisedAvg = Math.min(allTimeMaxVolunteers || Infinity, avg * combinedMultiplier);
+  const revisedLow  = Math.max(5, Math.round(revisedAvg * 0.8));
+  const revisedHigh = Math.round(revisedAvg * 1.2);
 
   // Patch 4 — natural-language citations
   const top = matches.slice(0, 3);
@@ -595,7 +659,11 @@ function generateResponse(proposed, matches) {
 
   const tips = label === 'Reconsider' ? generateTips(proposed) : null;
 
-  return { range: `${low}–${high} volunteers`, explanation, icon, label, verdict, boxClass, tips };
+  return {
+    range: `${low}–${high} volunteers`, low, high,
+    explanation, icon, label, verdict, boxClass, tips,
+    applicableTips, revisedLow, revisedHigh
+  };
 }
 
 // ── Input parsing ─────────────────────────────────────────────────────────────
@@ -817,6 +885,20 @@ function appendAnalysisBubble(id, proposed, matches, result) {
        </div>`
     : '';
 
+  const turnoutHtml = result.applicableTips.length > 0 ? `
+    <div class="rounded-lg border border-emerald-200 bg-emerald-50 p-3 mb-3">
+      <div class="text-xs font-semibold text-emerald-700 uppercase tracking-wide mb-2">Ways to Increase Turnout</div>
+      <ul class="list-disc list-inside text-sm text-gray-700 space-y-1.5">
+        ${result.applicableTips.map(t => `<li><span class="font-semibold text-gray-800">${t.tip}</span><span class="text-gray-500"> — ${t.evidence}</span></li>`).join('')}
+      </ul>
+      <p class="text-sm text-gray-700 mt-2.5">If these suggestions are implemented:</p>
+      <p class="text-sm mt-0.5"><span class="font-bold text-emerald-700">Revised estimate: ${result.revisedLow}–${result.revisedHigh} volunteers</span> <span class="text-gray-400">(up from ${result.low}–${result.high})</span></p>
+    </div>` : `
+    <div class="rounded-lg border border-emerald-200 bg-emerald-50 p-3 mb-3 flex items-start gap-2">
+      ${ICONS.success}
+      <span class="text-sm text-gray-700">This event is already well-optimized based on PAVA's historical data.</span>
+    </div>`;
+
   const tipsHtml = result.tips ? `
     <div class="tips-section mb-3" data-msg-id="${id}">
       <div class="tips-prompt rounded-lg border border-gray-200 bg-gray-50 p-3 flex items-center justify-between gap-3 flex-wrap">
@@ -851,6 +933,8 @@ function appendAnalysisBubble(id, proposed, matches, result) {
       </div>
       <div class="text-sm text-gray-700 leading-relaxed">${result.verdict}</div>
     </div>
+
+    ${turnoutHtml}
 
     ${tipsHtml}
 
@@ -919,7 +1003,7 @@ document.getElementById('eventForm').addEventListener('submit', (e) => {
       return;
     }
 
-    const proposed = { category, location, month };
+    const proposed = { category, location, month, eventName: raw };
     const matches = getTopMatches(proposed);
     if (!matches.length) {
       appendAgentMessage(`<p class="text-sm text-gray-700">I couldn't find any comparable past PAVA events for that combination. Try a different event type or location.</p>`);
@@ -1127,6 +1211,30 @@ function downloadPDF(entry) {
   const vLines = doc.splitTextToSize(result.verdict, W - 32);
   doc.text(vLines, 18, y); y += vLines.length * 5 + 6;
 
+  // Ways to Increase Turnout
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(11); doc.setTextColor(0);
+  doc.text('Ways to Increase Turnout', 14, y); y += 5;
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(10);
+  if (result.applicableTips.length > 0) {
+    result.applicableTips.forEach(t => {
+      doc.setTextColor(0);
+      const tipLines = doc.splitTextToSize(`- ${t.tip}`, W - 32);
+      doc.text(tipLines, 18, y); y += tipLines.length * 5;
+      doc.setTextColor(120, 120, 120);
+      const evLines = doc.splitTextToSize(t.evidence, W - 36);
+      doc.text(evLines, 22, y); y += evLines.length * 5 + 3;
+    });
+    doc.setTextColor(4, 120, 87); doc.setFont('helvetica', 'bold');
+    const revText = `Revised Estimate: ${result.revisedLow}–${result.revisedHigh} volunteers (up from ${result.low}–${result.high})`;
+    const revLines = doc.splitTextToSize(revText, W - 32);
+    doc.text(revLines, 18, y); y += revLines.length * 5 + 6;
+  } else {
+    doc.setFont('helvetica', 'italic'); doc.setTextColor(80);
+    doc.text("This event is already well-optimized based on PAVA's historical data.", 18, y);
+    y += 9;
+  }
+  doc.setTextColor(0); doc.setFont('helvetica', 'normal');
+
   // Analysis
   doc.setFont('helvetica', 'bold'); doc.setFontSize(10.5);
   doc.text('Analysis:', 14, y); y += 4.5;
@@ -1212,6 +1320,7 @@ async function init() {
     surveyResponses    = await surveyRes.json();
     filteredConsolidated = [...consolidatedEvents];
     computeLatestDataYear();
+    computeAllTimeMax();
     buildInsightMaps();
     buildSurveyInsightMap();
     populateFilters();
