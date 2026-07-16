@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Event Management Agent — PAVA World</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+  <style>
+    .matched-row { background-color: #dbeafe !important; }
+    .sort-arrow::after { content: ' ↕'; opacity: 0.35; font-size: 0.7em; }
+    .sort-asc::after   { content: ' ↑'; opacity: 1;    font-size: 0.7em; }
+    .sort-desc::after  { content: ' ↓'; opacity: 1;    font-size: 0.7em; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans min-h-screen">
+
+  <!-- HEADER -->
+  <header class="bg-white border-b border-gray-200 py-7 px-4">
+    <div class="max-w-5xl mx-auto">
+      <h1 class="text-2xl font-bold text-gray-900 tracking-tight">The Event Management Agent</h1>
+      <p class="text-sm text-gray-500 mt-1">Powered by PAVA World data (2022–2025) · 236 real events · No API required</p>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-4 py-8 space-y-8">
+
+    <!-- FORM -->
+    <section class="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+      <h2 class="text-lg font-semibold text-gray-800 mb-5">Analyze a Proposed Event</h2>
+      <form id="eventForm" class="space-y-5">
+        <div>
+          <label class="block text-sm font-semibold text-gray-800 mb-0.5">What kind of event are you planning?</label>
+          <p class="text-xs text-gray-500 mb-1">Include the event type, location, and month — all in one sentence.</p>
+          <p class="text-xs text-gray-400 italic mb-2.5">
+            e.g. <span class="text-gray-500 not-italic font-medium">"Beach cleanup in Santa Monica in July"</span>
+            &nbsp;·&nbsp; <span class="text-gray-500 not-italic font-medium">"Food bank volunteer event in Garden Grove in March"</span>
+          </p>
+          <input id="eventInput" type="text" autocomplete="off"
+            placeholder="Beach cleanup in Santa Monica in July…"
+            class="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors">
+
+          <!-- Detected chips (shown while typing) -->
+          <div id="parsedTags" class="hidden mt-2 flex flex-wrap gap-2">
+            <span id="detectedType"     class="hidden text-xs bg-blue-50 text-blue-700 border border-blue-200 rounded-full px-3 py-0.5"></span>
+            <span id="detectedLocation" class="hidden text-xs bg-blue-50 text-blue-700 border border-blue-200 rounded-full px-3 py-0.5"></span>
+            <span id="detectedMonth"    class="hidden text-xs bg-blue-50 text-blue-700 border border-blue-200 rounded-full px-3 py-0.5"></span>
+          </div>
+
+          <!-- Validation errors (shown on submit) -->
+          <div id="eventInputErrors" class="hidden mt-2 space-y-0.5">
+            <p id="errorType"     class="hidden text-xs text-red-500"></p>
+            <p id="errorLocation" class="hidden text-xs text-red-500"></p>
+            <p id="errorMonth"    class="hidden text-xs text-red-500"></p>
+          </div>
+
+          <p class="mt-3 text-xs text-gray-400">
+            Event type not recognized?
+            <a href="#eventHistory" class="text-blue-500 hover:underline">Browse the event history below</a>
+            to see which category your event falls under.
+          </p>
+        </div>
+
+        <button type="submit"
+          class="bg-blue-600 text-white text-sm font-medium px-5 py-2.5 rounded-lg hover:bg-blue-700 transition-colors">
+          Analyze Event →
+        </button>
+      </form>
+    </section>
+
+    <!-- AGENT RESPONSE -->
+    <section id="agentResponse" class="hidden bg-white rounded-xl border border-gray-200 shadow-sm p-6 space-y-6">
+
+      <!-- Predicted range -->
+      <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+        <div class="text-xs font-semibold text-blue-600 uppercase tracking-wide mb-1">Predicted Attendance</div>
+        <div id="predictedRange" class="text-2xl font-bold text-blue-900"></div>
+      </div>
+
+      <!-- Matched events table -->
+      <div>
+        <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Most Similar Past PAVA Events</div>
+        <div class="overflow-x-auto rounded-lg border border-gray-200">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-50 border-b border-gray-200">
+              <tr>
+                <th class="px-3 py-2 text-left text-xs font-semibold text-gray-500">Event</th>
+                <th class="px-3 py-2 text-left text-xs font-semibold text-gray-500">Location</th>
+                <th class="px-3 py-2 text-left text-xs font-semibold text-gray-500">Date</th>
+                <th class="px-3 py-2 text-right text-xs font-semibold text-gray-500">Volunteers</th>
+                <th class="px-3 py-2 text-right text-xs font-semibold text-gray-500">Match</th>
+              </tr>
+            </thead>
+            <tbody id="matchedEventsTable" class="divide-y divide-gray-100"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Plain-English explanation -->
+      <div>
+        <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Analysis</div>
+        <div id="analysisText" class="text-sm text-gray-700 leading-relaxed"></div>
+      </div>
+
+      <!-- Low confidence warning -->
+      <div id="lowConfidenceWarning" class="hidden rounded-lg p-3 bg-gray-100 border border-gray-300 text-sm text-gray-600">
+        ⚠️ <strong>Low confidence</strong> — no close historical match found in PAVA's data. Treat this prediction as a rough estimate only.
+      </div>
+
+      <!-- Verdict -->
+      <div id="verdictBox" class="rounded-lg p-4 border-2">
+        <div class="flex items-center gap-2 mb-1">
+          <span id="verdictIcon" class="text-xl"></span>
+          <span id="verdictLabel" class="font-bold text-base"></span>
+        </div>
+        <div id="verdictText" class="text-sm text-gray-700 leading-relaxed"></div>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="flex items-center gap-4 pt-1">
+        <a href="#data" class="text-sm text-blue-600 hover:underline">See full data ↓</a>
+        <button onclick="downloadPDF()"
+          class="text-sm bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors font-medium">
+          ⬇ Download as PDF
+        </button>
+      </div>
+    </section>
+
+    <!-- DATA SECTION -->
+    <section id="data" class="space-y-6">
+
+      <!-- Chart -->
+      <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+        <h2 class="text-base font-semibold text-gray-800">📊 Attendance by Location</h2>
+        <p class="text-xs text-gray-400 mt-0.5 mb-4">Average volunteer turnout by city — PAVA 2022–2025</p>
+        <div class="relative" style="height: 340px;">
+          <canvas id="locationChart"></canvas>
+        </div>
+        <p id="chartNote" class="text-xs text-gray-400 mt-3"></p>
+      </div>
+
+      <!-- Volunteer survey -->
+      <div id="volunteerVoices" class="hidden bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+        <h2 class="text-base font-semibold text-gray-800">💬 What Volunteers Say</h2>
+        <p class="text-xs text-gray-400 mt-0.5 mb-4">PAVA's 2026 volunteer survey · favorite event type &amp; why · 12 responses</p>
+        <div id="surveyList" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+      </div>
+
+      <!-- Consolidated event table -->
+      <div id="eventHistory" class="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+        <h2 class="text-base font-semibold text-gray-800 mb-4">📋 PAVA Event History</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+          <select id="filterCategory" onchange="applyFilters()"
+            class="border border-gray-300 rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="">All Categories</option>
+          </select>
+          <select id="filterLocation" onchange="applyFilters()"
+            class="border border-gray-300 rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="">All Locations</option>
+          </select>
+        </div>
+
+        <div class="overflow-x-auto rounded-lg border border-gray-200">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-50 border-b border-gray-200">
+              <tr id="consolidatedHeaders">
+                <th data-key="event_name"     class="px-3 py-2.5 text-left   text-xs font-semibold text-gray-500 cursor-pointer select-none sort-arrow">Event Name</th>
+                <th data-key="category"       class="px-3 py-2.5 text-left   text-xs font-semibold text-gray-500 cursor-pointer select-none sort-arrow">Category</th>
+                <th data-key="location"       class="px-3 py-2.5 text-left   text-xs font-semibold text-gray-500 cursor-pointer select-none sort-arrow">Location</th>
+                <th data-key="times_run"      class="px-3 py-2.5 text-right  text-xs font-semibold text-gray-500 cursor-pointer select-none sort-arrow">Times Run</th>
+                <th data-key="avg_volunteers" class="px-3 py-2.5 text-right  text-xs font-semibold text-gray-500 cursor-pointer select-none sort-arrow">Avg</th>
+                <th data-key="max_volunteers" class="px-3 py-2.5 text-right  text-xs font-semibold text-gray-500 cursor-pointer select-none sort-arrow">Max</th>
+                <th data-key="min_volunteers" class="px-3 py-2.5 text-right  text-xs font-semibold text-gray-500 cursor-pointer select-none sort-arrow">Min</th>
+              </tr>
+            </thead>
+            <tbody id="consolidatedTable" class="divide-y divide-gray-100"></tbody>
+          </table>
+        </div>
+        <p id="tableCount" class="text-xs text-gray-400 mt-2.5"></p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="mt-12 py-5 border-t border-gray-200 text-center text-xs text-gray-400">
+    Generated by The Event Management Agent &nbsp;|&nbsp; Powered by PAVA World data (2022–2025)
+  </footer>
+
+<script>
+// ── State ────────────────────────────────────────────────────────────────────
+let rawEvents        = [];
+let consolidatedEvents = [];
+let filteredConsolidated = [];
+let currentMatchedNames = new Set();
+let lastAnalysis = null;
+let sortKey = 'avg_volunteers';
+let sortDir = 'desc';
+let locationChartInstance = null;
+let surveyResponses = [];
+let surveyInsightMap = {};
+
+const MONTH_NAMES = ['January','February','March','April','May','June',
+                     'July','August','September','October','November','December'];
+
+// ── Similarity matching ───────────────────────────────────────────────────────
+function categoryGroup(cat) {
+  if (cat.includes('Environmental'))      return 'environmental';
+  if (cat.includes('Community Outreach')) return 'outreach';
+  if (cat.includes('Political'))          return 'political';
+  if (cat.includes('Elderly') || cat.includes('Senior')) return 'elderly';
+  return 'other';
+}
+
+function sameRegion(loc1, loc2) {
+  const la = ['Los Angeles, CA','Santa Monica, CA','Torrance, CA','Palos Verdes, CA'];
+  const oc = ['Garden Grove, CA','Irvine, CA','Huntington Beach, CA','Orange County, CA','Fullerton, CA','Brea, CA'];
+  return (la.includes(loc1) && la.includes(loc2)) || (oc.includes(loc1) && oc.includes(loc2));
+}
+
+function scoreSimilarity(proposed, past) {
+  let score = 0;
+  if (past.category === proposed.category)                                    score += 50;
+  else if (categoryGroup(past.category) === categoryGroup(proposed.category)) score += 25;
+  if (past.location === proposed.location)                                    score += 30;
+  else if (sameRegion(past.location, proposed.location))                      score += 15;
+  const pm = new Date(past.date).getMonth() + 1;
+  if (Math.abs(proposed.month - pm) <= 1)                                     score += 20;
+  return score;
+}
+
+function getSimilarityPercent(proposed, pastEvent) {
+  return Math.min(100, Math.round(scoreSimilarity(proposed, pastEvent)));
+}
+
+function getTopMatches(proposed, n = 5) {
+  const scored = rawEvents
+    .map(e => ({ ...e, _score: scoreSimilarity(proposed, e) }))
+    .filter(e => e._score > 0)
+    .sort((a, b) => b._score - a._score || b.volunteers - a.volunteers);
+
+  const sameCat = scored.filter(e => e.category === proposed.category).slice(0, n);
+  if (sameCat.length >= 3) return sameCat;
+  const fill = scored.filter(e => e.category !== proposed.category).slice(0, n - sameCat.length);
+  return [...sameCat, ...fill];
+}
+
+// ── Category / location insight text (computed live from rawEvents) ──────────
+let categoryInsightMap = {};
+let locationInsightMap = {};
+
+function describeStat(name, avg, count, rank, total, kind) {
+  if (count < 3) {
+    return `${name} has limited PAVA history — only ${count} event${count === 1 ? '' : 's'} — so treat this as a rough estimate.`;
+  }
+  if (rank === 0) {
+    return `${name} is PAVA's strongest ${kind}, averaging ${avg} volunteers across ${count} events.`;
+  }
+  if (rank === total - 1) {
+    return `${name} has the lowest average turnout of any PAVA ${kind} at ${avg} volunteers.`;
+  }
+  if (rank < total / 3) {
+    return `${name} is one of PAVA's more reliable ${kind === 'category' ? 'categories' : 'locations'}, averaging ${avg} volunteers across ${count} events.`;
+  }
+  return `${name} events average ${avg} volunteers across ${count} events.`;
+}
+
+function buildInsightMaps() {
+  const catStats = {}, locStats = {};
+  rawEvents.forEach(e => {
+    const c = catStats[e.category] || (catStats[e.category] = { sum: 0, count: 0 });
+    c.sum += e.volunteers; c.count++;
+    const l = locStats[e.location] || (locStats[e.location] = { sum: 0, count: 0 });
+    l.sum += e.volunteers; l.count++;
+  });
+
+  const rankedCats = Object.entries(catStats)
+    .map(([cat, s]) => ({ cat, avg: +(s.sum / s.count).toFixed(1), count: s.count }))
+    .sort((a, b) => b.avg - a.avg);
+  categoryInsightMap = {};
+  rankedCats.forEach((r, i) => {
+    categoryInsightMap[r.cat] = describeStat(r.cat, r.avg, r.count, i, rankedCats.length, 'category');
+  });
+
+  const rankedLocs = Object.entries(locStats)
+    .map(([loc, s]) => ({ loc, avg: +(s.sum / s.count).toFixed(1), count: s.count }))
+    .sort((a, b) => b.avg - a.avg);
+  const mostActive = rankedLocs.reduce((m, r) => r.count > m.count ? r : m, rankedLocs[0]);
+  locationInsightMap = {};
+  rankedLocs.forEach((r, i) => {
+    let text = describeStat(r.loc, r.avg, r.count, i, rankedLocs.length, 'location');
+    if (r.loc === mostActive.loc && r.count >= 10) {
+      text += ` It's PAVA's most active location, with ${r.count} events total.`;
+    }
+    locationInsightMap[r.loc] = text;
+  });
+}
+
+function categoryInsight(cat) {
+  return categoryInsightMap[cat] || '';
+}
+
+function locationInsight(loc) {
+  return locationInsightMap[loc] || '';
+}
+
+// ── Volunteer survey insight (favorite event type & why, 2026 PAVA survey) ────
+const SURVEY_CATEGORY_MAP = {
+  'Feeding Homeless':        'Community Outreach - Feeding/Homeless',
+  'Cultural/Festival event': 'Cultural/Festival Event',
+  'Food Distribution':       'Food Distribution',
+  'River Cleanup':           'Environmental - River Cleanup',
+  'Nature/Outdoor Activity': 'Nature/Outdoor Activity',
+  'Beach/Coastal Cleanup':   'Environmental - Beach/Coastal Cleanup',
+  'Elderly/Senior Care':     'Elderly/Senior Care'
+};
+
+function buildSurveyInsightMap() {
+  const groups = {};
+  surveyResponses.forEach(r => {
+    const appCat = SURVEY_CATEGORY_MAP[r.event_type];
+    if (!appCat) return;
+    if (!groups[appCat]) groups[appCat] = { label: r.event_type, count: 0, reasons: [] };
+    groups[appCat].count++;
+    groups[appCat].reasons.push(r.reason);
+  });
+  const total = surveyResponses.length;
+  surveyInsightMap = {};
+  Object.entries(groups).forEach(([appCat, g]) => {
+    const quote = g.reasons.reduce((a, b) => b.length > a.length ? b : a, g.reasons[0]);
+    surveyInsightMap[appCat] = { label: g.label, count: g.count, total, quote };
+  });
+}
+
+function surveyInsight(cat) {
+  return surveyInsightMap[cat] || null;
+}
+
+// ── Template-based response generation (no API) ───────────────────────────────
+function generateResponse(proposed, matches) {
+  const avg = matches.reduce((s, e) => s + e.volunteers, 0) / matches.length;
+  const low  = Math.max(5, Math.round(avg * 0.8));
+  const high = Math.round(avg * 1.2);
+
+  // Patch 4 — natural-language citations
+  const top = matches.slice(0, 3);
+  let citationText = '';
+  if (top.length === 1) {
+    citationText = `The closest match is ${top[0].event_name} in ${top[0].location} (${top[0].date.slice(0,7)}), which drew ${top[0].volunteers} volunteers.`;
+  } else if (top.length === 2) {
+    citationText = `The closest matches are ${top[0].event_name} in ${top[0].location} (${top[0].volunteers} volunteers) and ${top[1].event_name} in ${top[1].location} (${top[1].volunteers} volunteers).`;
+  } else {
+    citationText = `The closest matches include ${top[0].event_name} in ${top[0].location} (${top[0].volunteers} volunteers), ${top[1].event_name} in ${top[1].location} (${top[1].volunteers} volunteers), and ${top[2].event_name} in ${top[2].location} (${top[2].volunteers} volunteers).`;
+  }
+
+  // Patch 3 — location familiarity context
+  const eventsAtLocation = rawEvents.filter(e => e.location === proposed.location);
+  const locationCount = eventsAtLocation.length;
+  let locationContext = '';
+  if (locationCount === 0) {
+    locationContext = `PAVA has no prior events in this city — this prediction is based on similar locations and event types only.`;
+  } else if (locationCount < 3) {
+    locationContext = `Limited location data — only ${locationCount} past PAVA event(s) in ${proposed.location}.`;
+  } else {
+    const locAvg = Math.round(eventsAtLocation.reduce((s, e) => s + e.volunteers, 0) / locationCount);
+    locationContext = `PAVA has run ${locationCount} events in ${proposed.location}, averaging ${locAvg} volunteers.`;
+  }
+
+  const catNote = categoryInsight(proposed.category);
+
+  // Volunteer survey — favorite event type & why (qualitative signal, separate from turnout history)
+  const survey = surveyInsight(proposed.category);
+  let surveyNote = '';
+  if (survey) {
+    surveyNote = ` In PAVA's volunteer survey, ${survey.count} of ${survey.total} respondents named ${survey.label} their favorite type of event — one wrote: "${survey.quote}"`;
+  }
+
+  const explanation = `${citationText} ${catNote} ${locationContext}${surveyNote}`.trim();
+
+  // Patch 3 — adjusted thresholds based on location history
+  const establishedLocations = ['Los Angeles, CA','Torrance, CA','Fullerton, CA','Santa Monica, CA','Garden Grove, CA','Huntington Beach, CA'];
+  const isEstablished = establishedLocations.includes(proposed.location);
+  const worthItThreshold = isEstablished ? 12 : 16;
+  const cautionThreshold = isEstablished ?  8 : 12;
+
+  let icon, label, verdict, boxClass;
+  if (avg >= worthItThreshold) {
+    icon = '✅'; label = 'Worth Pursuing'; boxClass = 'border-green-400 bg-green-50';
+    verdict = `Similar PAVA events have consistently drawn strong numbers, and ${matches[0].event_name} hit ${matches[0].volunteers} as recently as ${matches[0].date.slice(0,7)}. Strong historical precedent supports moving forward.`;
+  } else if (avg >= cautionThreshold) {
+    icon = '⚠️'; label = 'Proceed with Caution'; boxClass = 'border-yellow-400 bg-yellow-50';
+    verdict = `Comparable events averaged ${Math.round(avg)} volunteers — enough to run, but set realistic expectations. ${matches[0].event_name} is your closest benchmark at ${matches[0].volunteers} volunteers.`;
+  } else {
+    icon = '❌'; label = 'Reconsider'; boxClass = 'border-red-400 bg-red-50';
+    verdict = `Similar events in PAVA's history have averaged low turnout. ${matches[0].event_name} drew only ${matches[0].volunteers} at its most similar run. Consider a different event type or a location with a stronger track record.`;
+  }
+
+  return { range: `${low}–${high} volunteers`, explanation, icon, label, verdict, boxClass };
+}
+
+// ── Input parsing ─────────────────────────────────────────────────────────────
+const MONTH_MAP = {
+  january:1, jan:1, february:2, feb:2, march:3, mar:3,
+  april:4, apr:4, may:5, june:6, jun:6, july:7, jul:7,
+  august:8, aug:8, september:9, sep:9, sept:9,
+  october:10, oct:10, november:11, nov:11, december:12, dec:12,
+  winter:1, spring:4, summer:7, fall:10, autumn:10
+};
+
+const LOCATION_MAP = {
+  'san pedro':       'San Pedro, CA',
+  'santa monica':    'Santa Monica, CA',
+  'palos verdes':    'Palos Verdes, CA',
+  'huntington beach':'Huntington Beach, CA',
+  'diamond bar':     'Diamond Bar, CA',
+  'garden grove':    'Garden Grove, CA',
+  'orange county':   'Orange County, CA',
+  'los angeles':     'Los Angeles, CA',
+  'victorville':     'Victorville, CA',
+  'fullerton':       'Fullerton, CA',
+  'torrance':        'Torrance, CA',
+  'irvine':          'Irvine, CA',
+  'brea':            'Brea, CA',
+};
+
+const CATEGORY_MAP = [
+  { keys: ['beach cleanup','coastal cleanup','ocean cleanup','bolsa chica','heal the bay','cabrillo','dockweiler','beach clean'], cat: 'Environmental - Beach/Coastal Cleanup' },
+  { keys: ['river cleanup','river restoration','la river','river clean','river'], cat: 'Environmental - River Cleanup' },
+  { keys: ['recycling','recycle'], cat: 'Environmental - Recycling' },
+  { keys: ['bird sanctuary','griffith park','wilson park','park restoration','garden','park cleanup','park clean'], cat: 'Environmental - Park/Garden' },
+  { keys: ['school cleanup','school restoration','amigos','school planting'], cat: 'Environmental - School' },
+  { keys: ['feeding','homeless','shelter','midnight mission','soup kitchen','meal service','food outreach'], cat: 'Community Outreach - Feeding/Homeless' },
+  { keys: ['food distribution','food bank','food drive','second harvest','food pantry','hunger','oc food'], cat: 'Food Distribution' },
+  { keys: ['elderly','senior care','senior center','dementia','alzheimer','nursing home','retirement'], cat: 'Elderly/Senior Care' },
+  { keys: ['political','campaign','civic','election','canvass','voting registration','rally','candidate'], cat: 'Political/Civic Outreach' },
+  { keys: ['festival','parade','concert','cultural','dance','music event','fair','carnival'], cat: 'Cultural/Festival Event' },
+  { keys: ['conference','seminar','orientation','leadership','workshop','training','educational'], cat: 'Organization/Educational' },
+  { keys: ['marathon','hike','nature walk','trail','dog rescue','turtle','climb','outdoor activity'], cat: 'Nature/Outdoor Activity' },
+  { keys: ['park','garden','restoration','cleanup'], cat: 'Environmental - Park/Garden' },
+  { keys: ['community outreach','outreach event'], cat: 'Community Outreach' },
+];
+
+function parseMonth(text) {
+  const lower = text.toLowerCase();
+  for (const [word, num] of Object.entries(MONTH_MAP)) {
+    const re = new RegExp(`\\b${word}\\b`);
+    if (re.test(lower)) return num;
+  }
+  return null;
+}
+
+function parseLocation(text) {
+  const lower = text.toLowerCase();
+  for (const [key, val] of Object.entries(LOCATION_MAP)) {
+    if (lower.includes(key)) return val;
+  }
+  return null;
+}
+
+function parseCategory(text) {
+  const lower = text.toLowerCase();
+  for (const { keys, cat } of CATEGORY_MAP) {
+    if (keys.some(k => lower.includes(k))) return cat;
+  }
+  return null;
+}
+
+function showFieldState(detectedId, errorId, inputId, detectedText, errorText) {
+  const det = document.getElementById(detectedId);
+  const err = document.getElementById(errorId);
+  const inp = document.getElementById(inputId);
+  if (detectedText) {
+    det.textContent = '✓ ' + detectedText;
+    det.classList.remove('hidden');
+    err.classList.add('hidden');
+    inp.classList.remove('border-red-400');
+    inp.classList.add('border-blue-400');
+  } else if (errorText) {
+    err.textContent = errorText;
+    err.classList.remove('hidden');
+    det.classList.add('hidden');
+    inp.classList.add('border-red-400');
+    inp.classList.remove('border-blue-400');
+  } else {
+    det.classList.add('hidden');
+    err.classList.add('hidden');
+    inp.classList.remove('border-red-400','border-blue-400');
+  }
+}
+
+// Live parse feedback as user types (single sentence input)
+document.getElementById('eventInput').addEventListener('input', function() {
+  const text = this.value.trim();
+  const cat  = parseCategory(text);
+  const loc  = parseLocation(text);
+  const m    = parseMonth(text);
+  const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+  const typeTag = document.getElementById('detectedType');
+  const locTag  = document.getElementById('detectedLocation');
+  const monTag  = document.getElementById('detectedMonth');
+  const tagsDiv = document.getElementById('parsedTags');
+
+  if (cat) { typeTag.textContent = `Type: ${cat}`; typeTag.classList.remove('hidden'); }
+  else      { typeTag.classList.add('hidden'); }
+  if (loc) { locTag.textContent = `Location: ${loc}`; locTag.classList.remove('hidden'); }
+  else      { locTag.classList.add('hidden'); }
+  if (m)   { monTag.textContent = `Month: ${MONTH_NAMES[m-1]}`; monTag.classList.remove('hidden'); }
+  else      { monTag.classList.add('hidden'); }
+
+  tagsDiv.classList.toggle('hidden', !text || !(cat || loc || m));
+
+  // Reset errors and border while typing
+  ['errorType','errorLocation','errorMonth'].forEach(id => document.getElementById(id).classList.add('hidden'));
+  document.getElementById('eventInputErrors').classList.add('hidden');
+  this.classList.remove('border-red-400');
+  this.classList.toggle('border-blue-400', !!(cat || loc || m));
+});
+
+// ── Badge color helper ────────────────────────────────────────────────────────
+function badgeClass(v) {
+  if (v >= 20) return 'bg-green-100 text-green-800';
+  if (v >= 10) return 'bg-yellow-100 text-yellow-800';
+  return 'bg-red-100 text-red-700';
+}
+
+// ── Form submit ───────────────────────────────────────────────────────────────
+document.getElementById('eventForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const raw      = document.getElementById('eventInput').value.trim();
+  const category = parseCategory(raw);
+  const location = parseLocation(raw);
+  const month    = parseMonth(raw);
+
+  const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+  const inp        = document.getElementById('eventInput');
+  const errType    = document.getElementById('errorType');
+  const errLoc     = document.getElementById('errorLocation');
+  const errMon     = document.getElementById('errorMonth');
+  const errorsDiv  = document.getElementById('eventInputErrors');
+
+  [errType, errLoc, errMon].forEach(el => el.classList.add('hidden'));
+  let hasError = false;
+
+  if (!category) {
+    errType.textContent = raw
+      ? `Couldn't identify an event type. Try: "beach cleanup", "food bank", "senior care", "park restoration".`
+      : 'Please include the type of event.';
+    errType.classList.remove('hidden');
+    hasError = true;
+  }
+  if (!location) {
+    errLoc.textContent = raw
+      ? `Couldn't identify a location. Try including a city: Los Angeles, Torrance, Santa Monica, Orange County, Garden Grove.`
+      : 'Please include a city or area.';
+    errLoc.classList.remove('hidden');
+    hasError = true;
+  }
+  if (!month) {
+    errMon.textContent = raw
+      ? `Couldn't identify a month. Try: "July", "March", "fall", "spring".`
+      : 'Please include a month or season.';
+    errMon.classList.remove('hidden');
+    hasError = true;
+  }
+
+  if (hasError) {
+    errorsDiv.classList.remove('hidden');
+    inp.classList.add('border-red-400');
+    inp.classList.remove('border-blue-400');
+    return;
+  }
+
+  errorsDiv.classList.add('hidden');
+  inp.classList.remove('border-red-400');
+  inp.classList.add('border-blue-400');
+
+  const proposed = { category, location, month };
+
+  const matches = getTopMatches(proposed);
+  if (!matches.length) {
+    alert('No matching past events found. Try a different event type or location.');
+    return;
+  }
+
+  const result = generateResponse(proposed, matches);
+  currentMatchedNames = new Set(matches.map(e => e.event_name));
+  lastAnalysis = { proposed, matches, result };
+
+  renderAgentResponse(result, matches, proposed);
+  renderConsolidatedTable();
+
+  const section = document.getElementById('agentResponse');
+  section.classList.remove('hidden');
+  section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
+function renderAgentResponse(result, matches, proposed) {
+  document.getElementById('predictedRange').textContent = result.range;
+
+  // Patch 1 — match % badge per row
+  document.getElementById('matchedEventsTable').innerHTML = matches.map(e => {
+    const pct = getSimilarityPercent(proposed, e);
+    const matchBadge = pct >= 75 ? 'bg-green-100 text-green-800'
+                     : pct >= 50 ? 'bg-yellow-100 text-yellow-800'
+                     : 'bg-red-100 text-red-800';
+    return `<tr class="hover:bg-gray-50">
+      <td class="px-3 py-2 font-medium text-sm">${e.event_name}</td>
+      <td class="px-3 py-2 text-xs text-gray-500">${e.location}</td>
+      <td class="px-3 py-2 text-xs text-gray-500">${e.date}</td>
+      <td class="px-3 py-2 text-right">
+        <span class="${badgeClass(e.volunteers)} px-2 py-0.5 rounded-full text-xs font-semibold">${e.volunteers}</span>
+      </td>
+      <td class="px-3 py-2 text-right">
+        <span class="${matchBadge} px-2 py-0.5 rounded-full text-xs font-semibold">${pct}%</span>
+      </td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('analysisText').textContent = result.explanation;
+
+  // Patch 2 — low confidence warning
+  const topScore = getSimilarityPercent(proposed, matches[0]);
+  const warning = document.getElementById('lowConfidenceWarning');
+  if (topScore < 50) {
+    warning.classList.remove('hidden');
+  } else {
+    warning.classList.add('hidden');
+  }
+
+  const box = document.getElementById('verdictBox');
+  box.className = `rounded-lg p-4 border-2 ${result.boxClass}`;
+  document.getElementById('verdictIcon').textContent  = result.icon;
+  document.getElementById('verdictLabel').textContent = result.label;
+  document.getElementById('verdictText').textContent  = result.verdict;
+}
+
+// ── Filters ───────────────────────────────────────────────────────────────────
+function populateFilters() {
+  const cats = [...new Set(consolidatedEvents.map(e => e.category))].sort();
+  const locs = [...new Set(consolidatedEvents.map(e => e.location))].sort();
+  const catSel = document.getElementById('filterCategory');
+  const locSel = document.getElementById('filterLocation');
+  cats.forEach(c => { const o = document.createElement('option'); o.value = o.textContent = c; catSel.appendChild(o); });
+  locs.forEach(l => { const o = document.createElement('option'); o.value = o.textContent = l; locSel.appendChild(o); });
+}
+
+function applyFilters() {
+  const cat = document.getElementById('filterCategory').value;
+  const loc = document.getElementById('filterLocation').value;
+  filteredConsolidated = consolidatedEvents.filter(e =>
+    (!cat || e.category === cat) &&
+    (!loc || e.location === loc)
+  );
+  renderConsolidatedTable();
+}
+
+// ── Consolidated table ────────────────────────────────────────────────────────
+document.getElementById('consolidatedHeaders').addEventListener('click', (e) => {
+  const th = e.target.closest('th[data-key]');
+  if (!th) return;
+  const key = th.dataset.key;
+  if (sortKey === key) {
+    sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+  } else {
+    sortKey = key;
+    sortDir = (key === 'event_name' || key === 'category' || key === 'location') ? 'asc' : 'desc';
+  }
+  document.querySelectorAll('#consolidatedHeaders th').forEach(h => {
+    h.classList.remove('sort-asc', 'sort-desc');
+    if (!h.classList.contains('sort-arrow')) h.classList.add('sort-arrow');
+  });
+  th.classList.remove('sort-arrow');
+  th.classList.add(sortDir === 'asc' ? 'sort-asc' : 'sort-desc');
+  renderConsolidatedTable();
+});
+
+function renderConsolidatedTable() {
+  const sorted = [...filteredConsolidated].sort((a, b) => {
+    let av = a[sortKey], bv = b[sortKey];
+    if (typeof av === 'string') { av = av.toLowerCase(); bv = bv.toLowerCase(); }
+    if (av < bv) return sortDir === 'asc' ? -1 : 1;
+    if (av > bv) return sortDir === 'asc' ?  1 : -1;
+    return 0;
+  });
+
+  document.getElementById('consolidatedTable').innerHTML = sorted.map(e => {
+    const isMatch = currentMatchedNames.has(e.event_name);
+    return `<tr class="${isMatch ? 'matched-row' : 'hover:bg-gray-50'}">
+      <td class="px-3 py-2.5 text-sm font-medium">${e.event_name}${isMatch ? ' <span class="text-xs font-normal text-blue-500">↑ matched</span>' : ''}</td>
+      <td class="px-3 py-2.5 text-xs text-gray-500">${e.category}</td>
+      <td class="px-3 py-2.5 text-xs text-gray-500">${e.location}</td>
+      <td class="px-3 py-2.5 text-right text-sm">${e.times_run}</td>
+      <td class="px-3 py-2.5 text-right">
+        <span class="${badgeClass(e.avg_volunteers)} px-2 py-0.5 rounded-full text-xs font-semibold">${e.avg_volunteers}</span>
+      </td>
+      <td class="px-3 py-2.5 text-right text-sm text-gray-600">${e.max_volunteers}</td>
+      <td class="px-3 py-2.5 text-right text-sm text-gray-600">${e.min_volunteers}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('tableCount').textContent =
+    `Showing ${sorted.length} of ${consolidatedEvents.length} unique events`;
+}
+
+// ── Chart ─────────────────────────────────────────────────────────────────────
+function renderChart() {
+  const byLoc = {};
+  rawEvents.forEach(e => {
+    if (!byLoc[e.location]) byLoc[e.location] = { sum: 0, count: 0 };
+    byLoc[e.location].sum += e.volunteers;
+    byLoc[e.location].count++;
+  });
+
+  const entries = Object.entries(byLoc)
+    .map(([loc, d]) => ({ loc, avg: +(d.sum / d.count).toFixed(1), count: d.count }))
+    .sort((a, b) => b.avg - a.avg);
+
+  const smallLocs = entries.filter(e => e.count < 3).map(e => e.loc);
+  document.getElementById('chartNote').textContent = smallLocs.length
+    ? `Note: ${smallLocs.join(', ')} — fewer than 3 events; may not be fully representative.`
+    : 'All locations have 3+ events.';
+
+  const ctx = document.getElementById('locationChart').getContext('2d');
+  if (locationChartInstance) locationChartInstance.destroy();
+
+  locationChartInstance = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: entries.map(e => e.loc),
+      datasets: [{
+        label: 'Avg Volunteers',
+        data: entries.map(e => e.avg),
+        backgroundColor: entries.map(e => e.avg >= 15 ? '#22c55e' : e.avg >= 10 ? '#eab308' : '#ef4444'),
+        borderRadius: 4,
+        borderSkipped: false
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => `${ctx.parsed.x} avg · ${entries[ctx.dataIndex].count} events`
+          }
+        }
+      },
+      scales: {
+        x: {
+          beginAtZero: true,
+          title: { display: true, text: 'Average Volunteers', font: { size: 11 } },
+          grid: { color: '#f3f4f6' }
+        },
+        y: { grid: { display: false } }
+      }
+    }
+  });
+}
+
+// ── Volunteer survey card ─────────────────────────────────────────────────────
+function renderSurveyVoices() {
+  const entries = Object.entries(surveyInsightMap).sort((a, b) => b[1].count - a[1].count);
+  if (!entries.length) return;
+
+  document.getElementById('surveyList').innerHTML = entries.map(([, s]) => `
+    <div class="border border-gray-100 rounded-lg p-3">
+      <div class="flex items-center justify-between mb-1">
+        <span class="text-sm font-medium text-gray-800">${s.label}</span>
+        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">${s.count}/${s.total} volunteers</span>
+      </div>
+      <p class="text-xs text-gray-500 italic">"${s.quote}"</p>
+    </div>
+  `).join('');
+
+  document.getElementById('volunteerVoices').classList.remove('hidden');
+}
+
+// ── PDF download ──────────────────────────────────────────────────────────────
+function downloadPDF() {
+  if (!lastAnalysis) return;
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+  const { proposed, matches, result } = lastAnalysis;
+  const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  const W = doc.internal.pageSize.width;
+  const H = doc.internal.pageSize.height;
+
+  const addFooter = () => {
+    doc.setFontSize(7.5);
+    doc.setTextColor(160);
+    doc.text('Generated by The Event Management Agent  |  Powered by PAVA World data (2022–2025)', 14, H - 8);
+    doc.text(`Page ${doc.internal.getCurrentPageInfo().pageNumber}`, W - 14, H - 8, { align: 'right' });
+  };
+
+  let y = 15;
+
+  // Title
+  doc.setFontSize(17); doc.setFont('helvetica', 'bold'); doc.setTextColor(0);
+  doc.text('The Event Management Agent', 14, y); y += 7;
+  doc.setFontSize(10); doc.setFont('helvetica', 'normal'); doc.setTextColor(100);
+  doc.text('Event Analysis Report', 14, y); y += 5;
+  doc.text(`Generated: ${today}`, 14, y); y += 8;
+  doc.setDrawColor(220); doc.line(14, y, W - 14, y); y += 8;
+
+  // Proposed event
+  doc.setTextColor(0); doc.setFont('helvetica', 'bold'); doc.setFontSize(11);
+  doc.text('Proposed Event', 14, y); y += 5;
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(10);
+  doc.text(`Type: ${proposed.category}`, 18, y); y += 5;
+  doc.text(`Location: ${proposed.location}`, 18, y); y += 5;
+  doc.text(`Month: ${MONTH_NAMES[proposed.month - 1]}`, 18, y); y += 9;
+
+  // Predicted attendance
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(11); doc.setTextColor(0);
+  doc.text('Predicted Attendance', 14, y); y += 5;
+  doc.setFontSize(14); doc.setTextColor(37, 99, 235);
+  doc.text(result.range, 18, y); y += 9;
+
+  // Verdict
+  doc.setTextColor(0); doc.setFont('helvetica', 'bold'); doc.setFontSize(11);
+  doc.text(`Verdict: ${result.label}`, 14, y); y += 5;
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(10);
+  const vLines = doc.splitTextToSize(result.verdict, W - 32);
+  doc.text(vLines, 18, y); y += vLines.length * 5 + 6;
+
+  // Analysis
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(10.5);
+  doc.text('Analysis:', 14, y); y += 4.5;
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(10);
+  const aLines = doc.splitTextToSize(result.explanation, W - 32);
+  doc.text(aLines, 18, y); y += aLines.length * 5 + 8;
+
+  // Matched events table
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(11); doc.setTextColor(0);
+  doc.text('Most Similar Past Events', 14, y); y += 3;
+  doc.autoTable({
+    startY: y,
+    head: [['Event', 'Location', 'Date', 'Volunteers']],
+    body: matches.map(e => [e.event_name, e.location, e.date, e.volunteers]),
+    styles: { fontSize: 9 },
+    headStyles: { fillColor: [37, 99, 235] },
+    margin: { left: 14, right: 14 }
+  });
+  addFooter();
+
+  // Full consolidated table on new page
+  doc.addPage();
+  doc.setFontSize(12); doc.setFont('helvetica', 'bold'); doc.setTextColor(0);
+  doc.text('Full PAVA Event History (2022–2025)', 14, 15);
+
+  const matchedNames = new Set(matches.map(e => e.event_name));
+  doc.autoTable({
+    startY: 22,
+    head: [['Event Name', 'Category', 'Location', 'Times Run', 'Avg', 'Max', 'Min']],
+    body: consolidatedEvents.map(e => [
+      e.event_name, e.category, e.location,
+      e.times_run, e.avg_volunteers, e.max_volunteers, e.min_volunteers
+    ]),
+    styles: { fontSize: 8 },
+    headStyles: { fillColor: [55, 65, 81] },
+    margin: { left: 14, right: 14 },
+    didParseCell: (data) => {
+      if (data.section === 'body') {
+        const ev = consolidatedEvents[data.row.index];
+        if (ev && matchedNames.has(ev.event_name)) {
+          data.cell.styles.fillColor = [219, 234, 254];
+          data.cell.styles.fontStyle = 'bold';
+        }
+      }
+    }
+  });
+  addFooter();
+
+  doc.save('PAVA-Event-Analysis.pdf');
+}
+
+// ── Deduplication ────────────────────────────────────────────────────────────
+function deduplicateEvents(events) {
+  const groups = {};
+  events.forEach(e => {
+    const key = e.event_name.toLowerCase().trim();
+    if (!groups[key]) {
+      groups[key] = { ...e };
+    } else {
+      const g = groups[key];
+      const newTotal = g.total_volunteers + e.total_volunteers;
+      g.times_run       += e.times_run;
+      g.total_volunteers = newTotal;
+      g.avg_volunteers   = Math.round((newTotal / g.times_run) * 10) / 10;
+      g.max_volunteers   = Math.max(g.max_volunteers, e.max_volunteers);
+      g.min_volunteers   = Math.min(g.min_volunteers, e.min_volunteers);
+      if (g.location !== e.location) g.location = 'Multiple locations';
+    }
+  });
+  return Object.values(groups).sort((a, b) => b.avg_volunteers - a.avg_volunteers);
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+async function init() {
+  try {
+    const [rawRes, consolidatedRes, surveyRes] = await Promise.all([
+      fetch('pava_events.json'),
+      fetch('pava_consolidated.json'),
+      fetch('pava_survey.json')
+    ]);
+    rawEvents          = await rawRes.json();
+    consolidatedEvents = deduplicateEvents(await consolidatedRes.json());
+    surveyResponses    = await surveyRes.json();
+    filteredConsolidated = [...consolidatedEvents];
+    buildInsightMaps();
+    buildSurveyInsightMap();
+    populateFilters();
+    renderConsolidatedTable();
+    renderChart();
+    renderSurveyVoices();
+  } catch (err) {
+    console.error('Failed to load data:', err);
+  }
+}
+
+init();
+</script>
+</body>
+</html>
