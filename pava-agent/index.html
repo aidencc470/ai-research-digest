@@ -16,15 +16,42 @@
     html { scroll-behavior: smooth; }
     body { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; }
 
-    @keyframes gradientShift {
-      0%   { background-position: 0% 50%; }
-      50%  { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    .blob-bg { position: fixed; inset: 0; overflow: hidden; z-index: 0; pointer-events: none; }
+    .blob { position: absolute; border-radius: 50%; filter: blur(70px); will-change: transform; }
+
+    .blob-1 {
+      width: 520px; height: 520px; top: -140px; left: -100px; opacity: 0.55;
+      background: radial-gradient(circle at 30% 30%, #86efac, #16a34a 70%);
+      animation: blobFloat1 24s ease-in-out infinite;
     }
-    .animated-bg {
-      background: linear-gradient(120deg, #fefce8, #fef9c3, #fde68a, #d9f99d, #bbf7d0, #fef9c3, #fefce8);
-      background-size: 300% 300%;
-      animation: gradientShift 24s ease-in-out infinite;
+    .blob-2 {
+      width: 460px; height: 460px; top: 35%; right: -140px; opacity: 0.5;
+      background: radial-gradient(circle at 60% 40%, #bef264, #4d7c0f 70%);
+      animation: blobFloat2 30s ease-in-out infinite;
+    }
+    .blob-3 {
+      width: 420px; height: 420px; bottom: -160px; left: 15%; opacity: 0.5;
+      background: radial-gradient(circle at 50% 50%, #5eead4, #0f766e 70%);
+      animation: blobFloat3 20s ease-in-out infinite;
+    }
+    .blob-4 {
+      width: 320px; height: 320px; top: 8%; left: 42%; opacity: 0.4;
+      background: radial-gradient(circle at 40% 60%, #fde68a, #eab308 70%);
+      animation: blobFloat1 27s ease-in-out infinite reverse;
+    }
+
+    @keyframes blobFloat1 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33%      { transform: translate(70px, 50px) scale(1.12); }
+      66%      { transform: translate(-40px, 80px) scale(0.94); }
+    }
+    @keyframes blobFloat2 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50%      { transform: translate(-90px, -60px) scale(1.15); }
+    }
+    @keyframes blobFloat3 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50%      { transform: translate(60px, -70px) scale(1.1); }
     }
 
     @keyframes fadeInUp {
@@ -46,15 +73,22 @@
     .sort-desc::after  { content: ' ↓'; opacity: 1;    font-size: 0.7em; }
   </style>
 </head>
-<body class="text-gray-900 min-h-screen animated-bg">
+<body class="text-gray-900 min-h-screen bg-yellow-50 overflow-x-hidden">
+
+  <div class="blob-bg" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
+  </div>
 
   <!-- HEADER -->
   <header class="bg-white/90 backdrop-blur-sm border-b border-gray-200/70 py-6 px-4 relative z-10">
     <div class="max-w-5xl mx-auto flex items-center gap-3">
-      <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-500 to-yellow-400 flex items-center justify-center text-xl shrink-0 shadow-sm">🌻</div>
+      <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-500 to-lime-400 flex items-center justify-center text-white font-extrabold text-lg shrink-0 shadow-sm">P</div>
       <div>
         <h1 class="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight">The Event Management Agent</h1>
-        <p class="text-sm text-gray-500 mt-0.5">🤝 In partnership with <span class="font-semibold text-gray-700">PAVA World</span> · 236 events · 2022–2025</p>
+        <p class="text-sm text-gray-500 mt-0.5">In partnership with <span class="font-semibold text-gray-700">PAVA World</span> · 236 events · 2022–2025</p>
       </div>
     </div>
   </header>
@@ -62,16 +96,22 @@
   <main class="relative z-10">
 
     <!-- TABS -->
-    <nav class="max-w-3xl mx-auto px-4 pt-5">
+    <nav class="max-w-4xl mx-auto px-4 pt-5">
       <div class="inline-flex bg-gray-100/80 backdrop-blur-sm rounded-xl p-1 gap-1 border border-gray-200/60">
-        <button id="tabChatBtn" type="button" onclick="switchTab('chat')" class="tab-btn tab-active px-4 py-1.5 rounded-lg text-sm font-medium transition-colors">💬 Event Predictor</button>
-        <button id="tabArchiveBtn" type="button" onclick="switchTab('archive')" class="tab-btn px-4 py-1.5 rounded-lg text-sm font-medium transition-colors">🗂️ PAVA Archive</button>
+        <button id="tabChatBtn" type="button" onclick="switchTab('chat')" class="tab-btn tab-active px-4 py-1.5 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+          Event Predictor
+        </button>
+        <button id="tabArchiveBtn" type="button" onclick="switchTab('archive')" class="tab-btn px-4 py-1.5 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>
+          PAVA Archive
+        </button>
       </div>
     </nav>
 
     <!-- CHAT VIEW -->
-    <section id="chatView" class="max-w-3xl mx-auto px-4 py-6">
-      <div class="bg-white/95 backdrop-blur-sm rounded-2xl border border-gray-200 shadow-lg overflow-hidden flex flex-col" style="height: 65vh; min-height: 380px;">
+    <section id="chatView" class="max-w-4xl mx-auto px-4 py-6">
+      <div class="bg-white/95 backdrop-blur-sm rounded-2xl border border-gray-200 shadow-lg overflow-hidden flex flex-col" style="height: 74vh; min-height: 480px;">
 
         <!-- Chat header -->
         <div class="px-5 py-3 border-b border-gray-100 flex items-center gap-2 bg-white/80 shrink-0">
@@ -83,7 +123,7 @@
         <!-- Message log -->
         <div id="chatLog" class="chat-scroll flex-1 min-h-0 overflow-y-auto px-5 py-4 space-y-4">
           <div class="chat-msg flex items-start gap-2.5">
-            <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm shrink-0">🌱</div>
+            <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[11px] font-bold shrink-0">PA</div>
             <div class="max-w-[85%] bg-white border border-gray-200 rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm">
               <p class="text-sm text-gray-700 leading-relaxed">Hi! I'm the PAVA Event Assistant. Tell me about an event you're planning — the type, location, and month — and I'll predict turnout using PAVA's historical data. Try something like <span class="italic">"Beach cleanup in Santa Monica in July."</span></p>
             </div>
@@ -102,8 +142,8 @@
               placeholder="Beach cleanup in Santa Monica in July…"
               class="flex-1 border border-gray-300 rounded-full px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors">
             <button type="submit" aria-label="Send"
-              class="bg-emerald-600 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-emerald-700 transition-colors shrink-0 shadow-sm text-lg">
-              ➤
+              class="bg-emerald-600 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-emerald-700 transition-colors shrink-0 shadow-sm">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
             </button>
           </form>
         </div>
@@ -114,13 +154,16 @@
     <section id="archiveView" class="hidden max-w-5xl mx-auto px-4 py-6 space-y-6">
 
       <div>
-        <h2 class="text-lg font-bold text-gray-900">🗂️ PAVA Archive</h2>
+        <h2 class="text-lg font-bold text-gray-900">PAVA Archive</h2>
         <p class="text-sm text-gray-500 mt-0.5">The full historical record behind every prediction — turnout by location, what volunteers say, and the raw event log.</p>
       </div>
 
       <!-- Chart -->
       <div class="bg-white/95 backdrop-blur-sm rounded-xl border border-gray-200 shadow-sm p-6">
-        <h3 class="text-base font-semibold text-gray-800">📊 Attendance by Location</h3>
+        <h3 class="text-base font-semibold text-gray-800 flex items-center gap-2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-gray-400"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+          Attendance by Location
+        </h3>
         <p class="text-xs text-gray-400 mt-0.5 mb-4">Average volunteer turnout by city — PAVA 2022–2025</p>
         <div class="relative" style="height: 340px;">
           <canvas id="locationChart"></canvas>
@@ -130,14 +173,20 @@
 
       <!-- Volunteer survey -->
       <div id="volunteerVoices" class="hidden bg-white/95 backdrop-blur-sm rounded-xl border border-gray-200 shadow-sm p-6">
-        <h3 class="text-base font-semibold text-gray-800">💬 What Volunteers Say</h3>
+        <h3 class="text-base font-semibold text-gray-800 flex items-center gap-2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-gray-400"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          What Volunteers Say
+        </h3>
         <p class="text-xs text-gray-400 mt-0.5 mb-4">PAVA's 2026 volunteer survey · favorite event type &amp; why · 12 responses</p>
         <div id="surveyList" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
       </div>
 
       <!-- Consolidated event table -->
       <div id="eventHistory" class="bg-white/95 backdrop-blur-sm rounded-xl border border-gray-200 shadow-sm p-6">
-        <h3 class="text-base font-semibold text-gray-800 mb-4">📋 PAVA Event History</h3>
+        <h3 class="text-base font-semibold text-gray-800 mb-4 flex items-center gap-2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-gray-400"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+          PAVA Event History
+        </h3>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
           <select id="filterCategory" onchange="applyFilters()"
@@ -487,13 +536,13 @@ function generateResponse(proposed, matches) {
 
   let icon, label, verdict, boxClass;
   if (avg >= worthItThreshold) {
-    icon = '✅'; label = 'Worth Pursuing'; boxClass = 'border-green-400 bg-green-50';
+    icon = 'success'; label = 'Worth Pursuing'; boxClass = 'border-green-400 bg-green-50';
     verdict = `Similar PAVA events have consistently drawn strong numbers, and ${matches[0].event_name} hit ${matches[0].volunteers} as recently as ${matches[0].date.slice(0,7)}. Strong historical precedent supports moving forward.`;
   } else if (avg >= cautionThreshold) {
-    icon = '⚠️'; label = 'Proceed with Caution'; boxClass = 'border-yellow-400 bg-yellow-50';
+    icon = 'caution'; label = 'Proceed with Caution'; boxClass = 'border-yellow-400 bg-yellow-50';
     verdict = `Comparable events averaged ${Math.round(avg)} volunteers — enough to run, but set realistic expectations. ${matches[0].event_name} is your closest benchmark at ${matches[0].volunteers} volunteers.`;
   } else {
-    icon = '❌'; label = 'Reconsider'; boxClass = 'border-red-400 bg-red-50';
+    icon = 'danger'; label = 'Reconsider'; boxClass = 'border-red-400 bg-red-50';
     verdict = `Similar events in PAVA's history have averaged low turnout. ${matches[0].event_name} drew only ${matches[0].volunteers} at its most similar run. Consider a different event type or a location with a stronger track record.`;
   }
 
@@ -607,6 +656,14 @@ function badgeClass(v) {
   return 'bg-red-100 text-red-700';
 }
 
+// ── Icons (inline SVG, no emoji) ───────────────────────────────────────────────
+const ICONS = {
+  success: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-green-600"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 17.01"></polyline></svg>`,
+  caution: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-yellow-600"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>`,
+  danger: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-red-600"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>`,
+  download: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>`,
+};
+
 // ── Chat rendering helpers ─────────────────────────────────────────────────────
 function escapeHtml(str) {
   const div = document.createElement('div');
@@ -631,7 +688,7 @@ function appendAgentMessage(innerHtml) {
   const div = document.createElement('div');
   div.className = 'chat-msg flex items-start gap-2.5';
   div.innerHTML = `
-    <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm shrink-0">🌱</div>
+    <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[11px] font-bold shrink-0">PA</div>
     <div class="max-w-[85%] bg-white border border-gray-200 rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm">${innerHtml}</div>
   `;
   document.getElementById('chatLog').appendChild(div);
@@ -645,7 +702,7 @@ function appendTypingIndicator() {
   div.id = id;
   div.className = 'chat-msg flex items-start gap-2.5';
   div.innerHTML = `
-    <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm shrink-0">🌱</div>
+    <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[11px] font-bold shrink-0">PA</div>
     <div class="bg-white border border-gray-200 rounded-2xl rounded-tl-sm px-4 py-3.5 shadow-sm">
       <span class="inline-flex gap-1 items-center">
         <span class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style="animation-delay:0ms"></span>
@@ -707,8 +764,9 @@ function matchedEventsTableHtml(proposed, matches) {
 function appendAnalysisBubble(id, proposed, matches, result) {
   const topScore = getSimilarityPercent(proposed, matches[0]);
   const lowConfidenceHtml = topScore < 50
-    ? `<div class="rounded-lg p-3 bg-gray-100 border border-gray-300 text-sm text-gray-600 mb-3">
-         ⚠️ <strong>Low confidence</strong> — no close historical match found in PAVA's data. Treat this prediction as a rough estimate only.
+    ? `<div class="rounded-lg p-3 bg-gray-100 border border-gray-300 text-sm text-gray-600 mb-3 flex items-start gap-2">
+         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mt-0.5 shrink-0 text-gray-500"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+         <span><strong>Low confidence</strong> — no close historical match found in PAVA's data. Treat this prediction as a rough estimate only.</span>
        </div>`
     : '';
 
@@ -741,7 +799,7 @@ function appendAnalysisBubble(id, proposed, matches, result) {
 
     <div class="rounded-lg p-3 border-2 ${result.boxClass} mb-3">
       <div class="flex items-center gap-2 mb-1">
-        <span class="text-lg">${result.icon}</span>
+        ${ICONS[result.icon]}
         <span class="font-bold text-sm">${result.label}</span>
       </div>
       <div class="text-sm text-gray-700 leading-relaxed">${result.verdict}</div>
@@ -751,7 +809,7 @@ function appendAnalysisBubble(id, proposed, matches, result) {
 
     <div class="flex items-center gap-4 pt-1 text-sm">
       <button type="button" class="view-archive-link text-emerald-700 hover:underline">See full data in the Archive →</button>
-      <button type="button" class="download-pdf-btn text-sm bg-gray-800 text-white px-3 py-1.5 rounded-lg hover:bg-gray-700 transition-colors font-medium" data-msg-id="${id}">⬇ Download PDF</button>
+      <button type="button" class="download-pdf-btn flex items-center gap-1.5 text-sm bg-gray-800 text-white px-3 py-1.5 rounded-lg hover:bg-gray-700 transition-colors font-medium" data-msg-id="${id}">${ICONS.download} Download PDF</button>
     </div>
   `;
 
