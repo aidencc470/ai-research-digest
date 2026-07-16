@@ -265,10 +265,47 @@ function categoryGroup(cat) {
   return 'other';
 }
 
-function sameRegion(loc1, loc2) {
-  const la = ['Los Angeles, CA','Santa Monica, CA','Torrance, CA','Palos Verdes, CA'];
-  const oc = ['Garden Grove, CA','Irvine, CA','Huntington Beach, CA','Orange County, CA','Fullerton, CA','Brea, CA'];
-  return (la.includes(loc1) && la.includes(loc2)) || (oc.includes(loc1) && oc.includes(loc2));
+// Approximate city-center coordinates for every location PAVA has run an event in.
+// "Orange County, CA" is county-wide in the source data, so it's approximated at a
+// central OC point (near Santa Ana) rather than any specific city.
+const LOCATION_COORDS = {
+  'Brea, CA':             [33.9166, -117.9000],
+  'Diamond Bar, CA':      [34.0286, -117.8103],
+  'Fullerton, CA':        [33.8704, -117.9242],
+  'Garden Grove, CA':     [33.7739, -117.9414],
+  'Huntington Beach, CA': [33.6603, -117.9992],
+  'Irvine, CA':           [33.6846, -117.8265],
+  'Los Angeles, CA':      [34.0522, -118.2437],
+  'Orange County, CA':    [33.7455, -117.8677],
+  'Palos Verdes, CA':     [33.7963, -118.3970],
+  'San Pedro, CA':        [33.7361, -118.2922],
+  'Santa Monica, CA':     [34.0195, -118.4912],
+  'Torrance, CA':         [33.8358, -118.3406],
+  'Victorville, CA':      [34.5362, -117.2928],
+};
+
+function haversineMiles([lat1, lon1], [lat2, lon2]) {
+  const R = 3958.8; // Earth radius in miles
+  const toRad = d => d * Math.PI / 180;
+  const dLat = toRad(lat2 - lat1);
+  const dLon = toRad(lon2 - lon1);
+  const a = Math.sin(dLat / 2) ** 2 + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+function distanceMiles(locA, locB) {
+  const a = LOCATION_COORDS[locA], b = LOCATION_COORDS[locB];
+  return (a && b) ? haversineMiles(a, b) : null;
+}
+
+// Location score decays smoothly with real distance (exponential falloff, ~20mi
+// scale) instead of a hard "same predefined region" cutoff, so e.g. Irvine and
+// Los Angeles — different metro clusters but ~35mi apart — still get partial
+// credit proportional to how close they actually are.
+function locationScore(locA, locB) {
+  if (locA === locB) return 18;
+  const dist = distanceMiles(locA, locB);
+  return dist == null ? 0 : 18 * Math.exp(-dist / 20);
 }
 
 // Event type (category) dominates the match score by a wide margin — even a full
@@ -278,8 +315,7 @@ function scoreSimilarity(proposed, past) {
   let score = 0;
   if (past.category === proposed.category)                                    score += 70;
   else if (categoryGroup(past.category) === categoryGroup(proposed.category)) score += 20;
-  if (past.location === proposed.location)                                    score += 18;
-  else if (sameRegion(past.location, proposed.location))                      score += 9;
+  score += locationScore(past.location, proposed.location);
   const pm = new Date(past.date).getMonth() + 1;
   if (Math.abs(proposed.month - pm) <= 1)                                     score += 12;
   return score;
@@ -504,6 +540,17 @@ function generateResponse(proposed, matches) {
     citationText = `The closest matches include ${top[0].event_name} in ${top[0].location} (${top[0].volunteers} volunteers), ${top[1].event_name} in ${top[1].location} (${top[1].volunteers} volunteers), and ${top[2].event_name} in ${top[2].location} (${top[2].volunteers} volunteers).`;
   }
 
+  // Call out how far the closest match's location actually is, so a cross-region
+  // match (e.g. proposing something in Irvine when the nearest comparable event
+  // was in Los Angeles) is transparent rather than silently treated as local.
+  let distanceNote = '';
+  if (top[0].location !== proposed.location) {
+    const dist = distanceMiles(proposed.location, top[0].location);
+    if (dist != null) {
+      distanceNote = ` ${top[0].location} is about ${Math.round(dist)} miles from ${proposed.location}.`;
+    }
+  }
+
   // Patch 3 — location familiarity context
   const eventsAtLocation = rawEvents.filter(e => e.location === proposed.location);
   const locationCount = eventsAtLocation.length;
@@ -526,7 +573,7 @@ function generateResponse(proposed, matches) {
     surveyNote = ` In PAVA's volunteer survey, ${survey.count} of ${survey.total} respondents named ${survey.label} their favorite type of event — one wrote: "${survey.quote}"`;
   }
 
-  const explanation = `${citationText} ${catNote} ${locationContext}${surveyNote}`.trim();
+  const explanation = `${citationText}${distanceNote} ${catNote} ${locationContext}${surveyNote}`.trim();
 
   // Patch 3 — adjusted thresholds based on location history
   const establishedLocations = ['Los Angeles, CA','Torrance, CA','Fullerton, CA','Santa Monica, CA','Garden Grove, CA','Huntington Beach, CA'];
