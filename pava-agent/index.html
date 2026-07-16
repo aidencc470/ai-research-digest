@@ -4,151 +4,123 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Event Management Agent — PAVA World</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%BB%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
   <style>
-    .matched-row { background-color: #dbeafe !important; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; }
+
+    @keyframes gradientShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .animated-bg {
+      background: linear-gradient(120deg, #fefce8, #fef9c3, #fde68a, #d9f99d, #bbf7d0, #fef9c3, #fefce8);
+      background-size: 300% 300%;
+      animation: gradientShift 24s ease-in-out infinite;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .chat-msg { animation: fadeInUp 0.25s ease-out; }
+
+    .chat-scroll::-webkit-scrollbar { width: 6px; }
+    .chat-scroll::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 999px; }
+    .chat-scroll::-webkit-scrollbar-track { background: transparent; }
+
+    .tab-btn { color: #6b7280; }
+    .tab-btn.tab-active { background: #ffffff; color: #047857; box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+
+    .matched-row { background-color: #d1fae5 !important; }
     .sort-arrow::after { content: ' ↕'; opacity: 0.35; font-size: 0.7em; }
     .sort-asc::after   { content: ' ↑'; opacity: 1;    font-size: 0.7em; }
     .sort-desc::after  { content: ' ↓'; opacity: 1;    font-size: 0.7em; }
   </style>
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans min-h-screen">
+<body class="text-gray-900 min-h-screen animated-bg">
 
   <!-- HEADER -->
-  <header class="bg-white border-b border-gray-200 py-7 px-4">
-    <div class="max-w-5xl mx-auto">
-      <h1 class="text-2xl font-bold text-gray-900 tracking-tight">The Event Management Agent</h1>
-      <p class="text-sm text-gray-500 mt-1">Powered by PAVA World data (2022–2025) · 236 real events · No API required</p>
+  <header class="bg-white/90 backdrop-blur-sm border-b border-gray-200/70 py-6 px-4 relative z-10">
+    <div class="max-w-5xl mx-auto flex items-center gap-3">
+      <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-500 to-yellow-400 flex items-center justify-center text-xl shrink-0 shadow-sm">🌻</div>
+      <div>
+        <h1 class="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight">The Event Management Agent</h1>
+        <p class="text-sm text-gray-500 mt-0.5">🤝 In partnership with <span class="font-semibold text-gray-700">PAVA World</span> · 236 events · 2022–2025</p>
+      </div>
     </div>
   </header>
 
-  <main class="max-w-5xl mx-auto px-4 py-8 space-y-8">
+  <main class="relative z-10">
 
-    <!-- FORM -->
-    <section class="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
-      <h2 class="text-lg font-semibold text-gray-800 mb-5">Analyze a Proposed Event</h2>
-      <form id="eventForm" class="space-y-5">
-        <div>
-          <label class="block text-sm font-semibold text-gray-800 mb-0.5">What kind of event are you planning?</label>
-          <p class="text-xs text-gray-500 mb-1">Include the event type, location, and month — all in one sentence.</p>
-          <p class="text-xs text-gray-400 italic mb-2.5">
-            e.g. <span class="text-gray-500 not-italic font-medium">"Beach cleanup in Santa Monica in July"</span>
-            &nbsp;·&nbsp; <span class="text-gray-500 not-italic font-medium">"Food bank volunteer event in Garden Grove in March"</span>
-          </p>
-          <input id="eventInput" type="text" autocomplete="off"
-            placeholder="Beach cleanup in Santa Monica in July…"
-            class="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors">
+    <!-- TABS -->
+    <nav class="max-w-3xl mx-auto px-4 pt-5">
+      <div class="inline-flex bg-gray-100/80 backdrop-blur-sm rounded-xl p-1 gap-1 border border-gray-200/60">
+        <button id="tabChatBtn" type="button" onclick="switchTab('chat')" class="tab-btn tab-active px-4 py-1.5 rounded-lg text-sm font-medium transition-colors">💬 Event Predictor</button>
+        <button id="tabArchiveBtn" type="button" onclick="switchTab('archive')" class="tab-btn px-4 py-1.5 rounded-lg text-sm font-medium transition-colors">🗂️ PAVA Archive</button>
+      </div>
+    </nav>
 
-          <!-- Detected chips (shown while typing) -->
-          <div id="parsedTags" class="hidden mt-2 flex flex-wrap gap-2">
-            <span id="detectedType"     class="hidden text-xs bg-blue-50 text-blue-700 border border-blue-200 rounded-full px-3 py-0.5"></span>
-            <span id="detectedLocation" class="hidden text-xs bg-blue-50 text-blue-700 border border-blue-200 rounded-full px-3 py-0.5"></span>
-            <span id="detectedMonth"    class="hidden text-xs bg-blue-50 text-blue-700 border border-blue-200 rounded-full px-3 py-0.5"></span>
-          </div>
+    <!-- CHAT VIEW -->
+    <section id="chatView" class="max-w-3xl mx-auto px-4 py-6">
+      <div class="bg-white/95 backdrop-blur-sm rounded-2xl border border-gray-200 shadow-lg overflow-hidden flex flex-col" style="height: 65vh; min-height: 380px;">
 
-          <!-- Validation errors (shown on submit) -->
-          <div id="eventInputErrors" class="hidden mt-2 space-y-0.5">
-            <p id="errorType"     class="hidden text-xs text-red-500"></p>
-            <p id="errorLocation" class="hidden text-xs text-red-500"></p>
-            <p id="errorMonth"    class="hidden text-xs text-red-500"></p>
-          </div>
-
-          <p class="mt-3 text-xs text-gray-400">
-            Event type not recognized?
-            <a href="#eventHistory" class="text-blue-500 hover:underline">Browse the event history below</a>
-            to see which category your event falls under.
-          </p>
+        <!-- Chat header -->
+        <div class="px-5 py-3 border-b border-gray-100 flex items-center gap-2 bg-white/80 shrink-0">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          <span class="text-sm font-semibold text-gray-700">PAVA Event Assistant</span>
+          <span class="text-xs text-gray-400 ml-auto hidden sm:inline">No API required · runs entirely on PAVA's data</span>
         </div>
 
-        <button type="submit"
-          class="bg-blue-600 text-white text-sm font-medium px-5 py-2.5 rounded-lg hover:bg-blue-700 transition-colors">
-          Analyze Event →
-        </button>
-      </form>
-    </section>
-
-    <!-- AGENT RESPONSE -->
-    <section id="agentResponse" class="hidden bg-white rounded-xl border border-gray-200 shadow-sm p-6 space-y-6">
-
-      <!-- Predicted range -->
-      <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
-        <div class="text-xs font-semibold text-blue-600 uppercase tracking-wide mb-1">Predicted Attendance</div>
-        <div id="predictedRange" class="text-2xl font-bold text-blue-900"></div>
-      </div>
-
-      <!-- Matched events table -->
-      <div>
-        <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Most Similar Past PAVA Events</div>
-        <div class="overflow-x-auto rounded-lg border border-gray-200">
-          <table class="w-full text-sm">
-            <thead class="bg-gray-50 border-b border-gray-200">
-              <tr>
-                <th class="px-3 py-2 text-left text-xs font-semibold text-gray-500">Event</th>
-                <th class="px-3 py-2 text-left text-xs font-semibold text-gray-500">Location</th>
-                <th class="px-3 py-2 text-left text-xs font-semibold text-gray-500">Date</th>
-                <th class="px-3 py-2 text-right text-xs font-semibold text-gray-500">Volunteers</th>
-                <th class="px-3 py-2 text-right text-xs font-semibold text-gray-500">Match</th>
-              </tr>
-            </thead>
-            <tbody id="matchedEventsTable" class="divide-y divide-gray-100"></tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Plain-English explanation -->
-      <div>
-        <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Analysis</div>
-        <div id="analysisText" class="text-sm text-gray-700 leading-relaxed"></div>
-      </div>
-
-      <!-- Low confidence warning -->
-      <div id="lowConfidenceWarning" class="hidden rounded-lg p-3 bg-gray-100 border border-gray-300 text-sm text-gray-600">
-        ⚠️ <strong>Low confidence</strong> — no close historical match found in PAVA's data. Treat this prediction as a rough estimate only.
-      </div>
-
-      <!-- Verdict -->
-      <div id="verdictBox" class="rounded-lg p-4 border-2">
-        <div class="flex items-center gap-2 mb-1">
-          <span id="verdictIcon" class="text-xl"></span>
-          <span id="verdictLabel" class="font-bold text-base"></span>
-        </div>
-        <div id="verdictText" class="text-sm text-gray-700 leading-relaxed"></div>
-      </div>
-
-      <!-- Attendance tips (only offered when the verdict is "Reconsider") -->
-      <div id="tipsSection" class="hidden">
-        <div id="tipsPrompt" class="rounded-lg border border-gray-200 bg-gray-50 p-4 flex items-center justify-between gap-4 flex-wrap">
-          <p class="text-sm text-gray-700">Want tips to help increase attendance for this event?</p>
-          <div class="flex gap-2 shrink-0">
-            <button id="tipsYesBtn" type="button" class="text-sm bg-blue-600 text-white px-3 py-1.5 rounded-lg hover:bg-blue-700 transition-colors">Yes</button>
-            <button id="tipsNoBtn" type="button" class="text-sm bg-gray-200 text-gray-700 px-3 py-1.5 rounded-lg hover:bg-gray-300 transition-colors">No</button>
+        <!-- Message log -->
+        <div id="chatLog" class="chat-scroll flex-1 min-h-0 overflow-y-auto px-5 py-4 space-y-4">
+          <div class="chat-msg flex items-start gap-2.5">
+            <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm shrink-0">🌱</div>
+            <div class="max-w-[85%] bg-white border border-gray-200 rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm">
+              <p class="text-sm text-gray-700 leading-relaxed">Hi! I'm the PAVA Event Assistant. Tell me about an event you're planning — the type, location, and month — and I'll predict turnout using PAVA's historical data. Try something like <span class="italic">"Beach cleanup in Santa Monica in July."</span></p>
+            </div>
           </div>
         </div>
-        <div id="tipsContent" class="hidden rounded-lg border border-blue-200 bg-blue-50 p-4">
-          <div class="text-xs font-semibold text-blue-700 uppercase tracking-wide mb-2">Tips to Increase Attendance</div>
-          <ul id="tipsList" class="list-disc list-inside space-y-1.5 text-sm text-gray-700"></ul>
-        </div>
-      </div>
 
-      <!-- Action buttons -->
-      <div class="flex items-center gap-4 pt-1">
-        <a href="#data" class="text-sm text-blue-600 hover:underline">See full data ↓</a>
-        <button onclick="downloadPDF()"
-          class="text-sm bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors font-medium">
-          ⬇ Download as PDF
-        </button>
+        <!-- Input bar -->
+        <div class="border-t border-gray-100 p-3 bg-white/90 shrink-0">
+          <div id="parsedTags" class="hidden mb-2 flex flex-wrap gap-1.5 px-1">
+            <span id="detectedType"     class="hidden text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full px-2.5 py-0.5"></span>
+            <span id="detectedLocation" class="hidden text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full px-2.5 py-0.5"></span>
+            <span id="detectedMonth"    class="hidden text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full px-2.5 py-0.5"></span>
+          </div>
+          <form id="eventForm" class="flex items-center gap-2">
+            <input id="eventInput" type="text" autocomplete="off"
+              placeholder="Beach cleanup in Santa Monica in July…"
+              class="flex-1 border border-gray-300 rounded-full px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors">
+            <button type="submit" aria-label="Send"
+              class="bg-emerald-600 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-emerald-700 transition-colors shrink-0 shadow-sm text-lg">
+              ➤
+            </button>
+          </form>
+        </div>
       </div>
     </section>
 
-    <!-- DATA SECTION -->
-    <section id="data" class="space-y-6">
+    <!-- ARCHIVE VIEW -->
+    <section id="archiveView" class="hidden max-w-5xl mx-auto px-4 py-6 space-y-6">
+
+      <div>
+        <h2 class="text-lg font-bold text-gray-900">🗂️ PAVA Archive</h2>
+        <p class="text-sm text-gray-500 mt-0.5">The full historical record behind every prediction — turnout by location, what volunteers say, and the raw event log.</p>
+      </div>
 
       <!-- Chart -->
-      <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
-        <h2 class="text-base font-semibold text-gray-800">📊 Attendance by Location</h2>
+      <div class="bg-white/95 backdrop-blur-sm rounded-xl border border-gray-200 shadow-sm p-6">
+        <h3 class="text-base font-semibold text-gray-800">📊 Attendance by Location</h3>
         <p class="text-xs text-gray-400 mt-0.5 mb-4">Average volunteer turnout by city — PAVA 2022–2025</p>
         <div class="relative" style="height: 340px;">
           <canvas id="locationChart"></canvas>
@@ -157,23 +129,23 @@
       </div>
 
       <!-- Volunteer survey -->
-      <div id="volunteerVoices" class="hidden bg-white rounded-xl border border-gray-200 shadow-sm p-6">
-        <h2 class="text-base font-semibold text-gray-800">💬 What Volunteers Say</h2>
+      <div id="volunteerVoices" class="hidden bg-white/95 backdrop-blur-sm rounded-xl border border-gray-200 shadow-sm p-6">
+        <h3 class="text-base font-semibold text-gray-800">💬 What Volunteers Say</h3>
         <p class="text-xs text-gray-400 mt-0.5 mb-4">PAVA's 2026 volunteer survey · favorite event type &amp; why · 12 responses</p>
         <div id="surveyList" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
       </div>
 
       <!-- Consolidated event table -->
-      <div id="eventHistory" class="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
-        <h2 class="text-base font-semibold text-gray-800 mb-4">📋 PAVA Event History</h2>
+      <div id="eventHistory" class="bg-white/95 backdrop-blur-sm rounded-xl border border-gray-200 shadow-sm p-6">
+        <h3 class="text-base font-semibold text-gray-800 mb-4">📋 PAVA Event History</h3>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
           <select id="filterCategory" onchange="applyFilters()"
-            class="border border-gray-300 rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+            class="border border-gray-300 rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500">
             <option value="">All Categories</option>
           </select>
           <select id="filterLocation" onchange="applyFilters()"
-            class="border border-gray-300 rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+            class="border border-gray-300 rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500">
             <option value="">All Locations</option>
           </select>
         </div>
@@ -200,8 +172,10 @@
 
   </main>
 
-  <footer class="mt-12 py-5 border-t border-gray-200 text-center text-xs text-gray-400">
-    Generated by The Event Management Agent &nbsp;|&nbsp; Powered by PAVA World data (2022–2025)
+  <footer class="py-5 text-center text-xs text-gray-500 relative z-10">
+    <div class="max-w-5xl mx-auto px-4 border-t border-gray-200/70 pt-5">
+      Generated by The Event Management Agent &nbsp;|&nbsp; In partnership with PAVA World
+    </div>
   </footer>
 
 <script>
@@ -210,7 +184,7 @@ let rawEvents        = [];
 let consolidatedEvents = [];
 let filteredConsolidated = [];
 let currentMatchedNames = new Set();
-let lastAnalysis = null;
+let analysisHistory  = [];
 let sortKey = 'avg_volunteers';
 let sortDir = 'desc';
 let locationChartInstance = null;
@@ -219,6 +193,19 @@ let surveyInsightMap = {};
 
 const MONTH_NAMES = ['January','February','March','April','May','June',
                      'July','August','September','October','November','December'];
+
+// ── Tabs ─────────────────────────────────────────────────────────────────────
+function switchTab(tab) {
+  const chatView    = document.getElementById('chatView');
+  const archiveView = document.getElementById('archiveView');
+  const chatBtn     = document.getElementById('tabChatBtn');
+  const archiveBtn  = document.getElementById('tabArchiveBtn');
+  const showArchive = tab === 'archive';
+  chatView.classList.toggle('hidden', showArchive);
+  archiveView.classList.toggle('hidden', !showArchive);
+  chatBtn.classList.toggle('tab-active', !showArchive);
+  archiveBtn.classList.toggle('tab-active', showArchive);
+}
 
 // ── Similarity matching ───────────────────────────────────────────────────────
 function categoryGroup(cat) {
@@ -591,36 +578,12 @@ function parseCategory(text) {
   return null;
 }
 
-function showFieldState(detectedId, errorId, inputId, detectedText, errorText) {
-  const det = document.getElementById(detectedId);
-  const err = document.getElementById(errorId);
-  const inp = document.getElementById(inputId);
-  if (detectedText) {
-    det.textContent = '✓ ' + detectedText;
-    det.classList.remove('hidden');
-    err.classList.add('hidden');
-    inp.classList.remove('border-red-400');
-    inp.classList.add('border-blue-400');
-  } else if (errorText) {
-    err.textContent = errorText;
-    err.classList.remove('hidden');
-    det.classList.add('hidden');
-    inp.classList.add('border-red-400');
-    inp.classList.remove('border-blue-400');
-  } else {
-    det.classList.add('hidden');
-    err.classList.add('hidden');
-    inp.classList.remove('border-red-400','border-blue-400');
-  }
-}
-
 // Live parse feedback as user types (single sentence input)
 document.getElementById('eventInput').addEventListener('input', function() {
   const text = this.value.trim();
   const cat  = parseCategory(text);
   const loc  = parseLocation(text);
   const m    = parseMonth(text);
-  const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
   const typeTag = document.getElementById('detectedType');
   const locTag  = document.getElementById('detectedLocation');
@@ -635,12 +598,6 @@ document.getElementById('eventInput').addEventListener('input', function() {
   else      { monTag.classList.add('hidden'); }
 
   tagsDiv.classList.toggle('hidden', !text || !(cat || loc || m));
-
-  // Reset errors and border while typing
-  ['errorType','errorLocation','errorMonth'].forEach(id => document.getElementById(id).classList.add('hidden'));
-  document.getElementById('eventInputErrors').classList.add('hidden');
-  this.classList.remove('border-red-400');
-  this.classList.toggle('border-blue-400', !!(cat || loc || m));
 });
 
 // ── Badge color helper ────────────────────────────────────────────────────────
@@ -650,84 +607,70 @@ function badgeClass(v) {
   return 'bg-red-100 text-red-700';
 }
 
-// ── Form submit ───────────────────────────────────────────────────────────────
-document.getElementById('eventForm').addEventListener('submit', (e) => {
-  e.preventDefault();
+// ── Chat rendering helpers ─────────────────────────────────────────────────────
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
 
-  const raw      = document.getElementById('eventInput').value.trim();
-  const category = parseCategory(raw);
-  const location = parseLocation(raw);
-  const month    = parseMonth(raw);
+function scrollChatToBottom() {
+  const log = document.getElementById('chatLog');
+  log.scrollTo({ top: log.scrollHeight, behavior: 'smooth' });
+}
 
-  const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+function appendUserMessage(text) {
+  const div = document.createElement('div');
+  div.className = 'chat-msg flex justify-end';
+  div.innerHTML = `<div class="max-w-[80%] bg-emerald-600 text-white rounded-2xl rounded-br-sm px-4 py-2.5 text-sm shadow-sm">${escapeHtml(text)}</div>`;
+  document.getElementById('chatLog').appendChild(div);
+  scrollChatToBottom();
+}
 
-  const inp        = document.getElementById('eventInput');
-  const errType    = document.getElementById('errorType');
-  const errLoc     = document.getElementById('errorLocation');
-  const errMon     = document.getElementById('errorMonth');
-  const errorsDiv  = document.getElementById('eventInputErrors');
+function appendAgentMessage(innerHtml) {
+  const div = document.createElement('div');
+  div.className = 'chat-msg flex items-start gap-2.5';
+  div.innerHTML = `
+    <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm shrink-0">🌱</div>
+    <div class="max-w-[85%] bg-white border border-gray-200 rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm">${innerHtml}</div>
+  `;
+  document.getElementById('chatLog').appendChild(div);
+  scrollChatToBottom();
+  return div;
+}
 
-  [errType, errLoc, errMon].forEach(el => el.classList.add('hidden'));
-  let hasError = false;
+function appendTypingIndicator() {
+  const id = 'typing-' + Date.now();
+  const div = document.createElement('div');
+  div.id = id;
+  div.className = 'chat-msg flex items-start gap-2.5';
+  div.innerHTML = `
+    <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm shrink-0">🌱</div>
+    <div class="bg-white border border-gray-200 rounded-2xl rounded-tl-sm px-4 py-3.5 shadow-sm">
+      <span class="inline-flex gap-1 items-center">
+        <span class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style="animation-delay:0ms"></span>
+        <span class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style="animation-delay:150ms"></span>
+        <span class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style="animation-delay:300ms"></span>
+      </span>
+    </div>`;
+  document.getElementById('chatLog').appendChild(div);
+  scrollChatToBottom();
+  return id;
+}
 
-  if (!category) {
-    errType.textContent = raw
-      ? `Couldn't identify an event type. Try: "beach cleanup", "food bank", "senior care", "park restoration".`
-      : 'Please include the type of event.';
-    errType.classList.remove('hidden');
-    hasError = true;
-  }
-  if (!location) {
-    errLoc.textContent = raw
-      ? `Couldn't identify a location. Try including a city: Los Angeles, Torrance, Santa Monica, Orange County, Garden Grove.`
-      : 'Please include a city or area.';
-    errLoc.classList.remove('hidden');
-    hasError = true;
-  }
-  if (!month) {
-    errMon.textContent = raw
-      ? `Couldn't identify a month. Try: "July", "March", "fall", "spring".`
-      : 'Please include a month or season.';
-    errMon.classList.remove('hidden');
-    hasError = true;
-  }
+function appendAgentClarification(missing) {
+  const html = `
+    <p class="text-sm text-gray-700 mb-2">I couldn't quite parse the full event yet — I still need:</p>
+    <ul class="text-sm text-gray-700 list-disc list-inside space-y-1">
+      ${missing.map(m => `<li>${m}</li>`).join('')}
+    </ul>
+    <p class="text-xs text-gray-400 mt-2.5">e.g. "Beach cleanup in Santa Monica in July"</p>
+  `;
+  appendAgentMessage(html);
+}
 
-  if (hasError) {
-    errorsDiv.classList.remove('hidden');
-    inp.classList.add('border-red-400');
-    inp.classList.remove('border-blue-400');
-    return;
-  }
-
-  errorsDiv.classList.add('hidden');
-  inp.classList.remove('border-red-400');
-  inp.classList.add('border-blue-400');
-
-  const proposed = { category, location, month };
-
-  const matches = getTopMatches(proposed);
-  if (!matches.length) {
-    alert('No matching past events found. Try a different event type or location.');
-    return;
-  }
-
-  const result = generateResponse(proposed, matches);
-  currentMatchedNames = new Set(matches.map(e => e.event_name));
-  lastAnalysis = { proposed, matches, result };
-
-  renderAgentResponse(result, matches, proposed);
-  renderConsolidatedTable();
-
-  const section = document.getElementById('agentResponse');
-  section.classList.remove('hidden');
-  section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-});
-
-function renderAgentResponse(result, matches, proposed) {
-  document.getElementById('predictedRange').textContent = result.range;
-
-  // Patch 1 — match % badge per row
-  document.getElementById('matchedEventsTable').innerHTML = matches.map(e => {
+function matchedEventsTableHtml(proposed, matches) {
+  const rows = matches.map(e => {
     const pct = getSimilarityPercent(proposed, e);
     const matchBadge = pct >= 75 ? 'bg-green-100 text-green-800'
                      : pct >= 50 ? 'bg-yellow-100 text-yellow-800'
@@ -745,44 +688,147 @@ function renderAgentResponse(result, matches, proposed) {
     </tr>`;
   }).join('');
 
-  document.getElementById('analysisText').textContent = result.explanation;
-
-  // Patch 2 — low confidence warning
-  const topScore = getSimilarityPercent(proposed, matches[0]);
-  const warning = document.getElementById('lowConfidenceWarning');
-  if (topScore < 50) {
-    warning.classList.remove('hidden');
-  } else {
-    warning.classList.add('hidden');
-  }
-
-  const box = document.getElementById('verdictBox');
-  box.className = `rounded-lg p-4 border-2 ${result.boxClass}`;
-  document.getElementById('verdictIcon').textContent  = result.icon;
-  document.getElementById('verdictLabel').textContent = result.label;
-  document.getElementById('verdictText').textContent  = result.verdict;
-
-  // Attendance tips — reset to the yes/no prompt for each new analysis
-  const tipsSection = document.getElementById('tipsSection');
-  if (result.tips && result.tips.length) {
-    tipsSection.classList.remove('hidden');
-    document.getElementById('tipsPrompt').classList.remove('hidden');
-    document.getElementById('tipsContent').classList.add('hidden');
-  } else {
-    tipsSection.classList.add('hidden');
-  }
+  return `<div class="overflow-x-auto rounded-lg border border-gray-200">
+    <table class="w-full text-sm">
+      <thead class="bg-gray-50 border-b border-gray-200">
+        <tr>
+          <th class="px-3 py-2 text-left text-xs font-semibold text-gray-500">Event</th>
+          <th class="px-3 py-2 text-left text-xs font-semibold text-gray-500">Location</th>
+          <th class="px-3 py-2 text-left text-xs font-semibold text-gray-500">Date</th>
+          <th class="px-3 py-2 text-right text-xs font-semibold text-gray-500">Volunteers</th>
+          <th class="px-3 py-2 text-right text-xs font-semibold text-gray-500">Match</th>
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+    </table>
+  </div>`;
 }
 
-document.getElementById('tipsYesBtn').addEventListener('click', () => {
-  if (!lastAnalysis || !lastAnalysis.result.tips) return;
-  document.getElementById('tipsList').innerHTML =
-    lastAnalysis.result.tips.map(t => `<li>${t}</li>`).join('');
-  document.getElementById('tipsContent').classList.remove('hidden');
-  document.getElementById('tipsPrompt').classList.add('hidden');
+function appendAnalysisBubble(id, proposed, matches, result) {
+  const topScore = getSimilarityPercent(proposed, matches[0]);
+  const lowConfidenceHtml = topScore < 50
+    ? `<div class="rounded-lg p-3 bg-gray-100 border border-gray-300 text-sm text-gray-600 mb-3">
+         ⚠️ <strong>Low confidence</strong> — no close historical match found in PAVA's data. Treat this prediction as a rough estimate only.
+       </div>`
+    : '';
+
+  const tipsHtml = result.tips ? `
+    <div class="tips-section mb-3" data-msg-id="${id}">
+      <div class="tips-prompt rounded-lg border border-gray-200 bg-gray-50 p-3 flex items-center justify-between gap-3 flex-wrap">
+        <p class="text-sm text-gray-700">Want tips to help increase attendance?</p>
+        <div class="flex gap-2 shrink-0">
+          <button type="button" class="tips-yes-btn text-sm bg-emerald-600 text-white px-3 py-1.5 rounded-lg hover:bg-emerald-700 transition-colors" data-msg-id="${id}">Yes</button>
+          <button type="button" class="tips-no-btn text-sm bg-gray-200 text-gray-700 px-3 py-1.5 rounded-lg hover:bg-gray-300 transition-colors" data-msg-id="${id}">No</button>
+        </div>
+      </div>
+      <div class="tips-content hidden rounded-lg border border-emerald-200 bg-emerald-50 p-3 mt-3">
+        <div class="text-xs font-semibold text-emerald-700 uppercase tracking-wide mb-1.5">Tips to Increase Attendance</div>
+        <ul class="list-disc list-inside space-y-1 text-sm text-gray-700"></ul>
+      </div>
+    </div>` : '';
+
+  const html = `
+    <div class="text-xs font-semibold text-emerald-700 uppercase tracking-wide mb-1">Predicted Attendance</div>
+    <div class="text-xl font-bold text-emerald-900 mb-3">${result.range}</div>
+
+    <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Most Similar Past Events</div>
+    <div class="mb-3">${matchedEventsTableHtml(proposed, matches)}</div>
+
+    <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Analysis</div>
+    <p class="text-sm text-gray-700 leading-relaxed mb-3">${result.explanation}</p>
+
+    ${lowConfidenceHtml}
+
+    <div class="rounded-lg p-3 border-2 ${result.boxClass} mb-3">
+      <div class="flex items-center gap-2 mb-1">
+        <span class="text-lg">${result.icon}</span>
+        <span class="font-bold text-sm">${result.label}</span>
+      </div>
+      <div class="text-sm text-gray-700 leading-relaxed">${result.verdict}</div>
+    </div>
+
+    ${tipsHtml}
+
+    <div class="flex items-center gap-4 pt-1 text-sm">
+      <button type="button" class="view-archive-link text-emerald-700 hover:underline">See full data in the Archive →</button>
+      <button type="button" class="download-pdf-btn text-sm bg-gray-800 text-white px-3 py-1.5 rounded-lg hover:bg-gray-700 transition-colors font-medium" data-msg-id="${id}">⬇ Download PDF</button>
+    </div>
+  `;
+
+  appendAgentMessage(html);
+}
+
+// Event delegation — the chat log is rebuilt with new messages constantly, so
+// buttons inside messages (tips yes/no, PDF, archive link) are wired once here.
+document.getElementById('chatLog').addEventListener('click', (e) => {
+  const yesBtn = e.target.closest('.tips-yes-btn');
+  const noBtn  = e.target.closest('.tips-no-btn');
+  const pdfBtn = e.target.closest('.download-pdf-btn');
+  const archiveLink = e.target.closest('.view-archive-link');
+
+  if (yesBtn) {
+    const entry = analysisHistory[+yesBtn.dataset.msgId];
+    if (!entry || !entry.result.tips) return;
+    const section = yesBtn.closest('.tips-section');
+    section.querySelector('.tips-content ul').innerHTML = entry.result.tips.map(t => `<li>${t}</li>`).join('');
+    section.querySelector('.tips-content').classList.remove('hidden');
+    section.querySelector('.tips-prompt').classList.add('hidden');
+  } else if (noBtn) {
+    noBtn.closest('.tips-section').classList.add('hidden');
+  } else if (pdfBtn) {
+    downloadPDF(analysisHistory[+pdfBtn.dataset.msgId]);
+  } else if (archiveLink) {
+    switchTab('archive');
+  }
 });
 
-document.getElementById('tipsNoBtn').addEventListener('click', () => {
-  document.getElementById('tipsSection').classList.add('hidden');
+// ── Chat submit ───────────────────────────────────────────────────────────────
+document.getElementById('eventForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const inputEl = document.getElementById('eventInput');
+  const raw = inputEl.value.trim();
+  if (!raw) return;
+
+  appendUserMessage(raw);
+  inputEl.value = '';
+  document.getElementById('parsedTags').classList.add('hidden');
+
+  const typingId = appendTypingIndicator();
+
+  setTimeout(() => {
+    const typingEl = document.getElementById(typingId);
+    if (typingEl) typingEl.remove();
+
+    const category = parseCategory(raw);
+    const location = parseLocation(raw);
+    const month    = parseMonth(raw);
+
+    const missing = [];
+    if (!category) missing.push(`the <strong>event type</strong> — try "beach cleanup", "food bank", "senior care", "park restoration"`);
+    if (!location) missing.push(`a <strong>location</strong> — try a city like Los Angeles, Torrance, Santa Monica, or Garden Grove`);
+    if (!month)    missing.push(`a <strong>month</strong> — try "July", "March", or a season like "fall"`);
+
+    if (missing.length) {
+      appendAgentClarification(missing);
+      return;
+    }
+
+    const proposed = { category, location, month };
+    const matches = getTopMatches(proposed);
+    if (!matches.length) {
+      appendAgentMessage(`<p class="text-sm text-gray-700">I couldn't find any comparable past PAVA events for that combination. Try a different event type or location.</p>`);
+      return;
+    }
+
+    const result = generateResponse(proposed, matches);
+    currentMatchedNames = new Set(matches.map(e => e.event_name));
+    renderConsolidatedTable();
+
+    const id = analysisHistory.length;
+    analysisHistory.push({ proposed, matches, result });
+    appendAnalysisBubble(id, proposed, matches, result);
+  }, 450);
 });
 
 // ── Filters ───────────────────────────────────────────────────────────────────
@@ -837,7 +883,7 @@ function renderConsolidatedTable() {
   document.getElementById('consolidatedTable').innerHTML = sorted.map(e => {
     const isMatch = currentMatchedNames.has(e.event_name);
     return `<tr class="${isMatch ? 'matched-row' : 'hover:bg-gray-50'}">
-      <td class="px-3 py-2.5 text-sm font-medium">${e.event_name}${isMatch ? ' <span class="text-xs font-normal text-blue-500">↑ matched</span>' : ''}</td>
+      <td class="px-3 py-2.5 text-sm font-medium">${e.event_name}${isMatch ? ' <span class="text-xs font-normal text-emerald-600">↑ matched</span>' : ''}</td>
       <td class="px-3 py-2.5 text-xs text-gray-500">${e.category}</td>
       <td class="px-3 py-2.5 text-xs text-gray-500">${e.location}</td>
       <td class="px-3 py-2.5 text-right text-sm">${e.times_run}</td>
@@ -929,11 +975,11 @@ function renderSurveyVoices() {
 }
 
 // ── PDF download ──────────────────────────────────────────────────────────────
-function downloadPDF() {
-  if (!lastAnalysis) return;
+function downloadPDF(entry) {
+  if (!entry) return;
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF({ unit: 'mm', format: 'a4' });
-  const { proposed, matches, result } = lastAnalysis;
+  const { proposed, matches, result } = entry;
   const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
   const W = doc.internal.pageSize.width;
   const H = doc.internal.pageSize.height;
@@ -941,7 +987,7 @@ function downloadPDF() {
   const addFooter = () => {
     doc.setFontSize(7.5);
     doc.setTextColor(160);
-    doc.text('Generated by The Event Management Agent  |  Powered by PAVA World data (2022–2025)', 14, H - 8);
+    doc.text('Generated by The Event Management Agent  |  In partnership with PAVA World', 14, H - 8);
     doc.text(`Page ${doc.internal.getCurrentPageInfo().pageNumber}`, W - 14, H - 8, { align: 'right' });
   };
 
@@ -966,7 +1012,7 @@ function downloadPDF() {
   // Predicted attendance
   doc.setFont('helvetica', 'bold'); doc.setFontSize(11); doc.setTextColor(0);
   doc.text('Predicted Attendance', 14, y); y += 5;
-  doc.setFontSize(14); doc.setTextColor(37, 99, 235);
+  doc.setFontSize(14); doc.setTextColor(4, 120, 87);
   doc.text(result.range, 18, y); y += 9;
 
   // Verdict
@@ -991,7 +1037,7 @@ function downloadPDF() {
     head: [['Event', 'Location', 'Date', 'Volunteers']],
     body: matches.map(e => [e.event_name, e.location, e.date, e.volunteers]),
     styles: { fontSize: 9 },
-    headStyles: { fillColor: [37, 99, 235] },
+    headStyles: { fillColor: [4, 120, 87] },
     margin: { left: 14, right: 14 }
   });
   addFooter();
@@ -1016,7 +1062,7 @@ function downloadPDF() {
       if (data.section === 'body') {
         const ev = consolidatedEvents[data.row.index];
         if (ev && matchedNames.has(ev.event_name)) {
-          data.cell.styles.fillColor = [219, 234, 254];
+          data.cell.styles.fillColor = [209, 250, 229];
           data.cell.styles.fontStyle = 'bold';
         }
       }
