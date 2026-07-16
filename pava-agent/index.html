@@ -235,14 +235,17 @@ function sameRegion(loc1, loc2) {
   return (la.includes(loc1) && la.includes(loc2)) || (oc.includes(loc1) && oc.includes(loc2));
 }
 
+// Event type (category) dominates the match score by a wide margin — even a full
+// location + month match on the wrong category (20 + 18 + 12 = 50) can't beat an
+// exact category match alone (70), let alone one paired with any location/month hit.
 function scoreSimilarity(proposed, past) {
   let score = 0;
-  if (past.category === proposed.category)                                    score += 50;
-  else if (categoryGroup(past.category) === categoryGroup(proposed.category)) score += 25;
-  if (past.location === proposed.location)                                    score += 30;
-  else if (sameRegion(past.location, proposed.location))                      score += 15;
+  if (past.category === proposed.category)                                    score += 70;
+  else if (categoryGroup(past.category) === categoryGroup(proposed.category)) score += 20;
+  if (past.location === proposed.location)                                    score += 18;
+  else if (sameRegion(past.location, proposed.location))                      score += 9;
   const pm = new Date(past.date).getMonth() + 1;
-  if (Math.abs(proposed.month - pm) <= 1)                                     score += 20;
+  if (Math.abs(proposed.month - pm) <= 1)                                     score += 12;
   return score;
 }
 
@@ -276,7 +279,7 @@ function computeLatestDataYear() {
 
 function recencyWeight(dateStr) {
   const yearsAgo = Math.max(0, latestDataYear - new Date(dateStr).getFullYear());
-  return Math.pow(0.6, yearsAgo); // each year back, an event counts for 60% as much
+  return Math.pow(0.4, yearsAgo); // each year back, an event counts for 40% as much — 2022/2023 barely move the needle
 }
 
 function weightedAverage(events) {
@@ -563,16 +566,25 @@ function parseMonth(text) {
   return null;
 }
 
-function parseLocation(text) {
-  const lower = text.toLowerCase();
-  for (const [key, val] of Object.entries(LOCATION_MAP)) {
-    if (lower.includes(key)) return val;
+function matchedLocationKey(lower) {
+  for (const key of Object.keys(LOCATION_MAP)) {
+    if (lower.includes(key)) return key;
   }
   return null;
 }
 
+function parseLocation(text) {
+  const key = matchedLocationKey(text.toLowerCase());
+  return key ? LOCATION_MAP[key] : null;
+}
+
+// Strip the matched location phrase before scanning for category keywords, so a
+// location name that happens to contain a category word (e.g. "Garden Grove"
+// containing "garden") doesn't get misread as that category (e.g. Park/Garden).
 function parseCategory(text) {
-  const lower = text.toLowerCase();
+  let lower = text.toLowerCase();
+  const locKey = matchedLocationKey(lower);
+  if (locKey) lower = lower.split(locKey).join(' ');
   for (const { keys, cat } of CATEGORY_MAP) {
     if (keys.some(k => lower.includes(k))) return cat;
   }
