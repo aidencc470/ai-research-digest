@@ -118,6 +118,21 @@
         <div id="verdictText" class="text-sm text-gray-700 leading-relaxed"></div>
       </div>
 
+      <!-- Attendance tips (only offered when the verdict is "Reconsider") -->
+      <div id="tipsSection" class="hidden">
+        <div id="tipsPrompt" class="rounded-lg border border-gray-200 bg-gray-50 p-4 flex items-center justify-between gap-4 flex-wrap">
+          <p class="text-sm text-gray-700">Want tips to help increase attendance for this event?</p>
+          <div class="flex gap-2 shrink-0">
+            <button id="tipsYesBtn" type="button" class="text-sm bg-blue-600 text-white px-3 py-1.5 rounded-lg hover:bg-blue-700 transition-colors">Yes</button>
+            <button id="tipsNoBtn" type="button" class="text-sm bg-gray-200 text-gray-700 px-3 py-1.5 rounded-lg hover:bg-gray-300 transition-colors">No</button>
+          </div>
+        </div>
+        <div id="tipsContent" class="hidden rounded-lg border border-blue-200 bg-blue-50 p-4">
+          <div class="text-xs font-semibold text-blue-700 uppercase tracking-wide mb-2">Tips to Increase Attendance</div>
+          <ul id="tipsList" class="list-disc list-inside space-y-1.5 text-sm text-gray-700"></ul>
+        </div>
+      </div>
+
       <!-- Action buttons -->
       <div class="flex items-center gap-4 pt-1">
         <a href="#data" class="text-sm text-blue-600 hover:underline">See full data ↓</a>
@@ -338,6 +353,79 @@ function surveyInsight(cat) {
   return surveyInsightMap[cat] || null;
 }
 
+// ── Attendance tips (only offered for "Reconsider" verdicts) ─────────────────
+// Draws on both datasets: pava_events.json (better location/timing/category) and
+// pava_survey.json (what volunteers say draws them in).
+function generateTips(proposed) {
+  const tips = [];
+  const catEvents = rawEvents.filter(e => e.category === proposed.category);
+  const catAvg = catEvents.length ? catEvents.reduce((s, e) => s + e.volunteers, 0) / catEvents.length : 0;
+
+  // 1. Better location for this category
+  const byLoc = {};
+  catEvents.forEach(e => {
+    const l = byLoc[e.location] || (byLoc[e.location] = { sum: 0, count: 0 });
+    l.sum += e.volunteers; l.count++;
+  });
+  const locStats = Object.entries(byLoc)
+    .map(([loc, s]) => ({ loc, avg: s.sum / s.count, count: s.count }))
+    .filter(s => s.count >= 2)
+    .sort((a, b) => b.avg - a.avg);
+  const bestLoc = locStats[0];
+  if (bestLoc && bestLoc.loc !== proposed.location && bestLoc.avg > catAvg * 1.15) {
+    tips.push(`Consider ${bestLoc.loc} instead of ${proposed.location} — past ${proposed.category} events there averaged ${Math.round(bestLoc.avg)} volunteers, well above the ${Math.round(catAvg)}-volunteer category average.`);
+  }
+
+  // 2. Better month for this category
+  const byMonth = {};
+  catEvents.forEach(e => {
+    const m = new Date(e.date).getMonth() + 1;
+    const b = byMonth[m] || (byMonth[m] = { sum: 0, count: 0 });
+    b.sum += e.volunteers; b.count++;
+  });
+  const monthStats = Object.entries(byMonth)
+    .map(([m, s]) => ({ m: +m, avg: s.sum / s.count, count: s.count }))
+    .filter(s => s.count >= 2)
+    .sort((a, b) => b.avg - a.avg);
+  const bestMonth = monthStats[0];
+  if (bestMonth && bestMonth.m !== proposed.month && bestMonth.avg > catAvg * 1.15) {
+    tips.push(`${MONTH_NAMES[bestMonth.m - 1]} has historically outperformed for this category — averaging ${Math.round(bestMonth.avg)} volunteers, vs. the ${Math.round(catAvg)}-volunteer overall average. Shifting the date could help if it's flexible.`);
+  }
+
+  // 3. Stronger related category to borrow elements from
+  const group = categoryGroup(proposed.category);
+  const byRelatedCat = {};
+  rawEvents.forEach(e => {
+    if (categoryGroup(e.category) !== group || e.category === proposed.category) return;
+    const c = byRelatedCat[e.category] || (byRelatedCat[e.category] = { sum: 0, count: 0 });
+    c.sum += e.volunteers; c.count++;
+  });
+  const relatedStats = Object.entries(byRelatedCat)
+    .map(([cat, s]) => ({ cat, avg: s.sum / s.count, count: s.count }))
+    .filter(s => s.count >= 3)
+    .sort((a, b) => b.avg - a.avg);
+  if (relatedStats.length && relatedStats[0].avg > catAvg * 1.15) {
+    tips.push(`${relatedStats[0].cat} events in the same category consistently draw more (avg ${Math.round(relatedStats[0].avg)}) — combining an element of that format with your event could boost turnout.`);
+  }
+
+  // 4. Survey-driven framing tip
+  const survey = surveyInsight(proposed.category);
+  if (survey) {
+    tips.push(`Volunteers who name ${survey.label} their favorite type of event point to the personal draw — one wrote "${survey.quote}" — so lean into that angle in your promotion and messaging.`);
+  } else {
+    const topSurvey = Object.values(surveyInsightMap).sort((a, b) => b.count - a.count)[0];
+    if (topSurvey) {
+      tips.push(`This category has no direct match in PAVA's volunteer survey, but ${topSurvey.label} was the most commonly cited favorite (${topSurvey.count}/${topSurvey.total} respondents) — borrowing an element of that (e.g. its social or hands-on appeal) may help draw volunteers who'd otherwise sit this one out.`);
+    }
+  }
+
+  if (!tips.length) {
+    tips.push(`PAVA's data doesn't point to an obvious lever here — this combination of category, location, and month is simply outside where PAVA has historically drawn strong turnout.`);
+  }
+
+  return tips;
+}
+
 // ── Template-based response generation (no API) ───────────────────────────────
 function generateResponse(proposed, matches) {
   const avg = matches.reduce((s, e) => s + e.volunteers, 0) / matches.length;
@@ -397,7 +485,9 @@ function generateResponse(proposed, matches) {
     verdict = `Similar events in PAVA's history have averaged low turnout. ${matches[0].event_name} drew only ${matches[0].volunteers} at its most similar run. Consider a different event type or a location with a stronger track record.`;
   }
 
-  return { range: `${low}–${high} volunteers`, explanation, icon, label, verdict, boxClass };
+  const tips = label === 'Reconsider' ? generateTips(proposed) : null;
+
+  return { range: `${low}–${high} volunteers`, explanation, icon, label, verdict, boxClass, tips };
 }
 
 // ── Input parsing ─────────────────────────────────────────────────────────────
@@ -637,7 +727,29 @@ function renderAgentResponse(result, matches, proposed) {
   document.getElementById('verdictIcon').textContent  = result.icon;
   document.getElementById('verdictLabel').textContent = result.label;
   document.getElementById('verdictText').textContent  = result.verdict;
+
+  // Attendance tips — reset to the yes/no prompt for each new analysis
+  const tipsSection = document.getElementById('tipsSection');
+  if (result.tips && result.tips.length) {
+    tipsSection.classList.remove('hidden');
+    document.getElementById('tipsPrompt').classList.remove('hidden');
+    document.getElementById('tipsContent').classList.add('hidden');
+  } else {
+    tipsSection.classList.add('hidden');
+  }
 }
+
+document.getElementById('tipsYesBtn').addEventListener('click', () => {
+  if (!lastAnalysis || !lastAnalysis.result.tips) return;
+  document.getElementById('tipsList').innerHTML =
+    lastAnalysis.result.tips.map(t => `<li>${t}</li>`).join('');
+  document.getElementById('tipsContent').classList.remove('hidden');
+  document.getElementById('tipsPrompt').classList.add('hidden');
+});
+
+document.getElementById('tipsNoBtn').addEventListener('click', () => {
+  document.getElementById('tipsSection').classList.add('hidden');
+});
 
 // ── Filters ───────────────────────────────────────────────────────────────────
 function populateFilters() {
