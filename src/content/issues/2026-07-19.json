@@ -1,0 +1,586 @@
+{
+  "slug": "2026-07-19",
+  "title": "Weekly AI Digest — July 19, 2026",
+  "dateRange": {
+    "start": "2026-07-12T14:19:45.511Z",
+    "end": "2026-07-19T14:19:45.511Z"
+  },
+  "papersByCategory": {
+    "Computer Vision": [
+      {
+        "id": "2607.15278",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Hierarchical Denoising For Multi-Step Visual Reasoning",
+        "authors": [
+          "Zezhong Qian",
+          "Xiaowei Chi",
+          "Chak-Wing Mak",
+          "Tianze Zhou",
+          "Ruibin Yuan",
+          "Yuhan Rui",
+          "Hengzhe Sun",
+          "Zhuoqun Wu",
+          "Yuming Li",
+          "Siyuan Qian",
+          "Sirui Han",
+          "Shanghang Zhang"
+        ],
+        "summary": "Video models are evolving into vision foundation models, yet they still lack human-like multi-step reasoning. Streaming autoregressive diffusion models are efficient but limited in reasoning, while bidirectional diffusion enables global revision with high inference costs due to dense frame-level denoising. Both paradigms struggle to achieve logical consistency and low-latency streaming for complex reasoning tasks. We propose HDR (Hierarchical Denoising for Visual Reasoning), a unified framework that integrates hierarchical latents into causal video generation for multi-step reasoning. HDR organizes video latents into a tree-structured hierarchy, enabling coarse-to-fine reasoning before streaming output. Coarse denoising layers preserve uncertain hypotheses for global planning, while finer layers progressively refine them into concrete visual states. A sparse hierarchical attention pattern (SHAP) further reduces temporal attention costs. We introduce a level-stratified multi-step video reasoning benchmark with out-of-distribution cases, covering six tasks: maze navigation, Tower of Hanoi, one-line drawing, sliding puzzle, Sokoban, and water pouring. Compared with streaming autoregressive diffusion baselines, HDR improves success from 34.22 to 60.29 (76.2% relative gain) and increases average progress from 76.00 to 89.56, demonstrating more consistent reasoning trajectories. HDR maintains low-latency streaming at 0.70 seconds per latent, achieving 54.2 times faster inference than bidirectional diffusion. It also retains 82.9% of full-data performance with only 2% training data, compared with 52.0% for bidirectional diffusion. Real-world robot experiments further demonstrate HDR's potential for physical interaction and world modeling. Project demo: https://hierarchical-diffusion-reasoning.github.io/.",
+        "url": "https://arxiv.org/abs/2607.15278v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.15278v1",
+        "publishedDate": "2026-07-16T17:59:57.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2607.15273",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "MeanFlowNFT: Bringing Forward-Process RL to Average-Velocity Generators",
+        "authors": [
+          "Yushi Huang",
+          "Xiangxin Zhou",
+          "Jun Zhang",
+          "Liefeng Bo",
+          "Tianyu Pang"
+        ],
+        "summary": "MeanFlow generators achieve fast few-step sampling by predicting average velocities over time intervals, making them attractive for efficient generation. Reinforcement learning (RL) has become a powerful way to align diffusion and flow models with human preferences and task-specific objectives. In particular, DiffusionNFT offers an efficient forward-process RL framework that does not require reverse-process trajectories or likelihood estimation. However, applying such RL methods to MeanFlow remains underexplored. DiffusionNFT optimizes instantaneous velocities, whereas MeanFlow samples with average velocities. To bridge this gap, we introduce MeanFlowNFT. Inspired by the MeanFlow identity, which bridges average and instantaneous velocities, we construct an induced instantaneous-velocity predictor. We apply the DiffusionNFT objective to this predictor, making reward optimization well-defined for MeanFlow. Sampling remains based on the average velocity, preserving MeanFlow's fast few-step generation. We further prove that MeanFlowNFT inherits DiffusionNFT's strict policy-improvement guarantee. Experiments on image and video generation show that MeanFlowNFT consistently improves baselines. Moreover, it outperforms prior state-of-the-art RL-tuned few-step generators on most metrics ($6$ of $8$ on SD3.5-M), and can even surpass multi-step RL-tuned diffusion while using only a few sampling steps. For instance, on Wan 2.1, $4$-step MeanFlowNFT reaches a VBench score of $84.33$, surpassing $50$-step LongCat-Video RL ($82.57$).",
+        "url": "https://arxiv.org/abs/2607.15273v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.15273v1",
+        "publishedDate": "2026-07-16T17:59:02.000Z",
+        "tags": [
+          "cs.CV",
+          "cs.LG"
+        ]
+      },
+      {
+        "id": "2607.15271",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Online Neural Space Time Memory for Dynamic Novel View Synthesis",
+        "authors": [
+          "Baback Elmieh",
+          "Lynn Tsai",
+          "Zeman Li",
+          "Srinivas Kaza",
+          "Tiancheng Sun",
+          "Gabor Csapo",
+          "Ali Behrouz",
+          "Yuan Deng",
+          "Stephen Lombardi",
+          "Steven M. Seitz",
+          "Xuan Luo"
+        ],
+        "summary": "Online novel view synthesis from multi-view streaming videos faces a fundamental trade-off: maintaining a persistent, long-horizon memory to reconstruct temporarily occluded regions while operating under strict real-time constraints. While Test-Time Training (TTT) offers a powerful memory mechanism, standard models mandate gradient-based memory updates at every frame to adapt to the changing motion in dynamic scenes. The computational cost of heavy memory updates precludes real-time application and can lead to instability over long contexts. Given that memory updates are more demanding than memory application and video content is largely redundant, we propose to decouple the frequencies of these two processes. Our approach performs periodic memory updates while applying the memory on a per-frame basis, using cross-view attention to manage deformations between the prior memory state and the current frame. To lock in the historical context, we introduce two critical mechanisms: an auxiliary Memory Loss that forces persistent internalization of the scene, and a Memory Caching strategy that regularizes active weights against catastrophic drift. Our method demonstrates real-time, state-of-the-art performance on scenes with dynamic human motion as well as minute-scale online memorization.",
+        "url": "https://arxiv.org/abs/2607.15271v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.15271v1",
+        "publishedDate": "2026-07-16T17:58:18.000Z",
+        "tags": [
+          "cs.CV",
+          "cs.GR",
+          "cs.LG"
+        ]
+      },
+      {
+        "id": "2607.15268",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Motion-Conditioned Multi-View Fusion for Myocardial Infarction Localization from Echocardiography",
+        "authors": [
+          "Guang Yang",
+          "Wentian Xu",
+          "Siyu Wang",
+          "Betty Raman",
+          "Lei Li",
+          "Vicente Grau"
+        ],
+        "summary": "Myocardial infarction (MI) remains a leading cause of mortality worldwide. Echocardiography (Echo) is a widely available modality for MI assessment, where regional wall motion abnormality is a key indicator. Prior learning based methods for myocardial motion analysis often use handcrafted descriptors or densely supervised estimation, but the need for extensive annotation limits applicability. Foundation models have recently improved vision-based Echo analysis; however, most methods operate on single views and segment-level localization remains unreliable under view-dependent ambiguity, especially in apical views. To address this, we propose MCF-Net, a novel motion-guided multi-view fusion framework that fuses myocardial motion cues with foundation model representations to localize infarction. Visual features are extracted using EchoPrime, a pretrained Echo foundation model shared across dual views. Cardiac motion is modeled with extremely sparse supervision: a single annotated template frame is transferred across videos to initialize point tracking, avoiding dense labels. Motion-derived segment-aware soft masks provide coarse spatial priors that selectively enhance features for challenging myocardial segments. A motion-conditioned fusion mechanism then integrates motion and vision across views, refining predictions without overriding strong appearance cues. On segment-level MI localization, MCF-Net achieves 72.4\\% F1 and 84.9\\% accuracy, outperforming state-of-the-art motion-only, vision-only, and fusion baselines.",
+        "url": "https://arxiv.org/abs/2607.15268v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.15268v1",
+        "publishedDate": "2026-07-16T17:56:56.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2607.15265",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "SceneBind: Binding What and Where Across Vision, Audio and Language",
+        "authors": [
+          "Mingfei Chen",
+          "Zijun Cui",
+          "Ruoke Zhang",
+          "Hyeonggon Ryu",
+          "Eli Shlizerman"
+        ],
+        "summary": "We present SceneBind, an omni-modal representation of realistic scenes with joint semantic and 3D spatial understanding across vision, audio and language. Existing omni-modal encoders excel at instance-level semantics (i.e., what is present), but often lack explicit spatial structure (i.e., where it is). SceneBind addresses this gap by representing each scene as a semantic-spatial entity, combining a global semantic embedding with object-centric semantic-spatial slots. This representation explicitly captures object-level semantics, spatial attributes, and uncertainty. We further propose SceneBind Matching, a semantic-spatial matching scheme that integrates global scene similarity with object alignment, supporting cross-modal scene retrieval and object grounding. To train and evaluate SceneBind, we curate a novel real-world binaural audio-visual dataset with structured semantic and spatial annotations, and propose a training protocol for aligning semantic and spatial signals across modalities. SceneBind is compatible with large-scale pretrained semantic encoders, adds lightweight spatial modeling with only a few additional tokens. It achieves state-of-the-art scene and spatial retrieval while enabling strong zero-shot transfer to downstream tasks such as audio-visual localization.",
+        "url": "https://arxiv.org/abs/2607.15265v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.15265v1",
+        "publishedDate": "2026-07-16T17:55:15.000Z",
+        "tags": [
+          "cs.CV",
+          "cs.AI",
+          "cs.MM",
+          "cs.SD"
+        ]
+      },
+      {
+        "id": "2607.15255",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "HoloGeo: Mitigating Landmark Bias in Geo-localization via Evidence-Driven Reasoning",
+        "authors": [
+          "Pengcheng Zhou",
+          "Xuanyu Liu",
+          "Yanchen Yin",
+          "Bobo Li",
+          "Shengqiong Wu",
+          "Mong-Li Lee",
+          "Wynne Hsu"
+        ],
+        "summary": "Recent advances in Vision-Language Models (VLMs) have significantly improved image geo-localization, yet existing models remain susceptible to landmark bias, causing them to overlook geographical cues or form spurious correlations, ultimately resulting in inaccurate localization. To systematically investigate this issue, we first design two quantitative metrics, Bias Intensity (BI) and Bias Harmfulness (BH), to characterize the impact of landmarks exerted on model reasoning, and establish a comprehensive benchmark, LandmarkBias-3K. To mitigate landmark bias, we further propose an evidence-driven reasoning framework, HoloGeo, to improve the reliability of geo-localization. HoloGeo is supported by a high-quality dataset, BF-30k, annotated with structured multi-evidence bias-free reasoning chains. By incorporating multi-dimensional rewards, HoloGeo explicitly encourages balanced attention over diverse visual cues and achieves evidence-driven joint reasoning. Extensive experiments demonstrate that HoloGeo not only maintains excellent performance on IM2GPS3K and YFCC4k but also significantly outperforms existing open-source VLMs on LandmarkBias-3K, validating its effectiveness for robust geospatial reasoning.",
+        "url": "https://arxiv.org/abs/2607.15255v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.15255v1",
+        "publishedDate": "2026-07-16T17:50:03.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2607.15246",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "ARMOR++: Agentic Orchestration of a Multi-Domain Primitive Set for Transferable Attacks on Deepfake Detectors",
+        "authors": [
+          "Christos Korgialas",
+          "Gabriel Lee Jun Rong",
+          "Dion Jia Xu Ho",
+          "Pai Chet Ng",
+          "Xiaoxiao Miao",
+          "Konstantinos N. Plataniotis"
+        ],
+        "summary": "The reliability of deepfake detectors frequently degrades under black-box adversarial transfer, as these models often rely on fragile, architecture-dependent forensic cues. Existing transfer attacks often lack semantic awareness and struggle to maintain effectiveness under strict no-query constraints, particularly when perturbations are transferred from convolutional surrogates to transformer-based targets. To address these limitations, this paper introduces ARMOR++, a robust multi-agent framework designed for high-transferability deepfake evasion. The framework leverages the Qwen2.5-VL Vision-Language Model (VLM) to supply spatial semantic priors, while the Qwen3 Large Language Model (LLM) orchestrates primitive selection, adaptive hyperparameter reparameterization, and entropy-regularized perturbation mixing. By integrating five complementary primitives, spanning dense optimization, saliency-based methods, spatial transformations, frequency-domain perturbations, and block-structured modifications, ARMOR++ effectively targets heterogeneous inductive biases. Rigorous evaluation on the AADD-2025 benchmark demonstrates that ARMOR++ significantly outperforms existing agentic and non-agentic baselines across both low- and high-quality image regimes. Statistical analysis confirms a substantial gain in blind-target Attack Success Rate (ASR) over the state-of-the-art agentic baseline, with further performance advantages evidenced against non-agentic benchmarks and under robust defensive configurations. These findings highlight a significant residual reliability gap in current deepfake detector deployments and demonstrate the efficacy of agentic orchestration in identifying latent vulnerabilities.",
+        "url": "https://arxiv.org/abs/2607.15246v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.15246v1",
+        "publishedDate": "2026-07-16T17:45:13.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      }
+    ],
+    "LLMs & Language": [
+      {
+        "id": "2607.15277",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Partition, Prompt, Aggregate: Statistical Self-Consistency in Language Models",
+        "authors": [
+          "Patrik Wolf",
+          "Thomas Kleine Buening",
+          "Andreas Krause",
+          "Celestine Mendler-Dünner"
+        ],
+        "summary": "In-context learning is commonly interpreted as a form of conditional inference, in which the prompt specifies a context and the model's output is treated as an estimate of the corresponding conditional distribution. If this interpretation holds, then LLM estimates should satisfy basic probabilistic identities. In particular, the law of total probability asserts that prior-weighted conditional distributions aggregate into population-level marginals over any valid partition of the population. In this work, we investigate to what extent LLM estimates adhere to this self-consistency principle. We use binary trees as an evaluation scaffold to recursively partition a population into increasingly fine-grained subpopulations. We then prompt LLMs with verbalized subpopulation descriptions in context, aggregate the resulting estimates back into population-level estimates, and compare them across partitions of varying granularity. Applying this protocol across problem domains and state-of-the-art frontier models, we show widespread violations of basic consistency properties. An in-depth study of persona prompting reveals a pattern we call the macro fallacy: estimates reconstructed from more fine-grained subpopulation responses are often better aligned with human reference data than direct population-level estimates. This effect persists across variations in tree structure and estimation task, and can be partially recovered through implicit prompting. Together, these findings suggest that models possess relevant subpopulation knowledge but do not reliably propagate it into aggregate estimates. This gap establishes statistical self-consistency as an unsaturated, reference-free criterion for evaluating LLMs.",
+        "url": "https://arxiv.org/abs/2607.15277v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.15277v1",
+        "publishedDate": "2026-07-16T17:59:31.000Z",
+        "tags": [
+          "cs.CL"
+        ]
+      },
+      {
+        "id": "2607.15272",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "SciDiagramEdit: Learning to Edit Scientific Diagrams from Paper Revisions",
+        "authors": [
+          "Yasheng Sun",
+          "Zezi Zeng",
+          "Yifan Yang",
+          "Chong Luo",
+          "Wenyi Wang",
+          "Ziwei Liu",
+          "Jürgen Schmidhuber"
+        ],
+        "summary": "Editing the figures in a research paper is a routine and time-consuming part of everyday research practice: authors relabel components, rearrange panels, and restyle visuals as they revise their manuscripts. Automating this editing workflow under a natural-language instruction, however, is challenging, because a scientific figure is a dense infographic in which heterogeneous visual elements such as schematics, plots, photos, captions, and arrows are composed under a tight visual grammar to advance a specific argument. To address this, we present SciDiagramEdit, a benchmark and skill-evolution framework that learns from natural paper revisions and operates on the figure's editable vector source, where users can inspect and co-edit individual primitives alongside the agent. Our benchmark mines before/after figure pairs from arXiv version histories, each grounded in the authors' own revision intent. To accommodate the diversity of editing instructions, we adopt agentic learning via skill evolution: an agentic proposer continually refines the agent's skill specification from execution traces over multiple epochs. The resulting skill progressively lifts edit accuracy on a held-out validation set, providing evidence that natural paper revisions are an effective training signal for instruction-driven figure editing.",
+        "url": "https://arxiv.org/abs/2607.15272v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.15272v1",
+        "publishedDate": "2026-07-16T17:58:36.000Z",
+        "tags": [
+          "cs.CL",
+          "cs.AI"
+        ]
+      },
+      {
+        "id": "2607.15267",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Pretraining Data Can Be Poisoned through Computational Propaganda",
+        "authors": [
+          "Victoria Graf",
+          "Hannaneh Hajishirzi",
+          "Noah A. Smith",
+          "David Kohlbrenner",
+          "Kyle Lo"
+        ],
+        "summary": "Poisoning pretraining data can introduce harmful behaviors to LMs that are difficult to detect and mitigate. Prior work on poisoning pretraining data has largely exploited established data sources such as Wikipedia, which do not represent the large scale and heterogeneity typical of pretraining corpora, and has ignored the interaction between poisoned data and data curation pipelines. We demonstrate that poisoning attacks on pretraining data are feasible beyond this limited setting through an existing web-scale content injection mechanism: public discussion interfaces. Additionally, to measure whether malicious content is included after web crawling and data curation, we introduce HalfLife, a novel analysis for estimating adversarial content inclusion in web-crawl based LM training data. We use HalfLife to explore the feasibility of poisoning pretraining corpora at web scale through open discussion interfaces. Our analysis demonstrates the importance of estimating whether poison injections are included in pretraining data, and establishes third-party webpage content as a possible vector for attacking language model pretraining.",
+        "url": "https://arxiv.org/abs/2607.15267v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.15267v1",
+        "publishedDate": "2026-07-16T17:56:05.000Z",
+        "tags": [
+          "cs.AI",
+          "cs.CL"
+        ]
+      },
+      {
+        "id": "2607.15253",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Bridge Evidence: Static Retrieval Utility Does Not Predict Causal Utility in Multi-Step Agentic Search",
+        "authors": [
+          "Debayan Mukhopadhyay",
+          "Utshab Kumar Ghosh",
+          "Shubham Chatterjee"
+        ],
+        "summary": "Retrieval systems are trained and evaluated on a static idea of usefulness: hand a document and a question to a reader model, see whether the answer improves, and score the document accordingly. The idea holds up when a document is read on its own. It breaks when a language model works as a search agent, issuing several queries and reasoning across turns, because a document can matter for what it lets the agent do next rather than for what it says about the current question. We measure that gap rather than argue it. Using a ReAct style agent over HotpotQA, we replay 1000 development questions and, for every document the agent read, delete it and re-run the rest of the trajectory from that point. Comparing the original run against its counterfactual gives a Counterfactual Trajectory Utility (CTU) score from three deltas: final answer quality, next query retrieval quality, and turn count. Crossing CTU against Static RAG Utility (SRU) over 23,322 document observations, the two are close to statistically independent (Spearman rho = -0.026). Roughly a third of the documents the agent reads are causally load bearing while looking useless to a static reader; we call these bridge documents. The pattern survives when the reader based axis is swapped for a BM25 and cross encoder proxy, giving a bridge cell of 27.2% on an evenly spread axis. A second experiment pins down the mechanism. Using the Observable Entity Relevance (OER) measure from prior work, entities that discriminate relevant from non-relevant candidates appear in the agent's next query 4.02 times more often than entities found only in non-relevant documents (6.1% vs 1.5%, n = 227,139). A bridge document earns its keep by handing the agent a discriminative entity that redirects the search. Static relevance and causal usefulness are different quantities in agentic retrieval, and optimizing the first does not deliver the second.",
+        "url": "https://arxiv.org/abs/2607.15253v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.15253v1",
+        "publishedDate": "2026-07-16T17:48:29.000Z",
+        "tags": [
+          "cs.IR",
+          "cs.CL"
+        ]
+      },
+      {
+        "id": "2607.15241",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Beyond the Leaderboard: Design Lessons for Trustworthy Multimodal VQA",
+        "authors": [
+          "Sushant Gautam",
+          "Vajira Thambawita",
+          "Michael A. Riegler",
+          "Pål Halvorsen",
+          "Steven A. Hicks"
+        ],
+        "summary": "Healthcare multimodal AI must combine visual and textual evidence while remaining reliable and interpretable. Using MediaEval Medico 2025 as a retrospective GI endoscopy case study, we analyze design choices across nine documented systems for question answering and explanation quality. Parameter-efficient adaptation of pretrained backbones provides strong challenge performance, but answer-level gains do not consistently translate into faithful and complete clinical reasoning. Methods enforcing structured reasoning and explicit grounding show more reliable behavior across heterogeneous question types, although the evidence is correlational rather than ablation-based. These results motivate evaluation beyond lexical overlap, standardized evidence-linked explanations, leakage-aware data governance, and lightweight robustness and calibration checks. The findings support trustworthy multimodal healthcare AI based on data fusion, explainability, and resilient evaluation.",
+        "url": "https://arxiv.org/abs/2607.15241v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.15241v1",
+        "publishedDate": "2026-07-16T17:38:19.000Z",
+        "tags": [
+          "cs.CL",
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2607.15240",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "TikStance: A Multimodal and Hierarchical Dataset for Multi-target Stance Analysis in TikTok Political Conversations",
+        "authors": [
+          "Yazhi Zhang",
+          "Fuqiang Niu",
+          "Bowen Zhang"
+        ],
+        "summary": "Political discourse has increasingly moved to short-video platforms, yet computational analysis of such content remains constrained by the scarcity of datasets that jointly preserve audiovisual information and hierarchical conversations. Here we present TikStance, a multimodal and context-aware dataset comprising 161 videos and 13,876 comments from TikTok, designed for stance detection in political discussions. The dataset covers three major political figures in the 2024 U.S. election cycle--Donald Trump, Joe Biden, and Kamala Harris--with content collected between September 2023 and January 2025. Each discussion unit links a host video and its metadata to a parent-linked comment tree, enabling stance analysis within both audiovisual and conversational context. Each item was independently labeled by three annotators using a three-class scheme (Favor, Against, None) for video-to-target and comment-to-target stance; items with disagreement were re-annotated, and the final Krippendorff's \\(α\\) reached 0.743, 0.723, and 0.722 for the Trump, Biden, and Harris subsets, respectively. Descriptive analysis further reveals target-dependent differences in stance distributions and conversational depth, with nested replies accounting for 23.3\\% of all comments. By combining multi-target coverage, hierarchical conversations, and reliable multi-level human annotations, TikStance supports research in multimodal stance detection, political communication, computational social science, and context-aware natural language processing.",
+        "url": "https://arxiv.org/abs/2607.15240v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.15240v1",
+        "publishedDate": "2026-07-16T17:37:19.000Z",
+        "tags": [
+          "cs.CL"
+        ]
+      }
+    ],
+    "Machine Learning": [
+      {
+        "id": "2607.15275",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "RoboTTT: Context Scaling for Robot Policies",
+        "authors": [
+          "Yunfan Jiang",
+          "Yevgen Chebotar",
+          "Ruijie Zheng",
+          "Fengyuan Hu",
+          "Yunhao Ge",
+          "Jimmy Wu",
+          "Tianyuan Dai",
+          "Scott Reed",
+          "Li Fei-Fei",
+          "Yuke Zhu",
+          "Linxi \"Jim\" Fan"
+        ],
+        "summary": "Recent robot foundation models operate with single-step or short-history visuomotor context. We introduce Test-Time-Training Robot Policies (RoboTTT), a robot model and training recipe that scale visuomotor context to 8K timesteps, three orders of magnitude beyond state-of-the-art policies, without growing inference latency. At this context length, we unlock new robot capabilities: one-shot in-context imitation from human video demonstrations, on-the-fly policy improvement, robustness to perturbations, and stronger performance on multi-stage, long-horizon tasks. We also observe, for the first time, steady gains in closed-loop performance as pretraining context length scales. At its core, RoboTTT integrates Test-Time Training into robot foundation models such as Vision-Language-Action policies, yielding a sequence model whose recurrent state consists of fast weights, parameters updated by gradient descent during both training and inference, compressing histories into weight space and retrieving contextual information for long-context conditioning. To scale training context length, the recipe combines sequence action forcing with truncated backpropagation through time. On challenging real-robot manipulation tasks, RoboTTT improves overall performance by 87% over the single-step context baseline and fully completes a five-minute, ten-stage assembly task, which no baseline ever does. RoboTTT trained with 8K-timestep context outperforms the same model pretrained with 1K timesteps by 62%, suggesting context length as a new scaling axis for robot foundation models. Videos are available at https://research.nvidia.com/labs/gear/robottt/",
+        "url": "https://arxiv.org/abs/2607.15275v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.15275v1",
+        "publishedDate": "2026-07-16T17:59:06.000Z",
+        "tags": [
+          "cs.RO",
+          "cs.AI",
+          "cs.LG"
+        ]
+      },
+      {
+        "id": "2607.15258",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Decoding Market Emotion from Blockchain Activity: A Data-Driven Sentiment Classifier",
+        "authors": [
+          "Arthur G. Bubolz",
+          "Abreu Quevedo",
+          "Giancarlo Lucca",
+          "Rafael A. Berri",
+          "Eduardo Borges",
+          "Bruno L. Dalmazo"
+        ],
+        "summary": "The growing use of Bitcoin as a decentralized digital asset and investment tool has sparked strong interest in understanding its market behavior. This study presents a new approach to analyze Bitcoin market sentiment by combining on-chain and financial data with social media posts. Unlike models that aim to predict prices, this work focuses on explaining market sentiment using blockchain transactions, historical price data of Bitcoin, and daily Twitter sentiment classifications. The method merges sentiment trends with on-chain and financial metrics, normalized into a dataset for detailed market analysis. Multiple machine learning models were tested using cross-validation, with Gradient Boosting (XGBoost) emerging as the most reliable model for classifying sentiment, achieving an average F1-score of about 0.84. SHAP (SHapley Additive exPlanations), a game theory-based method for model interpretability, was used to quantify the contribution of on-chain features to the model's predictions, improving transparency. The results indicate that this data combination yields meaningful predictive signals and insights, supporting data-driven cryptocurrency analysis and future improvements with deep learning.",
+        "url": "https://arxiv.org/abs/2607.15258v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.15258v1",
+        "publishedDate": "2026-07-16T17:52:26.000Z",
+        "tags": [
+          "cs.LG",
+          "cs.CE"
+        ]
+      },
+      {
+        "id": "2607.15242",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Mutable Low-Rank Sketches for Retrain-Free Recommendation",
+        "authors": [
+          "Hector J. Garcia",
+          "Nick Clayton"
+        ],
+        "summary": "A common bottleneck in two-stage recommendation is embedding staleness: when a user rates a new item, their embedding remains fixed until the next retrain cycle. We propose mutable sketches, which store each user's preferences in a KP-tree (a sparse segment tree with sum aggregation), fit a low-rank projection once, and recompute embeddings on-the-fly as ratings arrive. We prove that each new observation monotonically tightens the prediction error envelope (Theorem 1), a guarantee that FunkSVD and eALS lack. On KuaiRec, the mutable sketch achieves 0.810 RMSE at 1.8% data read vs. ALS 0.822 at 100%, with 8x faster per-batch updates. A new user receives personalized recommendations in <1 ms after their first rating, with no model retraining required. A comparison of sampling strategies across density regimes shows that the KP-tree's norm-proportional sampling provides 40-130% better item coverage on sparse data (<1% density), while uniform sampling suffices on dense matrices.",
+        "url": "https://arxiv.org/abs/2607.15242v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.15242v1",
+        "publishedDate": "2026-07-16T17:39:38.000Z",
+        "tags": [
+          "cs.LG"
+        ]
+      }
+    ],
+    "AI & Agents": [
+      {
+        "id": "2607.15263",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Beyond Success Rate: Cost-Aware Evaluation of Offensive and Defensive Security Agents",
+        "authors": [
+          "Paul Kassianik",
+          "Blaine Nelson",
+          "Yaron Singer"
+        ],
+        "summary": "Security-agent evaluations commonly measure peak offensive capability under generous inference budgets, emphasizing vulnerability discovery, exploit development, penetration testing, and CTF completion. Such measurements are useful but incomplete: in operational security, every reasoning step, tool call, telemetry query, and enrichment request consumes budget. We evaluate language-model security agents through this cost-success lens on offensive Cybench challenges and defensive Splunk BOTS v1 investigation challenges. Instead of reporting only best-case success, we compare models at fixed cost levels and decompose performance by inference spend and tool spend. Our results show distinct scalingregimes for red- and blue-team tasks. Offensive CTF performance improves with additional test-time compute, and scaled open-weight models can approach frontier proprietary systems while remaining cost-competitive. Defensive SOC investigation does not scale in the same way: success depends more heavily on disciplined tool use, telemetry navigation, and selective enrichment than on raw reasoning budget alone. We argue that security-agent benchmarks should measure economic efficiency and operational fit alongside task success. Cost-aware, SOC-native evaluations provide a clearer picture of which models are practically useful today and where defensive agents still need to improve. We present an interactive website with our results https://evals.frontier.security.",
+        "url": "https://arxiv.org/abs/2607.15263v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.15263v1",
+        "publishedDate": "2026-07-16T17:54:47.000Z",
+        "tags": [
+          "cs.CR",
+          "cs.AI"
+        ]
+      },
+      {
+        "id": "2607.15257",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "SearchOS-V1: Towards Robust Open-Domain Information-Seeking Agent Collaboration",
+        "authors": [
+          "Yuyao Zhang",
+          "Junjie Gao",
+          "Zhengxian Wu",
+          "Jiaming Fan",
+          "Jin Zhang",
+          "Shihan Ma",
+          "Yao Yao",
+          "Weiran Qi",
+          "Chuyan Jin",
+          "Guiyu Ma",
+          "Xingzhong Xu",
+          "Kai Yang",
+          "Ji-Rong Wen",
+          "Zhicheng Dou"
+        ],
+        "summary": "Recent advances in Tool-Integrated Large Language Models have made web search a core capability of information-seeking agents. However, as interaction histories grow, agents increasingly struggle to track task progress. When search attempts fail to yield useful evidence, current single- and multi-agent systems can become trapped in repetitive loops, wasting search budgets and ultimately compromising the quality and completeness of the final output. We introduce SearchOS, a system-level multi-agent framework that turns fragile, implicit search progress into explicit, persistent, and shared state. First, we formulate open-domain information seeking as relational schema completion with grounded citations, where agents discover entities, populate attributes across linked tables, and anchor each value to source evidence. Then we design Search-Oriented Context Management (SOCM), which externalizes the evolving state into Frontier Task, an Evidence Graph, a Coverage Map, and Failure Memory. Built on SOCM, SearchOS applies a pipeline-parallel scheduling mechanism that overlaps the execution of sub-agents and continuously refills freed slots with tasks targeting unresolved coverage gaps to improve utilization and throughput. To schedule and control the execution of search agents, SearchOS introduces a Search Tool Middleware Harness that intercepts model and tool interactions to record grounded evidence and react to stalls or budget exhaustion, and provides a reusable hierarchical skill system comprising strategy and access skills to augment the agents' search process and avoid repeating failed search patterns across runs. On WideSearch and GISA, SearchOS leads all metrics among the evaluated single- and multi-agent baselines, paving the way toward robust information-seeking collaboration.",
+        "url": "https://arxiv.org/abs/2607.15257v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.15257v1",
+        "publishedDate": "2026-07-16T17:51:23.000Z",
+        "tags": [
+          "cs.AI",
+          "cs.IR"
+        ]
+      },
+      {
+        "id": "2607.15254",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "teLLMe Why (Ain't Nothing but a Jam): Exploratory Causal Analysis of Urban Driving Data",
+        "authors": [
+          "Qiwei Li",
+          "Jorge Ortiz"
+        ],
+        "summary": "Traffic agencies now have access to large volumes of video-derived data for studying safety and congestion. Most of these data are observational and collected without interventions, which makes causal questions such as \"How would rain change traffic density?\" difficult to answer. We present teLLMe, a system for exploratory causal analysis of urban driving datasets. The system starts from a structured event table built from dashcam annotations and combines causal structure learning with the PC algorithm, bootstrap-based stability checks, and query-specific effect estimation using linear regression and DoWhy. Natural-language questions are mapped to structured causal queries through a schema-aware LLM, enabling users to specify treatments, outcomes, and subpopulations. teLLMe returns a \"Causal Card\" that summarizes effect estimates, adjustment sets, DAG support, and assumptions, followed by a short natural-language explanation. Case studies on BDD-derived traffic events show that the system can surface plausible relationships involving weather, peak hours, and traffic density, while making uncertainty and modeling choices explicit. The system is designed as a tool for hypothesis generation and expert reasoning rather than a source of definitive causal claims.",
+        "url": "https://arxiv.org/abs/2607.15254v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.15254v1",
+        "publishedDate": "2026-07-16T17:49:28.000Z",
+        "tags": [
+          "cs.AI",
+          "cs.HC"
+        ]
+      },
+      {
+        "id": "2607.15247",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "AutoSynthesis: An agentic system for automated meta-analysis",
+        "authors": [
+          "Moein Taherinezhad",
+          "Sebastian Maier",
+          "Gerardo Vitagliano",
+          "Francesco Pierri",
+          "Stefan Feuerriegel"
+        ],
+        "summary": "Evidence synthesis is crucial for turning primary research into reliable knowledge for science, medicine, education, and policy. Yet, quantitative evidence synthesis remains largely manual and difficult to scale. Here, we introduce AutoSynthesis, an end-to-end multi-agent system for automated meta-analysis. Given a research question in natural language, AutoSynthesis formulates a search strategy, retrieves scientific literature, screens candidate studies, assesses full-text eligibility, extracts quantitative statistics, computes standardized effect sizes, and finally performs random-effects meta-analysis. AutoSynthesis further supports heterogeneity analysis to examine how effect sizes vary across moderators, as well as risk-of-bias assessment. As output, AutoSynthesis produces a transparent report aligned with PRISMA guidelines. In our application, AutoSynthesis screened over 28 studies and extracted more than 20 quantitative claims. The pooled effect estimates produced by AutoSynthesis are similar to Hedges' $g$ of expert-conducted meta-analyses, indicating close agreement with manual evidence synthesis. Together, these results show that AutoSynthesis can make quantitative evidence synthesis more scalable, thereby supporting evidence-based decision-making across disciplines.",
+        "url": "https://arxiv.org/abs/2607.15247v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.15247v1",
+        "publishedDate": "2026-07-16T17:45:27.000Z",
+        "tags": [
+          "cs.AI"
+        ]
+      }
+    ]
+  },
+  "labPosts": [
+    {
+      "id": "openai-2015284439",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "A scorecard for the AI age",
+      "authors": [],
+      "summary": "Sarah Friar, CFO of OpenAI, introduces a practical AI scorecard to measure ROI through useful work, cost per successful task, dependability, and return on compute.",
+      "url": "https://openai.com/index/a-scorecard-for-the-ai-age",
+      "publishedDate": "2026-07-17T10:00:00.000Z",
+      "tags": [
+        "Company"
+      ]
+    },
+    {
+      "id": "openai-162753871",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Why teens deserve access to safe AI",
+      "authors": [],
+      "summary": "Learn how OpenAI is making ChatGPT safer for teens with age-appropriate protections, learning tools, parental controls, and expert partnerships.",
+      "url": "https://openai.com/index/why-teens-deserve-access-safe-ai",
+      "publishedDate": "2026-07-16T16:00:00.000Z",
+      "tags": [
+        "Safety"
+      ]
+    },
+    {
+      "id": "deepmind-1538584580",
+      "type": "blog_post",
+      "source": "deepmind",
+      "title": "Our approach to bioresilience",
+      "authors": [],
+      "summary": "Google DeepMind and Isomorphic Labs are sharing our joint approach to bioresilience and AI models.",
+      "url": "https://deepmind.google/blog/our-approach-to-bioresilience/",
+      "publishedDate": "2026-07-16T09:30:42.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-1899889177",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "How Cars24 scales conversations and builds faster with OpenAI",
+      "authors": [],
+      "summary": "Cars24 uses OpenAI-powered voice and chat agents to handle 1M+ monthly conversation minutes, recover 12% of lost leads, and bring agentic workflows to teams across the company.",
+      "url": "https://openai.com/index/cars24",
+      "publishedDate": "2026-07-16T00:00:00.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-1999278620",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "The US is advancing AI safety through state and federal action",
+      "authors": [],
+      "summary": "OpenAI outlines a “reverse federalism” approach to AI governance, where state laws help build a national framework for safe, democratic AI.",
+      "url": "https://openai.com/index/advancing-ai-safety-through-state-and-federal-action",
+      "publishedDate": "2026-07-15T12:00:00.000Z",
+      "tags": [
+        "Global Affairs"
+      ]
+    },
+    {
+      "id": "openai-392423490",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "GPT-Red: Unlocking Self-Improvement for Robustness",
+      "authors": [],
+      "summary": "Explore GPT-Red, OpenAI’s automated red teaming system that uses self-play to improve AI safety, alignment, and prompt injection robustness.",
+      "url": "https://openai.com/index/unlocking-self-improvement-gpt-red",
+      "publishedDate": "2026-07-15T10:00:00.000Z",
+      "tags": [
+        "Safety"
+      ]
+    },
+    {
+      "id": "openai-946243",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "How to manage AI investments in the agentic era",
+      "authors": [],
+      "summary": "Learn how enterprises can manage AI investments in the agentic era by measuring useful work per dollar, improving efficiency, and scaling high-value workflows.",
+      "url": "https://openai.com/index/managing-ai-investments-in-agentic-era",
+      "publishedDate": "2026-07-14T10:00:00.000Z",
+      "tags": [
+        "AI Adoption"
+      ]
+    },
+    {
+      "id": "openai-1093483434",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "How sales teams use ChatGPT Work",
+      "authors": [],
+      "summary": "See how sales teams can use ChatGPT Work to create pipeline briefs, meeting prep packets, forecast reviews, account plans, and stalled-deal diagnoses from real work inputs.",
+      "url": "https://openai.com/academy/codex-for-work/how-sales-teams-use-codex",
+      "publishedDate": "2026-07-14T00:00:00.000Z",
+      "tags": [
+        "OpenAI Academy"
+      ]
+    },
+    {
+      "id": "openai-638643111",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "How data science teams use ChatGPT Work",
+      "authors": [],
+      "summary": "See how data science teams can use ChatGPT Work to build root-cause briefs, impact readouts, KPI memos, scoped analyses, and dashboard specs from real work inputs.",
+      "url": "https://openai.com/academy/codex-for-work/how-data-science-teams-use-codex",
+      "publishedDate": "2026-07-14T00:00:00.000Z",
+      "tags": [
+        "OpenAI Academy"
+      ]
+    },
+    {
+      "id": "deepmind-1542506856",
+      "type": "blog_post",
+      "source": "deepmind",
+      "title": "Empowering India’s next generation of innovators with ATL Saathi",
+      "authors": [],
+      "summary": "Google and AIM launched ATL Saathi, a Gemini-powered AI tool empowering Indian educators in robotics labs.",
+      "url": "https://deepmind.google/blog/empowering-indias-next-generation-of-innovators-with-atl-saathi/",
+      "publishedDate": "2026-07-13T12:37:28.000Z",
+      "tags": []
+    }
+  ],
+  "stats": {
+    "totalPapersScanned": 200,
+    "totalPostsScanned": 10
+  }
+}
