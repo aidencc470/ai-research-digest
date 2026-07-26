@@ -1,0 +1,597 @@
+{
+  "slug": "2026-07-26",
+  "title": "Weekly AI Digest — July 26, 2026",
+  "dateRange": {
+    "start": "2026-07-19T14:23:45.157Z",
+    "end": "2026-07-26T14:23:45.157Z"
+  },
+  "papersByCategory": {
+    "Computer Vision": [
+      {
+        "id": "2607.21595",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "3D-Aware VLMs with Implicit and Explicit Geometries",
+        "authors": [
+          "Wenhao Li",
+          "Xueying Jiang",
+          "Quanhao Qian",
+          "Deli Zhao",
+          "Ran Xu",
+          "Shijian Lu",
+          "Gongjie Zhang"
+        ],
+        "summary": "Despite rapid progress, most existing vision-language models (VLMs) built from 2D visual inputs often struggle when handling various 3D tasks that require fine-grained spatial understanding and reasoning. To bridge this gap, we present VLM-IE3D, a unified framework that enhances the 3D spatial awareness of VLMs by equipping them with both implicit and explicit 3D geometries learned from RGB videos. Our VLM-IE3D introduces Implicit Geometry Tokens (IGTs) that capture high-level geometric priors from input videos, as well as complementary Explicit Geometry Tokens (EGTs) that encode detailed geometric structures from reconstructed 3D attributes. On top of that, VLM-IE3D comes with a 3D-aware adapter that effectively fuses the two types of geometric representations with 2D visual cues. This RGB-only design injects strong 3D inductive biases for fine-grained spatial understanding and reasoning without requiring any additional 3D inputs. Extensive experiments show that VLM-IE3D achieves superior performance consistently across various 3D tasks including 3D video detection, 3D visual grounding, 3D dense captioning, and spatial reasoning. Code and models are available at https://github.com/Vegetebird/VLM-IE3D.",
+        "url": "https://arxiv.org/abs/2607.21595v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.21595v1",
+        "publishedDate": "2026-07-23T17:59:59.000Z",
+        "tags": [
+          "cs.CV",
+          "cs.AI",
+          "cs.LG"
+        ]
+      },
+      {
+        "id": "2607.21594",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Streaming Multi-Agent Autoregressive Diffusion Model with World State Registers",
+        "authors": [
+          "Sicheng Mo",
+          "Yuheng Li",
+          "Ziyang Leng",
+          "Krishna Kumar Singh",
+          "Bolei Zhou"
+        ],
+        "summary": "Multi-agent interactive world models should not only generate consistent observations, but also maintain world states that persist across agents and evolve across views. Existing autoregressive video diffusion pipelines carry forward observation history as conditioning context, which makes shared state difficult to maintain in multi-agent and multi-view settings. We present WorldWeaver (W^2), a streaming multi-agent video diffusion model that augments rollout with cross-agent world state registers: learnable tokens that store shared world information, track individual agent status, and are dynamically updated after each generated chunk. We ground these registers with supervision signals spanning individual agent status, global state views including bird's-eye views, and scene text. We further improve the architecture with a Mixture-of-Transformers design that uses separate weights for world state modeling and visual frame modeling. Extensive experiments in two-agent Minecraft video generation show that explicit world-state modeling improves logical consistency and generation quality.",
+        "url": "https://arxiv.org/abs/2607.21594v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.21594v1",
+        "publishedDate": "2026-07-23T17:59:58.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2607.21592",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Unified Video Dense Prediction from Disjoint Data",
+        "authors": [
+          "Yihong Sun",
+          "Seoung Wug Oh",
+          "Jiahui Huang",
+          "Bharath Hariharan",
+          "Joon-Young Lee"
+        ],
+        "summary": "Scene understanding requires simultaneous prediction about geometry, appearance, and semantics. However, existing task-specific annotations are fragmented across incompatible, domain-specific datasets. Current unified systems circumvent this by restricting training to fully co-annotated data, or by incurring the large computational cost of pseudo-labeling. To mitigate this, we introduce UniD, a unified video model that jointly predicts eight dense scene properties-depth, surface normals, semantic segmentation, boundaries, human parts, albedo, shading, and materials-all learned from disjoint, domain-specific datasets. We propose a simple yet effective distillation step in which per-task experts supervise a unified backbone through lightweight task projectors, eliminating the need for annotation overlap or pseudo-labeling. Our key insight is that the strong visual priors of a pretrained diffusion model are sufficient to bridge the domain gaps introduced by disjoint training sources, enabling robust generalization to scene-task combinations never seen during training. UniD achieves competitive performance against per-task specialists and multi-task baselines, with strong generalization to out-of-distribution scenarios and enhanced temporal and cross-task consistency. Code and video results are available at https://unid-video.github.io/.",
+        "url": "https://arxiv.org/abs/2607.21592v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.21592v1",
+        "publishedDate": "2026-07-23T17:59:50.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2607.21591",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Inference-Time Scaling of Diffusion Models via Progressive Seed Pruning",
+        "authors": [
+          "Rogerio Guimaraes",
+          "Pietro Perona"
+        ],
+        "summary": "Diffusion and flow-matching models dominate conditional image generation, yet inference-time scaling for these models is far less developed than for autoregressive language models. Because final quality is highly sensitive to the initial noise seed, many approaches spend extra compute on seed search or resampling under a black-box reward, but typically maintaining a constant memory footprint throughout inference. We show that relaxing this constraint enables an underexplored inference-time scaling axis: by front-loading exploration, evaluating many seeds early, and pruning aggressively, we can use a fixed compute budget more effectively. \\emph{Progressive Seed Pruning} (\\PSP) scores intermediate denoised estimates and progressively narrows the candidate set so that only promising trajectories are fully denoised, while keeping the total number of model evaluations fixed. Across diffusion and flow-matching backbones, \\PSP \\ consistently improves reward-guided selection and achieves higher GenEval scores (automated) and better human evaluation on prompt-alignment than best-of-$N$, importance-sampling, and tree-search baselines at matched compute. Project page: https://www.vision.caltech.edu/psp. Code: https://github.com/rogerioagjr/psp.",
+        "url": "https://arxiv.org/abs/2607.21591v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.21591v1",
+        "publishedDate": "2026-07-23T17:59:46.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2607.21582",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Scale Up Strategically: Learning Compositional Generalization via Bias-Aware Evaluation and Data Collection for Robotic Manipulation",
+        "authors": [
+          "Yu Qi",
+          "Zhang Ye",
+          "Xinyi Xu",
+          "Yuxuan Lu",
+          "Amitoj Sandhu",
+          "Boce Hu",
+          "Haojie Huang",
+          "Jonathan Tremblay",
+          "Lawson L. S. Wong"
+        ],
+        "summary": "Compositional generalization is essential for robot to follow diverse instructions. However, pretrained policies are known to take shortcuts, deferring to salient cues rather than grounding language. We introduce a diagnostic framework that localizes this failure to individual \\textit{instruction factors}, \\textit{e.g.,} reusable semantic components such as color, verb, object, size, and spatial attribute. Our framework formalizes instruction factor bias, the tendency of fine-tuned policies to over-rely on dominant factors as shortcuts, and quantifies it through two metrics: Factor Dominance Rate (FDR), capturing pairwise bias between factors, and Factor Dominance Hierarchy (FDH), aggregating these into a global ranking. Evaluation on six foundation policies reveals broadly consistent ordering, \\textit{i.e.}, color $\\geq$ object $\\geq$ spatial $\\geq$ verb $\\geq$ size, with color dominant, and verb and size most under-grounded. We further show the diagnosis is actionable: a bias-aware data collection strategy that reallocates a fixed budget toward under-grounded factors outperforms baselines in simulation and on a real robot using half the demonstrations, thereby enabling more sample-efficient and generalizable policy learning.",
+        "url": "https://arxiv.org/abs/2607.21582v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.21582v1",
+        "publishedDate": "2026-07-23T17:57:09.000Z",
+        "tags": [
+          "cs.RO",
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2607.21580",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "GraphVid: Interactive Graph-Controllable Video Generation",
+        "authors": [
+          "Vedant Shah",
+          "Onkar Susladkar",
+          "Tushar Prakash",
+          "Kiet Nguyen",
+          "Tianjio Yu",
+          "Adheesh Juvekar",
+          "Muntasir Waheed",
+          "Ismini Lourentzou"
+        ],
+        "summary": "Controllable video generation remains challenging due to the difficulty of specifying precise multi-object interactions using text prompts or motion-control inputs that primarily constrain pixel movement. In practice, trajectory-based control often requires users to draw accurate tracks for multiple objects, which scales poorly with scene complexity and becomes ambiguous under occlusion or overlap. To enable flexible yet precise multi-subject control, we introduce $\\textbf{GraphVid}$, a graph-conditioned image-to-video generation model that enables interactive control through structured interaction graphs. We further curate $\\textbf{GraphVid-Bench}$, a large-scale interaction-centric video dataset with structured relational annotations to enable training of interaction-aware video generation models. Despite using substantially less training data and fewer trainable parameters than prior motion-control methods, GraphVid delivers strong controllability and video quality. Compared with Motion-I2V, GraphVid reduces FID by up to 39.9% and FVD by 37.6%, while improving PSNR (9.87=>15.98) and SSIM (0.38=>0.61). Our results highlight the potential of structured semantic interfaces as a powerful paradigm for controllable video generation.",
+        "url": "https://arxiv.org/abs/2607.21580v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.21580v1",
+        "publishedDate": "2026-07-23T17:56:30.000Z",
+        "tags": [
+          "cs.CV",
+          "cs.AI"
+        ]
+      },
+      {
+        "id": "2607.21577",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Synthetic data generation framework for quality control automation in gravure printing",
+        "authors": [
+          "Korota Arsène Coulibaly",
+          "Mohamed Hamlich",
+          "Khalid Hmali",
+          "Andrea Trombin"
+        ],
+        "summary": "Quality control in printing, particularly in rotogravure printing, still depends on slow, costly, and subjective manual inspection. Automated surface defect detection is critical for maintaining high-quality standards in rotogravure printing. Deep learning models give prospects for automation. However, training robust deep learning models, such as YOLO or Vision Transformers, is heavily hindered by the extreme scarcity of real-world industrial defects images. To overcome this limitation, this paper introduces a novel synthetic data generation framework tailored for rotogravure printing quality control. The proposed pipeline automatically generates high-fidelity images of specific printing defects (creases, streaks, misregistration, etc.) and outputs corresponding bounding boxes and annotations. To validate the framework, a synthetic dataset of 7533 images was generated and used to train the state-of-the-art object-detection model RFDETR. Experimental results demonstrate that the model trained on our synthetic data achieves a Mean Average Precision (mAP) of 80.9\\% on real industrial testing samples. This framework provides a zero-cost, rapid-deployment solution for automating defect inspection in printing lines without requiring massive manual data collection.",
+        "url": "https://arxiv.org/abs/2607.21577v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.21577v1",
+        "publishedDate": "2026-07-23T17:55:21.000Z",
+        "tags": [
+          "cs.CV",
+          "cs.AI",
+          "cs.LG",
+          "eess.IV"
+        ]
+      },
+      {
+        "id": "2607.21576",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Self-Supervised Learning of Structured Dynamics from Videos",
+        "authors": [
+          "Lukas Knobel",
+          "Andrew Zisserman",
+          "Yuki M. Asano"
+        ],
+        "summary": "Understanding motion in video is a fundamental challenge for visual learning, as frame-to-frame change entangles two sources of dynamics: camera motion and object motion. This decomposition has remained underexplored in representation learning, partly because these factors are tightly coupled in natural videos and difficult to supervise separately. Yet recovering it is important for learning robust motion representations that separate meaningful object dynamics from camera-induced variation. We study whether such structured motion representations can be recovered from frozen features of a pretrained image vision transformer. We propose the Structured Dynamics Model (SDM), which explicitly separates the dominant source of temporal change from residual dynamics through future-feature prediction, rather than representing video change with a single entangled latent or with unstructured, spatially dense transition tokens. Training combines self-supervised learning on real video with weak supervision of scene dynamics on synthetic Kubric data. We evaluate SDM on ProbeMotion, a new evaluation suite spanning synthetic and real videos with camera motion, object motion, and combined dynamics. SDM outperforms backbone baselines using global CLS or average-pooled features, and compares favorably to strongly supervised representations such as VGGT on several probes, despite using substantially weaker supervision. These results suggest that pretrained image models can be readily repurposed into structured video-dynamics representations, providing a useful inductive bias for learning and analyzing latent video dynamics.",
+        "url": "https://arxiv.org/abs/2607.21576v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.21576v1",
+        "publishedDate": "2026-07-23T17:55:07.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2607.21562",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Scene Parameter Saliency via Differentiable Light Transport",
+        "authors": [
+          "Linas Beresna",
+          "Eugene Fiume"
+        ],
+        "summary": "Gradient-based saliency methods reveal which input features most influence a neural network's output, and are a standard tool for model interpretability. We observe that differentiable renderers, which are conventionally used for parameter optimisation, produce an analogous form of saliency: given any scalar metric evaluated on a rendered image, a single reverse-mode differentiation pass yields per-parameter gradients that identify which scene elements most influence the metric. We call these gradient fields metric saliency maps. Unlike neural saliency, which propagates attribution through learned weights, metric saliency propagates through the image formation process itself, including multi-bounce light transport, capturing parameter dependencies that are semi-opaque to manual inspection. We compute metric saliency maps for qualitatively different objectives: psychovisual glare indices, mean scene luminance, and neural perceptual scores. The saliency rankings differ substantially across metrics for the same scene, with parameters that dominate one objective being negligible for another. The saliency map is specific to the metric, not an intrinsic property of the scene. Our results suggest that differentiable renderers produce derivative images that are as informative for scene understanding as the primal images they were designed to generate.",
+        "url": "https://arxiv.org/abs/2607.21562v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.21562v1",
+        "publishedDate": "2026-07-23T17:46:26.000Z",
+        "tags": [
+          "cs.CV",
+          "cs.GR"
+        ]
+      },
+      {
+        "id": "2607.21556",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Visual Contrastive Self-Distillation",
+        "authors": [
+          "Yijun Liang",
+          "Yunjie Tian",
+          "Yijiang Li",
+          "Yuqi Jia",
+          "Furong Huang",
+          "Tianyi Zhou",
+          "Di Fu"
+        ],
+        "summary": "On-policy self-distillation (OPSD) is promising as it removes the external teacher required by on-policy distillation (OPD), yet it still needs asymmetric information between teacher and student to ensure that the self-teacher provides a stronger learning signal than the student. Existing methods create this asymmetry either through privileged answers or visual evidence. We ask whether both can be removed, yielding a simpler form of OPSD driven purely by input conditioning. For this purpose, we propose Visual Contrastive Self-Distillation, namely VCSD, which converts image-content removal into an on-policy self-distillation signal. At each student-generated response prefix, the EMA teacher produces two next-token distributions under the same prompt and prefix -- one conditioned on the original image and the other on a content-erased control. Their token-wise log-probability difference highlights candidates whose likelihood is specifically increased by the instance-level visual content. We use this contrast to sharpen the teacher's original-image distribution within its plausible support, and distill the resulting full-distribution target into the student. Using ViRL39K dataset, VCSD consistently outperforms matched OPSD across Qwen3-VL and Qwen3.5 models. For example, on Qwen3-VL, it improves the seven-benchmark aggregate from $62.27\\% \\rightarrow 67.04\\%$ at 2B, $71.30\\% \\rightarrow 73.16\\%$ at 4B, and $72.51\\% \\rightarrow 76.26\\%$ at 8B. Furthermore, VCSD requires no external teacher, privileged answers, visual evidence signals, reasoning traces, or additional inference-time cost.",
+        "url": "https://arxiv.org/abs/2607.21556v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.21556v1",
+        "publishedDate": "2026-07-23T17:37:37.000Z",
+        "tags": [
+          "cs.CV",
+          "cs.AI"
+        ]
+      },
+      {
+        "id": "2607.21553",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "SANA-Video 2.0: Hybrid Linear Attention with Attention Residuals for Efficient Video Generation",
+        "authors": [
+          "Junsong Chen",
+          "Jincheng Yu",
+          "Yitong Li",
+          "Shuchen Xue",
+          "Haozhe Liu",
+          "Jingyu Xin",
+          "Yuyang Zhao",
+          "Tian Ye",
+          "Zhangjie Wu",
+          "Zian Wang",
+          "Daquan Zhou",
+          "Ping Luo",
+          "Song Han",
+          "Enze Xie"
+        ],
+        "summary": "We introduce SANA-Video 2.0, a hybrid video diffusion transformer instantiated at 5B and 14B scales under a unified architecture. Designed to generate high-quality video up to 720p on a single GPU, SANA-Video 2.0 matches full-softmax video DiTs in quality while retaining the favorable long-sequence scaling of linear attention. To avoid quadratic attention throughout, Hybrid Linear-Softmax Attention combines gated linear attention for O(N)-dominated mixing with periodic gated-softmax anchors at a 3:1 ratio, restoring the full-rank token interactions that pure linear attention lacks. To propagate these refreshed representations across depth, Block Attention Residuals (AttnRes) route completed block summaries into later linear layers, enabling anchor-feature reuse and boosting deep-layer effective rank by ~12%. Through from-scratch training, SANA-Video 2.0 learns the complete hybrid directly rather than linearizing pretrained models, with reduced-resolution proxy studies establishing 25% softmax as the optimal quality-efficiency trade-off. With 40-step sampling, SANA-Video 2.0 achieves a VBench score of 84.30 in 13.2s at 480p on a single H100, remaining competitive with far larger softmax video DiTs at a fraction of the latency. Its compiled DiT forward pass is 3.2x faster than a matched full-softmax baseline at 720p/60s, a gap that expands with video duration. Furthermore, full-stack Sol-Engine optimization (kernel fusion, caching, and sparse attention) accelerates this hardware-friendly backbone by a further 3.58x, bringing the 5B pipeline to 13.06s at 720p/5s and making it 120x faster than Wan 2.2-A14B on one H100. Overall, our hybrid design recovers softmax-level expressiveness at substantially reduced cost, unlocking scalable long, high resolution video generation.",
+        "url": "https://arxiv.org/abs/2607.21553v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.21553v1",
+        "publishedDate": "2026-07-23T17:36:05.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      }
+    ],
+    "Machine Learning": [
+      {
+        "id": "2607.21585",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Expanding Flow Maps",
+        "authors": [
+          "Sophia Tang",
+          "Pranam Chatterjee"
+        ],
+        "summary": "Flow-based generative models have enabled remarkable progress in fast and controllable generation across continuous and discrete state spaces, yet existing parameterizations are constrained to fixed dimensions or fixed sequence lengths. Here, we introduce Expanding Generative Flows (EFlows), which define flows between distributions of increasing dimensionality along an expanding interpolant that grows the state by augmenting it with conditional noise. Building on this construction, we propose Expanding Flow Maps (EFMs), a new class of flow maps that distill the expanding interpolant into efficient few-step generative models. Each EFM factors the map between any two timesteps into two learnable operations: an expand operator, which augments the state space with new coordinates or tokens conditioned on the current state, and a transport map, which pushes the expanded state forward along the interpolant. Composing these operators yields a single map that jointly expands and denoises the state, recovering existing fixed-canvas flows and flow maps as the special case in which the expand operator is the identity. We further extend the framework to the discrete simplex, enabling variable-size graph generation and variable-length sequence generation. Across both continuous and discrete modalities, we establish EFlows and EFMs as a principled framework for settings in which output size is itself a learned, controllable degree of freedom.",
+        "url": "https://arxiv.org/abs/2607.21585v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.21585v1",
+        "publishedDate": "2026-07-23T17:57:38.000Z",
+        "tags": [
+          "cs.LG"
+        ]
+      },
+      {
+        "id": "2607.21579",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Barzilai-Borwein Fails Superlinear Convergence on an Open Set of Quadratics for Every Dimension $n\\geq 4$",
+        "authors": [
+          "Dawei Li",
+          "Xiaotian Jiang",
+          "Mingyi Hong"
+        ],
+        "summary": "Barzilai--Borwein (BB) method has shown strong practical performance in continuous optimization, yet its convergence dynamics remains poorly understood. In particular, a central unresolved question is whether BB converges superlinearly for almost every strictly convex quadratic problem and initialization. We provide a negative answer to this question. Specifically, for every finite dimension $n\\geq4$, we construct a nonempty open, hence positive-Lebesgue-measure, family of strictly convex quadratic problems and initial points for which the long Barzilai--Borwein method (BB1) converges but cannot converge root-superlinearly. More precisely, with the explicit constants $ρ_{\\min}=10^{-6},ρ_{\\max}=0.61$, every spectral component of the gradient is bounded above and below by the corresponding geometric sequence. Consequently, the gradient norm and the energy norm of the error satisfy two-sided geometric estimates with the same rates, while the objective gap satisfies the corresponding estimates with squared rates. In particular, all three quantities are bounded below by geometric sequences, ruling out superlinear convergence. The construction is highly nontrivial, based on a computer-assisted proof of a nonresonant, attracting seven-cycle of the projectivized BB dynamics in dimension four.",
+        "url": "https://arxiv.org/abs/2607.21579v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.21579v1",
+        "publishedDate": "2026-07-23T17:56:05.000Z",
+        "tags": [
+          "math.OC",
+          "cs.AI",
+          "cs.LG"
+        ]
+      },
+      {
+        "id": "2607.21573",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Beyond Sufficiency: Time Series Explanation with Counterfactual Necessity",
+        "authors": [
+          "Hongnan Ma",
+          "Yiwei Shi",
+          "Mengyue Yang",
+          "Weiru Liu"
+        ],
+        "summary": "Faithful explanations of time-series classifiers should identify subsequences that are not only sufficient to preserve a black-box model's prediction, but also necessary for maintaining it. However, existing sufficiency-oriented methods can assign high importance to spurious subsequences that support the prediction without being essential to the model's decision. We introduce \\textbf{TimePNS}, a necessity-aware framework for time-series explanation. Inspired by Pearl's counterfactual notion of necessity, TimePNS assesses whether a temporal factor is necessary by intervening on it and measuring whether the original prediction is disrupted. The framework adopts a two-stage design. Stage I learns an identifiable causal generative process together with a sufficiency-oriented explanation mask. Stage II performs counterfactual interventions on temporal factors to derive necessity signals, which supervise a temporal gate that refines the initial explanation by suppressing non-essential components and emphasizing counterfactually necessary ones. Experiments on synthetic and real-world time-series benchmarks show that TimePNS more accurately identifies decision-critical subsequences and consistently improves sufficiency-necessity trade-offs over strong baselines.",
+        "url": "https://arxiv.org/abs/2607.21573v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.21573v1",
+        "publishedDate": "2026-07-23T17:52:01.000Z",
+        "tags": [
+          "cs.LG",
+          "cs.AI"
+        ]
+      },
+      {
+        "id": "2607.21561",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Graph Learning on Ensembles of Cyclic Peptides: An Investigation of Molecular Ensemble Modeling",
+        "authors": [
+          "Aaron Feller",
+          "Kris Deibler",
+          "Maxim Secor"
+        ],
+        "summary": "Molecular property prediction from structure often uses a single representative conformation, even though many molecules exist as conformational ensembles in solution. We introduce EnsembleEGNN, a molecular ensemble foundation model that encodes an ensemble by first encoding each conformer with shared Equivariant Graph Neural Network (EGNN) layers, then pooling the resulting conformer representations with a Set Attention Block. We pretrain the model on CREMP, a cyclic peptide ensemble dataset, using a multi-task self-supervised objective combining masked token recovery, noisy-coordinate reconstruction, and pairwise distance reconstruction. On the CREMP-CycPeptMPDB dataset, training EnsembleEGNN from scratch fails entirely ($R^2=0.005$). However, the pretrained model reaches $R^2=0.477$ and Pearson $r=0.699$, outperforming the sequence-only BERT baseline ($R^2=0.439$, Pearson $r=0.667$). When EnsembleEGNN is co-trained end-to-end with the BERT sequence encoder, the hybrid model improves further to $R^2=0.538$ and Pearson $r=0.737$. These results demonstrate that encoding conformational ensembles into a single thermodynamically informed embedding improves cyclic-peptide property prediction.",
+        "url": "https://arxiv.org/abs/2607.21561v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.21561v1",
+        "publishedDate": "2026-07-23T17:42:51.000Z",
+        "tags": [
+          "cs.LG",
+          "q-bio.BM"
+        ]
+      }
+    ],
+    "LLMs & Language": [
+      {
+        "id": "2607.21574",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Surprisal Theory is Tautological (without Rational Grounding)",
+        "authors": [
+          "Ryan Cotterell"
+        ],
+        "summary": "Surprisal theory holds that the human processing difficulty of a linguistic unit in context is an affine function of its surprisal under some language model. I argue this claim is a tautology without further constraint: for any non-negative difficulty measure over units in context, there exists a language model whose surprisal is an affine function of it under mild technical conditions. Therefore, because any pattern of difficulty is consistent with some language model, without an additional constraint on the language model, surprisal theory makes no falsifiable predictions. The tautology was long obscured by an assumption implicit in two decades of psycholinguistic work---that the relevant language model is the distribution that generated the training corpus, so that improving corpus fit improves predictions of human behavior. Recent empirical work has undermined this assumption, demonstrating that better corpus models can be worse predictors of processing difficulty. I conclude that breaking the tautology requires a rationalist intervention, i.e., the relevant language model must be derived from a non-empirically motivated model of the comprehender, which could be based on, for instance, memory constraints or processing goals, and that, thus, does not depend on the behavioral data surprisal theory is meant to explain.",
+        "url": "https://arxiv.org/abs/2607.21574v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.21574v1",
+        "publishedDate": "2026-07-23T17:54:37.000Z",
+        "tags": [
+          "cs.CL"
+        ]
+      },
+      {
+        "id": "2607.21570",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "MedGame: Storytelling Gamification Empowered by Large Language Models for Medical Education",
+        "authors": [
+          "Qian Wu",
+          "Xinrong Zhou",
+          "Zizhan Ma",
+          "Kai Chen",
+          "Zheyao Gao",
+          "Xun Lin",
+          "Hongqiu Wu",
+          "Longfei Gou",
+          "Yixiao Liu",
+          "Ann Sin Nga Lau",
+          "Qi Dou"
+        ],
+        "summary": "Large Language Models (LLMs) show promise for medical education, but most existing systems focus on localized interactions such as question answering or single-turn feedback, rather than organizing an entire clinical case into a decision-centered learning trajectory. We introduce \\textit{MedGame}, a framework that transforms static clinical cases into structured, executable storytelling games. MedGame uses a dual-engine design: a Medical Narrative Designer synthesizes case-grounded clinical storylines with states and decision nodes, while a Story Director converts them into dependency-aware multimodal orchestration plans rendered by our released interactive platform. We construct MedGame Bench, a 5,000-case benchmark and evaluation protocol for Medical Narrative Generation and Story Direction. Experiments show that task-specific fine-tuning substantially improves open-source LLMs on MedGame Bench and narrows the gap with commercial models. A pilot student study further shows that learners perceive MedGame as more engaging and useful than text-only alternatives.",
+        "url": "https://arxiv.org/abs/2607.21570v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.21570v1",
+        "publishedDate": "2026-07-23T17:50:28.000Z",
+        "tags": [
+          "cs.CL",
+          "cs.HC"
+        ]
+      },
+      {
+        "id": "2607.21557",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "OpenForgeRL: Train Harness-native Agents in Any Environment",
+        "authors": [
+          "Xiao Yu",
+          "Baolin Peng",
+          "Ruize Xu",
+          "Hao Zou",
+          "Qianhui Wu",
+          "Hao Cheng",
+          "Wenlin Yao",
+          "Nikhil Singh",
+          "Zhou Yu",
+          "Jianfeng Gao"
+        ],
+        "summary": "Modern AI agents rely on elaborate inference harnesses such as Claude Code, Codex, and OpenClaw to drive multi-turn reasoning, tool use, and access to external systems. While powerful, these complex harnesses also make agents hard to train end-to-end with open infrastructure, whose SFT/RL stacks cannot natively express stateful, multi-process harness inference. To address this, we present OpenForgeRL, an open-source framework for training harness-based agents end-to-end in diverse environments. OpenForgeRL achieves this with a lightweight proxy that serves the harness's model calls while recording them as training data for a standard RL codebase (e.g., veRL), and a Kubernetes orchestrator that runs each rollout in its own remote container, together enabling training on any harness in any environment at scale. By decoupling training and inference, OpenForgeRL allows researchers to easily train, study, and improve agents directly in the real harnesses and environments they are deployed with. We validate our framework across diverse, complex harnesses and environments, spanning tool/claw-based agents and multimodal GUI browser- and computer-use agents. Using only hundreds to a few thousand tasks, OpenForgeClaw reaches 31.7 pass^3 and 55.9 pass@3 on ClawEval and 33.7 on QwenClawBench. OpenForgeGUI reaches 37.7 on OSWorld-Verified, 63.0 on Online-Mind2Web, and 72.3 on WebVoyager. Both outperform open baselines of similar size on nearly all benchmarks, and in the GUI setting match or surpass models several times larger. Beyond benchmarks, we analyze how harness choice (e.g., ZeroClaw, OpenClaw, Codex) and RL shape agent behavior. We find that some harnesses are substantially harder to learn than others, and that RL improves agentic reliability, such as self-verification, tool coverage, and completing multi-step plans, though critical abilities such as error recovery remain weak.",
+        "url": "https://arxiv.org/abs/2607.21557v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.21557v1",
+        "publishedDate": "2026-07-23T17:38:30.000Z",
+        "tags": [
+          "cs.AI",
+          "cs.CL"
+        ]
+      }
+    ],
+    "AI & Agents": [
+      {
+        "id": "2607.21559",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Unsupervised Consensus-Based Anomaly Detection for Spatiotemporal Malaria Incidence in Ghana",
+        "authors": [
+          "T. Ansah-Narh",
+          "Y. Asare Afrane"
+        ],
+        "summary": "A consensus anomaly detection framework was applied to monthly malaria surveillance data from Ghana (2014-2023) to identify atypical transmission patterns. Anomalies were highly structured in space and time. Ashanti and Northern Regions accounted for most recurrent anomalies, with persistent hotspots at Tamale, Kumasi, and Accra. A key finding was the spatial distinction between anomaly burden (cumulative cases during anomalous periods) and anomaly frequency (persistence of unusual behaviour). Tamale had the highest burden during anomalies, whereas the highest anomaly rates clustered in Ashanti districts, showing that high-burden areas are not necessarily those with the most frequent anomalous transmission. Anomalous months formed a statistically distinct group, with much higher case counts (Cohen's $d = 3.252$) and large seasonal deviations ($d > 1.2$) compared with normal months. Malaria burden alone provides an incomplete picture of transmission dynamics. By distinguishing where malaria is most prevalent from where transmission behaves most unusually, this framework can strengthen surveillance, prioritise investigations, and support targeted control strategies.",
+        "url": "https://arxiv.org/abs/2607.21559v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.21559v1",
+        "publishedDate": "2026-07-23T17:40:51.000Z",
+        "tags": [
+          "cs.AI",
+          "cs.CE",
+          "cs.ET",
+          "stat.AP",
+          "stat.ML"
+        ]
+      },
+      {
+        "id": "2607.21558",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Beyond Sycophancy: Structured Resistance and Compliance in LLM Moral Reasoning",
+        "authors": [
+          "Baihui Wang",
+          "Bernard Koch"
+        ],
+        "summary": "Building socially calibrated large language models, which can learn from others without simply yielding to them, requires more than reducing sycophancy as a one-dimensional failure mode. Models must distinguish when to incorporate others' perspectives from when to maintain a well-grounded moral judgment. We study the broader resistance-compliance process governing this distinction. Across three studies, we show that models' judgment revision is structured along three dimensions that parallel classic phenomena in human social psychology: the distance between an incoming view and the model's initial position, the source attribution of that view, and the coalition structure supporting it. Models are generally more receptive to nearby positions, more influenced by views presented as their own prior judgments, and differently responsive to group pressure. These findings recast sycophancy as one expression of a broader judgment-updating process shaped by social influence. Our framework provides a principled basis for distinguishing constructive belief revision from sycophantic compliance, thereby supporting better alignment in morally consequential interactions.",
+        "url": "https://arxiv.org/abs/2607.21558v1",
+        "pdfUrl": "https://arxiv.org/pdf/2607.21558v1",
+        "publishedDate": "2026-07-23T17:40:07.000Z",
+        "tags": [
+          "cs.AI"
+        ]
+      }
+    ]
+  },
+  "labPosts": [
+    {
+      "id": "openai-1529419196",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Launching Health in ChatGPT",
+      "authors": [],
+      "summary": "Health in ChatGPT now lets eligible U.S. users securely connect medical records and Apple Health to get more personalized insights and better understand their health.",
+      "url": "https://openai.com/index/health-in-chatgpt",
+      "publishedDate": "2026-07-23T00:00:00.000Z",
+      "tags": [
+        "Product"
+      ]
+    },
+    {
+      "id": "deepmind-580427990",
+      "type": "blog_post",
+      "source": "deepmind",
+      "title": "Accelerating the frontiers of scientific discovery: Google’s $40M commitment to the Genesis Mission",
+      "authors": [],
+      "summary": "Google commits $40M in AI tokens and credits for the Genesis Mission",
+      "url": "https://deepmind.google/blog/accelerating-the-frontiers-of-scientific-discovery-googles-40m-commitment-to-the-genesis-mission/",
+      "publishedDate": "2026-07-22T13:38:54.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-2136212505",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Building AI infrastructure with the Effingham County community",
+      "authors": [],
+      "summary": "OpenAI announces Project Camellia in Effingham County, Georgia, with commitments to responsible energy, community investment, jobs, and access to Codex.",
+      "url": "https://openai.com/index/building-ai-infrastructure-with-the-effingham-county-community",
+      "publishedDate": "2026-07-22T13:00:00.000Z",
+      "tags": [
+        "Global Affairs"
+      ]
+    },
+    {
+      "id": "openai-1132724412",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "How news organizations are using AI to advance their vital missions",
+      "authors": [],
+      "summary": "News organizations are using AI to strengthen reporting, grow audiences, and improve business operations, with OpenAI tools supporting journalists and publishers worldwide.",
+      "url": "https://openai.com/index/how-news-organizations-are-using-ai",
+      "publishedDate": "2026-07-22T13:00:00.000Z",
+      "tags": [
+        "Company"
+      ]
+    },
+    {
+      "id": "openai-1199888562",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Advancing the next era of national science",
+      "authors": [],
+      "summary": "OpenAI outlines its commitment to advancing American science working with the U.S. Department of Energy and national labs to use frontier AI to accelerate discovery.",
+      "url": "https://openai.com/index/advancing-the-next-era-of-national-science",
+      "publishedDate": "2026-07-22T12:00:00.000Z",
+      "tags": [
+        "Global Affairs"
+      ]
+    },
+    {
+      "id": "openai-986875571",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Introducing OpenAI Presence",
+      "authors": [],
+      "summary": "Introducing OpenAI Presence, a proven enterprise AI agent platform that helps organizations deploy trusted voice and chat agents for customer and internal workflows.",
+      "url": "https://openai.com/index/introducing-openai-presence",
+      "publishedDate": "2026-07-22T05:30:00.000Z",
+      "tags": [
+        "Product"
+      ]
+    },
+    {
+      "id": "openai-2100291873",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "NTT DATA Group cuts incident analysis to 30 minutes with Codex",
+      "authors": [],
+      "summary": "NTT DATA Group uses ChatGPT Enterprise and Codex to help 9,000 employees automate work, cut incident analysis to 30 minutes, and scale secure AI adoption.",
+      "url": "https://openai.com/index/ntt-data",
+      "publishedDate": "2026-07-22T00:00:00.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-908678016",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Introducing the ChatGPT for small business program",
+      "authors": [],
+      "summary": "OpenAI launches the ChatGPT for Small Businesses program, helping entrepreneurs build AI skills, automate work, and grow with ChatGPT Work.",
+      "url": "https://openai.com/index/introducing-chatgpt-small-business-program",
+      "publishedDate": "2026-07-21T17:00:00.000Z",
+      "tags": [
+        "AI Adoption"
+      ]
+    },
+    {
+      "id": "deepmind-1072636633",
+      "type": "blog_post",
+      "source": "deepmind",
+      "title": "Introducing Gemini 3.6 Flash, 3.5 Flash-Lite, and 3.5 Flash Cyber",
+      "authors": [],
+      "summary": "We’re introducing new Gemini models, including Gemini 3.6 Flash, 3.5 Flash-Lite and 3.5 Flash Cyber.",
+      "url": "https://deepmind.google/blog/introducing-gemini-36-flash-35-flash-lite-and-35-flash-cyber/",
+      "publishedDate": "2026-07-21T15:16:30.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-1002764498",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "OpenAI and Hugging Face partner to address security incident during model evaluation",
+      "authors": [],
+      "summary": "OpenAI and Hugging Face share early findings from a security incident during AI model evaluation, highlighting advanced cyber capabilities and lessons for defenders.",
+      "url": "https://openai.com/index/hugging-face-model-evaluation-security-incident",
+      "publishedDate": "2026-07-21T07:00:00.000Z",
+      "tags": [
+        "Security"
+      ]
+    },
+    {
+      "id": "openai-962453948",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "David Vélez and Robin Vince join the boards of the OpenAI Foundation and OpenAI Group PBC",
+      "authors": [],
+      "summary": "David Vélez and Robin Vince join the boards of the OpenAI Foundation and OpenAI Group PBC, bringing global leadership in finance, technology, and governance.",
+      "url": "https://openai.com/index/david-velez-robin-vince-join-openai-boards",
+      "publishedDate": "2026-07-21T00:00:00.000Z",
+      "tags": [
+        "Company"
+      ]
+    },
+    {
+      "id": "openai-839143392",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Safety and alignment in an era of long-horizon models",
+      "authors": [],
+      "summary": "OpenAI shares lessons from deploying long-running AI models, highlighting new safety risks, observed failures, and improved safeguards through iterative deployment.",
+      "url": "https://openai.com/index/safety-alignment-long-horizon-models",
+      "publishedDate": "2026-07-20T10:00:00.000Z",
+      "tags": [
+        "Safety"
+      ]
+    }
+  ],
+  "stats": {
+    "totalPapersScanned": 200,
+    "totalPostsScanned": 12
+  }
+}
