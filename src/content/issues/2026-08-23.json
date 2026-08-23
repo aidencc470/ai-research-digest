@@ -1,0 +1,659 @@
+{
+  "slug": "2026-08-23",
+  "title": "Weekly AI Digest — August 23, 2026",
+  "dateRange": {
+    "start": "2026-08-16T13:24:39.787Z",
+    "end": "2026-08-23T13:24:39.787Z"
+  },
+  "papersByCategory": {
+    "Machine Learning": [
+      {
+        "id": "2608.20337",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Information on trajectories: martingales and random times",
+        "authors": [
+          "Akshay Balsubramani"
+        ],
+        "summary": "Accounting for information flow on the path space of trajectories of a nonnegative martingale yields exact variational identities for it, even at arbitrary random times. This recovers the widely used classical concentration inequalities, from Ville to PAC-Bayes, and measures what each one discards. The tail a bound controls is itself a relative entropy, resolved by the chain rule into per-step conditional divergences. The discarded slack has an exact form in each of three geometries: a Gibbs tilt for the Azuma-Hoeffding and PAC-Bayes bounds, the crossing itself for Ville's and for pooled tests, and a dominating certificate for the $L^p$ maximal bound. That certificate's optional-stopping deficit resolves per step into Bregman divergences of the running maximum. On a path-time space, the same identity gains one factor that prices anticipation: an arbitrary random time carries an e-process ``peeking penalty.'' The partition function can be read as a coalescent--a prefix-sharing probability of independent copies--and geometric mixtures of test martingales gain a pooling benefit for multi-model safe testing.",
+        "url": "https://arxiv.org/abs/2608.20337v1",
+        "pdfUrl": "https://arxiv.org/pdf/2608.20337v1",
+        "publishedDate": "2026-08-20T17:59:57.000Z",
+        "tags": [
+          "math.PR",
+          "cs.IT",
+          "cs.LG",
+          "math.ST"
+        ]
+      },
+      {
+        "id": "2608.20326",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "$TCP_α$: Margin-Controlled Confidence estimation for reliable Music Information Retrieval",
+        "authors": [
+          "Parampreet Singh",
+          "Anushka Singh",
+          "Sumit Kumar",
+          "Vipul Arora"
+        ],
+        "summary": "Deep neural networks are often overconfident, assigning high confidence even to incorrect predictions. Consequently, users lack a reliable signal for deciding when a prediction can be trusted. Post-hoc confidence estimation addresses this by training a lightweight auxiliary head over a frozen classifier. Existing targets, however, suffer from inherent ambiguity: they assign overlapping confidence values to correct and incorrect predictions, while errors near the decision boundary receive confidence scores indistinguishable from correct predictions. In this work, we propose $TCP_α$, a novel confidence target that resolves these limitations by introducing a margin-controlled penalty for misclassified samples. We prove that $TCP_α$ guarantees complete separation between the target values of correct and incorrect predictions, with a separation margin that is independent of the number of classes and increases monotonically with the penalty parameter. Since accurate classifiers naturally produce very few errors, learning these targets results in a severely imbalanced regression problem. We therefore present a systematic study of training strategies for learning under this imbalance and identify an effective training configuration through extensive ablation studies. We evaluate the proposed approach on rāga identification, investigate its robustness under domain shift, and further validate it on frame-wise ornamentation detection without modifying the selected configuration. Across all settings, $TCP_α$ consistently outperforms existing confidence targets for failure prediction. Rejecting only the least-confident 8\\% of predictions improves the base model's macro-F1 from 0.89 to 0.98, while fine-tuning the confidence head with only 5\\% labeled samples from a new corpus effectively restores performance under domain shift.",
+        "url": "https://arxiv.org/abs/2608.20326v1",
+        "pdfUrl": "https://arxiv.org/pdf/2608.20326v1",
+        "publishedDate": "2026-08-20T17:58:50.000Z",
+        "tags": [
+          "eess.AS",
+          "cs.LG"
+        ]
+      },
+      {
+        "id": "2608.20322",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "A comparison between ceiling-mounted FMCW, IR-UWB and Wi-Fi radar for in-bedroom human activity monitoring and sleep interruption detection",
+        "authors": [
+          "Anton Lambrecht",
+          "Reda El Hail",
+          "Xianjun Jiao",
+          "Pieter Crombez",
+          "Dominique Schreurs",
+          "Peter Karsmakers",
+          "Adnan Shahid",
+          "Eli De Poorter"
+        ],
+        "summary": "Despite their growing importance for contact-free radio frequency (RF) based healthcare monitoring, different radio technologies such as frequency-modulated continuous wave (FMCW) radar, impulse radio ultra-wideband (IR-UWB), and Wi-Fi sensing are rarely compared under identical deployment conditions, as existing studies typically differ in hardware, datasets, and evaluation methodologies. In addition, the performance of ceiling-mounted radars, despite their practical deployment and cost advantages in healthcare environments, remain underexplored. Therefore, this paper presents a controlled comparison and analysis of ceiling-mounted FMCW, IR-UWB, and Wi-Fi sensing using synchronized recordings from 20 participants across six room layouts. All technologies are evaluated with the same convolutional neural network (CNN) on both a fine-grained 10-class human activity recognition (HAR) task and a coarse 4-class sleep monitoring task. IR-UWB achieves the highest cross-subject activity recognition performance (89.0% macro F1), while FMCW generalizes best to unseen room layouts (83.8% macro F1). For sleep monitoring, all technologies exceed 92% macro F1 in unseen environments. The results reveal a fundamental trade-off between recognition performance and environmental robustness, which can be explained through differences in range resolution, antenna diversity, Doppler resolution, and spatial information retention. These findings provide practical guidelines for the design of healthcare-oriented RF sensing systems.",
+        "url": "https://arxiv.org/abs/2608.20322v1",
+        "pdfUrl": "https://arxiv.org/pdf/2608.20322v1",
+        "publishedDate": "2026-08-20T17:58:22.000Z",
+        "tags": [
+          "cs.LG"
+        ]
+      },
+      {
+        "id": "2608.20315",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Explainable Transformer Models for Clinical Prediction Tasks on Structured Electronic Health Records",
+        "authors": [
+          "Jun Ni Du",
+          "Lukas Adamek",
+          "Maxim Kryukov",
+          "Flavio Dormont",
+          "Ziv Bar-Joseph",
+          "Sven Jager",
+          "Brandon Rufino"
+        ],
+        "summary": "Predictive models over structured electronic health records (EHRs) remain central to machine learning for healthcare, but few have jointly emphasized quantitative laboratory information and interpretability with respect to input medical events. We present BERT-LER, a BERT-style model for coded EHR timelines pretrained and fine-tuned from a de-identified EHR dataset of 75 million patients, that encodes laboratory test results as discrete tokens while retaining graded information through percentile-based binning, paired with Integrated Gradients for token-level attributions grounded in the input EHR sequence. We benchmark our approach on the public EHRShot benchmark suite and on an asthma severity progression study based on real-world data. This addresses a methodological gap in EHR foundation-style modeling by unifying laboratory value representation and explainability in a single framework, while assessing whether both predictive performance and explanations generalize beyond standard clinical prediction tasks. Across EHRShot and asthma tasks, BERT-LER achieves predictive performance that is competitive with, and on laboratory-related tasks often exceeds, publicly available benchmark models, and provides attributions that align with clinically known risk factors. Our architecture and explainability approach can be applied to many therapeutic areas and prediction tasks using language models trained on structured EHRs.",
+        "url": "https://arxiv.org/abs/2608.20315v1",
+        "pdfUrl": "https://arxiv.org/pdf/2608.20315v1",
+        "publishedDate": "2026-08-20T17:54:17.000Z",
+        "tags": [
+          "cs.LG"
+        ]
+      },
+      {
+        "id": "2608.20295",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Physical-Support Confidence Sets for Highly Coherent Dictionaries",
+        "authors": [
+          "Guan-Ju Peng"
+        ],
+        "summary": "Sparse pursuit after dictionary learning can yield a precise atom support even when its physical interpretation is not justified by the calibration data, especially for highly coherent dictionaries where alternative calibration-compatible dictionaries may assign different physical meanings to the same selected support. We develop resolution-aware physical-support inference that jointly accounts for uncertainty in the learned dictionary and in the representation of a deployment signal. Our cross-dictionary confidence correspondence retains calibration-compatible dictionaries and deployment-compatible sparse representations, then projects the surviving explanations onto physical-support space. For local coherent-atom classes with separation scale s, once the deployment data resolve the coherent-block explanation and its atom support, the minimax physical resolution from N calibration signals satisfies $δ_{\\mathrm{opt}}(N,s)\\asymp\\min\\{s,\\frac{1}{\\sqrt{N}s^2}\\}$, with relative resolution governed by the orientation-information scale $Ns^6$. Deployment replication improves physical localization only when orientation changes cannot be absorbed by adjusting the active coefficients. For computation, we introduce active endpoint bracketing (AEB), an adaptive finite-bank procedure that evaluates only candidates that can still affect the physical report and otherwise safely coarsens or abstains. Finite-bank experiments, including a four-region synthetic application, show that a point-valued plug-in selector can be physically overprecise, whereas AEB avoids unsupported refinement with fewer candidate evaluations.",
+        "url": "https://arxiv.org/abs/2608.20295v1",
+        "pdfUrl": "https://arxiv.org/pdf/2608.20295v1",
+        "publishedDate": "2026-08-20T17:35:26.000Z",
+        "tags": [
+          "cs.LG",
+          "eess.SP",
+          "math.ST"
+        ]
+      },
+      {
+        "id": "2608.20285",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Dynamic Structural Causal Modeling for Sleep",
+        "authors": [
+          "Ranveer Singh",
+          "Saurabh Mathur",
+          "Pranuthi Tenali",
+          "Arun Badi",
+          "Sriraam Natarajan"
+        ],
+        "summary": "The causal dynamics of sleep-disordered breathing are complex and vary across patient populations, hindering the development of targeted interventions. We learn dynamic causal graphs of sleep-disordered breathing from Home Sleep Apnea Test (HSAT) recordings, revealing systematic differences in causal structure across sex and age subcohorts. We do so using the PCMCI+ algorithm on windowed fractional variables derived from 105 HSAT recordings, exploiting domain knowledge via edge blacklisting and employing bootstrap aggregation to address small subcohort sizes. The learned graphs show that temporal self-dependencies and the apnea-desaturation relationship persist across all cohorts, while other relationships vary substantially.",
+        "url": "https://arxiv.org/abs/2608.20285v1",
+        "pdfUrl": "https://arxiv.org/pdf/2608.20285v1",
+        "publishedDate": "2026-08-20T17:20:09.000Z",
+        "tags": [
+          "cs.LG"
+        ]
+      }
+    ],
+    "LLMs & Language": [
+      {
+        "id": "2608.20338",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "ConceptGuard: Benchmarking Context-Sensitive Unlearning in Large Language Models",
+        "authors": [
+          "Sahil Kale",
+          "Ian Harris"
+        ],
+        "summary": "Large Language Models (LLMs) increasingly require selective removal of harmful or sensitive knowledge, called unlearning, yet existing methods and benchmarks fail to evaluate this capability completely. Current approaches rely on disjoint forget and retain sets composed of independent facts, and measure success using simple and direct factual recall. This framing fails to capture a key requirement of unlearning, namely the ability to eliminate harmful behaviors while preserving benign and beneficial knowledge. We argue that effective unlearning must operate at the level of concepts, ensuring complete removal of unsafe applications while maintaining their correct and useful usage, thereby achieving conceptually meaningful and complete unlearning. To better evaluate unlearning techniques from such a practical viewpoint, we introduce the notion of dual-use concepts: concepts that can be used in both harmful and benign contexts. Building on these concepts, we construct a benchmark called ConceptGuard where forget and retain sets are explicitly complementary in concept usage. Our benchmark uniquely enables unlearning to be explored and gauged at the level of concepts, instead of sparse facts, and evaluation is intent-sensitive with the goal of maximizing contextual separation to promote safer behavior. We demonstrate that current unlearning techniques perform poorly under this setting, showing weak contextual separation alongside poor performance in ROUGE and concept-level metrics. Our results reveal strong forgetting-utility trade-offs, limited gains in contextual sensitivity, and poor consistency in concept-level control across methods, and provide ideas for unlearning approaches that better align with real-world safety requirements. Our dataset is publicly available.",
+        "url": "https://arxiv.org/abs/2608.20338v1",
+        "pdfUrl": "https://arxiv.org/pdf/2608.20338v1",
+        "publishedDate": "2026-08-20T17:59:57.000Z",
+        "tags": [
+          "cs.CL"
+        ]
+      },
+      {
+        "id": "2608.20331",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "G-CARL: Grounded Checklist-Aligned Reward Learning for Patient-Oriented Medical Report Interpretation",
+        "authors": [
+          "Shiao Xie",
+          "Siyu Chen",
+          "Jianwei Lv",
+          "Bo Yuan",
+          "Yujin Wang",
+          "Xiandong Li"
+        ],
+        "summary": "Personalized interpretation of medical reports has emerged as an increasingly important need among patients. Addressing this need requires both evidence-grounded medical factuality and context-dependent patient communication, yet existing medical vision-language tasks do not adequately capture these dual requirements. To bridge this gap, we introduce Patient-oriented Medical Report Interpretation (PMRI), a novel open-ended multimodal generation task that requires models to explain medical reports in accurate and accessible language based on a user's query and dialogue history. These two objectives differ fundamentally in their verifiability, yet remain tightly coupled, making them difficult to optimize jointly under conventional supervised fine-tuning and holistic reinforcement learning paradigms. To address this challenge, we propose G-CARL, a grounded, checklist-aligned reinforcement learning framework that combines multi-source retrieval for atomic claim verification with context-aware, instance-specific weighted checklists for response coverage, providing structured supervision for factuality, user-demand satisfaction, and expression quality without constraining response diversity. We further construct MMedReport, a real-world PMRI benchmark, along with a clinician-designed three-dimensional evaluation protocol. Extensive experiments demonstrate that G-CARL consistently outperforms existing post-training baselines in overall quality, claim-level precision, and checklist recall. Pairwise preference evaluation by clinicians further confirms that G-CARL produces interpretations that are more accurate and better aligned with patient needs.",
+        "url": "https://arxiv.org/abs/2608.20331v1",
+        "pdfUrl": "https://arxiv.org/pdf/2608.20331v1",
+        "publishedDate": "2026-08-20T17:59:46.000Z",
+        "tags": [
+          "cs.CL",
+          "cs.AI",
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2608.20320",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "An Agentic Approach for Active Data Collection, Travel Behavior Modeling, and Weather-Sensitive Demand Prediction",
+        "authors": [
+          "Narges Ahmadi",
+          "Yubo Jiao",
+          "Jônatas Augusto Manzolli",
+          "Jiangbo Yu",
+          "Luis Miranda-Moreno"
+        ],
+        "summary": "Travel behavior research increasingly combines digital data collection with predictive modeling, yet these stages are often developed and evaluated separately. This study proposes a three-agent workflow integrating conversational data collection, structured data processing, and behavioral prediction. A chatbot-administered, image-augmented stated-preference survey collected mode choices from student commuters across five predefined weather scenarios, yielding 454 respondent-scenario observations. Weather-related associations were analyzed using a multinomial logit model, while logistic regression and random forest provided machine-learning benchmarks. Nine locally deployed large language models (LLMs), ranging from 2 to 35 billion parameters, were evaluated across four zero-shot prompt-and-context conditions and extended through persona, few-shot, and vision-based configurations. Random forest achieved 69.6% five-class accuracy, while the best text-only zero-shot LLM reached 69.9% without task-specific fitting. Habitual travel information produced the most consistent gains, Expert framing generally outperformed Role-Play, and persona information was most useful when habitual travel information was unavailable. Few-shot prompting improved prediction for several models, with gains stabilizing after a small number of examples. Using the same weather images shown to respondents, the best vision-based configuration reached 71.5% five-class accuracy, indicating that visual context may provide additional predictive information for selected models. Overall, the study shows how conversational surveys, structured data processing, conventional behavioral modeling, machine learning, and multimodal LLM prediction can be coordinated within an auditable multi-agent workflow.",
+        "url": "https://arxiv.org/abs/2608.20320v1",
+        "pdfUrl": "https://arxiv.org/pdf/2608.20320v1",
+        "publishedDate": "2026-08-20T17:57:42.000Z",
+        "tags": [
+          "cs.AI",
+          "cs.CL"
+        ]
+      },
+      {
+        "id": "2608.20319",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Inducing Task Models from Computer-Use Traces",
+        "authors": [
+          "Yucheng Jiang",
+          "Zora Zhiruo Wang",
+          "Ruishi Chen",
+          "Diyi Yang"
+        ],
+        "summary": "Naturalistic computer-use traces, passively recorded screenshots and mouse or keyboard actions, are a valuable resource for deriving symbolic, auditable, and reusable models of how everyday work is done. Such models matter as computer-use agents enter real work, where agents need to learn how tasks are actually performed, and organizations need to audit and reuse that knowledge. However, inducing such task models is challenging, as activity is observed only as low-level events and real-world work is multi-threaded with interleaved goals. Existing methods assume a given task or a single workflow, and produce step-level summaries rather than structured task models. We introduce Task Model Induction (TMI), which (i) discovers the latent tasks in an unconstrained trace, disentangling concurrent activity, and (ii) for each latent task, induces a task model pairing a hierarchical objective model of recursive goal decomposition with a procedure model of the control flow that organized the execution. Intrinsically, on controlled human and agent trajectories, TMI recovers interleaved tasks with 0.974 agreement against ground-truth groupings and reconstructs 74.9% of the observed execution steps, far more than the strongest workflow induction baseline. Extrinsically, skills derived from TMI's task models improve held-out task accuracy by 30.0% over the strongest baseline.",
+        "url": "https://arxiv.org/abs/2608.20319v1",
+        "pdfUrl": "https://arxiv.org/pdf/2608.20319v1",
+        "publishedDate": "2026-08-20T17:57:00.000Z",
+        "tags": [
+          "cs.CL",
+          "cs.AI"
+        ]
+      },
+      {
+        "id": "2608.20318",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "AI4AI-Bench: Benchmarking LLM Agents in Algorithmic Design for Recursive Self-Improvement",
+        "authors": [
+          "Yizhe Chi",
+          "Wenyi Li",
+          "Deyao Hong",
+          "Xiaoqiu Wang",
+          "Mingju Gao",
+          "Kaisen Yang",
+          "Bingxiang He",
+          "Youjie Zheng",
+          "Calvin Xiao",
+          "Qinhuai Na"
+        ],
+        "summary": "Recursive self-improvement (RSI) asks whether an AI system can improve the process that produces AI systems, so that the next system inherits the improvement. That process is the training algorithm: a better objective or update rule improves the compute\\mbox{-}capability exchange rate for every subsequent run, including the one that produces the next agent. Whether RSI is feasible therefore turns on whether an agent can design training algorithms. No benchmark isolates that ability: existing suites are won by collecting data or by tuning hyperparameters, and none tells a change to how a run is executed apart from a change to how the model learns. We present AI4AI\\mbox{-}Bench, 10 frozen research repositories spanning 10 training algorithm families. In each task, an agent has 4 hours on one B300 to rewrite the training algorithm; its code is then rerun from scratch for up to 12 hours and scored by a fixed evaluator hidden from the agent, against the repository's original algorithm under the same procedure. Because the 10 metrics are incommensurable, every task is mapped onto one scale on which $0$ is an uninformative model, $0.1$ is the algorithm the repository ships, and $1.0$ is the task optimum. Across 29 configurations of 6 systems on all 10 tasks the mean score is $0.166$, and the best system reaches $0.250$: even the strongest closes under a fifth of the distance between the algorithm that was already there and the optimum. The submissions show where that distance went: most never change how the model learns at all, and the minority that do average $0.226$ against $0.126$ for the rest. More reasoning effort mostly buys the willingness to go there, taking that minority from $8\\%$ of submissions to $64\\%$ and the mean score from $0.094$ to $0.196$. We release the task suite, the evaluators and every scored submission, so that the measurement can be repeated as these systems change.",
+        "url": "https://arxiv.org/abs/2608.20318v1",
+        "pdfUrl": "https://arxiv.org/pdf/2608.20318v1",
+        "publishedDate": "2026-08-20T17:56:59.000Z",
+        "tags": [
+          "cs.AI",
+          "cs.CL",
+          "cs.LG"
+        ]
+      },
+      {
+        "id": "2608.20290",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Phantom Gains: Auditing Self-Improvement Against a Measured Null",
+        "authors": [
+          "Cheng Xu",
+          "Nan Yan",
+          "Liming Chen",
+          "M-Tahar Kechadi"
+        ],
+        "summary": "Whether a language model has improved itself is increasingly judged not by mean accuracy but by which individual problems it gains and loses. Tracking these transitions means differencing two noisy estimates, leaving them vulnerable to measurement artifacts. Auditing three rounds of rank-$32$ LoRA self-training on Qwen3-8B against a frozen control pushed through the identical pipeline, we identify seven measurement failures, each of which inverts a reported finding when its control is absent. Several are standard practice. A ledger built on a single greedy decode manufactures capability changes on an untrained model, largely an artifact of inference batching; the expansion statistic separating acquisition from sharpening assigns that same model a rate of $0.280$. The natural threshold repair does not survive replication: estimated across the frozen comparisons such a design already contains, its null stays non-zero. We replace it with a per-problem exact test against a pooled baseline under false-discovery-rate control, which detects nothing on any held-out replicate and is unchanged under the multiple-testing rule, error rate and pool size. Applied to a ladder of arms matched in stream, volume and evaluation, the audit finds that external distillation improves problems the base model rarely reaches while three forms of self-training do not; a regression rejects this asymmetry as a by-product of distillation's larger overall gain ($p < 10^{-8}$). On the far smaller set of problems the base model never reaches, the evidence is inconclusive, while self-training corrupts problems solved at baseline at rates well above the measured floor. Transition-level auditing therefore requires a separately measured null for every statistic it reports: nulls that cost no new experiments, built from baseline replicates a multi-arm study already owns, though not from as few as most possess.",
+        "url": "https://arxiv.org/abs/2608.20290v1",
+        "pdfUrl": "https://arxiv.org/pdf/2608.20290v1",
+        "publishedDate": "2026-08-20T17:30:14.000Z",
+        "tags": [
+          "cs.AI",
+          "cs.CL"
+        ]
+      }
+    ],
+    "Computer Vision": [
+      {
+        "id": "2608.20335",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "4DAnyone: Create Anyone in 4D from a Casual Monocular Video",
+        "authors": [
+          "Yudong Jin",
+          "Tao Xie",
+          "Qihang Zhang",
+          "Zehong Shen",
+          "Zhen Xu",
+          "Yujun Shen",
+          "Hujun Bao",
+          "Xiaowei Zhou",
+          "Yinghao Xu"
+        ],
+        "summary": "We present 4DAnyone, a framework for reconstructing 4D humans from an uncalibrated monocular video by generating reconstruction-grade multiview-consistent videos and lifting them into 4D Gaussian Splatting (4DGS). Existing camera-controlled video diffusion models synthesize plausible novel-view videos but fail to maintain consistency when scaled to the tens of target views required for 4DGS reconstruction. We identify this failure as a bounded-attention-context problem: when target views exceed the capacity of a single DiT forward pass, they must be split into groups, exposing two coupled bottlenecks. On the reference-context side, conditioning on all previously generated views grows as $O(N)$, weakening cross-view appearance guidance. On the target-context side, disjoint groups cannot directly exchange information, causing global structural drift. 4DAnyone addresses both bottlenecks with two complementary designs: Reference Context Packing (RCP) compresses growing reference views into a fixed-length mixed-resolution context with $O(1)$ reference-context complexity, while Target Context Routing (TCR) rotates target-view groupings during denoising to share context across groups at high-noise steps and stabilize details at low-noise steps. We further build the MVGameHuman dataset using our in-house game engine and combine it with light-stage and in-the-wild video datasets for training. Experiments on DNA-Rendering and DyMVHumans show that 4DAnyone outperforms prior methods in both novel-view video quality and downstream 4DGS reconstruction, with robust in-the-wild generalization. See our project page for video results and source code: https://4danyone.github.io.",
+        "url": "https://arxiv.org/abs/2608.20335v1",
+        "pdfUrl": "https://arxiv.org/pdf/2608.20335v1",
+        "publishedDate": "2026-08-20T17:59:53.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2608.20336",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "WithEveryone: Unified Planning and Identity Grounding for Group Image Generation",
+        "authors": [
+          "Hengyuan Xu",
+          "Qixun Wang",
+          "Yiji Cheng",
+          "Miles Yang",
+          "Zhao Zhong",
+          "Wei Cheng",
+          "Xingjun Ma",
+          "Yu-gang Jiang"
+        ],
+        "summary": "Identity-preserving image generation becomes increasingly unreliable when a scene must contain many specified people. Beyond retaining each identity, the model must bind every reference to a distinct person and location, while training-time identity losses must establish correspondence among several noisy predicted faces. We introduce WithEveryone, a unified framework for generating group images up to ten reference identities. WithEveryone injects each selected identity as an addressed token, predicts a structured identity--layout plan, and renders the plan as a visual condition. Its key objective, Layout-Grounded ID Loss, uses annotated face regions to supervise the intended identities directly, avoiding unstable embedding-based face matching; ID Representation Forcing additionally trains a prediction for each identity before image synthesis. On an identity-disjoint benchmark, WithEveryone achieves the highest target-context identity similarity, improving face similarity from 0.462 for GPT-Image-2 to 0.499, while reducing copy-paste artifacts from 0.169 to 0.055. It further covers 97.3\\% of the requested identities with a duplicate rate of only 2.8\\%. These results show that explicit identity--layout grounding enables identity-preserving generation to scale to larger groups without relying on direct reference-face copying.",
+        "url": "https://arxiv.org/abs/2608.20336v1",
+        "pdfUrl": "https://arxiv.org/pdf/2608.20336v1",
+        "publishedDate": "2026-08-20T17:59:53.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2608.20334",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Swift-Image: Exploring the Performance Frontier of Compact Unified Image Generation Models",
+        "authors": [
+          "Taihang Hu",
+          "Zhao Wang",
+          "Zuan Gao",
+          "Tao Liu",
+          "Hao Yan",
+          "Zhengze Xu",
+          "Yuhang Yu",
+          "Yongchao Du",
+          "Xingjian Wang",
+          "Jun Zheng",
+          "Qinye Zhou",
+          "Zhengrui Chen",
+          "Chao Lin",
+          "Yefeng Shen",
+          "Zhengtao Wu",
+          "Ge Wu",
+          "Xiaoli Xu",
+          "Denghui Yang",
+          "Huayu Zhang",
+          "Mingzhou Zhang",
+          "Mengting Chen"
+        ],
+        "summary": "We present Swift-Image, a compact unified model for text-to-image generation, single-image editing, and multi-image editing. Our goal is to explore how far a relatively small visual generator can be pushed through systematic training engineering under a constrained computational budget. Swift-Image adopts an efficient 6B single-stream DiT and a progressive training pipeline that evolves from broad semantic coverage to higher resolution, stronger visual quality, and unified generation-editing supervision. For post-training, we employ parallel expert reinforcement learning followed by multi-teacher on-policy distillation to alleviate interference among heterogeneous objectives. We further decouple high-level reasoning from pixel-level rendering with a Prompt Enhancer that translates user requests into generator-aligned visual specifications. For efficient deployment, structural pruning and few-step distillation produce 3B and accelerated variants. Swift-Image achieves leading aggregate performance among evaluated open-source models with only 6B parameters and 243K GPU training hours; the compressed 3B model incurs nearly no loss, while few-step distillation further improves aggregate editing performance with substantially fewer sampling steps. Our study also summarizes practical lessons for architecture, data curriculum, post-training, prompt enhancement, and model compression.",
+        "url": "https://arxiv.org/abs/2608.20334v1",
+        "pdfUrl": "https://arxiv.org/pdf/2608.20334v1",
+        "publishedDate": "2026-08-20T17:59:52.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2608.20312",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Inter-X++: A Comprehensive Benchmark for Multimodal Human-Human Interaction Analysis",
+        "authors": [
+          "Liang Xu",
+          "Chengqun Yang",
+          "Zili Lin",
+          "Xintao Lv",
+          "Yichao Yan",
+          "Xin Jin",
+          "Zhibo Chen",
+          "Xiaokang Yang",
+          "Wenjun Zeng"
+        ],
+        "summary": "The capability to perceive and synthesize human-human interactions is fundamental to developing intelligent digital human systems. However, existing datasets and modeling approaches are fundamentally constrained by low-fidelity kinematics, the omission of dexterous hand gestures and a severe lack of rich multimodal annotations. Furthermore, fragmented interaction representations and inconsistent evaluation protocols also impede fair and rigorous benchmarking. To systematically address these bottlenecks, we present Inter-X++, a comprehensive and large-scale benchmark designed to empower versatile HHI analysis. Captured via a novel hybrid motion capture system, Inter-X++ provides 11,388 high-fidelity interaction sequences and over 8.1M frames, featuring precise whole-body movements and detailed finger articulations. Meanwhile, we enrich the data foundation with multifaceted annotations, including hierarchical fine-grained textual descriptions, interaction categories, causal interaction orders, the relationship and personality of the subjects, as well as vertex-level contact maps and physically regularized constraints. Leveraging these elaborate annotations, we formulate a unified testing ground comprising four categories of downstream tasks that symmetrically span both generative and perceptive paradigms. To eliminate benchmarking ambiguities, we systematically standardize the interaction representations and evaluation protocols. Finally, we go beyond dataset construction to propose OpenHHI, a single and unified HHI representation and modeling framework that jointly optimizes interaction reconstruction and semantic understanding. Extensive experiments reveal that OpenHHI achieves state-of-the-art performance on both generation and perception tasks. This definitively proves that our unified representation successfully bridges interaction understanding and generation simultaneously.",
+        "url": "https://arxiv.org/abs/2608.20312v1",
+        "pdfUrl": "https://arxiv.org/pdf/2608.20312v1",
+        "publishedDate": "2026-08-20T17:51:48.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2608.20308",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "DreamHand: Repurposing Video Diffusion Models for Occlusion-Robust Egocentric 3D Hand Motion Recovery",
+        "authors": [
+          "Yufei Liu",
+          "Xixi Wang",
+          "Hao Li",
+          "Ganlong Zhao",
+          "Kaitong Cai",
+          "Chengkai Jin",
+          "Chunxiao Liu",
+          "Jianbo Liu",
+          "Siyuan Huang",
+          "Xingang Pan",
+          "Hongsheng Li"
+        ],
+        "summary": "Egocentric video offers scalable manipulation data for embodied AI, yet recovering metric 3D hand trajectories remains challenging due to severe object occlusion and frequent out-of-sight gaps. Existing single-frame and windowed temporal regressors fail when hand shortly leaves the frame, while recent video diffusion models (VDMs) rely on heavy, stochastic multi-step sampling as pixel-space renderers. We instead repurpose VDM into a deterministic geometry encoder. A single forward pass over the clean latent exposes scene content beyond current observations, including occluded and out-of-sight hands. We introduce DreamHand, an offline clip-level framework that extracts features via a Deterministic Clean-Latent Encoder and decodes them with a Bidirectional Spatiotemporal Decoder. DreamHand recovers continuous bimanual trajectories with metric placement and no external detector, while a Ray-Based Camera Solver supports a second configuration that needs no test-time camera intrinsics. Across five egocentric benchmarks, DreamHand sets a new state of the art, cutting MPJPE-p by 30% on occlusion-heavy ARCTIC and 40% on HOT3D. These gains reach 46%-61% once out-of-sight hands are included in the evaluation, offering a scalable path from everyday human video to robot manipulation data.",
+        "url": "https://arxiv.org/abs/2608.20308v1",
+        "pdfUrl": "https://arxiv.org/pdf/2608.20308v1",
+        "publishedDate": "2026-08-20T17:46:24.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2608.20305",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "CalcSeg: Confidence-aware 3D Latent Context Curriculum Learning For Myocardial Scar Segmentation From Single-Stack LGE-CMRs",
+        "authors": [
+          "Nivetha Jayakumar",
+          "Hannah Kim",
+          "Amit R. Patel",
+          "Miaomiao Zhang"
+        ],
+        "summary": "Myocardial scar segmentation from single-stack late gadolinium-enhanced cardiac magnetic resonance (LGE-CMR) imaging has been a longstanding and clinically important challenge, particularly in the presence of low tissue contrast, diffuse, and small scar regions. These challenges are further intensified by the limited availability of 3D spatial context. This paper presents CalcSeg, a Confidence-aware latent context curriculum learning framework that leverages fused 3D feature representations from single-stack 2D LGE-CMR images for robust scar segmentation. Specifically, we introduce a dynamic semi-supervised curriculum learning strategy that progressively expands training from easier to more challenging scar cases using a learned confidence-aware scoring function. Such a function integrates errors in the predicted scar maps with quantified epistemic uncertainty and scar burden estimation to automatically assess sample difficulty without requiring manual labels. To compensate for the limited spatial context in single-stack acquisitions, we then develop a latent slice-wise self-attention to capture inter-slice dependencies and infer 3D spatial representations from sparse 2D inputs. We evaluate CalcSeg on multi-center clinical LGE-CMR datasets and benchmark against existing scar segmentation networks. Experimental results show that CalcSeg consistently outperforms all competing methods, particularly with substantial improvements on clinically challenging cases. Our code is released on Github.",
+        "url": "https://arxiv.org/abs/2608.20305v1",
+        "pdfUrl": "https://arxiv.org/pdf/2608.20305v1",
+        "publishedDate": "2026-08-20T17:45:33.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      }
+    ],
+    "AI & Agents": [
+      {
+        "id": "2608.20316",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Pandora's AI Model Routing Box: Efficient Allocation with Costly Value Estimation",
+        "authors": [
+          "Adam Fisch",
+          "Shubhendu Trivedi",
+          "Fantine Huot",
+          "William W. Cohen",
+          "Michael Kaisers",
+          "Mirella Lapata",
+          "Kate Larson",
+          "Jacob Eisenstein"
+        ],
+        "summary": "Heterogeneous AI systems composed of multiple models, architectures, harnesses, or inference-time settings can improve quality and efficiency by routing queries to the specialist who can answer most effectively at the lowest cost. Routing requires estimating each specialist's expected return, but this value estimation has a cost. Cheap estimators (e.g., embedding-based predictors) are fast but noisy, while accurate estimators (e.g., fine-tuned models with access to retrieval results or partial reasoning traces) are expensive. We formalize this tradeoff as an instance of Pandora's Box, the classical problem of optimal search with costly inspection. Under a Gaussian signal model, the resulting policies have closed-form value-of-information expressions that determine, for each specialist and input, whether refining the value estimate is worth its cost. We call the centralized policy Pandora's Router. We extend this to a decentralized setting, Pandora's Bidder, where specialists independently decide whether to invest in self-assessment before accepting an offered price to claim a query. Experiments across three domains---a standard multi-LLM benchmark, retrieval-augmented specialists, and LLMs with variable inference-time reasoning---show that Pandora's Router matches the routing quality of exhaustive estimation, while querying the expensive estimator far less often. In the decentralized setting, value-of-information reasoning improves allocative efficiency when competing estimates are accurate; when competing estimates are noisy, however, it can increase the strategic specialist's utility at the expense of others.",
+        "url": "https://arxiv.org/abs/2608.20316v1",
+        "pdfUrl": "https://arxiv.org/pdf/2608.20316v1",
+        "publishedDate": "2026-08-20T17:54:37.000Z",
+        "tags": [
+          "cs.AI"
+        ]
+      },
+      {
+        "id": "2608.20314",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "MidTool: Mid-training Data Synthesis for Agentic Tool Use",
+        "authors": [
+          "Fengqing Jiang",
+          "Yite Wang",
+          "Boyi Liu",
+          "Zhaoyang Wang",
+          "Canwen Xu",
+          "Zhewei Yao",
+          "Radha Poovendran",
+          "Yuxiong He"
+        ],
+        "summary": "Mid-training is increasingly recognized as a critical stage for shaping the capabilities of large language models. Recent work has shown that targeted mid-training can strengthen reasoning-intensive abilities such as math and science, and can also improve agentic capabilities in software-engineering settings. In this work, we study the parallel but less explored agentic capability: general tool use. We present MidTool, an open corpus construction pipeline for agentic tool-use mid-training that combines large-scale web, PDF, and code data with synthesized supervision from real-world tool APIs, MCP skills, and document-grounded workflows. MidTool is designed to teach models how to recognize tool affordances, ground arguments from context, compose tool call workflow, and recover from incomplete information. We mid-train Qwen3-4B-Base and Qwen3-8B-Base on MidTool-Mix, and then apply follow-up post-training with both supervised fine-tuning and reinforcement learning. Compared with baselines, MidTool-Mix consistently improves downstream performance under both SFT and RL on BFCL, tau2-Bench, and MCP Universe. These results suggest that general tool use, like other important LLM capabilities, benefits from dedicated mid-training rather than being left entirely to post-training.",
+        "url": "https://arxiv.org/abs/2608.20314v1",
+        "pdfUrl": "https://arxiv.org/pdf/2608.20314v1",
+        "publishedDate": "2026-08-20T17:53:59.000Z",
+        "tags": [
+          "cs.AI"
+        ]
+      }
+    ]
+  },
+  "labPosts": [
+    {
+      "id": "deepmind-715315204",
+      "type": "blog_post",
+      "source": "deepmind",
+      "title": "From Atari to EVE Online: Building on 15 Years of AI Research in Games",
+      "authors": [],
+      "summary": "Google DeepMind partners with game studios to prototype breakthrough AI gameplay.",
+      "url": "https://deepmind.google/blog/from-atari-to-eve-online-building-on-15-years-of-ai-research-in-games/",
+      "publishedDate": "2026-08-21T11:59:48.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-308693196",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Introducing AI Futures",
+      "authors": [],
+      "summary": "Introducing AI Futures, a new OpenAI blog exploring how transformative AI could reshape power, governance, the economy, and individual freedom.",
+      "url": "https://openai.com/index/introducing-ai-futures",
+      "publishedDate": "2026-08-20T07:00:00.000Z",
+      "tags": [
+        "AI Futures"
+      ]
+    },
+    {
+      "id": "openai-610316040",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Stampli cuts launch hours by 68% using ChatGPT Work",
+      "authors": [],
+      "summary": "With a fixed deadline and design resources committed elsewhere, Stampli used Codex and ChatGPT Work to compress weeks of launch production into days.",
+      "url": "https://openai.com/index/stampli",
+      "publishedDate": "2026-08-20T00:00:00.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-322541578",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Offering Zero Data Retention for frontier models",
+      "authors": [],
+      "summary": "OpenAI reaffirms Zero Data Retention for eligible API customers and previews Private Safety Processing for advanced AI safety without compromising data privacy.",
+      "url": "https://openai.com/index/offering-zero-data-retention-for-frontier-models",
+      "publishedDate": "2026-08-19T19:00:00.000Z",
+      "tags": [
+        "Company"
+      ]
+    },
+    {
+      "id": "openai-1962011310",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Replit expands access to software creation with GPT-5.6 Luna",
+      "authors": [],
+      "summary": "Replit introduces Free Mode, powered by GPT-5.6 Luna, so anyone can turn ideas into working software without worrying about token costs.",
+      "url": "https://openai.com/index/replit",
+      "publishedDate": "2026-08-19T07:00:00.000Z",
+      "tags": [
+        "Startup"
+      ]
+    },
+    {
+      "id": "openai-1323388627",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "ChatGPT Ads expands across Europe",
+      "authors": [],
+      "summary": "ChatGPT Ads is expanding to 31 European markets. Learn how advertisers can reach people as they explore, compare options, and make decisions.",
+      "url": "https://openai.com/index/chatgpt-ads-expands-across-europe",
+      "publishedDate": "2026-08-18T22:00:00.000Z",
+      "tags": [
+        "Product"
+      ]
+    },
+    {
+      "id": "openai-1939176632",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Strengthening democratic oversight in national security",
+      "authors": [],
+      "summary": "OpenAI launches an initiative to strengthen democratic oversight of AI in national security, supporting government institutions with tools, training, and expertise.",
+      "url": "https://openai.com/index/strengthening-democratic-oversight-in-national-security",
+      "publishedDate": "2026-08-18T19:00:00.000Z",
+      "tags": [
+        "Global Affairs"
+      ]
+    },
+    {
+      "id": "openai-25829121",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Partnering with CodeAI to prepare the first AI generation",
+      "authors": [],
+      "summary": "OpenAI and CodeAI are partnering to help students build AI literacy, think critically about AI, and develop the skills to use and shape it responsibly.",
+      "url": "https://openai.com/index/partnering-with-codeai",
+      "publishedDate": "2026-08-18T11:00:00.000Z",
+      "tags": [
+        "Company"
+      ]
+    },
+    {
+      "id": "openai-936462907",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Pacing model development in an era of cyber-critical capabilities",
+      "authors": [],
+      "summary": "OpenAI is strengthening monitoring, alignment, and security for frontier AI models. See how new safeguards are guiding the pace of model development.",
+      "url": "https://openai.com/index/pacing-model-development-cyber-capabilities",
+      "publishedDate": "2026-08-18T11:00:00.000Z",
+      "tags": [
+        "Company"
+      ]
+    },
+    {
+      "id": "openai-872092573",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Introducing ChatGPT for Teens: Built for learning, backed by protections",
+      "authors": [],
+      "summary": "ChatGPT for Teens helps teens learn, think critically, and use AI with confidence, with stronger built-in protections, healthy-use features, and additional controls for parents.",
+      "url": "https://openai.com/index/chatgpt-for-teens",
+      "publishedDate": "2026-08-18T11:00:00.000Z",
+      "tags": [
+        "Product"
+      ]
+    },
+    {
+      "id": "openai-1168338154",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Asana cleared 5 years of engineering work in 2 weeks with Codex",
+      "authors": [],
+      "summary": "Asana used OpenAI Codex to replace an outdated testing system in two weeks, completing work expected to take five years for about $12K.",
+      "url": "https://openai.com/index/asana",
+      "publishedDate": "2026-08-18T07:00:00.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-1897536807",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "How NVIDIA scales expertise with ChatGPT Work",
+      "authors": [],
+      "summary": "NVIDIA teams use ChatGPT Work to reduce manual tasks, connect fast-moving signals, and scale successful workflows globally.",
+      "url": "https://openai.com/index/nvidia/chatgpt-work",
+      "publishedDate": "2026-08-18T00:00:00.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-505246271",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "The Defender’s Window",
+      "authors": [],
+      "summary": "AI is reshaping cybersecurity for attackers and defenders alike. Learn how OpenAI is strengthening its defenses and what security teams can do now.",
+      "url": "https://openai.com/index/the-defenders-window",
+      "publishedDate": "2026-08-17T05:30:00.000Z",
+      "tags": [
+        "Security"
+      ]
+    },
+    {
+      "id": "openai-501532161",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "OpenAI joins PORTS-Pike project",
+      "authors": [],
+      "summary": "OpenAI joins PORTS-Pike project, expanding community investment and supporting thousands of Southern Ohio jobs",
+      "url": "https://openai.com/index/openai-joins-ports-pike-project",
+      "publishedDate": "2026-08-17T05:00:00.000Z",
+      "tags": [
+        "Global Affairs"
+      ]
+    },
+    {
+      "id": "openai-422250568",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "New policy ideas for the Intelligence Age",
+      "authors": [],
+      "summary": "OpenAI funds 14 independent projects exploring new AI policy ideas to expand economic opportunity and strengthen societal resilience in the Intelligence Age.",
+      "url": "https://openai.com/index/new-policy-ideas-for-the-intelligence-age",
+      "publishedDate": "2026-08-17T03:15:00.000Z",
+      "tags": [
+        "Global Affairs"
+      ]
+    }
+  ],
+  "stats": {
+    "totalPapersScanned": 200,
+    "totalPostsScanned": 15
+  }
+}
