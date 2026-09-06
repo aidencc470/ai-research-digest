@@ -1,0 +1,901 @@
+{
+  "slug": "2026-09-06",
+  "title": "Weekly AI Digest — September 6, 2026",
+  "dateRange": {
+    "start": "2026-08-30T15:53:13.763Z",
+    "end": "2026-09-06T15:53:13.763Z"
+  },
+  "papersByCategory": {
+    "Computer Vision": [
+      {
+        "id": "2609.04203",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Temporal Self-Distillation: Learning Visual State Tracking in Videos Without Supervision",
+        "authors": [
+          "Shravan Venkatraman",
+          "Wenshuai Zhao",
+          "Mohammad Hassan Vali",
+          "Arno Solin"
+        ],
+        "summary": "We introduce S$^3$T (Self-Supervised Self-Distillation over Time), which, to the best of our knowledge, is the first fully self-contained framework for continuous video state tracking. Our method treats temporal sampling density as privileged information, based on the hypothesis that a denser view of the same clip recovers the running state more accurately. This view serves as the teacher, while a sparse-view student with the same weights learns to match its next-token distribution. The model generates its own target, so training requires no labels, separate teacher, or reward signal, and adds no inference cost. On LLaVA-OneVision-2-8B, S$^3$T improves VSTAT accuracy by $+1.74$ as a single model, $+2.38$ with souping, and $+2.70$ with additional vision-encoder adaptation, while prior self-evolving methods leave state tracking largely unchanged. The capability learned from unlabeled synthetic clips transfers to real videos, improving performance by $+7.95$ on VSTAT-YouTube state-tracking questions and $+4.50$ on MVBench Action Count.",
+        "url": "https://arxiv.org/abs/2609.04203v1",
+        "pdfUrl": "https://arxiv.org/pdf/2609.04203v1",
+        "publishedDate": "2026-09-03T17:59:55.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2609.04202",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "TokenMatch: 3D Mesh Correspondence Transformer with Curvature-Guided Tokenisation",
+        "authors": [
+          "Adeela Islam",
+          "Zorah Lähner",
+          "Vittorio Murino",
+          "Vladislav Golyanik"
+        ],
+        "summary": "While data-driven 3D shape correspondence estimation has recently seen substantial progress, robust matching under partial observations and strong non-isometric deformations remains challenging. Existing learning-based approaches often rely on hand-crafted descriptors or template-based representations, whereas recent generative models over functional maps suffer from high inference cost, limited interpretability, and poor generalisation to partial shapes. In response to these limitations, this paper introduces TokenMatch, a new transformer-based unified model for estimating 3D shape correspondences. Our feed-forward approach trained exclusively on BeCoS, a challenging non-isometric partial-to-partial shape-matching dataset, can generalise to matching full shapes without retraining or fine-tuning. TokenMatch uses self- and cross-attention mechanisms to efficiently learn patch-level and point-level relations as well as dense correspondences between shape pairs. Our core insight is that meshes can be adaptively tokenised into patches using shape curvature guidance, enabling effective learning of shape-specific geometric descriptors for correspondence estimation. We evaluate TokenMatch on standard benchmarks for partial and full shape matching, including CP2P, PSMAL, BeCoS, FAUST, SCAPE, and SHREC'19. Our method achieves consistently high performance, in most cases outperforming existing methods for partial and full shape matching in the mean geodesic error and intersection-over-union metrics, while also running faster at sub-second inference speeds.",
+        "url": "https://arxiv.org/abs/2609.04202v1",
+        "pdfUrl": "https://arxiv.org/pdf/2609.04202v1",
+        "publishedDate": "2026-09-03T17:59:55.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2609.04201",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Scal3R: Learning Efficient Multi-Relative Pose Query for Scalable Online 3D Reconstruction",
+        "authors": [
+          "Chin-Yang Lin",
+          "Yang-Che Sun",
+          "Cheng Sun",
+          "Fu-En Yang",
+          "Min-Hung Chen",
+          "Yen-Yu Lin",
+          "Wei-Chen Chiu",
+          "Yu-Lun Liu"
+        ],
+        "summary": "Online 3D reconstruction models perform poorly on long videos. This happens because regressing poses relative to a fixed first-frame anchor forces extrapolation far beyond the training distribution. Small drifts accumulate and amplify into significant geometric collapse. However, we observe that per-frame depth remains stable throughout this failure. The backbone's local geometry remains intact; only the global pose head breaks down. Motivated by this decoupling, we introduce Scal3R. This approach reformulates online reconstruction as multi-reference relative pose querying. We use lightweight learnable tokens, which make up about ~1% of the parameters, and inject them into a completely frozen backbone via asymmetric attention. This setup queries poses relative to multiple past keyframes. An online pose-graph optimization system with loop closure suppresses long-range drift. Scal3R reaches convergence in 8 hours on a single GPU. It reduces the average ATE by over 60% on KITTI compared to the online baseline. It also achieves state-of-the-art performance across Virtual KITTI, Sintel, TUM-Dynamic, ScanNet, and 7-Scenes. Project page: https://linjohnss.github.io/scal3r/",
+        "url": "https://arxiv.org/abs/2609.04201v1",
+        "pdfUrl": "https://arxiv.org/pdf/2609.04201v1",
+        "publishedDate": "2026-09-03T17:59:53.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2609.04200",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Principia: Relational Physics Tests for Video Models",
+        "authors": [
+          "Varun Varma Thozhiyoor",
+          "Shivam Tripathi",
+          "Venkatesh Babu Radhakrishnan",
+          "Anand Bhattad"
+        ],
+        "summary": "Evaluating physical reasoning in video models is difficult because absolute motion measurements depend on frame rate, object scale, and camera calibration, all of which are often ambiguous or unavailable in generated video. We propose a different approach. When two objects in the same scene obey the same physical law, their motions must satisfy predictable relationships, and these relationships hold independent of calibration. We introduce Principia, a benchmark that evaluates Newtonian physics through relational consistency between paired objects. Principia spans eight phenomena - gravity, restitution, friction, rotational inertia, projectile motion, momentum, pendulum, and mass-spring oscillation - across translational, rotational, collisional, and oscillatory dynamics, using real-world scenes recorded under controlled protocols. We also introduce a calibration-independent consistency score that quantifies physical violation directly in image space. Across thousands of generations from six state-of-the-art video generators, no model exceeds 0.42 on Principia despite all scoring around 0.8 on VBench. Vision-language models are evaluated on their ability to detect relational physics violations, with the best model achieving only 67% accuracy and most performing near chance level.",
+        "url": "https://arxiv.org/abs/2609.04200v1",
+        "pdfUrl": "https://arxiv.org/pdf/2609.04200v1",
+        "publishedDate": "2026-09-03T17:59:50.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2609.04196",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Puffin-World: Scaling a Unified Multimodal Model with Native 3D World States",
+        "authors": [
+          "Kang Liao",
+          "Yihang Luo",
+          "Xiao-Ming Wu",
+          "Linyi Jin",
+          "Size Wu",
+          "Chunyu Lin",
+          "Yao Zhao",
+          "Fei Wang",
+          "Wei Li",
+          "Chen Change Loy"
+        ],
+        "summary": "We propose Puffin-World, a unified multimodal architecture that integrates physical understanding, spatial simulation, and 3D world generation and reconstruction without relying on external offline modules. To reliably construct and interact with 3D worlds, our framework jointly models three native world states: physics (gravity field and latitude), geometry (depth), and appearance (image), together with a unified Omni-Camera representation that supports diverse tasks and flexible motions. Beyond modeling these states, we introduce a strategy for propagating physical dynamics across future frames. By grounding absolute camera properties in the real world, Puffin-World enables physically consistent and visually stable world generation. We further couple appearance and geometry within a single generative process, jointly synthesizing each future view and reconstructing its underlying geometry. This unified paradigm enables interleaved closed-loop applications requiring synergy across multiple tasks, including mimic and self-calibrated world exploration. To scale Puffin-World to complex scenarios, we construct Puffin-16M, comprising 15 million vision-language-camera triplets and 1 million trajectories featuring various and challenging motions. To foster further research in this area, we released the code, models, and datasets.",
+        "url": "https://arxiv.org/abs/2609.04196v1",
+        "pdfUrl": "https://arxiv.org/pdf/2609.04196v1",
+        "publishedDate": "2026-09-03T17:59:13.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2609.04190",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "One Editor, Many Edits: A Unified Training-Free Framework for Diverse Video Editing",
+        "authors": [
+          "Adheesh Sunil Juvekar",
+          "Onkar Kishor Susladkar",
+          "Kiet A. Nguyen",
+          "Muntasir Wahed",
+          "Nabeel Bashir",
+          "Xiaona Zhou",
+          "Tianjiao Yu",
+          "Vedant Shah",
+          "Ismini Lourentzou"
+        ],
+        "summary": "Video editing spans diverse editing paradigms, yet achieving high-quality instruction-guided and subject-guided editing within a single unified framework remains challenging. We introduce EditVid, a training-free framework combining sparse causal memory for local coherence, correspondence-based post-attention token injection for long-range identity preservation, and soft latent blending for edit locality. The same framework supports instruction-guided and reference-guided edits, including style transfer, attribute modification, object insertion, part-level editing, and subject replacement. On FiVE, EditVid achieves 78.16 FiVE-Acc, compared with 58.95 for the strongest evaluated training-free baseline, while obtaining competitive results on IVEBench. A user study further shows a 51.8\\% overall preference for EditVid over 7 competing methods.",
+        "url": "https://arxiv.org/abs/2609.04190v1",
+        "pdfUrl": "https://arxiv.org/pdf/2609.04190v1",
+        "publishedDate": "2026-09-03T17:59:01.000Z",
+        "tags": [
+          "cs.CV",
+          "cs.AI"
+        ]
+      },
+      {
+        "id": "2609.04183",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Seeing Before Synthesizing: VLM-Guided Transition Event Discovery for Weakly-Supervised Dense Video Captioning",
+        "authors": [
+          "Ye-Chan Kim",
+          "Seunghee Choi",
+          "SeungJu Cha",
+          "Si-Woo Kim",
+          "Hwiseon Kim",
+          "Hyungee Kim",
+          "Dong-Jin Kim"
+        ],
+        "summary": "Weakly-Supervised Dense Video Captioning aims to localize and describe multiple events in untrimmed videos given only an ordered set of event-level captions per video. Recent work synthesizes auxiliary transition captions via LLM to provide additional vision-language alignment, but these captions lack visual grounding and are rigidly assigned to every inter-event gap at a fixed location and duration. To address these, we propose Seeing Before Synthesizing (SBS), a framework that adaptively provides visually grounded linguistic guidance only where warranted. Leveraging a VLM, we generate frame-level narratives for the inter-event gaps and detect transitions from the semantic variation across them. For identified transitions, we then refine inter-event temporal masks by blending the temporal midpoint with the semantic change point and selecting the width that maximizes vision-language alignment. Experiments on ActivityNet Captions and YouCook2 demonstrate state-of-the-art performance in both captioning and localization.",
+        "url": "https://arxiv.org/abs/2609.04183v1",
+        "pdfUrl": "https://arxiv.org/pdf/2609.04183v1",
+        "publishedDate": "2026-09-03T17:58:02.000Z",
+        "tags": [
+          "cs.CV",
+          "cs.AI"
+        ]
+      },
+      {
+        "id": "2609.04174",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Zero-Shot Novel Depth Synthesis Using 3D Foundation Models Scene Representations",
+        "authors": [
+          "Denis M. Akola",
+          "David F. Fouhey"
+        ],
+        "summary": "3D Foundation Models (3DFMs) such as VGGT have recently pushed the boundaries of 3D vision by predicting rich unified representations with feed-foward transformers. The scene representations learned by these models enable strong performance on multiple 3D vision tasks. In this paper, we investigate using their internal representations to infer 3D in the scene from new views. Our hypothesis is that in order to solve the task of 3D reconstruction, these models need to learn a representation that includes a large amount of general knowledge about 3D scenes. After showing that it is possible to decode hidden surfaces from internal 3DFM representations, we propose a method, Z3D, that estimates pointmaps in unseen views by doing latent diffusion on 3DFM representation. We show that Z3D can predict realistic depth maps for new views across multiple datasets.",
+        "url": "https://arxiv.org/abs/2609.04174v1",
+        "pdfUrl": "https://arxiv.org/pdf/2609.04174v1",
+        "publishedDate": "2026-09-03T17:54:52.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      }
+    ],
+    "LLMs & Language": [
+      {
+        "id": "2609.04199",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Compile by Training: Turning Natural-Language Specifications into Local Neural Functions",
+        "authors": [
+          "Yuntian Deng",
+          "Pengyu Nie",
+          "Stuart Shieber"
+        ],
+        "summary": "Many recurring text functions are easy to describe but difficult to implement with rules, while calling a large remote model for every input introduces repeated cost, latency, and dependency on a provider. We present compile by training, which turns a natural-language specification into a reusable neural function. At compile time, teacher models generate task-specific examples that are used to train a small adapter for a compact interpreter. The resulting function runs without the teachers and can be stored, versioned, and composed like ordinary software. On FuzzyBench-Hard, a subset on which the Program-as-Weights fast compiler produced no exact matches, compile by training reaches 83.6% semantic accuracy. This higher accuracy comes with a higher compile-time cost: roughly a minute rather than seconds for the fast compiler. We deploy the compiler in a public interactive service and demonstrate compiled functions in a multi-site website helper, a language-controlled 3D avatar, and a bidirectional English-Claudish translator.",
+        "url": "https://arxiv.org/abs/2609.04199v1",
+        "pdfUrl": "https://arxiv.org/pdf/2609.04199v1",
+        "publishedDate": "2026-09-03T17:59:49.000Z",
+        "tags": [
+          "cs.CL",
+          "cs.AI",
+          "cs.LG"
+        ]
+      },
+      {
+        "id": "2609.04197",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "ESPO: Error-Structured Prompt Optimization via Diagnose, Diversify, and Stabilize",
+        "authors": [
+          "Lihao Liu",
+          "Peng Tang",
+          "Kunwar Yashraj Singh",
+          "Shabnam Ghadar"
+        ],
+        "summary": "Evolutionary prompt optimizers such as GEPA suffer from prompt bloat: each iteration appends rules and caveats, producing prompts up to 3$\\times$ longer yet no more accurate. We trace this to three deficiencies - incomplete error observation, limited search diversity, and unreliable selection - and propose ESPO (Error-Structured Prompt Optimization), which decomposes prompt optimization into three phases: Diagnose clusters all training errors into structural patterns in one round; Propose generates candidates via four complementary strategies with independent biases; Select applies bootstrap stability selection. On seven public NLP benchmarks - Tweet, MMLU, GSM8K, HotpotQA, ScoNe, HoVer, and PUPA - ESPO improves average accuracy by $+$3.76 pp over the state-of-the-art (74.67% vs 70.91% for GEPA), matching or exceeding GEPA on every dataset while producing prompts 47% shorter (1,004 vs 1,878 chars) and faster at inference. Cross-model experiments across four additional student models (Gemma 3 12B, Mistral 14B, Qwen3 32B, Claude Haiku 4.5) show ESPO yields the best average accuracy on every model tested, with the largest gap on Qwen3 GSM8K (15.00% $\\to$ 91.40%). A generalization bound (Appendix) grounds each phase in a corresponding term of the test-time gap, and the ablation confirms a key prediction: adding diversity without bootstrap selection actually hurts performance ($-$1.20%).",
+        "url": "https://arxiv.org/abs/2609.04197v1",
+        "pdfUrl": "https://arxiv.org/pdf/2609.04197v1",
+        "publishedDate": "2026-09-03T17:59:37.000Z",
+        "tags": [
+          "cs.CL",
+          "cs.AI"
+        ]
+      },
+      {
+        "id": "2609.04194",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Legibility is Not Interpretability: Comparing Judged and Actual Importance in Chain-Of-Thought Reasoning",
+        "authors": [
+          "Kevin Du",
+          "Alexander Hoyle",
+          "Laura Ruis",
+          "Acyr Locatelli"
+        ],
+        "summary": "Reasoning traces from chain-of-thought models appear to offer a legible window into how a model arrives at its answer. A growing body of work treats them as such, using LLM judges to diagnose errors, evaluate faithfulness, and provide step-level supervision via process reward models and generative critics. These practices rely on the text of a reasoning step carrying information about its functional role. But does the text actually encode information about which reasoning steps matter? We operationalize the importance of a reasoning step as its advantage: the change in expected reward, e.g., producing the correct final answer, from including that step, estimated via Monte Carlo rollouts. Basing ground truth on these estimates, we evaluate whether LLM judges can identify high-advantage steps and find that sufficiently capable LLMs can outperform a prevalence baseline but fall well short of a noise ceiling. Fine-tuning a model as a step-level critic yields strong improvement for incorrect responses but remains distant from ceiling for correct responses, suggesting that step importance is only partially recoverable from the text of the reasoning trace. Our findings contribute to a growing body of chain-of-thought faithfulness work that cautions against treating the legibility of reasoning traces as interpretability, especially with implications for process reward modeling.",
+        "url": "https://arxiv.org/abs/2609.04194v1",
+        "pdfUrl": "https://arxiv.org/pdf/2609.04194v1",
+        "publishedDate": "2026-09-03T17:59:08.000Z",
+        "tags": [
+          "cs.CL",
+          "cs.LG"
+        ]
+      },
+      {
+        "id": "2609.04180",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Knowledge Acquisition During Pre-training? Large Language Models Learn Better With Auxiliary Views",
+        "authors": [
+          "Joseph Lee",
+          "Yidi Huang",
+          "Dokyoon Kim",
+          "Shu Yang",
+          "Li Shen"
+        ],
+        "summary": "Gaps remain in our understanding of how large language models (LLMs) acquire knowledge during pre-training. We posit that auxiliary views, reformulations of knowledge, are causally helpful for learning. We design controlled experiments to isolate this. First, we confirm that repetition is necessary for acquisition and clarify that paraphrasing helps only at smaller batch sizes. Second, holding the token budget fixed, allocating tokens from document repetition to auxiliary views improves learning, counterintuitively, even for factual recall. Third, the effectiveness of auxiliary views is not contingent on the strength of the teacher model that generates them. Fourth, we identify forms of knowledge, contextual and foundational, that aid learning in the presence of prior knowledge gaps. Finally, we examine how these effects manifest mechanistically via layer-wise biases and compression. Together, our findings suggest that auxiliary representations of knowledge, which arise naturally in large pre-training corpora, are a key factor in the success of pre-training and offer a plausible explanation for why data diversity matters.",
+        "url": "https://arxiv.org/abs/2609.04180v1",
+        "pdfUrl": "https://arxiv.org/pdf/2609.04180v1",
+        "publishedDate": "2026-09-03T17:57:02.000Z",
+        "tags": [
+          "cs.CL",
+          "cs.AI"
+        ]
+      },
+      {
+        "id": "2609.04173",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Last Translation Benchmark",
+        "authors": [
+          "Vilém Zouhar",
+          "Niyati Bafna",
+          "Mukund Choudhary",
+          "Maike Züfle",
+          "Sara Rajaee",
+          "Pinzhen Chen",
+          "Jannis Vamvas",
+          "Sara Papi",
+          "Ona de Gibert",
+          "Bhavitvya Malik",
+          "Eliya Habba",
+          "Orfeas Menis Mastromichalakis",
+          "Patrícia Schmidtová",
+          "Michelle Wastl",
+          "Sheriff Issaka",
+          "Leshem Choshen",
+          "Stella Biderman",
+          "Antonis Anastasopoulos",
+          "Jan Niehues",
+          "Rico Sennrich",
+          "Mrinmaya Sachan",
+          "Ondřej Bojar",
+          "Kenton Murray",
+          "Jörg Tiedemann",
+          "Alham Fikri Aji",
+          "Philipp Koehn",
+          "Christof Monz",
+          "Alexandra Birch",
+          "Sowmya Vajjala",
+          "Chalamalasetti Kranti",
+          "Cristina España-Bonet",
+          "Nobin Sarwar",
+          "David Kaczér",
+          "Shunta Asano",
+          "Malik Marmonier",
+          "Daban Q. Jaff",
+          "Vaisakhi Mishra",
+          "Hend Al- Khalifa",
+          "Gabriele Sarti",
+          "Sourajit Saha",
+          "Nils Rehlinger",
+          "Juan Daniel Cuervo Villa",
+          "Jonathan Tonglet",
+          "Saugata Purkayastha",
+          "Dominik Macháček",
+          "Jagannathan Ramanujam",
+          "Heejin Do",
+          "Zuzana Nadova",
+          "Fred Philippy",
+          "Fabian Retkowski",
+          "Maria Lymperaiou",
+          "Silvia Casola",
+          "Hanna Yukhymenko",
+          "Shubhashis Roy Dipta",
+          "Sangwon Ryu",
+          "Andrés Jerez",
+          "Ron Keinan",
+          "Shuaib Shuaib Yusuf",
+          "Avantica Vempati",
+          "Maria Carmen Staiano",
+          "Sukannya Purkayastha",
+          "Adrian Cosma",
+          "Vitalii Babenko",
+          "Erivan Inan",
+          "Aviral Nigam",
+          "Wafa Aissa",
+          "Fatima Haouari",
+          "Venkata Prasanth Kumar Gummadi",
+          "Mehdi Jafarzadeh",
+          "Valentin Scourneau",
+          "Lukas Edman",
+          "Kaiser Sun",
+          "Shaomu Tan",
+          "Mohammad Sadegh Gholizadeh",
+          "Johannes-Rudolf David",
+          "Dipankar Srirag",
+          "Javier García Gilabert",
+          "Ruta Binkyte",
+          "Manar Ali",
+          "Ana-Maria Bucur",
+          "Sabry E. Farrag",
+          "Youssef Saber",
+          "Yihong Liu",
+          "Jean Maillard",
+          "Cojocaru Nicoleta",
+          "Xiaochuang Yuan",
+          "Sina Ahmadi",
+          "Philipp Mondorf",
+          "Kaustubh Dhole",
+          "Roman Wixinger",
+          "Shenbin Qian",
+          "Manuel Tuor",
+          "Sergey Troshin",
+          "Jonathan Yahav",
+          "Fida Mohammad Thoker",
+          "Amir Arsalan Rezapour",
+          "Lance Calvin Lim Gamboa",
+          "Manon Reusens",
+          "Kätriin Kukk",
+          "Koel Dutta Chowdhury",
+          "Giuseppe Gallipoli",
+          "Christian Hoang",
+          "Shaswati Saha",
+          "Seth Aycock",
+          "Jan Kocoń",
+          "Bo Chen",
+          "Linh Vu",
+          "Vatsal Venkatkrishna",
+          "Arafat Ahsan",
+          "Luan Thanh Nguyen",
+          "Hassan Soliman",
+          "Daryna Dementieva",
+          "Theresia Veronika Rampisela",
+          "Ngoc Quynh Tram Do",
+          "Marius Huber",
+          "Kazuki Egashira",
+          "Azmine Toushik Wasi",
+          "Vladislav Poritski",
+          "Mike Zhang",
+          "Deep Shah",
+          "Paul Gavrikov",
+          "Luis Frentzen Salim",
+          "David Africa",
+          "R. Damanhuri",
+          "Bello Umar Bello",
+          "Anumit Garg",
+          "Gengyu Rao",
+          "Pawan Sasanka Ammanamanchi",
+          "Kamile Dementaviciute",
+          "Andrianos Michail",
+          "L D M S Sai Teja",
+          "Dawei Zhu",
+          "Yi Fan",
+          "Wei Liu",
+          "Farhan Farsi",
+          "Elias Herranen",
+          "Sankalan Pal Chowdhury",
+          "Karen Sanchez",
+          "Farzad Shami",
+          "Ashok Urlana",
+          "Zimu Wang",
+          "Tomasz Limisiewicz",
+          "Priyaranjan Pattnayak",
+          "Marii Ojastu",
+          "Hongbin Na",
+          "Emilian Radoi",
+          "Chenyi Zhao",
+          "Carlos Hinojosa",
+          "Andrea Gregor de Varda",
+          "Zaid Alyafeai",
+          "Reem Alzahrani",
+          "Nehal Kathrotia",
+          "Alex Flückiger",
+          "Ulysses Sekai Tully Carr",
+          "Jimson Paulo Layacan",
+          "Guy Kaplan",
+          "Ritwik Tiwari",
+          "Rishit Dagli",
+          "Oksana Volchek",
+          "Isaac R Caswell",
+          "Bowen Yi",
+          "Blanka Kövér",
+          "Amir Hossein Yari",
+          "Aicha Chorana",
+          "Zhengxiang Wang",
+          "Selja Keränen",
+          "Samuel Simko",
+          "Joy Olusanya",
+          "Jenny Chim",
+          "Enzo Doyen",
+          "Vivek Harsha Lakkamaneni",
+          "Sophia Conrad",
+          "Pouya Sadeghi",
+          "Panayiotis Panayiotou",
+          "Luis Lara",
+          "Jannatul Nayem",
+          "Eran Yahav",
+          "Debanshu Das",
+          "Antonia Karamolegkou",
+          "Anmol Goel",
+          "Aishik Mandal",
+          "Tommaso Cerruti",
+          "Raoyuan Zhao",
+          "Mykola Haltiuk",
+          "Thura Aung",
+          "Naser Almousa",
+          "Amir Hossein Kargaran",
+          "Rachel Bawden",
+          "Qiaoyuan Zheng",
+          "Mateusz Lango",
+          "Beni Egressy",
+          "Fidel Rodríguez Velásquez",
+          "Natchapon Jongwiriyanurak",
+          "Minh Ngoc Do",
+          "Marco Gaido",
+          "Lena Libon",
+          "Dzmitry Kuzmin",
+          "Badal Nyalang",
+          "Antoine Taroni",
+          "Andrei Niculae",
+          "Abdulaziz Nura Kani",
+          "Rushikesh Zawar",
+          "Marek Šuppa",
+          "Beatrice Savoldi",
+          "Andreas Simons",
+          "Rayyan Merchant",
+          "Ilai Yaron Levy",
+          "Francesco Pinto",
+          "Ziyi Yang",
+          "Yolanda Xavier",
+          "Samuel Frontull",
+          "Muhammad Ravi Shulthan Habibi",
+          "Kenneth Enevoldsen",
+          "Harris Abdul Majid",
+          "Francesca Padovani",
+          "Tim Graf",
+          "Tatiana Bielakova",
+          "Sharifa Djurabaeva",
+          "Shaoxiong Ji",
+          "Raia Abu Ahmad",
+          "Pavel Stepachev",
+          "Jirui Qi",
+          "Ayush Sunil Munot",
+          "Alireza Pakniat",
+          "Ayla Rigouts Terryn",
+          "Yuxing Lu",
+          "Yurii Paniv",
+          "Xiyan Fu",
+          "Tosin Adewumi",
+          "Sunisth Kumar",
+          "Stéphane J. P. S. Thunus",
+          "Shree Harsha Bokkahalli Satish",
+          "Shayan Bali",
+          "Prakhar Gupta",
+          "Papa Abdou Karim Karou Diallo",
+          "Matija Akrap",
+          "Marko Culjak",
+          "Kristýna Onderková",
+          "Joseph Attieh",
+          "Esrael Teferi Tensay",
+          "Elisabeth Fittschen",
+          "Benoît Sagot",
+          "Jingwei Ni",
+          "Yu Fan"
+        ],
+        "summary": "For scientific progress, we need benchmarks that test the limits of state-of-the-art models, and evaluation methods that inform us about failure cases. As models get stronger, standard benchmarks for machine translation are approaching saturation. Further, automatic translation metrics are unreliable, vulnerable to reward-hacking, and provide unactionable assessments. Even gold human evaluation is not problem-free, because it often lacks reproducibility, objectivity, and scalability. Overall, this prevents us from tracking objective progress in the field and identifying pathways for improvement. We introduce the Last Translation Benchmark, a collection of human-authored and peer-reviewed examples (texts, images, audio, videos) that break leading machine translation models. We also present a new evaluation approach: each example comes with handcrafted verification rules describing concrete failure cases on that example, therefore allowing reliable and actionable future evaluation. The Last Translation Benchmark is a live dataset that accepts ongoing contributions. The latest version is LTBv1, containing accepted contributions prior to September 1st 2026, with future releases planned as new data is continuously collected.",
+        "url": "https://arxiv.org/abs/2609.04173v1",
+        "pdfUrl": "https://arxiv.org/pdf/2609.04173v1",
+        "publishedDate": "2026-09-03T17:54:45.000Z",
+        "tags": [
+          "cs.CL"
+        ]
+      },
+      {
+        "id": "2609.04172",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Rethinking On-Policy Distillation of Large Language Models II: One Training Example",
+        "authors": [
+          "Zixuan Fu",
+          "Bingxiang He",
+          "Yuxin Zuo",
+          "Haohuan Huang",
+          "Jinqian Zhang",
+          "Ruhang Xiao",
+          "Cheng Qian",
+          "Qinyu Luo",
+          "Huan-ang Gao",
+          "Yudong Wang",
+          "Zhiyuan Liu",
+          "Ning Ding",
+          "Chaojun Xiao"
+        ],
+        "summary": "On-policy distillation (OPD) combines student-generated rollouts with dense token-level supervision from a teacher. Existing work has mainly studied its algorithmic behavior, leaving the role of training data unclear. We examine this role at the data-minimal limit by training on a single query. One-shot OPD keeps improving for hundreds of steps and recovers most of full-data OPD's gain across task domains and model families. We explain this result through the states visited during training and the rate at which the student aligns with the teacher. We measure \\emph{state coverage}, the fraction of the states full-data OPD visits that a query set's rollouts reach. A single query already reaches \\(71.5\\%\\), most of it within the first 100 steps. Adding semantically distinct queries raises coverage and validation accuracy together, until 16 queries reach \\(98.9\\%\\) and match full-data training. Yet alignment slows at a similar pace whether OPD trains on one query or the whole dataset, and even a fixed set of states takes hundreds of steps to absorb. OPD is therefore data-overfed but algorithm-starved. Its rollouts quickly expose broad supervision, while the student absorbs that supervision increasingly slowly. The state-coverage result extends to multi-teacher OPD, where 16 semantically diverse queries per domain match full-data MOPD. As a further stress test, content-light templates and off-domain WildChat queries also approach the real-query baseline. Task content and induced state coverage can therefore come apart. We hope these findings direct future work toward the step efficiency of OPD, and prompt a re-examination of the data and the mechanisms behind its recent successes in frontier post-training.",
+        "url": "https://arxiv.org/abs/2609.04172v1",
+        "pdfUrl": "https://arxiv.org/pdf/2609.04172v1",
+        "publishedDate": "2026-09-03T17:54:38.000Z",
+        "tags": [
+          "cs.AI",
+          "cs.CL"
+        ]
+      }
+    ],
+    "Machine Learning": [
+      {
+        "id": "2609.04198",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Clean Engineering, Unstable Measurement: A Preregistered Reliability Failure of Black-Box LLM Observers on Shared Endpoints",
+        "authors": [
+          "Haoyaun Zhu",
+          "Jie Zhang"
+        ],
+        "summary": "Language-model judges now gate training data, score generations, and drive leaderboards. The judge is then a measurement instrument, resting on one rarely stated assumption: the same request, sent to the same model name, reads the same tomorrow. We audited that assumption in two preregistered campaigns with every threshold fixed in advance; neither got past validating its instrument. Across 52,988 audited request attempts, same-window repeat rankings agreed at Spearman 0.400 against a required 0.90, and byte-identical next-day replays agreed at 0.78 against a required 0.99, each time with the execution record at ceiling. Three mechanisms explain the gap: a label-to-meaning mapping that biased readouts as strongly as the signal; candidate gaps seven orders of magnitude below the instrument's own noise floor; and byte-identical inputs returning different rankings, a noise that exact-permutation readouts compound. Neither metric substitution nor sampling repaired it on the tested grid. Preregistered follow-ups bound the problem: waiting did not help on the days sampled (0.805 versus 0.800, replicated over five further days); switching providers did not help (four providers share the floor, medians 0.74 to 0.88, predicted by none of the metadata fields they expose); self-hosting on batch-invariant kernels helped only while the server was quiet; and on constructed errors with known gaps, the readout's separation tracks error type, not size. We distill the evidence into a three-level snapshot-identity ladder, eight design rules, and a reporting checklist; a pilot at roughly 2% of the study's call volume would have exposed both unreachable gates in advance. All results concern externally measured behaviour on shared serving infrastructure. On a shared endpoint, a model name is not a frozen instrument; a preregistered evaluation must measure its instrument before freezing any gate on it.",
+        "url": "https://arxiv.org/abs/2609.04198v1",
+        "pdfUrl": "https://arxiv.org/pdf/2609.04198v1",
+        "publishedDate": "2026-09-03T17:59:43.000Z",
+        "tags": [
+          "cs.AI",
+          "cs.LG"
+        ]
+      },
+      {
+        "id": "2609.04189",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Robust PAC Learning of Concurrent Stochastic Games",
+        "authors": [
+          "Angel Y. He",
+          "David Parker"
+        ],
+        "summary": "We introduce the first Probably Approximately Correct (PAC) learning framework for general-sum concurrent stochastic games (CSGs) with transition uncertainty, while addressing the challenge of Nash equilibrium (NE) existence. Our algorithm maintains data-driven $L^1$ confidence sets over transition kernels and solves a robust CSG to compute a social-welfare optimal $\\varepsilon$-NE, using a robust MDP-based exploration mechanism to drive joint state-action coverage. Crucially, we introduce a Nash margin characterisation that enables principled reasoning about equilibrium existence: the framework either returns an $\\varepsilon$-approximate NE whose social-welfare value is $\\varepsilon$-close to optimal, or provides a sound certificate that no exact NE exists. Under a minimum reachability condition $p_{\\mathrm{reach}}>0$ over relevant state-action pairs, the algorithm terminates after a polynomial number of trajectory samples, with sample complexity $\\widetilde{O}\\left( {R_{\\max}^2 H^4 |S|^2 |A| / (p_{\\mathrm{reach}} \\varepsilon^2)} \\right)$. Empirical results on benchmark CSGs demonstrate near-optimal performance, correct handling of equilibrium (non-)existence, and sample complexity consistent with theory.",
+        "url": "https://arxiv.org/abs/2609.04189v1",
+        "pdfUrl": "https://arxiv.org/pdf/2609.04189v1",
+        "publishedDate": "2026-09-03T17:58:57.000Z",
+        "tags": [
+          "cs.LG",
+          "cs.GT",
+          "cs.LO",
+          "cs.MA"
+        ]
+      },
+      {
+        "id": "2609.04168",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Para-Pipe: Exploiting Hierarchical Operator Parallelism of ML Computational Graphs on SoCs",
+        "authors": [
+          "Yujie Zhang",
+          "Huiying Lan",
+          "Ehsan Aghapour",
+          "Zhiyuan Ning",
+          "Peng Zan",
+          "Weidong Shao",
+          "Anuj Pathania",
+          "Tulika Mitra"
+        ],
+        "summary": "As edge-based deep learning applications become more complex, optimizing performance on heterogeneous System-on-Chips (SoCs) presents unique challenges. Traditional pipelining techniques distributing the computation across different on-chip processing units, while effective for throughput, do not address the latency demands posed by modern neural networks with complex interdependencies and extensive operator parallelism. There is a potential in leveraging operator parallelism to enable concurrent execution across multiple processing units, thereby reducing inference latency. However, prioritizing pipelining or parallel execution often necessitates a compromise, where optimizing one performance metric adversely impacts the other. This paper introduces Para-Pipe, a hierarchical mapping framework that integrates intra- and inter-stage operator parallelism within a pipelined architecture. Para-Pipe navigates the trade-off between throughput and latency by selectively fine-tuning parallelism levels within and across pipeline stages. This strategy can significantly reduce inter-processor communication overhead, significantly improving energy efficiency. Our evaluation demonstrates that Para-Pipe generates multiple Pareto-optimal configurations, achieving a balance between throughput and latency on an Amlogic SoC equipped with ARM big.LITTLE CPUs and GPU, as well as the Black Sesame Technology SoC featuring a deep learning accelerator and two DSPs. More importantly, throughput-optimized configurations under Para-Pipe on Amlogic SoC show an average energy efficiency improvement of 11.0% over purely pipelined strategies and 23.3% relative to non-pipelined parallel execution.",
+        "url": "https://arxiv.org/abs/2609.04168v1",
+        "pdfUrl": "https://arxiv.org/pdf/2609.04168v1",
+        "publishedDate": "2026-09-03T17:53:44.000Z",
+        "tags": [
+          "cs.DC",
+          "cs.LG",
+          "cs.PF"
+        ]
+      }
+    ],
+    "AI & Agents": [
+      {
+        "id": "2609.04177",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "A Computationally Feasible Framework for Causal Probabilistic Explanation",
+        "authors": [
+          "Rafal Urbaniak",
+          "Sam Witty",
+          "Daniel Waxman",
+          "Andy Zane",
+          "Poorva Garg",
+          "Emily Bunnapradist",
+          "Sankaran Vaidyanathan",
+          "Jack Feser",
+          "Drew Lehe",
+          "Eli Bingham"
+        ],
+        "summary": "Explaining why a specific outcome occurred, and which inputs deserve the blame or credit, is central to philosophical, scientific, and policy analysis. Existing tools split into two camps. The theory of actual causality (AC) gives principled verdicts, but only for toy-sized models, because computing them requires enumerating counterfactual scenarios. Scalable attribution methods like SHAP (or even causal SHAP) at least partially ignore the causal structure that generated the data, and can give answers that conflict with a careful causal analysis. We close this gap with Probabilistic Causal Impact (PCI). PCI builds on actual causality and on Pearl's notions of probability of necessity and sufficiency, but recasts the question of explainability as an estimation problem on a probabilistic causal model that is easily approximated via Monte Carlo. By specifying a distribution over \"candidate explanations,\" a distribution over counterfactual values, and a scoring function, PCI provides tractable, causally grounded, graded explanations, generalizing AC and Pearl's probability of causation as degenerate cases. We evaluate PCI in synthetic and real-world examples, spanning consistency checks with AC, scaling experiments, complex continuous-valued dynamical systems, and a real-world deployed causal machine learning model trained on millions of datapoints.",
+        "url": "https://arxiv.org/abs/2609.04177v1",
+        "pdfUrl": "https://arxiv.org/pdf/2609.04177v1",
+        "publishedDate": "2026-09-03T17:55:43.000Z",
+        "tags": [
+          "cs.AI"
+        ]
+      },
+      {
+        "id": "2609.04170",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "A Case Study on Emergent Cheating and Whistleblowing in Autonomous Research Swarms",
+        "authors": [
+          "Davide Paglieri",
+          "Logan Cross",
+          "Tim Genewein",
+          "Joel Z. Leibo",
+          "Nenad Tomasev",
+          "Alexander Sasha Vezhnevets"
+        ],
+        "summary": "Multi-agent AI science ecosystems rely on agents possessing tools that allow them to communicate, coordinate, and build on each other's work. Yet this shared infrastructure can also introduce vulnerabilities by creating a substrate for the contagious spread of unintended and undesirable behaviors. We report a case study on a research collective of 100 autonomous LLM agents tasked with proving formal mathematical conjectures. Within the swarm, cheating spontaneously emerged and was later challenged by whistleblowers - both without any external intervention. When a single agent discovered an exploit in the evaluation system, it propagated across the collective via a shared knowledge library and later through peer-to-peer messages. Despite early reluctance, a cohort of agents adopted the exploit in response to competitive pressure. A separate group of agents produced an emergent counter-response: auditing fraudulent proofs, alerting peers across broadcast and private channels, staging boycotts, lodging formal complaints, and proposing validation patches. In recent incidents, agent swarms coordinated covertly through improvised side-channels (Dalton and Wallace, 2026; Greenblatt et al., 2026). Our setting differs: the same transparent channels that carried the exploit also gave non-cheating agents the visibility they needed to detect fraud, organize resistance, and enforce norms. We cast the problem of managing the agents' shared infrastructure as the knowledge commons governance problem (Ostrom, 1990). To protect the commons from exploits, we propose to adopt institutional mechanisms, such as graduated sanctioning and collective-choice rules, to support decentralized self-governance in autonomous swarms.",
+        "url": "https://arxiv.org/abs/2609.04170v1",
+        "pdfUrl": "https://arxiv.org/pdf/2609.04170v1",
+        "publishedDate": "2026-09-03T17:54:09.000Z",
+        "tags": [
+          "cs.AI"
+        ]
+      },
+      {
+        "id": "2609.04167",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "SWE-Gate: Passing Functional Tests Is Not Enough for Software Engineering Agents",
+        "authors": [
+          "Xin He",
+          "Yanlin Wang",
+          "Mingwei Liu",
+          "Jiachi Chen",
+          "Hongyu Zhang",
+          "Guanbin Li"
+        ],
+        "summary": "Repository-level software engineering benchmarks have significantly advanced the evaluation of coding agents, but existing benchmarks primarily measure whether generated patches pass functional tests and overlook review-derived acceptance constraints (review constraints) that often influence whether a patch is acceptable in real-world software development. We introduce SWE-Gate, a repository-level benchmark for software engineering agents that explicitly evaluates review constraint compliance alongside functional correctness. SWE-Gate derives review constraints from real pull request review comments and synthesizes repository-level repair instances around these constraints. Each instance provides separate functional and constraint tests, together with non-compliant and gold patches, enabling explicit separation between issue resolution capability and review constraint compliance. We construct SWE-Gate with 303 repository-level repair instances spanning 75 open-source Python repositories across diverse software domains. Experiments with four LLM backends spanning different capability levels under a common coding-agent scaffold reveal a substantial gap between functional success and success under the complete repair specification: among 644 repairs that pass the functional tests, 221 fail to satisfy the provided review constraints. These findings show that functional-only evaluation overestimates agents' ability to satisfy the full requirements of repository-level repair tasks. The replication package including code, data, and experimental results is available at https://github.com/DeepSoftwareAnalytics/SWE-Gate.",
+        "url": "https://arxiv.org/abs/2609.04167v1",
+        "pdfUrl": "https://arxiv.org/pdf/2609.04167v1",
+        "publishedDate": "2026-09-03T17:53:34.000Z",
+        "tags": [
+          "cs.SE",
+          "cs.AI"
+        ]
+      }
+    ]
+  },
+  "labPosts": [
+    {
+      "id": "deepmind-279826976",
+      "type": "blog_post",
+      "source": "deepmind",
+      "title": "Introducing WeatherNext 3, our most advanced and accurate global weather AI model",
+      "authors": [],
+      "summary": "",
+      "url": "https://deepmind.google/blog/introducing-weathernext-3-our-most-advanced-and-accurate-global-weather-ai-model/",
+      "publishedDate": "2026-09-03T15:02:08.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-846295734",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Daybreak for Frontline Defenders: $1B to protect essential services",
+      "authors": [],
+      "summary": "OpenAI introduces Daybreak for Frontline Defenders. A $1 billion commitment expands access to frontier cyber AI, training, and support for essential services.",
+      "url": "https://openai.com/index/daybreak-for-frontline-defenders",
+      "publishedDate": "2026-09-03T13:15:00.000Z",
+      "tags": [
+        "Security"
+      ]
+    },
+    {
+      "id": "openai-700504930",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Playco cut manual fixes 50% prototyping games with GPT-6 Astra",
+      "authors": [],
+      "summary": "Using GPT-6 Astra, Playco built three themed game prototypes from one grey box foundation and reported 50% fewer manual fixes than with the previous model.",
+      "url": "https://openai.com/index/playco-game-prototyping-with-astra",
+      "publishedDate": "2026-09-03T12:00:00.000Z",
+      "tags": [
+        "Startup"
+      ]
+    },
+    {
+      "id": "openai-1176521304",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Legora reviewed 41 documents in minutes with GPT-6 Astra",
+      "authors": [],
+      "summary": "Legora used GPT-6 Astra to review 41 documents in minutes, find all four planted errors, and improve performance by nearly 40% in this financial-review workflow.",
+      "url": "https://openai.com/index/legora-financial-statement-review-with-astra",
+      "publishedDate": "2026-09-03T12:00:00.000Z",
+      "tags": [
+        "Startup"
+      ]
+    },
+    {
+      "id": "openai-1810324288",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "GPT-6 Astra: A new generation of intelligence",
+      "authors": [],
+      "summary": "Introducing GPT-6 Astra, our most intelligent and aligned model yet, with state-of-the-art capabilities across computer use, coding, cybersecurity, and science.",
+      "url": "https://openai.com/index/gpt-6-astra",
+      "publishedDate": "2026-09-03T11:00:00.000Z",
+      "tags": [
+        "Research"
+      ]
+    },
+    {
+      "id": "openai-1474280711",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Safety overview: GPT-6 Astra",
+      "authors": [],
+      "summary": "GPT-6 Astra is our most capable broadly deployed model and our first to reach the Critical level of cybersecurity capability under our Preparedness Framework.",
+      "url": "https://openai.com/index/safety-overview-gpt-6-astra",
+      "publishedDate": "2026-09-03T00:00:00.000Z",
+      "tags": [
+        "Safety"
+      ]
+    },
+    {
+      "id": "deepmind-998226315",
+      "type": "blog_post",
+      "source": "deepmind",
+      "title": "Proactive cyber defense for governments and enterprises",
+      "authors": [],
+      "summary": "",
+      "url": "https://deepmind.google/blog/proactive-cyber-defense-for-governments-and-enterprises/",
+      "publishedDate": "2026-09-02T16:24:24.000Z",
+      "tags": []
+    },
+    {
+      "id": "deepmind-1968609994",
+      "type": "blog_post",
+      "source": "deepmind",
+      "title": "Introducing Gemini 3.8 Flash and 3.8 Flash Cyber",
+      "authors": [],
+      "summary": "",
+      "url": "https://deepmind.google/blog/introducing-gemini-3-8-flash-and-38-flash-cyber/",
+      "publishedDate": "2026-09-02T16:18:31.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-2037831818",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "ATV Big Air Tour turned 3 days of work into 3 hours with ChatGPT",
+      "authors": [],
+      "summary": "ATV Big Air Tour uses ChatGPT Work to speed up marketing, merchandising, and more. It even turned merchandise photos into an inventory website in 15 minutes.",
+      "url": "https://openai.com/index/atv-big-air-tour",
+      "publishedDate": "2026-09-02T12:00:00.000Z",
+      "tags": []
+    },
+    {
+      "id": "deepmind-1286721275",
+      "type": "blog_post",
+      "source": "deepmind",
+      "title": "Introducing agentic video understanding with Gemini",
+      "authors": [],
+      "summary": "",
+      "url": "https://deepmind.google/blog/introducing-agentic-video-in-gemini/",
+      "publishedDate": "2026-09-01T17:08:51.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-727808101",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "How AI-native companies turn workflows into operating capability",
+      "authors": [],
+      "summary": "Basis, Clay, and Exa Labs use AI agents to improve onboarding, account management, and developer integrations. See what enterprise leaders can apply.",
+      "url": "https://openai.com/index/ai-native-company-workflows",
+      "publishedDate": "2026-09-01T17:00:00.000Z",
+      "tags": [
+        "AI Adoption"
+      ]
+    },
+    {
+      "id": "openai-1354874767",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Path to Astra: critical capabilities and frontier safeguards",
+      "authors": [],
+      "summary": "Astra is the first OpenAI model to meet the Critical cybersecurity capability threshold under the Preparedness Framework, with stronger safeguards for release.",
+      "url": "https://openai.com/index/path-to-astra",
+      "publishedDate": "2026-09-01T13:00:00.000Z",
+      "tags": [
+        "Safety"
+      ]
+    },
+    {
+      "id": "openai-2076033096",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Healthcare organizations can now connect EHR and additional industry data to ChatGPT",
+      "authors": [],
+      "summary": "ChatGPT can now connect to trusted healthcare data, helping clinicians securely access patient context, medical research, and more.",
+      "url": "https://openai.com/index/chatgpt-connects-health-records-and-healthcare-sources",
+      "publishedDate": "2026-09-01T12:00:00.000Z",
+      "tags": [
+        "Product"
+      ]
+    },
+    {
+      "id": "openai-1939092086",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "How law firm Gilbert + Tobin governs and scales AI with OpenAI",
+      "authors": [],
+      "summary": "See how Gilbert + Tobin combines CEO-led commitment, rigorous governance, and human accountability to scale ChatGPT Enterprise and Codex across the firm.",
+      "url": "https://openai.com/index/gilbert-tobin",
+      "publishedDate": "2026-09-01T01:00:00.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-34161965",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "OpenAI supports California’s bill to advance youth AI safety",
+      "authors": [],
+      "summary": "OpenAI supports California SB 1119, advancing strong, age-appropriate AI safeguards for teens while preserving opportunities to learn, create, and explore.",
+      "url": "https://openai.com/index/supporting-california-bill-advance-ai-youth-safety",
+      "publishedDate": "2026-08-31T07:00:00.000Z",
+      "tags": [
+        "Company"
+      ]
+    },
+    {
+      "id": "openai-975047760",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Polimill builds Japan's next-generation public AI infrastructure",
+      "authors": [],
+      "summary": "Polimill uses OpenAI GPT models and Codex to help municipalities search and use administrative knowledge while accelerating development.",
+      "url": "https://openai.com/index/polimill",
+      "publishedDate": "2026-08-31T07:00:00.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-938682734",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "A milestone in expanding access to AI",
+      "authors": [],
+      "summary": "ChatGPT Ads reaches $1 billion in annualized revenue run rate and expands globally, supporting broader access to AI through free and affordable options.",
+      "url": "https://openai.com/index/expanding-access-to-ai-with-chatgpt-ads",
+      "publishedDate": "2026-08-31T04:00:00.000Z",
+      "tags": [
+        "Product"
+      ]
+    }
+  ],
+  "stats": {
+    "totalPapersScanned": 200,
+    "totalPostsScanned": 17
+  }
+}
