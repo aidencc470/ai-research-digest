@@ -1,0 +1,693 @@
+{
+  "slug": "2026-10-25",
+  "title": "Weekly AI Digest — October 25, 2026",
+  "dateRange": {
+    "start": "2026-10-18T16:53:58.319Z",
+    "end": "2026-10-25T16:53:58.319Z"
+  },
+  "papersByCategory": {
+    "Computer Vision": [
+      {
+        "id": "2610.31671",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "A Unified Framework for Image-to-3D Part Generation via Variable Granularity",
+        "authors": [
+          "Qiwen Gu",
+          "Xin Zhou",
+          "Xiwu Chen",
+          "Zhongyang Zhu",
+          "Zhuo Zhang",
+          "Junqiao Zhao"
+        ],
+        "summary": "Controllable 3D part generation is pivotal for digital asset creation, yet existing methods lack the flexibility to accommodate diverse user workflows requiring varying levels of control. In this paper, we introduce FlexPart, a unified image-to-3D part generation framework that supports variable-granularity geometric conditions within a single model. By seamlessly integrating heterogeneous inputs, ranging from sparse points to dense bounding boxes and masks, via gated adaptive modulation, FlexPart unlocks a powerful cross-modal synergy. We also propose an asymmetric geometric guidance mechanism that leverages strong spatial priors to align representations across granularities, improving geometric consistency and facilitating inter-task synergy. Under mask conditioning on PartVerseXL, FlexPart reduces Part CD by 16.6% relative to TripoSG + SAM3D and by 10.5% relative to OmniPart, while maintaining competitive whole-mesh quality. The code can be found at https://github.com/Gucci233/FlexPart",
+        "url": "https://arxiv.org/abs/2610.31671v1",
+        "pdfUrl": "https://arxiv.org/pdf/2610.31671v1",
+        "publishedDate": "2026-10-22T17:59:53.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2610.31670",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Sensorimotor Alignment: A Platonic Proxy for Embodied Policy Success",
+        "authors": [
+          "Yunfei Xie",
+          "Howard H. Qian",
+          "Shiyi Lan",
+          "Kaiyu Hang",
+          "Chen Wei"
+        ],
+        "summary": "Robotic foundation models are typically evaluated through costly closed-loop rollouts, which motivates cheap offline proxies for model capability. The Platonic Representation Hypothesis (PRH) suggests that as representations improve, different modalities such as vision and language converge toward a shared statistical model of reality. We ask whether motion trajectories form another such modality: as embodied models become more capable, should their sensory representations converge toward the structure of physical motion? To examine this, we propose Sensorimotor Alignment ($S^2$), a training-free offline metric that measures how well a model's sensory representation aligns with the geometry of physical motion. We find that $S^2$ correlates positively with downstream robot task success across embodied model families, making it a low-cost offline proxy for prioritizing models before closed-loop evaluation. $S^2$ can also identify promising vision-language model (VLM) backbones even before costly fine-tuning into vision-language-action models (VLAs). Beyond this correlation, $S^2$ offers representation-level explanations for phenomena observed in VLAs and world action models (WAMs). With $S^2$, we extend PRH to embodied models and make sensorimotor alignment empirically measurable, offering insight into why an embodied model succeeds beyond its closed-loop success rate.",
+        "url": "https://arxiv.org/abs/2610.31670v1",
+        "pdfUrl": "https://arxiv.org/pdf/2610.31670v1",
+        "publishedDate": "2026-10-22T17:59:51.000Z",
+        "tags": [
+          "cs.CV",
+          "cs.LG",
+          "cs.RO"
+        ]
+      },
+      {
+        "id": "2610.31668",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Reading, Writing, Sharing, and Interacting with the World through Video",
+        "authors": [
+          "Shengqiong Wu",
+          "Meng Luo",
+          "Bobo Li",
+          "Ziwei Liu",
+          "Shuicheng Yan",
+          "Ming-Hsuan Yang",
+          "Philip Torr",
+          "Hao Fei"
+        ],
+        "summary": "Video foundation models have advanced rapidly in understanding and generating visual sequences, while video world models seek to capture the underlying dynamics of the world they depict. Despite their different objectives, both concern the relationship between video observations and an evolving world. This survey adopts world modeling as a unifying lens for examining these developments. Viewing an observed video as a partial, lossy, and temporally ordered projection of a latent temporal world, we organize the literature around four complementary operations: reading infers world properties from observed video; writing synthesizes video from specified or learned world conditions; sharing integrates understanding and generation through common modeling mechanisms; and interacting predicts and updates world states under actions and evolving observations. This perspective distinguishes temporal coherence in observed or generated sequences from consistency in the underlying world state. Across tasks, representations, models, datasets, and benchmarks, we trace a shift in emphasis from clip-level recognition and perceptual fidelity toward persistent state, controllable evolution, physical and causal validity, and evaluation grounded in interaction and downstream decisions, and we distill the open challenges that follow.",
+        "url": "https://arxiv.org/abs/2610.31668v1",
+        "pdfUrl": "https://arxiv.org/pdf/2610.31668v1",
+        "publishedDate": "2026-10-22T17:59:50.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2610.31659",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "SpectralCanary: Embarrassingly Simple Low-Frequency Traces for T2I Dataset-Use Auditing",
+        "authors": [
+          "Sy-Tuyen Ho",
+          "Anirudh Satheesh",
+          "Soham Chawathe",
+          "Huy Nghiem",
+          "Yongkyun Lee",
+          "Andrew Adams Schoen",
+          "Furong Huang"
+        ],
+        "summary": "Auditing whether a text-to-image (T2I) model was fine-tuned on a particular image collection is difficult: a model can absorb collection-level visual characteristics without reproducing training images. Proactive dataset-use auditing plants a shared signal in a dataset before release, then later checks whether that signal appears in a suspect model's generated outputs. Existing approaches often trade off verifiability, fidelity, robustness, and deployability. We introduce $\\textbf{SpectralCanary}$, which uses a smooth low-pass mask to blend a fixed canary image into every collection image while leaving captions unchanged and requiring neither auxiliary generation nor per-image optimization. A lightweight verifier detects the transferred signal in suspect-model outputs. Across eight tests on the Pokemon dataset and three realistic data transformations, spanning two architectures families, SpectralCanary achieves the highest average per-generation TPR@$1\\%$ FPR ($91.1\\%$) and fixed threshold model-level accuracy using 30 generations ($94.8\\%$) among the evaluated methods. Across five datasets spanning artistic, medical, satellite, and fashion domains with SD3.5, SpectralCanary averages $92.4\\%$ per-generation TPR@$1\\%$ FPR while preserving the released images (SSIM $0.989$, LPIPS $0.022$) with a near-zero mean change FID (mean $Δ$FID $0.05$) across datasets. Matched-energy ablations on Pokemon and ROCOv2 support our design choice, low-frequency placement transfers more reliably compared to mid/high-frequency placement. Under the evaluated adaptive attacks, the most effective removal requires aggressive modification and incurs more than $25$ $Δ$FID points. These results identify low-frequency visual signals as effective carriers for collection-level T2I audit traces.",
+        "url": "https://arxiv.org/abs/2610.31659v1",
+        "pdfUrl": "https://arxiv.org/pdf/2610.31659v1",
+        "publishedDate": "2026-10-22T17:59:03.000Z",
+        "tags": [
+          "cs.CV",
+          "cs.LG"
+        ]
+      },
+      {
+        "id": "2610.31651",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "BrickWright: Agentic Creation of Physically Feasible Brick Builds",
+        "authors": [
+          "Ava Pun",
+          "Kevin Dai",
+          "Sally Chen",
+          "Maxwell Jones",
+          "Ruixuan Liu",
+          "Kangle Deng",
+          "Changliu Liu",
+          "Maneesh Agrawala",
+          "Deva Ramanan",
+          "Jun-Yan Zhu"
+        ],
+        "summary": "Frontier coding agents are becoming increasingly adept at 3D modeling. Yet, they still face challenges when building objects meant to be assembled in the physical world, often creating invalid assemblies with floating, colliding, or disconnected parts. We argue that providing agents with tools for assembling builds and verifying their physical feasibility is sufficient for them to produce physically valid assemblies that still adhere to input prompts. Focusing on the domain of LEGO brick builds, we present BrickWright, a framework for generating physically feasible brick builds from text or image prompts using pre-trained agents, where a build is physically feasible if it uses only real parts, has no colliding or floating parts, and forms a connected structure if possible. BrickWright guides agents to create builds by writing code with BrickLayer, a Python toolkit with two main components: an ergonomic brick assembly API that halves inference cost compared to working in raw LDraw, and a validator that provides feedback on physical feasibility. Whereas baseline agents achieve physical validity rates ranging from only 9% (GPT-6 Luna) to 69% (GPT-6 Astra), BrickWright-guided agents achieve 100% validity on a sample of 512 prompts, while improving prompt adherence for lightweight agents and maintaining it for stronger agents. Additionally, they outperform specialized models on the text-to-brick task. Code is available on our project page: https://avalovelace1.github.io/brickwright/",
+        "url": "https://arxiv.org/abs/2610.31651v1",
+        "pdfUrl": "https://arxiv.org/pdf/2610.31651v1",
+        "publishedDate": "2026-10-22T17:57:20.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2610.31649",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Gate3DGen: A Pre-processing Model that Selectively Purifies Real-World Images for 3D Generation",
+        "authors": [
+          "Xiaolin Li",
+          "Zihao Huang",
+          "Fanpeng Meng",
+          "Chen Yang",
+          "Guanjun Wu",
+          "Kai Zhang",
+          "Jiemin Fang",
+          "Qi Tian"
+        ],
+        "summary": "Single-image 3D generation has achieved high fidelity on curated benchmarks, yet degrades sharply on real-world images with uneven illumination, blur, and occlusions. Purifying such inputs requires deciding when to intervene and preserving the visual cues needed for 3D generation, while leaving clean inputs unchanged. We introduce Gate3DGen, a selective pre-processing model that gates image inputs to existing 3D generators without retraining them. A degradation-aware router bypasses inputs classified as clean and extracts features to guide purification of the remaining inputs. Conditioned on these features, a 3D-oriented one-step purifier purifies degraded inputs with spatial losses that encourage preservation of object identity, contours, and textural cues. To provide paired supervision, we construct a synthetic data engine that renders clean views of 3D assets and synthesises composite degradations. On the synthetic benchmark, the purifier improves image fidelity and downstream 3D geometry in only 2.3s on average, reducing TRELLIS.2 mesh distance by 61.5% relative to degraded inputs. VLM evaluation and human preferences on real photographs further support identity preservation and degradation correction. More demos and code are available at https://supra-3d.github.io/gate3dgen.",
+        "url": "https://arxiv.org/abs/2610.31649v1",
+        "pdfUrl": "https://arxiv.org/pdf/2610.31649v1",
+        "publishedDate": "2026-10-22T17:57:02.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2610.31645",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "OmniRay: Camera-Agnostic Monocular 3D Reconstruction with Composite Ray Fields",
+        "authors": [
+          "Namitha Guruprasad",
+          "Abhay Yadav",
+          "Cheng Peng",
+          "Rama Chellappa",
+          "Anand Bhattad"
+        ],
+        "summary": "Monocular models recover 3D geometry from a single image in one pass, but most assume a pinhole camera and produce distorted geometry on the wide-angle imagery produced by fisheye and panoramic lenses. Camera-aware models remove this assumption by predicting a per-pixel ray field. However, they represent different camera geometries using a single fixed basis to capture both the overall camera projection and its finer variations. We argue that camera geometry can be viewed as having a hierarchy of complexity for representing rays. We present OmniRay, a feed-forward model whose Ray Module is composed of three components: a monotone radial base that captures radially symmetric structure, a spherical-harmonic residual for smooth deviations from it, and a free-form residual for remaining local variation. These components are composed as successive rotations on the sphere, allowing the representation to accommodate diverse camera geometries. Given a single image, OmniRay predicts a ray direction and an up-to-scale radial distance for every pixel, from which a 3D point cloud is recovered without needing camera information at inference time. Extensive experiments across different camera configurations demonstrate that OmniRay establishes a new state-of-the-art in camera-agnostic monocular 3D reconstruction.",
+        "url": "https://arxiv.org/abs/2610.31645v1",
+        "pdfUrl": "https://arxiv.org/pdf/2610.31645v1",
+        "publishedDate": "2026-10-22T17:55:30.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2610.31644",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "GigaBench: Benchmarking Learnable Representations for Gigapixel Image Compression and Super-Resolution",
+        "authors": [
+          "Matteo Fusconi",
+          "Alex Costanzino",
+          "Pierluigi Zama Ramirez",
+          "Luigi Di Stefano"
+        ],
+        "summary": "Learnable Representations (LRs) can fit parametric families of functions to diverse kinds of signals. These emergent neural-native data formats are gathering interest in the scientific community due to their compactness, resolution-agnosticism and amenability to direct neural processing. On the other hand, gigapixel images are becoming increasingly widespread across a variety of scientific, cultural, and industrial domains. In this paper, we present GigaBench, the first benchmark and experimental evaluation focused on deploying LRs with gigapixel imagery. GigaBench includes images collected, acquired, and synthetically rendered across diverse domains, and addresses image compression and super-resolution. We adapt a representative set of LRs, spanning Implicit, Hybrid, and Explicit methods, so as to operate reliably at the gigapixel scale on consumer hardware. Through systematic evaluation across reconstruction quality, model size, compression and inference times, we identify consistent trends across methods and suggest actionable guidance for future investigation.",
+        "url": "https://arxiv.org/abs/2610.31644v1",
+        "pdfUrl": "https://arxiv.org/pdf/2610.31644v1",
+        "publishedDate": "2026-10-22T17:55:10.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2610.31641",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "UniVOE: A Removal-Driven Framework for Interaction-Aware Universal Video Object Editing",
+        "authors": [
+          "Shuzhou Yang",
+          "Lanqing Guo",
+          "Lingen Li",
+          "Weiqi Li",
+          "Zhao Zhong",
+          "Liefeng Bo",
+          "Jian Zhang"
+        ],
+        "summary": "Video object removal and injection are reciprocal editing operations between object-present and object-absent video states, yet they differ substantially in training difficulty. Removal can be effectively bootstrapped from video inpainting and further adapted to erase object-related interaction effects. Injection, however, requires large-scale paired supervision to model object appearance, dynamics, and scene-dependent effects, while perfectly aligned real-world pairs are difficult to collect and synthetic data lacks sufficient realism and diversity. To address this challenge, we present UniVOE, a removal-driven framework for training both video object removal and injection models. We first train an effect-aware remover by transferring video inpainting priors and finetuning on object-present/object-absent pairs. The trained remover converts real object-present videos into object-absent counterparts, creating large-scale paired supervision for injection. An injection model is trained on these pairs in the reverse direction to recover objects together with their dynamics and interaction effects. Moreover, since pixel-level reconstruction alone cannot adequately capture perceptual realism, we introduce a reward-based post-training method that aligns injection results with human preferences using a proprietary reward model. Experiments against strong open-source and commercial systems demonstrate that UniVOE achieves state-of-the-art performance on both object removal and injection, particularly in challenging interaction-effect cases.",
+        "url": "https://arxiv.org/abs/2610.31641v1",
+        "pdfUrl": "https://arxiv.org/pdf/2610.31641v1",
+        "publishedDate": "2026-10-22T17:54:03.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2610.31640",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "WorldForge V2: Eliciting Camera-Trajectory Alignment in Video Diffusion Models",
+        "authors": [
+          "Chenxi Song",
+          "Yanming Yang",
+          "Tong Zhao",
+          "Ruibo Li",
+          "Joey Tianyi Zhou",
+          "Chi Zhang"
+        ],
+        "summary": "Video diffusion models have learned rich 3D/4D priors, making them promising for scene generation and video re-rendering. However, their use in spatial tasks is limited by imprecise camera control, spatial and temporal inconsistencies, and entangled camera motion with scene dynamics. Existing approaches, such as task-specific fine-tuning and post-process warping, often introduce visual artifacts, generalize poorly, or incur high computational costs. We propose WorldForge V2 to achieve accurate camera control while preserving the generative capabilities of pretrained video models. We first develop a training-free guidance framework using warped references to iteratively refine generation along a target camera path. Optical-flow analysis identifies motion-related latent channels for selective guidance, helping separate motion control from appearance. A dual-path strategy further compares guided and unguided predictions to correct artifacts from imperfect references. Together, these components guide viewpoint changes while preserving scene appearance and object motion. To reduce refinement costs, v-cache approximates the correction using the preceding denoising prediction, avoiding an additional model evaluation. We further extend motion localization from latent channels to network blocks and introduce Trajectory LoRA, which concentrates adaptation on blocks most responsive to trajectory guidance. A two-stage training strategy teaches these adapters to denoise the states encountered during guided generation, using limited supervision effectively. This enables reliable camera control with very little training data, with a single training scene already supporting generalization to unseen scenes. Quantitative and qualitative evaluations across multiple datasets show that our method achieves state-of-the-art generation quality and trajectory accuracy in camera-controlled video generation.",
+        "url": "https://arxiv.org/abs/2610.31640v1",
+        "pdfUrl": "https://arxiv.org/pdf/2610.31640v1",
+        "publishedDate": "2026-10-22T17:53:03.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      }
+    ],
+    "LLMs & Language": [
+      {
+        "id": "2610.31667",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Direct Pass@$k$ Optimization for Thought Pruning: Balancing Quality and Diversity in Test-Time Reasoning",
+        "authors": [
+          "Mahdi Salmani",
+          "Adel Javanmard",
+          "Devansh Gupta",
+          "Meisam Razaviyayn"
+        ],
+        "summary": "Test-time scaling has emerged as a key inference strategy for reasoning models, where a model generates a large number of candidate solutions in the hope of finding at least one correct solution. Running all candidate solutions to completion can be computationally demanding, so recent work prunes the candidate pool after generating only a short prefix, committing further computation only to the surviving candidates. Existing pruning strategies divide broadly into two categories: Quality-based methods assign a score to each partial solution and discard those predicted to ultimately lead to an incorrect final solution, while diversity-based methods select partial solutions that follow different reasoning trajectories and are therefore likely to cover different final solutions. The tension between these two objectives is an instance of exploration versus exploitation, yet little to no prior work on pruning exposes this trade-off directly, let alone optimizes it. In this paper, we introduce a pruning procedure that addresses this trade-off directly by optimizing pass@$k$ over the selected solution pool. In particular, it chooses the pool to maximize the probability that at least one of its partial solutions, when continued to completion, yields a correct answer. Because this objective simultaneously rewards high-quality partial solutions and penalizes redundancy among them, quality and diversity are naturally balanced by the criterion itself rather than through separate ad-hoc design choices. On eight open-weight reasoning models, our method outperforms existing quality-based and diversity-based pruning strategies. The gains are particularly pronounced when the pruning procedure keeps a moderate number of partial solutions for continued generation, highlighting the value of directly balancing quality and diversity during pruning.",
+        "url": "https://arxiv.org/abs/2610.31667v1",
+        "pdfUrl": "https://arxiv.org/pdf/2610.31667v1",
+        "publishedDate": "2026-10-22T17:59:48.000Z",
+        "tags": [
+          "cs.AI",
+          "cs.CL"
+        ]
+      },
+      {
+        "id": "2610.31657",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Cost-Aware Abstention for LLM-Based IT Ticket Classification",
+        "authors": [
+          "Sachin Gupta"
+        ],
+        "summary": "Wrong automatic routing of an IT support ticket can cost more than human triage. We evaluate cost-aware abstention as an offline, cost-conditional readiness assessment: select a routing policy on calibration data under explicit costs, then evaluate that frozen policy once on held-out test data. On a public 47,837-ticket, eight-class corpus, we compare four trained non-LLM classifiers with four large language models under zero- and few-shot prompting. Under the illustrative cost model (c_ok, c_triage, c_wrong) = (0, 1, 5), TF-IDF with logistic regression and a threshold of 0.60 selected on calibration reduces test cost from 0.763 to 0.472, a 38.1% relative reduction (paired ratio-bootstrap 95% CI [35.7%, 40.4%]), while lowering wrong routes from 15.3% to 3.5%. Frozen calibration-selected policies also beat both always-route and always-defer on held-out test data in 14 of 16 settings in a post-hoc cost-parameter analysis. The strongest prompted configuration reaches 0.477 accuracy on a stratified 1,000-ticket test subset, versus 0.879 for fine-tuned DistilBERT on the same tickets. Isotonic lowers expected calibration error without reliably improving discrimination: GPT-4o-mini few-shot has one confidence value before and after recalibration and correctness AUROC 0.500. We therefore report correctness AUROC and tie-aware risk-coverage area alongside ECE. At the analytically derived break-even probability 0.80, seven prompted configurations defer all tickets; Haiku few-shot routes only 19/1,000. An LLM-only agreement control and margin/entropy rejection baselines further separate calibration from discrimination. The findings are scoped to this dataset, prompt design, model endpoints, and illustrative costs; the work is an evaluation framework, not a new abstention algorithm or universal deployment certification.",
+        "url": "https://arxiv.org/abs/2610.31657v1",
+        "pdfUrl": "https://arxiv.org/pdf/2610.31657v1",
+        "publishedDate": "2026-10-22T17:58:52.000Z",
+        "tags": [
+          "cs.LG",
+          "cs.AI",
+          "cs.CL"
+        ]
+      },
+      {
+        "id": "2610.31646",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Low-Bit N-Gram Embeddings for Language Models",
+        "authors": [
+          "Stephen Chung",
+          "Wenyu Du"
+        ],
+        "summary": "Many recent open-weight language models use n-gram embedding tables to improve performance. These tables store learned representations of short token sequences, such as pairs or triples of consecutive tokens, which the model retrieves during processing. However, they can require substantial memory: DeepSeek-V4.1-Flash, for example, allocates 196 billion parameters to its Engram n-gram memory. We therefore investigate whether this memory cost can be reduced while preserving the performance improvement that the tables provide. We propose storing n-gram embeddings at low precision and systematically investigate different quantization methods and bit allocations across tables. Across nanochat-, Llama-, and GPT-2-family models trained from scratch, four-bit tables save approximately 75% of table memory while preserving more than 99% of the validation-loss improvement from adding the tables. Using fewer bits leads to a larger drop in performance, although we find that a short fine-tuning phase recovers a significant part of this loss. In addition, reinvesting the saved memory in larger tables can improve performance beyond that of the original full-precision tables while still using less memory. These table memory savings also extend to large existing models: on DeepSeek-V4.1-Flash and Qwen3.8-Flash-Next, low-bit tables save 47-55% of table memory, with perplexity increases of less than 1.2% and largely preserved downstream task performance. These findings establish low-bit precision as a practical way to reduce the memory requirements of n-gram embeddings and use the saved capacity to improve model performance.",
+        "url": "https://arxiv.org/abs/2610.31646v1",
+        "pdfUrl": "https://arxiv.org/pdf/2610.31646v1",
+        "publishedDate": "2026-10-22T17:56:13.000Z",
+        "tags": [
+          "cs.CL",
+          "cs.AI"
+        ]
+      },
+      {
+        "id": "2610.31636",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Can an Agent Debug a Web Corpus? Agentic Auditing of Slovak FineWeb2",
+        "authors": [
+          "Marek Šuppa",
+          "Ivan Vykopal",
+          "Jaroslav Kopčan"
+        ],
+        "summary": "Multilingual pipelines such as FineWeb2 apply one recipe across a thousand languages, leaving the failure modes of individual languages unanticipated. We use an LLM once, as a corpus debugger rather than a classifier: a tool-using agent explores the corpus through a read-only, budgeted API and compiles each finding into an executable test, which a native speaker then validates. On the 26.5M-document Slovak portion of FineWeb2, three runs costing \\$2.21-\\$2.84 each found seven findings over four phenomena. The largest is a machine-generated content farm of 1,408,437 documents (5.32%) that passed the pipeline's filters, 86.6% of it passing even stricter thresholds. Blinded labels support 6 of the 7 findings (defect rates .53-1.00 against .08 in a random control) and do not support one. The compiled suite scans the full corpus in 0.7 s of wall-clock time without a GPU, against \\$12k-\\$90k per LLM classification pass. The best static sampling baseline validates more selectors than any agent run, at under half the cost. The agent contributes exact prevalence, a precision estimate checked against sampled documents, an account of why the pipeline missed each slice, and a reusable test. We release the framework, Slovak test suite, validation data and agent trajectories.",
+        "url": "https://arxiv.org/abs/2610.31636v1",
+        "pdfUrl": "https://arxiv.org/pdf/2610.31636v1",
+        "publishedDate": "2026-10-22T17:52:22.000Z",
+        "tags": [
+          "cs.CL"
+        ]
+      }
+    ],
+    "Machine Learning": [
+      {
+        "id": "2610.31663",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Phase Transition from Random Features to Fully Trainable Networks",
+        "authors": [
+          "Xin He",
+          "Huan Lao",
+          "Xiliang Lu",
+          "Shijun Zhang"
+        ],
+        "summary": "Constructing accurate and computationally tractable approximation spaces is a fundamental task in scientific computing. Partially trainable neural networks bridge fixed random features and fully adaptive representations. This paper quantifies a phase transition pattern in approximation bounds and observes analogous behavior in training errors: a rapid but smooth initial improvement followed by diminishing returns, with a sharper transition under greater initialization mismatch. Under polynomial spectral decay with exponent $α>1$ and leverage compatibility, we establish a squared $L_2$ approximation rate $\\mathcal{O}((κ_P\\log(m/δ)/m)^α)$ for two-layer networks of width $m$ and trainable proportion $P$, where $κ_P=(P/κ_1^*+(1-P)/κ_0^*)^{-1}$. The bound holds uniformly over the unit ball of a reproducing kernel Hilbert space (RKHS) with probability at least $1-δ$. The constants $κ_0^*$ and $κ_1^*$ quantify the fixed and trainable groups' sampling mismatches relative to the target RKHS. For spherical biased-ReLU features in dimension $d$, we verify these assumptions with $α=(d+2)/(d-1)$ and $κ_0^*=4\\sqrt{2}τ(d+1)/d$ for initialization scale $τ\\ge1$, and $κ_1^*=1$ under ridge leverage sampling. For $d=5$ and $τ=10$, a trainable proportion of approximately $4.1\\%$ captures $90\\%$ of the reduction in the approximation bound from $P=0$ to $P=1$. A structured three-layer example illustrates how a few trainable first-layer neurons exploit fixed downstream blocks through nonlinear composition. Numerical experiments across diverse settings, including networks with up to 15 layers, exhibit similar phase transitions in training errors.",
+        "url": "https://arxiv.org/abs/2610.31663v1",
+        "pdfUrl": "https://arxiv.org/pdf/2610.31663v1",
+        "publishedDate": "2026-10-22T17:59:29.000Z",
+        "tags": [
+          "math.NA",
+          "cs.LG",
+          "math.ST",
+          "stat.ML"
+        ]
+      },
+      {
+        "id": "2610.31662",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Reliable AI-Assisted Decisions via Selective Auditing",
+        "authors": [
+          "Isaac Gibbs",
+          "Elise L. Han",
+          "Ryan J. Tibshirani",
+          "Tijana Zrnic"
+        ],
+        "summary": "We consider online monitoring of an AI system that produces a sequence of decisions. At each round, the system outputs a proposed decision together with a confidence score estimating the trustworthiness of the decision. The decision and confidence score need not be produced by the same model: for example, one agent may propose a decision, while a separate verifier agent evaluates it and outputs a correctness or safety score. Based on this information, we must decide whether to accept the AI decision automatically or consult an expert, such as a human auditor, who reviews the proposal and either accepts or corrects it. We formulate this task as an online constrained optimization problem in which the goal is to minimize the frequency of expert auditing while guaranteeing that the fraction of AI errors that go unaudited stays below a user-defined threshold. We derive a family of algorithms with provable error-control guarantees with no assumptions, including a method that is optimally efficient: it asymptotically attains the best achievable auditing rate for both adversarial and i.i.d. data streams. Experiments on screening harmful requests to large language models, qualitative text annotation, and data labeling show that our methods achieve valid error control in practice while substantially reducing the need for human auditing compared to baselines.",
+        "url": "https://arxiv.org/abs/2610.31662v1",
+        "pdfUrl": "https://arxiv.org/pdf/2610.31662v1",
+        "publishedDate": "2026-10-22T17:59:22.000Z",
+        "tags": [
+          "stat.ML",
+          "cs.LG",
+          "stat.ME"
+        ]
+      },
+      {
+        "id": "2610.31656",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "METTA: Memory-Enhanced Test-Time Adaptation for Meta-Reinforcement Learning",
+        "authors": [
+          "Ali Najar",
+          "Hosein Hasani",
+          "Amir Kooshan Fattah",
+          "Yasamin Rajabi",
+          "Mahdieh Soleymani Baghshah"
+        ],
+        "summary": "Meta-reinforcement learning aims to train agents that adapt quickly to unseen tasks from limited interaction, but this requires representing task evidence over long interaction histories. Classical recurrent agents compress experience into hidden states, while transformer-based agents retrieve from past trajectories at quadratic memory and computation cost. In this work, we propose Memory-Enhanced Test-Time Adaptation (METTA) for meta-reinforcement learning. It decomposes the fast adaptation phase into two temporal scales: a causal neural memory performs fine-grained within-episode adaptation with linear sequence complexity, while compact episode-level summaries support long-range cross-episode task inference without attending over the full interaction history. Moreover, equipping agents with neural memory provides sufficient expressive capacity and test-time training capability, enabling effective adaptation to unseen held-out tasks and task families at meta-test time. On unseen held-out Meta-World ML10/45 test environments, METTA achieves a success rate over $50\\%$ while maintaining a low training budget and short wall-clock time. On long-context sparse-reward PointMaze tasks, it outperforms transformer-based baselines by exhibiting more structured exploration behavior. These results show that METTA provides an efficient path toward more adaptive and scalable long-context meta-RL.",
+        "url": "https://arxiv.org/abs/2610.31656v1",
+        "pdfUrl": "https://arxiv.org/pdf/2610.31656v1",
+        "publishedDate": "2026-10-22T17:58:27.000Z",
+        "tags": [
+          "cs.LG",
+          "cs.AI"
+        ]
+      },
+      {
+        "id": "2610.31650",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "EpiSEM-Bench: Evaluating Safety and Evidence Recovery in LLM Agents under Missing Evidence",
+        "authors": [
+          "Qijin Zhang",
+          "Hanzhen Wang",
+          "Yuehan Zhao",
+          "Haoyu Dai",
+          "Yao Shu",
+          "Zhongxiang Dai",
+          "Shuang Qiu"
+        ],
+        "summary": "Tool-using language model agents rely on environmental facts to decide whether an action is permitted. When a tool response omits a safety-relevant fact, an agent may carry out a prohibited action even though the user request is benign and every returned statement is true. We introduce \\bench{}, an executable benchmark for evaluating unsafe execution, safety boundaries, and evidence recovery in LLM agents under missing evidence. It contains 300 matched unsafe/safe task pairs across six domains. By systematically suppressing critical facts, the benchmark measures unsafe execution under critical evidence omission and determines the minimum observed failure cardinality, including failures with full evidence and cases with no observed failure after exhaustive testing. An independent audit tool tests whether agents seek missing facts and then withhold prohibited actions while completing permissible tasks. The benchmark reveals substantial variation across the ten models in omission robustness, evidence acquisition, and appropriate action. Resistance to missing evidence does not necessarily translate into useful recovery. Recovery access reduces unsafe execution for all ten models, but agents differ in whether they actively obtain the missing facts and use them to act appropriately in both worlds.",
+        "url": "https://arxiv.org/abs/2610.31650v1",
+        "pdfUrl": "https://arxiv.org/pdf/2610.31650v1",
+        "publishedDate": "2026-10-22T17:57:04.000Z",
+        "tags": [
+          "cs.AI",
+          "cs.LG"
+        ]
+      },
+      {
+        "id": "2610.31642",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "A Fix for Softmax and Cross-Entropy",
+        "authors": [
+          "Jonathan T. Barron",
+          "Dan Gnanapragasam",
+          "Michael Tschannen"
+        ],
+        "summary": "Standard implementations of softmax, log-softmax, and cross-entropy have two numerical bugs. The first bug, Softmax Collapse, rounds the target logit's gradient to zero if that one logit is much larger than the others, resulting in gradients that no longer sum to zero. The second bug, Softmax Cancellation, occurs when student logits are close to teacher logits, and produces non-zero gradients even when the student and teacher logits are equal. We present simple implementations of log-softmax, softmax, and cross-entropy that fix both bugs. Our fix eliminates the previously-observed \"Slingshot\" phenomenon, speeds up grokking with weight decay, prevents accuracy collapse without weight decay, stops student networks from drifting away from the teacher during distillation, and shows that after memorization, logit growth is bounded by an equilibrium between weight decay and Adam's $ε$ hyperparameter.",
+        "url": "https://arxiv.org/abs/2610.31642v1",
+        "pdfUrl": "https://arxiv.org/pdf/2610.31642v1",
+        "publishedDate": "2026-10-22T17:54:56.000Z",
+        "tags": [
+          "cs.LG"
+        ]
+      },
+      {
+        "id": "2610.31639",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Causal Chain of Thought: Mitigating Attention Leakage via Context Isolation",
+        "authors": [
+          "Gabriele Dominici",
+          "Teague McMillan",
+          "Fazl Barez",
+          "Marc Langheinrich",
+          "Martin Gjoreski"
+        ],
+        "summary": "Chain-of-thought (CoT) prompting elicits step-by-step rationales that appear to explain model predictions, but there is no guarantee these steps causally drive the final answer. In standard autoregressive generation, dense attention allows each reasoning step to attend to the full context, enabling the model to derive answers through direct lookup while generating plausible-sounding but post-hoc justifications. We introduce CausalCoT, an inference framework that enforces causal transparency by decomposing problems into a directed acyclic graph of atomic sub-questions, evaluating each node in an isolated context containing only its direct causal parents. This Markovian structure removes attention pathways to non-parent content, making downstream predictions sensitive to local reasoning rather than global context leakage. Across a diverse suite of reasoning benchmarks, CausalCoT preserves competitive predictive performance while improving explanation faithfulness, increasing causal sensitivity of intermediate reasoning steps by an average of 12 and up to 21 percentage points over the strongest baseline. The structured dependency graph additionally enables test-time interventions in which local corrections propagate predictably through downstream reasoning.",
+        "url": "https://arxiv.org/abs/2610.31639v1",
+        "pdfUrl": "https://arxiv.org/pdf/2610.31639v1",
+        "publishedDate": "2026-10-22T17:52:56.000Z",
+        "tags": [
+          "cs.LG",
+          "cs.AI"
+        ]
+      }
+    ]
+  },
+  "labPosts": [
+    {
+      "id": "openai-69036698",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Rapidly scaling online storage to serve over 1 billion ChatGPT users (Part II)",
+      "authors": [],
+      "summary": "Learn how OpenAI scaled Habitat with reliable multi-tenancy, global caching, and Azure Cosmos DB to deliver 12× faster reads for ChatGPT.",
+      "url": "https://openai.com/index/scaling-storage-one-billion-users-part-two",
+      "publishedDate": "2026-10-23T17:00:00.000Z",
+      "tags": [
+        "Engineering"
+      ]
+    },
+    {
+      "id": "openai-1938218402",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Securing our frontier model training environment",
+      "authors": [],
+      "summary": "OpenAI explains how we strengthened containment for frontier model training and evaluation, including offline environments and high-compute red-teaming.",
+      "url": "https://openai.com/index/securing-our-frontier-model-training-environment",
+      "publishedDate": "2026-10-23T10:00:00.000Z",
+      "tags": [
+        "Security"
+      ]
+    },
+    {
+      "id": "openai-65849036",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "OpenAI and Poland’s NASK partner to advance AI safety and security",
+      "authors": [],
+      "summary": "OpenAI and Poland’s NASK are partnering on AI safety, security, and technical research to strengthen safeguards and support a more resilient digital ecosystem.",
+      "url": "https://openai.com/index/openai-nask-ai-safety-security-partnership",
+      "publishedDate": "2026-10-23T00:00:00.000Z",
+      "tags": [
+        "Global Affairs"
+      ]
+    },
+    {
+      "id": "openai-699427860",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Build more responsive apps with the Decisions API",
+      "authors": [],
+      "summary": "Fast, focused, low-cost decisions for any application.",
+      "url": "https://openai.com/index/decisions-api",
+      "publishedDate": "2026-10-22T19:00:00.000Z",
+      "tags": [
+        "Product"
+      ]
+    },
+    {
+      "id": "deepmind-1839684812",
+      "type": "blog_post",
+      "source": "deepmind",
+      "title": "Beyond tree cover: mapping the world’s forest types",
+      "authors": [],
+      "summary": "A global map categorizing every 10-meter patch of land on Earth into distinct forest types.",
+      "url": "https://deepmind.google/blog/beyond-tree-cover-mapping-the-worlds-forest-types/",
+      "publishedDate": "2026-10-22T14:30:24.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-970286003",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "What FDE means at OpenAI",
+      "authors": [],
+      "summary": "What forward deployed engineering means at OpenAI",
+      "url": "https://openai.com/index/forward-deployed-engineering-means",
+      "publishedDate": "2026-10-22T06:00:00.000Z",
+      "tags": [
+        "AI Adoption"
+      ]
+    },
+    {
+      "id": "openai-1710619818",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Uber brings ChatGPT Work to all employees with OpenAI",
+      "authors": [],
+      "summary": "Uber is rolling out ChatGPT Work to more than 30,000 employees, helping teams research, analyze data, create presentations, and complete complex workflows.",
+      "url": "https://openai.com/index/uber-chatgpt-work-rollout",
+      "publishedDate": "2026-10-22T00:00:00.000Z",
+      "tags": [
+        "Company"
+      ]
+    },
+    {
+      "id": "openai-2127923305",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Broad access through consistent standards",
+      "authors": [],
+      "summary": "How OpenAI works with distribution partners to uphold consistent safeguards, support responsible access, and clarify expectations in our Usage Policies.",
+      "url": "https://openai.com/index/broad-access-through-consistent-standards",
+      "publishedDate": "2026-10-21T21:00:00.000Z",
+      "tags": [
+        "Safety"
+      ]
+    },
+    {
+      "id": "openai-1580862187",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "How AT&T is rethinking in-house legal work with OpenAI",
+      "authors": [],
+      "summary": "AT&T is working with OpenAI to make legal knowledge easier to access. Learn how its LegalEdge team is rethinking intake and scaling legal judgment.",
+      "url": "https://openai.com/index/att-legal",
+      "publishedDate": "2026-10-21T17:00:00.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-1957566623",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "ChatGPT Ads expands to 26 new countries as over 100,000 advertisers have used the platform",
+      "authors": [],
+      "summary": "From local businesses to global brands, more advertisers can now reach people as they explore, compare and decide what to buy in ChatGPT.",
+      "url": "https://openai.com/index/chatgpt-ads-expands-26-new-countries",
+      "publishedDate": "2026-10-21T13:00:00.000Z",
+      "tags": [
+        "Product"
+      ]
+    },
+    {
+      "id": "openai-1207067201",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "OpenAI models are coming to Google Cloud",
+      "authors": [],
+      "summary": "OpenAI and Google Cloud are bringing frontier models and Codex workflows to Gemini’s Model Garden, available through Google Cloud Marketplace.",
+      "url": "https://openai.com/index/openai-models-google-cloud",
+      "publishedDate": "2026-10-21T12:00:00.000Z",
+      "tags": [
+        "Company"
+      ]
+    },
+    {
+      "id": "openai-950214981",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Patch the Planet: global response coordination as agents uncover critical vulnerabilities",
+      "authors": [],
+      "summary": "Patch the Planet connects security researchers, maintainers, and incident responders to help address critical vulnerabilities across open source.",
+      "url": "https://openai.com/index/coordinated-disclosure-of-critical-vulnerabilities",
+      "publishedDate": "2026-10-21T07:00:00.000Z",
+      "tags": [
+        "Security"
+      ]
+    },
+    {
+      "id": "openai-1770729753",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "How we built ChatGPT’s novel ad stack for user trust and relevance",
+      "authors": [],
+      "summary": "Learn how OpenAI built ChatGPT’s LLM-powered ad stack to understand conversational intent, keep ads separate from answers, and deliver relevant ads at scale.",
+      "url": "https://openai.com/index/building-chatgpt-ad-stack",
+      "publishedDate": "2026-10-21T07:00:00.000Z",
+      "tags": [
+        "Engineering"
+      ]
+    },
+    {
+      "id": "openai-158956694",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Using thousands of AI agents to uncover new leads in biological data",
+      "authors": [],
+      "summary": "See how OpenAI, PerturbAI, and Scripps Research used distributed AI agents to uncover promising research leads in data from millions of brain cells.",
+      "url": "https://openai.com/index/scaling-ai-research-for-complex-biological-data",
+      "publishedDate": "2026-10-21T04:50:00.000Z",
+      "tags": [
+        "Publication"
+      ]
+    },
+    {
+      "id": "openai-690698941",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Cloudflare links vulnerability discovery to defense with OpenAI",
+      "authors": [],
+      "summary": "Cloudflare uses OpenAI Daybreak to investigate vulnerabilities and propose fixes for review. Its developers use Codex to build faster and improve code quality.",
+      "url": "https://openai.com/index/cloudflare-cyber",
+      "publishedDate": "2026-10-21T00:00:00.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-1791551116",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Democratic governance of frontier AI, part II: Empowering cyber defenders",
+      "authors": [],
+      "summary": "OpenAI outlines a blueprint for empowering cyber defenders with frontier AI, stronger safeguards, modernized cybersecurity, and more resilient public institutions.",
+      "url": "https://openai.com/index/empowering-cyber-defenders",
+      "publishedDate": "2026-10-21T00:00:00.000Z",
+      "tags": [
+        "Global Affairs"
+      ]
+    },
+    {
+      "id": "openai-1700424587",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Franchisee reconciles cash in 94% less time with ChatGPT Work",
+      "authors": [],
+      "summary": "An independent Schlotzsky’s and Cinnabon franchisee cut menu repricing time by 95% and built a workflow that could free up $100K in cash flow.",
+      "url": "https://openai.com/index/ted-taylor-restaurant",
+      "publishedDate": "2026-10-20T10:00:00.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-1838397919",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Terminal X matches senior investor judgment 88.6% with GPT-6.1",
+      "authors": [],
+      "summary": "Terminal X’s Eval Agent grades outputs against a 54-criterion rubric, catching 25% more deviances from a fund’s mandate with GPT-6.1 Sol.",
+      "url": "https://openai.com/index/terminal-x",
+      "publishedDate": "2026-10-20T07:00:00.000Z",
+      "tags": [
+        "Startup"
+      ]
+    },
+    {
+      "id": "openai-1268197986",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "OpenAI acquires Orchestra Bio",
+      "authors": [],
+      "summary": "OpenAI is acquiring Orchestra Bio to bring AI-powered operations to life sciences R&D, helping biopharma teams accelerate drug development and advance new treatments.",
+      "url": "https://openai.com/index/openai-to-acquire-orchestra-bio",
+      "publishedDate": "2026-10-20T00:00:00.000Z",
+      "tags": [
+        "Company"
+      ]
+    },
+    {
+      "id": "openai-786538937",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Advancing coding in low‑resource programming languages",
+      "authors": [],
+      "summary": "Learn how OpenAI is improving ChatGPT across low-resource programming languages, with new evaluations for software engineering, SQLite, and COBOL migration.",
+      "url": "https://openai.com/index/low-resource-programming-languages",
+      "publishedDate": "2026-10-19T12:00:00.000Z",
+      "tags": [
+        "Publication"
+      ]
+    }
+  ],
+  "stats": {
+    "totalPapersScanned": 200,
+    "totalPostsScanned": 20
+  }
+}
