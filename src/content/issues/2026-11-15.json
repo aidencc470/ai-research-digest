@@ -1,0 +1,754 @@
+{
+  "slug": "2026-11-15",
+  "title": "Weekly AI Digest — November 15, 2026",
+  "dateRange": {
+    "start": "2026-11-08T19:10:14.277Z",
+    "end": "2026-11-15T19:10:14.277Z"
+  },
+  "papersByCategory": {
+    "Computer Vision": [
+      {
+        "id": "2611.17336",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Back to Pixels: Lifting Latent Video Diffusion into Pixel Space",
+        "authors": [
+          "Yanke Song",
+          "Shuo Chen",
+          "Chris Rockwell",
+          "Guande He",
+          "Nan Liu",
+          "Desai Xie",
+          "Tianpei Gu",
+          "Yong-Hyun Park",
+          "Aryan V S",
+          "Dennis Yuren Menn",
+          "Ming-Hsuan Yang",
+          "Xun Huang"
+        ],
+        "summary": "Frontier video generation models work in a VAE latent space that compresses video in both space and time. This compression made training tractable, but now limits high-resolution, controllable, and interactive generation -- doubling resolution quadruples token count, conditions apply to groups of frames rather than individual ones, and each response must wait for the rest of its multi-frame block. We present PixVid, a simple yet effective method that lifts a pretrained latent video model to directly generate every frame in pixel space. PixVid keeps the diffusion transformer and replaces the VAE decoder with a convolutional head that renders its outputs into pixels. We find that predicting clean video rather than velocity, together with a larger noise shift, is key to quality. Finetuned from Wan2.1-14B, PixVid is competitive with the latent baseline within $\\sim 1.3$M training clips. Working framewise in pixels, it generates at $2\\times$ higher resolution with the same per-frame token count, keeps depth-conditioned video editing aligned under fast motion, and responds to each action at the next frame. Project page: https://chenshuo20.github.io/PixVid/",
+        "url": "https://arxiv.org/abs/2611.17336v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.17336v1",
+        "publishedDate": "2026-11-12T18:59:55.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2611.17334",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Unbundling Multimodal Vision Encoding",
+        "authors": [
+          "Ellis Brown",
+          "Chris Hoang",
+          "Shengyi Qian",
+          "Shang-Wen Li",
+          "Mike Lewis",
+          "Marjan Ghazvininejad",
+          "Luke Zettlemoyer",
+          "Lucas Beyer",
+          "Mengye Ren",
+          "Jakob Verbeek",
+          "Saining Xie",
+          "Hu Xu"
+        ],
+        "summary": "How multimodal language models should encode visual input remains up for debate. Most models use a pretrained vision encoder, while some recent recipes train the encoder from scratch with the language model or remove it entirely. Vision encoders bundle together three design choices: a visual prior from upstream pretraining, dedicated vision capacity, and pre-fusion placement of that capacity (i.e., before the multimodal backbone). Because published models also differ in data, architecture, and compute, comparing them cannot isolate the effect of each choice. We disentangle these choices via a controlled framework where we pretrain all models from scratch on common data and compare them on visual question answering and language benchmarks at matched lifetime compute. We find that the visual prior is not necessary; an encoder trained jointly from scratch is on par with a pretrained one, without a separate training stage. What matters instead is dedicated vision capacity: an encoder-free model trails on visual understanding even when its backbone is enlarged by the encoder's parameter count. Yet that capacity need not precede multimodal fusion, as vision-only modules added in-fusion to early backbone layers perform comparably to a pre-fusion encoder and can lower time to first token. These results also hold across backbone sizes, when encoder pretraining is treated as free, and when starting from a pretrained language model. Overall, our findings favor dedicated vision capacity trained jointly with the backbone and placed early within it.",
+        "url": "https://arxiv.org/abs/2611.17334v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.17334v1",
+        "publishedDate": "2026-11-12T18:59:54.000Z",
+        "tags": [
+          "cs.CV",
+          "cs.LG"
+        ]
+      },
+      {
+        "id": "2611.17331",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "TTB: Test-time Baking for Efficient Rendering of Decoder-only View Synthesis Models",
+        "authors": [
+          "Chin-Yang Lin",
+          "Ryo Hachiuma",
+          "Jaesung Choe",
+          "Min-Hung Chen",
+          "Yu-Chiang Frank Wang",
+          "Yen-Yu Lin",
+          "Wei-Chen Chiu",
+          "Yu-Lun Liu",
+          "Cheng Sun"
+        ],
+        "summary": "Decoder-only Large View Synthesis Models (LVSMs) with KV-cache have recently achieved state-of-the-art quality by regressing novel views from neural networks without reconstructing 3D geometry, while Test-Time Training (TTT) layers save computation but sacrifice quality. We propose Test-Time Baking (TTB), a strategy that learns to bake global scene information from cross-view attention into a lightweight MLP, enabling fast and high-fidelity novel-view decoding. The first key is to repurpose the fast-weight MLP of TTT to learn the cross-view attention mapping explicitly from its input-output pairs, rather than replacing attention entirely, achieving the same rendering efficiency as TTT while delivering substantially higher quality. The second key addresses a modality misalignment between context prefilling and novel-view rendering: we disentangle context tokens into camera-only context rendering tokens to serve as TTB input, and context ground-truth tokens with image content to serve as the TTB mapping target, ensuring the baked MLPs are relieved of the modality generalization challenge between context and novel-view processing. Our method achieves up to **23x** rendering speedup with quality on par with the state-of-the-art across several benchmarks. Project page: https://test-time-baking.github.io",
+        "url": "https://arxiv.org/abs/2611.17331v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.17331v1",
+        "publishedDate": "2026-11-12T18:59:52.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2611.17330",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "ProtoVis-Nav: Prototypical Visual Imagination for Visual-Spatial Aligned UAV Navigation",
+        "authors": [
+          "Guangyuan Sui",
+          "Yunzhong Hou",
+          "Chi Harold Liu"
+        ],
+        "summary": "Vision language navigation (VLN) is very challenging for Unmanned Aerial Vehicles (UAVs) since small errors in 3D motion prediction can lead to navigation errors and collisions. Unable to fathom execution outcomes in 3D environments, existing methods often struggle to predict accurate navigation waypoints from language instructions. To solve this, we introduce the Prototypical Visual Imagination framework, shortened as ProtoVis-Nav, which forces the model to imagine an outcome-associated local visual representation for the intended next UAV movement. Specifically, we predict feature prototypes and use their linear combination to estimate the visual feature of the target region. In this manner, the VLN model first imagines the local visual representation of the next intended location, and then uses predicted prototypes as context for generating the final action, promoting alignment between visual context and waypoint outputs. Extensive experiments demonstrate the effectiveness of the ProtoVis-Nav framework and show substantial improvements over existing baselines.",
+        "url": "https://arxiv.org/abs/2611.17330v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.17330v1",
+        "publishedDate": "2026-11-12T18:59:49.000Z",
+        "tags": [
+          "cs.RO",
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2611.17324",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "K2V: Generative Keyframing For Physically Plausible Video Generation",
+        "authors": [
+          "Felix O'Mahony",
+          "Daniel Olmeda Reino",
+          "Roberto Cipolla",
+          "Ayush Tewari"
+        ],
+        "summary": "Video diffusion models are able to generate samples with high-quality appearance and textural qualities. However, content produced by these methods is known to exhibit significant physical errors. This is because, in a classical video generation setting, all physical reasoning must take place simultaneously and exclusively within the diffusion process.We propose to resolve these issues by redistributing the task of physical reasoning onto a language model-backed keyframe generation module, which allows for explicit reasoning in language, and fine-grained control over the appearance of the video at important moments in the video. We then condition a video generation model with these keyframes, reducing the role of the diffusion model to the simpler task of interpolating between physically-correct intermediate states, rather than inferring an entire sequence with diffusion. Results demonstrate that our approach significantly outperforms existing approaches, achieving state-of-the-art performance on the Physics-IQ Verified benchmark and PhyGenBench.",
+        "url": "https://arxiv.org/abs/2611.17324v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.17324v1",
+        "publishedDate": "2026-11-12T18:59:09.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2611.17321",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "BrickFlow: Connectivity-Guided Brick Reconstruction",
+        "authors": [
+          "Peter Kulits",
+          "Cordelia Schmid"
+        ],
+        "summary": "Given a set of LEGO parts and an image of an assembled object, our task is to infer the pose of each part to assemble the object. In contrast with traditional 3D reconstruction, doing so requires satisfying discrete physical constraints, which provide structure but render the problem combinatorial and highly sensitive to small pose errors. To learn a prior over how parts fit together, we train a set-conditioned SE(3) flow model on procedurally generated assemblies. We then finetune this model to inject image conditioning, using 1% as much data. However, while the learned flow captures global structure, it does not enforce connectivity. To address this, we introduce an analytic connectivity-field guidance to pull predictions toward connected assemblies at test time. Through this, we demonstrate improved build quality with model size, pretraining, and guidance. We make our models and data available for research purposes at https://kulits.github.io/BrickFlow/",
+        "url": "https://arxiv.org/abs/2611.17321v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.17321v1",
+        "publishedDate": "2026-11-12T18:58:51.000Z",
+        "tags": [
+          "cs.CV",
+          "cs.GR"
+        ]
+      },
+      {
+        "id": "2611.17318",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Spatial Foundry: A Multimodal Dataset for Spatial Intelligence",
+        "authors": [
+          "Ethan Lin",
+          "Yang Song"
+        ],
+        "summary": "Spatial intelligence requires connecting visual observations to the geometry, objects, and persistent state of an environment. Images alone leave these relationships implicit, while disconnected annotations make it difficult to study appearance, camera motion, and scene changes under a common reference. We introduce Spatial Foundry, a collection of 5,280 furnished residential 3D scene configurations with editable assets and aligned visual, geometric, and temporal data. Its modalities include floor plans, perspective and panoramic RGB, metric depth, point clouds, meshes, instance-level 3D bounding boxes, and camera trajectories paired with video. Shared scene coordinates link observations across views and time; editable source scenes enable additional camera paths and controlled object changes. We describe the data representation and construction workflow, and discuss applications in floor-plan-conditioned 3D generation, geometric reconstruction, instance-level perception, camera-conditioned video generation, shared world modeling, and scene editing. Controlled camera and scene variations support spatial perception and world-model research. The public project page provides videos and an interactive colored point-cloud preview.",
+        "url": "https://arxiv.org/abs/2611.17318v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.17318v1",
+        "publishedDate": "2026-11-12T18:58:36.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2611.17302",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "FLEX-LBP: Learning Local Binary Patterns with Exact Binary Inference for Texture Classification",
+        "authors": [
+          "Mohamed Alimoussa",
+          "Amal El Kaid"
+        ],
+        "summary": "Local Binary Patterns (LBP) remain among the most widely used texture descriptors, from industrial inspection to medical imaging. Yet their radius, sampling angles, color transform and thresholds are fixed by hand for each dataset. We present FLEX-LBP, which learns these parameters by backpropagation while every forward pass computes exact binary codes and hard histogram counts. A straight-through estimator acts only in the backward pass, so the deployed descriptor is an interpretable hard-binary LBP with 90 learnable parameters and unchanged inference cost. In a controlled ablation on six color texture benchmarks, the component worth learning is dataset-dependent. One configuration, applied unchanged everywhere, learns the geometry and thresholds with the color transform frozen. It improves the nearest-neighbor accuracy of the identical fixed descriptor by 3.55 points on average over five seeds, significantly on five of six benchmarks and never significantly worse. With a linear discriminant readout, it gains 0.9 points; the fully learned descriptor gains 2.7 and has the highest mean. FLEX-LBP is more accurate than five classical LBP-family descriptors, PCANet and a neural LBP on five of six benchmarks. Its mean nearest-neighbor accuracy exceeds that of frozen ImageNet ResNet-50 features (23.5 million parameters). On the Kather colorectal cancer histology benchmark, the fully learned descriptor reaches 93.8%, significantly above the best classical descriptor (Completed LBP, 92.8%). The learned radii adapt in directions that recur across seeds. Noise drowns single-pixel comparisons and illuminant change flips inter-channel ones; median sampling or gray-world normalization restores 96-97%. The code is available as a drop-in PyTorch layer at https://github.com/medalimoussa/FLEX-LBP.",
+        "url": "https://arxiv.org/abs/2611.17302v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.17302v1",
+        "publishedDate": "2026-11-12T18:55:56.000Z",
+        "tags": [
+          "cs.CV",
+          "cs.LG"
+        ]
+      },
+      {
+        "id": "2611.17298",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Consistent Video-to-Video Translation via Explicit Correspondences",
+        "authors": [
+          "Gaurav Parmar",
+          "Zhengqi Li",
+          "Richard Zhang",
+          "Jun-Yan Zhu",
+          "Srinivasa Narasimhan",
+          "Eli Shechtman",
+          "Yotam Nitzan"
+        ],
+        "summary": "Interactive video-to-video applications require real-time generation while maintaining long-range temporal consistency. However, recent methods achieve speed by restricting attention to a fixed-length causal window. This limits long-range consistency whenever relevant history falls outside the context window. To address this limitation, we introduce vid2vid-long, a correspondence-based approach grounded in a simple observation. Video-to-video translation provides an explicit cross-frame reference: the regions that match in the input video should match in the output video too. Concretely, we compute patch-level correspondences in the input, guiding retrieval of previously generated outputs in the corresponding regions, and condition the model on these patches through correspondence cross-attention. Our experiments demonstrate that vid2vid-long consistently improves long-range temporal consistency across recent video models while preserving generation quality and real-time performance.",
+        "url": "https://arxiv.org/abs/2611.17298v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.17298v1",
+        "publishedDate": "2026-11-12T18:55:09.000Z",
+        "tags": [
+          "cs.CV",
+          "cs.AI",
+          "cs.GR",
+          "cs.LG"
+        ]
+      }
+    ],
+    "LLMs & Language": [
+      {
+        "id": "2611.17332",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "ArchSpace: Recording, Reviewing, and Referencing LLM Architecture Research",
+        "authors": [
+          "Jie Wang",
+          "Tong Zhu",
+          "JiaHao Kuang",
+          "Zhe Xu",
+          "Yunkai Chai",
+          "Dehong Zheng",
+          "Yu Cheng",
+          "Tao Ji",
+          "ZhouHan Lin",
+          "Qi Zhang",
+          "Bowen Zhou"
+        ],
+        "summary": "Model architecture shapes the scaling behavior, training efficiency, and inference cost of LLMs, making it a central focus of both industry and academia. In industry, teams such as those behind DeepSeek, Qwen, and Kimi routinely introduce architectural innovations, yet public reports rarely document which ideas succeeded, which were abandoned, and why. In academia, limited compute and inconsistent baselines often restrict evaluations to small-scale, single-point comparisons, making it difficult to establish whether improvements hold at larger scales or translate into broader impact. ArchSpace addresses both gaps as a public platform for Recording, Reviewing, and Referencing Architecture Researc}: each proposal is recorded with its experiments and reasoning, reviewed by the community, and referenced by later work. To evaluate ideas before costly large-scale training, ArchSpace leverages scaling laws to predict model loss at larger scales from smaller experiments, a practice widely adopted in industry. We provide initial references that make the platform usable: Qwen3.5 and OLMo3 baselines, fitted scaling laws, and a reusable training recipe. Ideas validated through this review can in turn become new baselines, and ArchSpace thereby aims to broaden the range of ideas that shape the next generation of models.",
+        "url": "https://arxiv.org/abs/2611.17332v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.17332v1",
+        "publishedDate": "2026-11-12T18:59:52.000Z",
+        "tags": [
+          "cs.CL",
+          "cs.LG"
+        ]
+      },
+      {
+        "id": "2611.17320",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Learning When Diffusion Language Models Should Regenerate",
+        "authors": [
+          "Minhae Oh",
+          "Jeonghye Kim",
+          "Jinwoo Koo",
+          "Yeongoon Kim",
+          "Jimin Seo",
+          "Minsik Seol",
+          "Jungwoo Lee"
+        ],
+        "summary": "Remasking allows diffusion language models to revisit generated text, but effective correction requires knowing when and what to revise. Our diagnosis on Sudoku reveals two gaps. Hidden states contain error information that token confidence does not reliably expose, and remasking an isolated error usually reproduces it when the surrounding context remains fixed. These findings motivate DiVR , a verifier that predicts whether a partially generated sequence will reach a correct answer. Trained on the final correctness of the model's own trajectories, DiVR decides when to regenerate a block and which alternative to retain, while the generator itself stays unchanged. On five reasoning benchmarks with LLaDA-8B-Base, DiVR raises the average accuracy of the fine-tuned generator from 35.3\\% to 43.4\\% at $1.9$-$3.5\\times$ the cost of greedy decoding, above search baselines that use $3.8$-$7.4\\times$. It also complements post-training such as supervised fine-tuning and reinforcement learning, and generalizes to other generators, including Dream.",
+        "url": "https://arxiv.org/abs/2611.17320v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.17320v1",
+        "publishedDate": "2026-11-12T18:58:50.000Z",
+        "tags": [
+          "cs.CL"
+        ]
+      },
+      {
+        "id": "2611.17316",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "CoReMem: Cost-Internalizing Memory for Successive Coding Tasks with Prospective Valuation",
+        "authors": [
+          "Peiwen Li",
+          "Harshit Verma",
+          "Sophia Zhou",
+          "Haiwen Wang",
+          "Ngoc Bui",
+          "Heng Chang",
+          "Fei Fei",
+          "David van Dijk",
+          "Rex Ying"
+        ],
+        "summary": "Coding agents tackle successive tasks on an evolving repository, carrying forward edits and writing memory before the next task is known. Selecting memory for unknown next tasks requires balancing future usefulness against the costs of writing and reading it. The actor must also decide when acting on available memory saves effort as the task unfolds. We introduce Coding-Repository Memory (CoReMem), a cost-internalizing framework that guides memory design and actor adaptation through measured memory value on the next task. Prospective segment valuation compares runs of the next task with and without individual trajectory segments from the same inherited repository state, guiding a compact memory built around anchors: repository locations and executable checks. Actor adaptation estimates on-policy memory value within rollout groups with and without memory, using a reward that prioritizes resolution and penalizes step count in successful runs. Provenance-gated value credit assigns the additional value term to steps identified as using memory-supplied anchors, while every step retains outcome credit. On ChainSWE, CoReMem raises the 27B actor's resolve rate from 21.0% to 25.7%, with 17% fewer steps and 11% fewer total cache-aware tokens, including memory-module calls, relative to the untrained actor model without memory.",
+        "url": "https://arxiv.org/abs/2611.17316v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.17316v1",
+        "publishedDate": "2026-11-12T18:58:22.000Z",
+        "tags": [
+          "cs.AI",
+          "cs.CL",
+          "cs.SE"
+        ]
+      },
+      {
+        "id": "2611.17314",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Linking Rapid Learning to Compositional Structure in Neural Networks: Evidence from Additive Analogies in Meta-Learned Parameter Spaces",
+        "authors": [
+          "Abigail L. Tenenbaum",
+          "R. Thomas McCoy"
+        ],
+        "summary": "Humans can learn rapidly from limited experience, while neural networks typically require extensive training. In this work, we investigate what properties of a neural network can enable it to learn rapidly. We study neural networks that have been optimized via meta-learning, a technique that exposes a network to many related functions to facilitate its subsequent learning of similar functions. Prior work has shown that these meta-learned networks can learn new functions rapidly, but how they do so remains unclear. To investigate their internal structure, we take inspiration from classic work demonstrating additive relationships among the learned vectors that neural networks use to represent words (e.g., \"king\" minus \"man\" plus \"woman\" approximates \"queen\"). Analogously, we look for additive relationships among a meta-learned network's \"representations\" of different functions; when a meta-learned network rapidly learns to implement a specific function, all of its adapted parameter values can be concatenated into a single vector that we treat as representing the function. We find that such parameter vectors can be added and subtracted according to symbolic relationships among the functions they represent, yielding new parameter vectors that successfully represent the functions predicted by the corresponding symbolic manipulations: the networks specified by these artificially recombined vectors actually implement the intended functions without any direct training on them. Our results suggest that meta-learning can tune a network's starting point to organize subsequent learning along systematic, functionally meaningful trajectories through the space of possible parameter vectors, providing a geometric basis for realizing inductive biases in neural networks.",
+        "url": "https://arxiv.org/abs/2611.17314v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.17314v1",
+        "publishedDate": "2026-11-12T18:57:49.000Z",
+        "tags": [
+          "cs.LG",
+          "cs.CL"
+        ]
+      },
+      {
+        "id": "2611.17297",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Goal Encoding in LLMs",
+        "authors": [
+          "Arnab Sen Sharma",
+          "Eric Todd",
+          "Sheridan Feucht",
+          "Andy Arditi",
+          "Rohit Gandikota",
+          "Natalie Shapira",
+          "Gabriele Sarti",
+          "Constanza Fierro",
+          "Lisa Schut",
+          "David Bau"
+        ],
+        "summary": "We investigate whether and how LLMs encode goals: internal neural representations that precede and guide action, and that are flexible enough to be realized through many different execution paths. We construct a coding setting with multiple sub-tasks that allows us to evaluate goal-seeking behavior and the selection of sub-goals. In this setting, we localize an encoding of the next sub-goal in the outputs of a sparse set of attention heads. The same heads can be used to decode the LM's future actions in natural language (e.g., \"I'm checking if a word is a palindrome\"). We verify that this encoding is causal for next action and is plastic: transplanting it into a different environment, e.g., another programming language, triggers the same operation realized with a different sequence of tokens. The LM also sustains the encoding throughout the action's execution, which is puzzling because a transformer LM without recurrence cannot carry a state forward for more tokens than it has layers left. We propose that it does not need to. Under a non-recurrent goal-seeking (NRGS) account, the LM frequently re-reads the goal from the task specification, compares it with the progress visible in the growing context, and pursues what remains. We test the predictions of this account with targeted causal interventions.",
+        "url": "https://arxiv.org/abs/2611.17297v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.17297v1",
+        "publishedDate": "2026-11-12T18:55:06.000Z",
+        "tags": [
+          "cs.CL",
+          "cs.AI",
+          "cs.LG"
+        ]
+      }
+    ],
+    "Machine Learning": [
+      {
+        "id": "2611.17329",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Internalizing Investment Mandates: A Neurosymbolic RL Approach to Portfolio Allocation",
+        "authors": [
+          "Zeynep Yıldız",
+          "Satchit Chatterji",
+          "Ercan Atam",
+          "Erman Acar"
+        ],
+        "summary": "Institutional portfolios operate under investment policy statements that specify asset allocation constraints, often conditioned on market regime information. Deep reinforcement learning has been shown to optimize financial performance but typically does not enforce rule compliance, making it unsuitable for real-world deployment. Existing neurosymbolic methods such as Probabilistic Logic Policy Gradient (PLPG) offer constraint-satisfying reinforcement learning (RL) via differentiable symbolic supervision but assume a finite, discrete action space. We present a PLPG-inspired continuous allocation method that estimates the probability that the policy's own executed action satisfies the investment mandate, using reparameterized Monte Carlo sampling, and adds it to the training objective. No post-hoc enforcement mechanism intercepts actions at inference time and compliance is learned by the agent. Audited directly on deterministic mean actions with no correction, the policy reduces violations of a six-rule regime-conditional mandate from 96-98% for unconstrained RL and 33.4% for a reward-penalty baseline to 4.8%, showing that a continuous-action neurosymbolic policy can substantially internalize a symbolic mandate.",
+        "url": "https://arxiv.org/abs/2611.17329v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.17329v1",
+        "publishedDate": "2026-11-12T18:59:37.000Z",
+        "tags": [
+          "cs.LG"
+        ]
+      },
+      {
+        "id": "2611.17323",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "AgentSSL: Can MLE Agents Leverage Unlabeled Data?",
+        "authors": [
+          "Ethan Lin",
+          "Akanksha Sarkar",
+          "Ziang Liu",
+          "Kristin Branson",
+          "Jennifer J. Sun"
+        ],
+        "summary": "Applying machine learning systems to new domains introduces bottlenecks in both labeled data acquisition and manual pipeline engineering. While recent MLE agents show promise in automating pipeline design, they have been studied almost exclusively in fully supervised settings, leaving them untested in realistic regimes where labeled data is scarce but unlabeled data is abundant. In this work, we introduce Agentic Semi-Supervised Learning (AgentSSL), framing SSL as a program search problem and studying how agents navigate this space under limited supervision. We find that even under weak feedback and matched compute, agents can synthesize code that combines and adapts established SSL techniques, exceeding the strongest human-engineered baselines in 8 of 12 settings by up to +21.8%. However, our results identify program selection as a critical bottleneck in AgentSSL, where performance drops by as much as 47% when selecting based on the agent's feedback metric. To systematically study this bottleneck, we introduce ProgramSelectBench, a large-scale benchmark with a combined total of 16,977 agent-generated and human-engineered SSL programs, and evaluate both unsupervised and active program selection methods. We further evaluate AgentSSL on real-world ecology detection tasks, highlighting the opportunities and challenges of transferring agent-discovered strategies beyond controlled benchmarks.",
+        "url": "https://arxiv.org/abs/2611.17323v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.17323v1",
+        "publishedDate": "2026-11-12T18:59:06.000Z",
+        "tags": [
+          "cs.AI",
+          "cs.LG"
+        ]
+      },
+      {
+        "id": "2611.17313",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Sketching Language Models for Context Attribution",
+        "authors": [
+          "Christopher Liaw",
+          "Aranyak Mehta",
+          "Grigoris Velegkas",
+          "Felix Zhou"
+        ],
+        "summary": "Context attribution asks how removing parts of a prompt changes a language model's output. We study leave-one-out (LOO) attribution for a prompt of $n$ tokens and a fixed measurement function. Computing all LOO values directly requires $n$ model evaluations. Under a stability assumption, our algorithm estimates all LOO values to error proportional to $\\varepsilon$ with constant probability using $O(\\sqrt{\\log(1/\\varepsilon)}/\\varepsilon)$ evaluation calls. To complement our upper bound, we prove a matching $Ω(\\sqrt{\\log(1/\\varepsilon)}/\\varepsilon)$ lower bound on the number of evaluation calls in an oracle model. Empirically, we verify coefficient decay consistent with stability and evaluate the performance of our sketching algorithm on a small language-model retrieval task. Technically, our result is based on a sketching algorithm for arithmetic circuits whose Taylor coefficients satisfy the stability condition recently introduced by Gunn [Gun26]. A direct adaptation of their forward differentiation sketches would require $\\widetilde{O}(\\log(n)/\\varepsilon^2)$ evaluation calls. Our key observation is that we can apply forward differentiation to the backpropagation circuit, with only constant overhead over a forward sketch of the same Taylor degree. This reduces the variance of the sketches and is key to our improved evaluation bound. Our lower bound builds on the techniques of Amsel, Chen, Duman Keles, Halikias, Musco, and Musco [ACDH+26, SIAM Journal on Matrix Analysis and Applications] for lower bounding the number of matrix-vector queries to estimate the diagonal elements of random matrices.",
+        "url": "https://arxiv.org/abs/2611.17313v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.17313v1",
+        "publishedDate": "2026-11-12T18:57:48.000Z",
+        "tags": [
+          "cs.DS",
+          "cs.AI",
+          "cs.LG",
+          "stat.ML"
+        ]
+      },
+      {
+        "id": "2611.17309",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Classical Energies Learn to Reason 1,000x Faster than Looped Models",
+        "authors": [
+          "Benjamin Hoover",
+          "Hugh Blayney",
+          "James C. R. Whittington"
+        ],
+        "summary": "Looped models have emerged as a prominent paradigm for reasoning, with successes on simple reasoning puzzles such as Sudoku-Extreme and Maze-Unique. However, these models can be unstable, slow to train, and use many parameters and FLOPs to solve simple puzzles. Descent on an energy not only mitigates these issues but also offers advantages: built-in early stopping, compute that adapts to problem difficulty, fast training without differentiating through a solver, and interpretable weights that learn the constraints of the puzzle. Here we demonstrate this with a learned version of Hopfield & Tank's energy from the 80s, which we term CRAM, solves 99.996% of Sudoku-Extreme and 100% of Maze-Unique test puzzles after 42 ms and 132 ms of training on one GPU, at least 1,000x faster than looped models on these tasks. CRAM also matches baseline looped models at their highest accuracy on Sudoku-Extreme using at least 282x fewer inference FLOPs. Our work suggests two things. First, that energies are an extremely promising direction for training reasoning from data. Second, a caution against using trivially solvable benchmarks like Sudoku and Maze to test the scalability of looped reasoning techniques.",
+        "url": "https://arxiv.org/abs/2611.17309v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.17309v1",
+        "publishedDate": "2026-11-12T18:56:56.000Z",
+        "tags": [
+          "cs.AI",
+          "cs.LG"
+        ]
+      },
+      {
+        "id": "2611.17308",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Quantifying structural stability of transparent models for general insurance pricing",
+        "authors": [
+          "Félix Côté",
+          "Marie-Pier Côté"
+        ],
+        "summary": "The short duration of general insurance contracts leads to rapid distributional shifts in the data, warranting regular model updates. This process may yield a post-update model that differs considerably from the pre-update model in both predictions and structure. Structural stability is upstream of predictive stability, yet existing structural stability metrics are mostly restricted to simple decision trees. Thus, we first introduce the notion of functional transparency, characterising models with a prediction function that can be expressed as a sum of univariate functions for main effects and bivariate functions for pairwise interactions. Then, we propose the Mean Squared Shape function distance, a metric to quantify the structural stability of functionally transparent models, which are particularly relevant in actuarial science. Using three public auto insurance datasets, we present a benchmark study to demonstrate the usefulness of our metric in identifying a stable and accurate transparent model. Generalised linear models with centred numerical covariates are stable, and explainable boosting machines (EBMs) offer a compromise between stability and performance. We also find that stabilisation strategies, such as sequential modelling and fixed hyperparameters, can substantially improve stability for both EBM and XGBoost models, with negligible impact on performance.",
+        "url": "https://arxiv.org/abs/2611.17308v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.17308v1",
+        "publishedDate": "2026-11-12T18:56:54.000Z",
+        "tags": [
+          "stat.ML",
+          "cs.LG"
+        ]
+      },
+      {
+        "id": "2611.17303",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Towards a Theory of Learnability via Debate",
+        "authors": [
+          "Tosca Lechner",
+          "Vinayak Pathak",
+          "Sivan Sabato",
+          "Ruth Urner"
+        ],
+        "summary": "Debate has been recently proposed as a training protocol that is hoped to produce more aligned models even as model capabilities scale. The idea is that the human, instead of providing supervision in the form of labels, judges a debate between two models that compete to prove the correctness of opposite labels. It can be shown that functions of a much higher computational complexity can be correctly judged in this way, compared to the complexity of functions that can be directly evaluated using a computationally weak evaluator. This suggests that perhaps debate can be used to teach very complicated functions to models. However, previous work has largely ignored the fact that this is a training protocol, and simply analyzes the game being played between the two debaters for a known judge. We take the first steps towards understanding the learning problem implicit within the protocol, by formulating it as an online learning problem. We show that once we formulate the learning problem precisely, there are cases where the best way to learn given access to a judge is different from running an adversarial debate. This motivates us to define a cooperative version of the protocol, whose learnability we characterize using a combinatorial dimension. We also consider the possibility of the human judge being fallible and occasionally judging the debate incorrectly. We show that a small number of errors in judgement can lead to a large error in learning.",
+        "url": "https://arxiv.org/abs/2611.17303v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.17303v1",
+        "publishedDate": "2026-11-12T18:55:58.000Z",
+        "tags": [
+          "cs.LG"
+        ]
+      }
+    ]
+  },
+  "labPosts": [
+    {
+      "id": "openai-545643268",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Introducing ChatGPT Wallet",
+      "authors": [],
+      "summary": "Introducing ChatGPT Wallet, a secure way for agents in ChatGPT Work, Codex, and dots to complete purchases with user approval and existing card protections.",
+      "url": "https://openai.com/index/introducing-chatgpt-wallet",
+      "publishedDate": "2026-11-13T15:00:00.000Z",
+      "tags": [
+        "Product"
+      ]
+    },
+    {
+      "id": "openai-436110912",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Shield helps technicians hand off legacy portal work with OpenAI",
+      "authors": [],
+      "summary": "Shield uses OpenAI to help IT technicians hand off work in legacy portals. Its Forge agents navigate systems so technicians can focus on issues needing their judgment.",
+      "url": "https://openai.com/business/customer-stories/shield",
+      "publishedDate": "2026-11-13T08:00:00.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-318452300",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "How Amplitude ships product improvements in 1–2 days with OpenAI",
+      "authors": [],
+      "summary": "Built primarily on OpenAI models, Amplitude’s proactive product agent, Wave, identifies what to build, helps teams ship changes with coding agents, and measures the impact.",
+      "url": "https://openai.com/business/customer-stories/amplitude",
+      "publishedDate": "2026-11-12T20:00:00.000Z",
+      "tags": []
+    },
+    {
+      "id": "deepmind-1047804953",
+      "type": "blog_post",
+      "source": "deepmind",
+      "title": "Introducing Gemini 4 Hydrogen",
+      "authors": [],
+      "summary": "",
+      "url": "https://deepmind.google/blog/introducing-gemini-4-hydrogen/",
+      "publishedDate": "2026-11-12T18:00:50.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-1220578097",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Gondola doubles revenue as its team builds more with Codex",
+      "authors": [],
+      "summary": "Gondola helps creatives get credit and get hired, with Codex raising its lead engineer’s output by 50% and ChatGPT simplifying daily work.",
+      "url": "https://openai.com/business/customer-stories/gondola",
+      "publishedDate": "2026-11-12T12:00:00.000Z",
+      "tags": [
+        "Startup"
+      ]
+    },
+    {
+      "id": "openai-1617817092",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Holiday Extras is rethinking what it can build with Codex",
+      "authors": [],
+      "summary": "With Codex, Holiday Extras is turning customer expertise into better apps, higher booking conversion and new possibilities for growth.",
+      "url": "https://openai.com/business/customer-stories/holidays-extras-codex",
+      "publishedDate": "2026-11-12T09:30:00.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-1198124551",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Supporting research on AI and children’s safety",
+      "authors": [],
+      "summary": "OpenAI commits $2 million to research on AI and children’s safety. The work supports shared tools to measure risks and opportunities for young people.",
+      "url": "https://openai.com/index/children-first-declaration",
+      "publishedDate": "2026-11-12T00:00:00.000Z",
+      "tags": [
+        "Global Affairs"
+      ]
+    },
+    {
+      "id": "openai-1317512097",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Gilbert + Tobin rethinks the business of law with AI",
+      "authors": [],
+      "summary": "A conversation with Sam Nickless, Partner and Chief Executive Officer at Gilbert + Tobin.",
+      "url": "https://openai.com/index/gilbert-tobin-sam-nickless",
+      "publishedDate": "2026-11-12T00:00:00.000Z",
+      "tags": []
+    },
+    {
+      "id": "deepmind-1988747717",
+      "type": "blog_post",
+      "source": "deepmind",
+      "title": "AlphaGenome 2: Deciphering how cells read DNA to better understand disease",
+      "authors": [],
+      "summary": "Predicting how DNA sequences and their variations impact specific human cell types and disease.",
+      "url": "https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/",
+      "publishedDate": "2026-11-11T15:00:15.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-872131847",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "ChatGPT Plus for veterans and servicemembers",
+      "authors": [],
+      "summary": "More than 20,000 veterans and transitioning service members have claimed a free year of ChatGPT Plus. See how they use it to prepare for civilian careers.",
+      "url": "https://openai.com/index/chatgpt-plus-for-veterans",
+      "publishedDate": "2026-11-11T08:00:00.000Z",
+      "tags": [
+        "Company"
+      ]
+    },
+    {
+      "id": "openai-1126665218",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "JioStar’s chief architect on AI discovery at 500M-user scale",
+      "authors": [],
+      "summary": "JioStar’s Vijay Seshadri explains AI discovery at 500M-user scale. Read his lessons on evals, guardrails, and taking AI into production.",
+      "url": "https://openai.com/index/jiostar-vijay-seshadri",
+      "publishedDate": "2026-11-11T00:00:00.000Z",
+      "tags": []
+    },
+    {
+      "id": "deepmind-2116169433",
+      "type": "blog_post",
+      "source": "deepmind",
+      "title": "Gemini 4 Carbon is now available",
+      "authors": [],
+      "summary": "",
+      "url": "https://deepmind.google/blog/gemini-4-carbon-is-now-available/",
+      "publishedDate": "2026-11-10T16:03:47.000Z",
+      "tags": []
+    },
+    {
+      "id": "deepmind-693444540",
+      "type": "blog_post",
+      "source": "deepmind",
+      "title": "Introducing AlphaProof Code: a breakthrough in verifying complex software at depth",
+      "authors": [],
+      "summary": "AlphaProof Code agents wrote three million lines of proofs in Lean to verify Signal’s core encryption.",
+      "url": "https://deepmind.google/blog/introducing-alphaproof-code/",
+      "publishedDate": "2026-11-10T12:02:28.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-1646230041",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Helping caregivers use AI in everyday life",
+      "authors": [],
+      "summary": "OpenAI Academy is bringing free, hands-on ChatGPT workshops to caregivers in five U.S. cities, helping them build practical AI skills for everyday life.",
+      "url": "https://openai.com/index/helping-caregivers-use-ai-in-everyday-life",
+      "publishedDate": "2026-11-10T12:00:00.000Z",
+      "tags": [
+        "Company"
+      ]
+    },
+    {
+      "id": "deepmind-1866295694",
+      "type": "blog_post",
+      "source": "deepmind",
+      "title": "Opening the datasets behind our AI weather models",
+      "authors": [],
+      "summary": "Foundational precipitation and geostationary satellite datasets to observe the planet clearly.",
+      "url": "https://deepmind.google/blog/opening-the-datasets-behind-our-ai-weather-models/",
+      "publishedDate": "2026-11-10T11:13:04.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-1664940989",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Introducing Businesses in ChatGPT",
+      "authors": [],
+      "summary": "Manage your business information, get insights about how your business shows up, and turn interest into action in ChatGPT.",
+      "url": "https://openai.com/index/introducing-businesses-chatgpt",
+      "publishedDate": "2026-11-10T10:00:00.000Z",
+      "tags": [
+        "Product"
+      ]
+    },
+    {
+      "id": "openai-1868306545",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Closing the AI guidance gap in education",
+      "authors": [],
+      "summary": "New ThinkYoung research and lessons from OpenAI’s EMEA education partnerships on supporting teachers, AI literacy, and independent learning.",
+      "url": "https://openai.com/index/closing-ai-guidance-gap-education",
+      "publishedDate": "2026-11-10T09:00:00.000Z",
+      "tags": [
+        "Company"
+      ]
+    },
+    {
+      "id": "openai-2083426419",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Singapore Airlines elevates travel & work with OpenAI technology",
+      "authors": [],
+      "summary": "Discover how Singapore Airlines uses OpenAI models and API to enhance customer support, travel discovery, and employee productivity, doubling CSAT for its Kris chatbot.",
+      "url": "https://openai.com/index/singapore-airlines-travel-work",
+      "publishedDate": "2026-11-10T08:00:00.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-398155342",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Work at the Frontier: AI’s effect on freelance work",
+      "authors": [],
+      "summary": "New research from OpenAI and Upwork finds shifting demand for freelance work, new skill combinations, and larger budgets and more hours for AI-related projects.",
+      "url": "https://openai.com/index/ai-effect-on-freelance-work",
+      "publishedDate": "2026-11-10T07:00:00.000Z",
+      "tags": [
+        "Company"
+      ]
+    },
+    {
+      "id": "openai-1911104869",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Cogent and OpenAI build cyber defense factories for enterprises",
+      "authors": [],
+      "summary": "Cogent combines OpenAI models with enterprise context to help automatically remediate vulnerabilities with agents.",
+      "url": "https://openai.com/index/cogent-security",
+      "publishedDate": "2026-11-10T00:00:00.000Z",
+      "tags": [
+        "Startup"
+      ]
+    },
+    {
+      "id": "deepmind-1686873020",
+      "type": "blog_post",
+      "source": "deepmind",
+      "title": "Gemini Robotics 2.5 accelerates real-world general dexterity",
+      "authors": [],
+      "summary": "Our most capable vision-language-action model enhances robot dexterity, reliability, and safety",
+      "url": "https://deepmind.google/blog/gemini-robotics-2-5-accelerates-real-world-physical-intelligence/",
+      "publishedDate": "2026-11-09T19:51:47.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-1149029055",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "ChatGPT Enterprise now available in AWS Marketplace",
+      "authors": [],
+      "summary": "ChatGPT Enterprise is now available through AWS Marketplace, helping organizations simplify procurement through existing AWS purchasing and billing relationships.",
+      "url": "https://openai.com/index/chatgpt-enterprise-aws-marketplace",
+      "publishedDate": "2026-11-09T19:00:00.000Z",
+      "tags": [
+        "Product"
+      ]
+    },
+    {
+      "id": "openai-844717629",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Control Room: A central system to track and stop model workloads across our research infrastructure",
+      "authors": [],
+      "summary": "Learn how OpenAI’s Control Room tracks model workloads across our research infrastructure and can rapidly stop them when safety or security concerns arise.",
+      "url": "https://openai.com/index/control-room",
+      "publishedDate": "2026-11-09T13:00:00.000Z",
+      "tags": [
+        "Safety"
+      ]
+    },
+    {
+      "id": "openai-1819057901",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "CodeRabbit scales agentic software development and ships 20x more",
+      "authors": [],
+      "summary": "CodeRabbit uses OpenAI models to govern and trust AI-generated code and Codex to ship 20 times more software with the same engineering team.",
+      "url": "https://openai.com/index/coderabbit-codex-daybreak",
+      "publishedDate": "2026-11-09T08:00:00.000Z",
+      "tags": [
+        "Startup"
+      ]
+    },
+    {
+      "id": "openai-1177642290",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Kuken Industries searches 70 years of drawings in minutes",
+      "authors": [],
+      "summary": "Kuken Industries uses the OpenAI API to search 70 years of cooling tower drawings. Engineers can find the drawing for a repair in 4.5 minutes, down from nearly an hour.",
+      "url": "https://openai.com/index/kuken",
+      "publishedDate": "2026-11-09T08:00:00.000Z",
+      "tags": []
+    }
+  ],
+  "stats": {
+    "totalPapersScanned": 200,
+    "totalPostsScanned": 25
+  }
+}
