@@ -1,0 +1,908 @@
+{
+  "slug": "2026-11-22",
+  "title": "Weekly AI Digest — November 22, 2026",
+  "dateRange": {
+    "start": "2026-11-15T20:02:03.286Z",
+    "end": "2026-11-22T20:02:03.286Z"
+  },
+  "papersByCategory": {
+    "Computer Vision": [
+      {
+        "id": "2611.26629",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Posterior Matching Distillation",
+        "authors": [
+          "Hidir Yesiltepe",
+          "Julius Berner",
+          "Arash Vahdat",
+          "Pinar Yanardag"
+        ],
+        "summary": "Diffusion distillation accelerates image and video generation by compressing a pretrained teacher's iterative sampling process into a few network evaluations. Distribution-based methods achieve this by matching the student's output distribution to the teacher's. This matching is often driven by reverse-KL objectives, whose mode-seeking bias favors dominant teacher modes at the expense of diversity across samples. We introduce Posterior Matching Distillation (PMD), a new member of the distribution-based distillation family that combines mode-covering posterior sampling with any-step generation. At zero population loss, PMD recovers the teacher's full posterior of clean images at each trained noise level. Its stochastic student supports any-step sampling budgets within the trained timestep grid without further training. To learn these posteriors, PMD matches exponentially reweighted averages of student samples conditioned on a fixed noisy state to corresponding teacher posterior means. Under Gaussian corruption, exponentially tilted posterior mean is a single teacher evaluation at a shifted input. We prove that, matching tilted means over an open neighborhood uniquely identifies the full posterior. PMD thus supervises the entire conditional distribution through a family of mean constraints, without any auxiliary student-score network. Experiments on SDXL and FLUX.2 [klein] 4B demonstrate that PMD achieves the best FID among 4-step methods on both models, while maintaining competitive or leading performance across prompt-alignment and perceptual-quality metrics.",
+        "url": "https://arxiv.org/abs/2611.26629v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.26629v1",
+        "publishedDate": "2026-11-19T18:59:57.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2611.26627",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "RL Post-Training in Diffusion Transformers Is Activation Steering",
+        "authors": [
+          "Tuna Han Salih Meral",
+          "Kaan Oktay",
+          "Alec Helbling",
+          "Atakan Kara",
+          "Duen Horng Chau",
+          "Pinar Yanardag"
+        ],
+        "summary": "Reinforcement learning (RL) post-training substantially improves the visual quality, text rendering, and compositional accuracy of diffusion transformers. Because capabilities such as rendering requested text or composing multiple objects are inherently prompt-dependent, a natural hypothesis is that improving them requires learning complex, input-dependent transformations. To isolate how much of these gains an input-independent shift explains, we probe each RL-tuned model with a deliberately simple parameterization: a fixed set of steering vectors added to the block outputs of the frozen base model. On SD3.5-M, these vectors hold 65x fewer parameters than the RL-tuned LoRA (0.29M against 18.8M). We fit them to match the velocity predictions of public RL-tuned checkpoints, with no reward in the objective. Although the vectors are identical for every prompt, token, and sampling seed, they recover 90.0-96.3% of the reward gains of six RL-tuned image models, and 89.8% and 111.9% on two RL-tuned video models. Initialized at zero and trained with online RL, the vectors alone exceed the reward gains of weight-based RL on text rendering (OCR) and human preference (PickScore) on SD3.5-M. A constant shift thus suffices for most of the gain of policy-gradient RL post-training: without new input-dependent transformations, it steers the pretrained generator toward what it can already compute.",
+        "url": "https://arxiv.org/abs/2611.26627v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.26627v1",
+        "publishedDate": "2026-11-19T18:59:53.000Z",
+        "tags": [
+          "cs.CV",
+          "cs.LG"
+        ]
+      },
+      {
+        "id": "2611.26624",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "PlayCraft: Designing Engaging Games from Agent Play Experience",
+        "authors": [
+          "Weihao Cheng"
+        ],
+        "summary": "Recent AI agents can generate playable games, but these games are not necessarily engaging. Mastery is a key source of engagement, yet designing for it requires extensive human play and tuning. We propose PlayCraft, an automated framework that uses a vision-based agent to play games and draws on its detailed play experience to revise them for mastery. Starting from an initial game, PlayCraft alternates between playing and crafting. In the playing stage, a player agent watches the game screen, uses the controls, and pursues the game objective over repeated episodes while retaining memory. After each episode, it reports its progress, outcomes, decisions, and reflections. In the crafting stage, a crafter agent uses these reports to revise the game. It estimates player abilities, predicts performance at different proficiency levels, and compares those predictions with a target learning progression. It diagnoses the game and addresses the gaps by giving players meaningful opportunities to improve through better decisions and execution. We evaluate games in fresh runs with player agents across three intelligence settings, measuring learning gain and learning slope. Compared with the initial games, PlayCraft yields larger learning gains and steeper learning slopes in most games. It also outperforms the baselines on the macro-average of each metric at every intelligence setting.",
+        "url": "https://arxiv.org/abs/2611.26624v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.26624v1",
+        "publishedDate": "2026-11-19T18:59:34.000Z",
+        "tags": [
+          "cs.AI",
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2611.26617",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "One Prior, Two Dynamics: Repurposing Video Diffusion Transformers for Self-Supervised Latent Action Learning",
+        "authors": [
+          "Yuxin Jiang",
+          "Wenqiang Sun",
+          "Jiaqi Li",
+          "Yuchao Gu",
+          "Lvmin Zhang",
+          "Ivor Tsang",
+          "Mike Zheng Shou"
+        ],
+        "summary": "Videos reveal how the world changes, but rarely the actions that cause those changes. Latent action learning recovers such supervision from visual transitions, yet often learns the underlying dynamics largely from scratch. We ask whether a pretrained video generator can instead provide the prior for both inverse and forward dynamics. We introduce O$^{2}$LaF, built on a simple principle: one prior, two dynamics. We initialize both models from the same pretrained video DiT and adapt them to their distinct roles: a feed-forward transition encoder with learnable action queries for inverse dynamics, and a causal, action-conditioned video generator for forward dynamics. By controlling information access and optimizing both dynamics end-to-end through a compact bottleneck, O$^{2}$LaF learns transferable actions from unlabeled videos. Across navigation and robotic manipulation, O$^{2}$LaF sets a new state of the art in few-shot action probing and enables stronger zero-shot action transfer across visual contexts and embodiments. Beyond generative video priors, we further extend our framework to predictive representation priors such as V-JEPA2, achieving competitive performance. Our findings suggest a broader paradigm for latent-action learning: repurposing pretrained video models to discover transferable actions and predict their consequences.",
+        "url": "https://arxiv.org/abs/2611.26617v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.26617v1",
+        "publishedDate": "2026-11-19T18:58:14.000Z",
+        "tags": [
+          "cs.CV",
+          "cs.AI",
+          "cs.LG",
+          "cs.RO"
+        ]
+      },
+      {
+        "id": "2611.26615",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "ScaleWorld: High-Resolution World Generation through Shared Prediction and Refinement",
+        "authors": [
+          "Yansong Qu",
+          "Wesker Zheng",
+          "Quanjian Song",
+          "Zhiyuan Zhang",
+          "Xiao Cao",
+          "Shengchuan Zhang",
+          "Liujuan Cao"
+        ],
+        "summary": "High-resolution generation enables video world models to render fine-grained scene structures and textures, but directly generating high-resolution video incurs substantial computational and memory costs. We present ScaleWorld, a causal video model that unifies low-resolution world prediction and high-resolution refinement within a single shared backbone. By refining its own predictions, ScaleWorld produces high-resolution world videos without requiring a separate refinement model. For each video chunk, the shared backbone first completes a low-resolution prediction and then performs one-step high-resolution refinement conditioned on that prediction. To support efficient streaming generation, we maintain separate causal states with a long low-resolution history for prediction and a short high-resolution history for refinement. To address task interference during distillation, we separate specialist optimization from capability consolidation and introduce task-asymmetric on-policy distillation (TA-OPD). This procedure transfers prediction and refinement behaviors from specialized teachers into a shared student through local velocity matching under their respective sampling and history policies. {Extensive experiments demonstrate that ScaleWorld achieves high-quality world generation with improved computational and memory efficiency.",
+        "url": "https://arxiv.org/abs/2611.26615v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.26615v1",
+        "publishedDate": "2026-11-19T18:58:04.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2611.26603",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Depth Pro 2: Sharp and Temporally Consistent Metric Monocular Depth",
+        "authors": [
+          "Peiyun Hu",
+          "Marko Mihajlovic",
+          "Lyndon Duong",
+          "Lahav Lipson",
+          "Wei Dong",
+          "Amaël Delaunoy",
+          "Stephan R. Richter",
+          "Vladlen Koltun"
+        ],
+        "summary": "We present Depth Pro 2, an approach to estimating dense metric depth for images and video at full resolution. By analyzing prior methods for monocular depth estimation, we find that they commonly trade off temporal consistency and boundary sharpness: multi-frame methods favor consistency, single-frame methods favor sharpness. To overcome this trade-off, we train a single, scalable network that processes both images and video and predicts depth maps at native resolution. Depth Pro 2 produces depth maps that are metrically accurate, sharp, and temporally consistent all at once, outperforming prior work in all of these dimensions. We release a family of models that define a new Pareto frontier in terms of metric accuracy, sharpness, temporal consistency, and runtime. We release code and weights at https://apple-aiml-research.github.io/ml-depth-pro-2/",
+        "url": "https://arxiv.org/abs/2611.26603v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.26603v1",
+        "publishedDate": "2026-11-19T18:55:41.000Z",
+        "tags": [
+          "cs.CV",
+          "cs.LG"
+        ]
+      },
+      {
+        "id": "2611.26595",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Coda-DaVinci: Reimagining Video Generation with Code2Video",
+        "authors": [
+          "Yiyan Ji",
+          "Qixun Wang",
+          "Yang Shi",
+          "Zhuoran Zhang",
+          "Yifan Xu",
+          "Tengfei Liu",
+          "Yuqi Tang",
+          "Xiaohan Zhang",
+          "Shujie Li",
+          "Jiafu Tang",
+          "Xuanyu Zhu",
+          "Xinyu Liu",
+          "Yan He",
+          "Yushuo Guan",
+          "Zihao Wang",
+          "Xianghua Ying",
+          "Shixuan Liu",
+          "Haotian Wang",
+          "Wenjing Yang",
+          "Zhaoxiang Zhang",
+          "Yuanxing Zhang",
+          "Pengfei Wan",
+          "Jiaheng Liu"
+        ],
+        "summary": "Code2Video uses agent-authored 3D proxies to guide video generation, enabling explicit control over structure and dynamics. However, how to construct proxies and prompts for optimal downstream quality remains underexplored, as do the capabilities and limitations of this paradigm. Through controlled experiments and blinded human evaluation, we study proxy granularity, physics simulation, and prompting. The results reveal task-dependent trade-offs: coarse proxies favor natural motion, while medium-grained proxies favor consistency. Physics simulation and proxy-aligned prompting further improve average quality. Guided by these findings, we introduce Coda-DaVinci, a task-adaptive agentic framework for Code2Video generation that selects between proxy-guided and direct generation, adapts modeling granularity to each entity, and coordinates simulation with proxy-grounded prompting. Its multi-agent harness preserves scene assets and guides repairs through visual inspection and independent review. Experiments demonstrate leading instruction following on VTR and scene consistency on R2M, improved physical plausibility over direct generation, and higher visual realism than the compared Code2Video baselines. Long-video evaluations further show gains in event structure and consistency across successive interactions, while revealing limitations in transition stability and adherence to scene settings.",
+        "url": "https://arxiv.org/abs/2611.26595v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.26595v1",
+        "publishedDate": "2026-11-19T18:51:58.000Z",
+        "tags": [
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2611.26590",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Probing the \"Conscious\" Mind: Selective Access and Global Workspace in Vision-Language Models",
+        "authors": [
+          "Jiahao Huang",
+          "Jun Wang"
+        ],
+        "summary": "Vision-language models (VLMs) integrate visual and textual information, but their outputs do not reveal internal concept representations. Global workspace theory (GWT) proposes that information is selected from parallel brain processes, integrated in a shared workspace, and made available to specialised processes. We introduce the Multimodal Concept Lens (MC-Lens), a multimodal Jacobian lens, to study these functions in VLM concept processing. Its vision encoder and language decoder lenses map intermediate states to a shared semantic space defined by the decoder's output vocabulary to compare concept accessibility across modalities. MC-Lens supports internal concept interventions to examine the role of accessed concepts in downstream computation. (i) Accessibility and selective access. Multimodal concept information is readable in intermediate states and selectively accessible as tasks require. We extend \"readout carriers\" from one name token to a token set to better capture and express concept information and support counterfactual experiments. (ii) Concepts in downstream computation. Counterfactual experiments show that accessed concept information participates in downstream computation and reasoning. (iii) Development of cross-modal alignment and selective access. We develop two J-space metrics tracking the development of cross-modal concept alignment more clearly than hidden state cosine in controlled VLM training. The experiment also shows that reliable selective access develops later than concept accessibility. (iv) Shared functions across models. Across VLM families and sizes, we find shared patterns of concept accessibility, query-dependent selectivity and cross-task intervention effects despite differences in internal organisation. These findings offer an experimental basis to study GWT in multimodal artificial systems and how it can guide cross-modal alignment improvements.",
+        "url": "https://arxiv.org/abs/2611.26590v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.26590v1",
+        "publishedDate": "2026-11-19T18:46:50.000Z",
+        "tags": [
+          "cs.AI",
+          "cs.CV",
+          "cs.LG"
+        ]
+      },
+      {
+        "id": "2611.26569",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Text-Aware, Vision-Blind: How Multimodal Image Editing Systems Handle Unsafe Inputs",
+        "authors": [
+          "Ziqing Yang",
+          "Yixin Wu",
+          "Michael Backes",
+          "Yang Zhang"
+        ],
+        "summary": "Multimodal image generation systems have made rapid progress and increasingly emphasize content safety. However, their safety mechanisms tend to rely on a single modality and lack joint consideration of both visual content and text prompts, particularly in instruction-guided image editing, where the uploaded image may itself carry risk. We thus introduce EditSafetyBench, a benchmark that measures system-level safety awareness of advanced image editing systems, containing 5,940 image-instruction pairs, covering safe and unsafe images across 11 risk categories and three edit intents. We then probe the benchmark dataset on four systems, including Gemini, GPT, Qwen API, and Qwen Local. Based on our evaluation, we observe a systematic text-vision safety mismatch: Gemini and GPT refuse 87.1\\% and 81.6\\% cases containing unsafe-intent editing prompts, while only refusing 24.2\\% and 22.4\\% cases with both unsafe images and neutral instructions. At the category level, most risks are considered inconsistently by different systems, e.g., GPT allows 70.4\\% editing attempts of unsafe political content while Gemini only allows 34.8\\%. Notably, sexual content shows the strongest visual sensitivity, likely benefiting from mature NSFW identification works. Our findings highlight the need for safety guardrails that jointly reason over both visual and textual modalities in image editing systems.",
+        "url": "https://arxiv.org/abs/2611.26569v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.26569v1",
+        "publishedDate": "2026-11-19T18:36:19.000Z",
+        "tags": [
+          "cs.CR",
+          "cs.CV",
+          "cs.LG"
+        ]
+      }
+    ],
+    "Machine Learning": [
+      {
+        "id": "2611.26619",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "TideCache: Efficient Hybrid LLM Serving with Transparent Cache Management and Layer-Wise Streaming",
+        "authors": [
+          "Jinbin Luo",
+          "Xiaozhe Yao",
+          "Shang Yang",
+          "Zhijian Liu",
+          "Song Han",
+          "Qinghao Hu"
+        ],
+        "summary": "Hybrid architectures have become mainstream among open-weight language models. Their global-attention and bounded-state layers maintain heterogeneous caches whose demands vary with context length and concurrency. We present TideCache, a serving system on CPU--GPU superchips with three components for allocating GPU memory among caches and managing their residency across GPU and host memory. The Transparent Cache Pool redistributes physical pages among cache components behind fixed virtual addresses, preserving cache layouts and backend interfaces. The Cache Streamer uses computation intervals provided by bounded-state layers to prefetch the next global-attention layer's prefix into GPU slots shared across global-attention layers, reducing GPU residency while overlapping layer-wise transfers with computation. Generated KV remains resident. The Request Scheduler selects resident or streamed execution and triggers capacity adjustments according to request size and queue state. Together, they let HBM released by streaming accommodate other cache components and additional requests. Implemented in SGLang and evaluated on GB300 and GH200 across seven model/platform configurations, TideCache completes up to 2.04x as many agent turns, reduces overall P50 per-token latency by 20--59%, and improves agent P50 TTFT by 1.40--3.05x compared with SGLang with HiCache.",
+        "url": "https://arxiv.org/abs/2611.26619v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.26619v1",
+        "publishedDate": "2026-11-19T18:58:31.000Z",
+        "tags": [
+          "cs.DC",
+          "cs.LG"
+        ]
+      },
+      {
+        "id": "2611.26607",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Bio-PM-Guided Synthetic IMU Generation",
+        "authors": [
+          "Deepali Singh",
+          "Deepesh Parpani",
+          "Aviral Gupta"
+        ],
+        "summary": "Collecting and labeling inertial measurement unit (IMU) data for human activity recognition (HAR) is expensive, and models trained on one group of subjects often fail to generalize to unseen individuals. Even with balanced data, classifiers struggle to distinguish dynamically similar activity classes and benefit from targeted augmentation. We explore whether synthetic IMU data generated in the representation space of a pretrained biosignal encoder, Bio-PM \\cite{b1}, can serve as a practical augmentation source. Rather than synthesizing raw signals, we leverage Bio-PM's frozen encoder to convert 10-second IMU windows into token embedding sequences and train class-conditional decoders in this space: (1) an autoregressive transformer decoder that predicts tokens sequentially, and (2) a diffusion decoder that learns the token distribution through a denoising objective. We analyze generation realism through distributional metrics and embedding-space visualizations, evaluate downstream utility through leave-one-subject-out HAR classification, and present a PatchDecoder for approximate raw waveform reconstruction. Our diffusion decoder achieves a Train-on-Synthetic-Test-on-Real (TSTR) macro-F1 of 0.68, demonstrating that generated tokens are realistic enough to train a classifier that transfers to real data. Combining synthetic-token augmentation with a 320-dimensional gravity-aware feature representation raises LOSO macro-F1 from 0.729 to 0.809 over a real-only baseline across 51 subjects on the WISDM benchmark, with statistically significant gains concentrated in the most challenging activity classes. These results demonstrate that high-fidelity generation in a pretrained encoder's representation space is achievable and practically useful for cross-subject HAR augmentation.",
+        "url": "https://arxiv.org/abs/2611.26607v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.26607v1",
+        "publishedDate": "2026-11-19T18:56:25.000Z",
+        "tags": [
+          "cs.LG"
+        ]
+      },
+      {
+        "id": "2611.26598",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Active Feature Acquisition by Distilling an Oracle Teacher",
+        "authors": [
+          "Yang Meng",
+          "Zixin Ding",
+          "Robert L. Grossman",
+          "Yuxin Chen"
+        ],
+        "summary": "Acquiring every feature of an instance is often costly: a measurement can carry a monetary price, a time delay, or a privacy cost. Active Feature Acquisition (AFA) addresses this by learning a policy that decides, per instance, which features to acquire under a budget. Existing AFA methods train this policy by optimizing a self-constructed utility target rather than distilling an explicit teacher. We construct this teacher explicitly. At training time the label and the unobserved feature values are available, and together they determine the teacher in closed form: an oracle that ranks every candidate by its effect on the downstream predictor's error. OracleImitator distills this ranking into a deployable policy by soft-target imitation. Across multimodal medical diagnosis and the AFABench benchmark, OracleImitator matches or outperforms existing AFA methods across the budget range, recovering 90% of the attainable accuracy gain at under a quarter of the acquisition cost. Because the teacher is an explicit algorithmic object rather than an implicit optimization target, we can also measure directly how much of its ranking is recoverable by a policy restricted to what is visible at deployment.",
+        "url": "https://arxiv.org/abs/2611.26598v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.26598v1",
+        "publishedDate": "2026-11-19T18:52:57.000Z",
+        "tags": [
+          "cs.LG",
+          "cs.AI"
+        ]
+      },
+      {
+        "id": "2611.26592",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Realized versus Population Reliability: Anytime-Valid Self-Consistency Certification under Correlated Reasoning",
+        "authors": [
+          "Terence D. Agbeyegbe",
+          "Toneukarin G. Agbeyegbe"
+        ],
+        "summary": "Self-consistency certification treats repeated sampling from a language model as sequential evidence accumulation and stops when an anytime-valid e-process crosses a threshold, guaranteeing finite-sample Type I error control by Ville's inequality. Prior constructions assume sampled rollouts are conditionally independent. We show this assumption fails in practice: reasoning streams are positively correlated through shared reasoning prefixes or across-prompt heterogeneity, changing not merely certificate efficiency but the hypothesis certified. Modeling dependence via a per-unit latent state (the random-effects / intraclass-correlation structure) induces exchangeable, equi-correlated increments with correlation $ρ$. Correlation splits the single null into a realized null about the drawn belief and a population null about average model behavior, which coincide only when $ρ=0$. We show: (i) the standard betting e-process remains anytime-valid for the realized null, not the population null; (ii) read as a population-null test, a suitable mixture has asymptotic crossing probability at least $π=P(μ(Z)>0)$, potentially exceeding nominal $ε$; (iii) the within-unit mean's effective sample size saturates at $1/ρ$, so extra within-unit rollouts cannot restore population validity; and (iv) a prompt-level e-process restores population validity, with optimal allocation at one rollout per prompt under a pure rollout budget. Simulations and Claude Haiku 4.5 rollouts confirm this regime dependence: on GSM8K ($\\hatρ=0.435$, $\\hatθ=+0.96$) the gap is dormant, whereas on AIME ($\\hatρ=0.480$, $\\hatθ=-0.15$) the single-unit rule crosses on 24% of prompts at nominal $ε=0.05$, while the prompt-level procedure declines (0.00). This correctness result identifies which reliability claim an anytime-valid certificate actually supports under dependence.",
+        "url": "https://arxiv.org/abs/2611.26592v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.26592v1",
+        "publishedDate": "2026-11-19T18:47:51.000Z",
+        "tags": [
+          "stat.ME",
+          "cs.AI",
+          "cs.LG"
+        ]
+      }
+    ],
+    "LLMs & Language": [
+      {
+        "id": "2611.26613",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "AgentRoboCritic: Understanding the Capability of Frontier Agents on Direct Robot Control",
+        "authors": [
+          "Yiyang Du",
+          "Yuxuan Kuang",
+          "Qitao Zhao",
+          "Yixuan Wang",
+          "Zhanqiu Guo",
+          "Yi Xu",
+          "Xin Li",
+          "Wenbin He",
+          "Liu Ren",
+          "Chenyan Xiong"
+        ],
+        "summary": "Frontier multimodal language agents such as GPT-6 Astra have demonstrated strong capabilities in controlling robots directly via low-level numerical actions without high-level primitives. However, existing benchmarks report only episode-level success rates, which show neither how these agents succeed nor where they fail. In this paper, we present a systematic action-level analysis of frontier agents on direct robot control across 12 manipulation benchmarks. We introduce AgentRoboCritic, an intent-grounded critique framework in which the policy agent states a local intent alongside each action, and a critic evaluates the action's outcome and failure mode against this intent. Our action-level analysis demonstrates the promising capabilities of frontier agents on direct robot control, including closed-loop recovery from local execution failures, reliable semantic grounding across diverse scenes, and strong zero-shot manipulation without task-specific adaptation. It also identifies their current limitations, including task-relevant physical execution bottlenecks such as grasping and alignment, and uneven recovery across failure modes. Finally, we validate our critic on a 400-action human-annotated benchmark and release a dataset of 12,844 annotated actions alongside a fine-tuned open-source critic, Muse-Glimmer-30B, whose failure-mode accuracy rises from 32.58% to 74.24%, enabling low-cost action-level analysis.",
+        "url": "https://arxiv.org/abs/2611.26613v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.26613v1",
+        "publishedDate": "2026-11-19T18:57:25.000Z",
+        "tags": [
+          "cs.RO",
+          "cs.CL",
+          "cs.CV"
+        ]
+      },
+      {
+        "id": "2611.26584",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Represented but misread: Post-training changes how language models read out what they represent",
+        "authors": [
+          "Jochen Laubrock"
+        ],
+        "summary": "Does post-training change what a language model represents, or how this representation is read out into an answer? We compared linear probes with the models' own answers, analyzed with signal detection theory, in six open-weight base models and their post-trained versions. For judgments of whether German texts were written by a human or an AI, probes and word n-gram classifiers separated the classes well, but the answers did not and often ordered the texts inversely. Post-training lowered the sensitivity of the answers on average ($Δd' = -0.34$ across model families; -0.29 across three prompts). It also changed the use of a stated base rate: Base models shifted their log-odds by less than the stated change in prior odds, most post-trained models by more. In two models with stage-wise checkpoints, the change occurred during supervised fine-tuning, model stitching implicated the early layers, and from mid-depth on internal states at positions after the text, not those of the text, transferred the change between checkpoints. Our corpora cannot be shared, so we add a case reproducible from public data, the truth of negated statements. Here, post-training acted in the opposite direction: Probes decoded truth at or near ceiling in every model, the answers of several base models did not use it, and post-training repaired them; by mid-depth the repair resided at the positions after the statement; below it, the representation of the statement contributed, strongly in one of four models. In a training study, adding 2,000 correctly labeled authorship judgments of news texts to otherwise identical fine-tuning data improved the answers on our newspaper and textbook corpora and inverted them on the chats, where they followed a news-trained probe of the base model. Post-training thus changed how a judgment is read out of what a model represents, and a small training signal can set its direction.",
+        "url": "https://arxiv.org/abs/2611.26584v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.26584v1",
+        "publishedDate": "2026-11-19T18:43:56.000Z",
+        "tags": [
+          "cs.CL",
+          "cs.LG"
+        ]
+      }
+    ],
+    "AI & Agents": [
+      {
+        "id": "2611.26601",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "SoK: Assessing the Evolution of LLM Capability in Software Vulnerability Research",
+        "authors": [
+          "Amine Lbath",
+          "Manan Suri",
+          "Aurelien Delaitre",
+          "Vadim Okun",
+          "Massih-Reza Amini",
+          "Dinesh Manocha"
+        ],
+        "summary": "LLM-based agents are becoming increasingly capable at discovering, validating and patching vulnerabilities in real software, and vendors and researchers report that this is already changing how vulnerabilities are found and fixed. These claims, however, are scattered across papers, vendor reports and disclosures and are rarely comparable. We introduce a framework that rates these capabilities on an autonomy scale modeled on the levels of driving automation, and qualifies each claim by its correctness, its availability and the strength of its evidence. We use this framework to systematize the published evidence on LLM capability in vulnerability research. We find that agents discovered, validated, and patched vulnerabilities in real-world software without human intervention before the restricted frontier models of 2026, and that open-weight models subsequently attained comparable autonomy for discovery and validation. We then measure the consequences of evolving LLM security capabilities in a decade of public vulnerability records, advisories and exploitation data. In 2026 the number of disclosed vulnerabilities more than doubled, with an increasing share rated critical or high, and severe bugs that had survived a decade or more in widely used code were reported several times more often than before. Yet the time between the stages of a vulnerability's life, from report to fix and from disclosure to attack, has not shifted noticeably so far. We grade the mitigations proposed in the literature with an explicit rubric and draw guidance for each group of stakeholders from the best-supported ones.",
+        "url": "https://arxiv.org/abs/2611.26601v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.26601v1",
+        "publishedDate": "2026-11-19T18:54:19.000Z",
+        "tags": [
+          "cs.CR",
+          "cs.AI",
+          "cs.SE"
+        ]
+      },
+      {
+        "id": "2611.26596",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "PGX: Physically Grounded Execution for Long-Horizon Humanoid Loco-Manipulation",
+        "authors": [
+          "Kai Lu",
+          "Chenyang Ma",
+          "Ioannis Havoutis"
+        ],
+        "summary": "Robotic vision-language-action (VLA) models can execute diverse individual manipulation skills, yet they still struggle with long-horizon loco-manipulation tasks, where temporal structure, skills, and precision are tightly coupled within a monolithic model. We propose Physically Grounded Execution (PGX), a framework that offloads temporal and precision control to two classical training-free components, allowing the VLA to focus on stage-specific skill dynamics. PGX decomposes long-horizon loco-manipulation into three layers: (i) a predicate-based state machine governs task progression, using physical predicates to gate phase transitions, trigger recovery, and coordinate navigation and waiting. Shared predicate semantics connect offline demonstration segmentation, online execution, and stage-wise evaluation; (ii) VLA skills operate within active manipulation phases, with flat or stage-trained models concentrating on task-relevant actions; and (iii) world-coordinate locking (WCL) maintains spatial consistency through base station keeping, object-relative positioning, and world-anchored contact targets. We demonstrate the effectiveness of PGX with extensive experiments conducted on three simulated tasks and one real-world task using a Unitree G1 humanoid robot for long-horizon loco-manipulation, showing improvements in stage progression and task success rates. Project page is available at: https://kl-research.github.io/pgx",
+        "url": "https://arxiv.org/abs/2611.26596v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.26596v1",
+        "publishedDate": "2026-11-19T18:52:18.000Z",
+        "tags": [
+          "cs.RO",
+          "cs.AI"
+        ]
+      },
+      {
+        "id": "2611.26588",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "Verify the Verifier: Specification-Grounded LLM Cross-Checking for Bugs That Escape UVM Scoreboards",
+        "authors": [
+          "Ana E. Sanchez Villalobos",
+          "Michael D. Quinn",
+          "Aakash Tyagi",
+          "Minh D. Luu",
+          "David Kebo Houngninou"
+        ],
+        "summary": "A passing UVM regression shows the design agrees with the reference model on what the scoreboard checks, not that it meets the specification. Bugs that pass every test yet violate the specification, termed scoreboard escapes, survive mature testbenches. We present Verify the Verifier, to our knowledge the first framework whose LLM-based Anomaly Cross-Checker examines a passing regression's traces against the specification. Of 564 bugs inserted into four OpenTitan IPs, 68 are candidate scoreboard escapes: non-equivalent, exercised by the tests, yet passing. The framework confirmed 41 as scoreboard escapes with assertions failing on the buggy design and proven on the original.",
+        "url": "https://arxiv.org/abs/2611.26588v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.26588v1",
+        "publishedDate": "2026-11-19T18:45:54.000Z",
+        "tags": [
+          "cs.SE",
+          "cs.AI",
+          "cs.AR"
+        ]
+      },
+      {
+        "id": "2611.26586",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "ProtoDiffusion: Token-per-Layer Generative Modeling of Multi-Layer Images",
+        "authors": [
+          "Adrià Ciurana Lanau",
+          "Harleen Hanspal",
+          "Lusine Abrahamyan",
+          "Emilio Tylson Baixauli",
+          "Yu Cao",
+          "Danai Triantafyllidou",
+          "Stefano Zorzi",
+          "Gustavo Zanoni Felipe",
+          "Peter Griger",
+          "Stefan Sietzen",
+          "Petru-Daniel Tudosiu"
+        ],
+        "summary": "Graphic designs are ordered compositions of RGBA layers whose separation enables selection, movement, and reuse. Existing layered models represent each layer with a full-canvas or region-sized spatial latent grid, so representation size grows with the cumulative spatial extent of the layers. We present ProtoDiffusion, a latent-diffusion framework built on ProtoVAE, a multi-layer variational autoencoder that encodes a design into one shared spatial prototype and one candidate vector per layer. Each candidate conditions a shared decoder to reconstruct its corresponding RGBA layer. For $N$ layers, the representation contains $HW+N$ tokens before backbone-specific packing, compared with $NHW$ for full-grid-per-layer representations. ProtoDiffusion jointly denoises the prototype and a fixed set of candidate slots, conditioned on an image or text, with bounding boxes as optional layout guidance. The model leaves unneeded slots empty and determines the number of layers and, in absence of boxes, their layout, requiring neither as input. The same architecture supports both image-to-design and text-to-design. ProtoVAE achieves high-fidelity reconstruction from its compact shared latent representation, reaching 40.43 dB PSNR on layer crops. On the LayerD evaluation split, image-to-design achieves RGB L1 scores of 0.040 with bounding boxes and 0.057 without, with box-guided alpha soft IoU (0.850) comparable to the strongest fine-tuned baseline (0.871). On merged images, text-to-design reaches 66.41 FID versus 86.84 for FLUX.2 [klein], achieves a 0.860 text-accuracy score, and runs $19.1\\times$ faster than the same-backbone generation-then-decomposition cascade.",
+        "url": "https://arxiv.org/abs/2611.26586v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.26586v1",
+        "publishedDate": "2026-11-19T18:45:31.000Z",
+        "tags": [
+          "cs.AI"
+        ]
+      },
+      {
+        "id": "2611.26564",
+        "type": "paper",
+        "source": "arxiv",
+        "title": "GEOHunter: Mapping a Generative Engine Optimization Network in the Wild",
+        "authors": [
+          "Sean Tang",
+          "Peiran Wang",
+          "Ying Li",
+          "Esha Shivakumar",
+          "Tao Meng",
+          "Yuan Tian"
+        ],
+        "summary": "Generative engines synthesize retrieved web pages into answers, recommendations, and rankings. Generative engine optimization (GEO) services sell visibility in these answers by publishing promotional articles on user-generated-content (UGC) platforms for paying clients. Such promotion raises concerns in medical and financial domains, where misleading advice can cause harm. To study the severity of this problem, we measure one such paid-content operation across three major Chinese UGC platforms, uncovering 1,985 accounts associated with the network comprising 466,357 inferred promotional placements. We find that the network promotes products across diverse categories through a growing pool of accounts, conducting coordinated campaigns spanning months across multiple platforms while evolving its listicle content over time. Across nine generative engines from both the US and China, we find that 4.5% to 20% of retrievable cited pages are attributable to the network, depending on how strictly attribution is drawn. On eight of these engines, its clients are named in 52% of answers, against 68% for category leaders. Our work demonstrates the effectiveness of UGC GEO placement at influencing generative engine outcomes, and reveals content-level defenses as insufficient against coordinated UGC placements, where account-level and platform-level signals are necessary for proper defense.",
+        "url": "https://arxiv.org/abs/2611.26564v1",
+        "pdfUrl": "https://arxiv.org/pdf/2611.26564v1",
+        "publishedDate": "2026-11-19T18:33:42.000Z",
+        "tags": [
+          "cs.CR",
+          "cs.AI",
+          "cs.SI"
+        ]
+      }
+    ]
+  },
+  "labPosts": [
+    {
+      "id": "openai-1204112120",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Perplexity and Intelligence",
+      "authors": [],
+      "summary": "How perplexity measures progress in AI models, and why it could help developers establish a shared approach to evaluating emerging capabilities.",
+      "url": "https://openai.com/index/perplexity-and-intelligence",
+      "publishedDate": "2026-11-22T00:00:00.000Z",
+      "tags": [
+        "Research"
+      ]
+    },
+    {
+      "id": "openai-264992574",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Combatting adversarial distillation",
+      "authors": [],
+      "summary": "OpenAI’s layered approach to adversarial distillation combines model training, safeguards, detection, and enforcement to protect against capability extraction.",
+      "url": "https://openai.com/index/combatting-adversarial-distillation",
+      "publishedDate": "2026-11-20T10:00:00.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-118208172",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Hebbia sees improvements in financial research with GPT-6 Astra",
+      "authors": [],
+      "summary": "Hebbia tested GPT-6 Astra for financial research. Its prerelease evaluations found gains in source coverage, citation relevance, and presentation quality.",
+      "url": "https://openai.com/business/customer-stories/hebbia",
+      "publishedDate": "2026-11-20T00:00:00.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-1196338368",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Can AI help scientists identify promising drug candidates?",
+      "authors": [],
+      "summary": "MedChemBench evaluates how well AI models interpret molecular structures, reason from experimental evidence, and select compounds in early drug discovery.",
+      "url": "https://openai.com/index/introducing-medchembench",
+      "publishedDate": "2026-11-20T00:00:00.000Z",
+      "tags": [
+        "Research"
+      ]
+    },
+    {
+      "id": "openai-1998276901",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "How OpenAI’s Performance Factory keeps ChatGPT fast",
+      "authors": [],
+      "summary": "Learn how OpenAI built the Performance Factory, a system of Codex-powered workflows that finds and fixes performance issues to help keep ChatGPT fast.",
+      "url": "https://openai.com/index/how-openai-performance-factory-keeps-chatgpt-fast",
+      "publishedDate": "2026-11-19T08:00:00.000Z",
+      "tags": [
+        "Engineering"
+      ]
+    },
+    {
+      "id": "openai-202683016",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Deploying Daybreak Red",
+      "authors": [],
+      "summary": "Explore a reference architecture for supervised security investigations with Daybreak Red, including safety controls, setup, and monitoring.",
+      "url": "https://openai.com/business/learn/deploying-daybreak-red",
+      "publishedDate": "2026-11-19T00:00:00.000Z",
+      "tags": [
+        "Guides"
+      ]
+    },
+    {
+      "id": "openai-774570406",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "See PR scans in action",
+      "authors": [],
+      "summary": "Watch a walkthrough of PR scans and see how the presenter reviews scan results in a pull request workflow.",
+      "url": "https://openai.com/business/learn/pr-scans-demo",
+      "publishedDate": "2026-11-19T00:00:00.000Z",
+      "tags": [
+        "Demos"
+      ]
+    },
+    {
+      "id": "openai-1622818509",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Get started with Daybreak Blue",
+      "authors": [],
+      "summary": "Watch a walkthrough of onboarding to Daybreak Blue, with a closer look at the setup experience and how to get started.",
+      "url": "https://openai.com/business/learn/daybreak-blue-onboarding-demo",
+      "publishedDate": "2026-11-19T00:00:00.000Z",
+      "tags": [
+        "Demos"
+      ]
+    },
+    {
+      "id": "openai-2041696783",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Explore the Codex Security Plugin",
+      "authors": [],
+      "summary": "Watch a demo of the Codex Security Plugin and see the workflow in action, from getting started to reviewing the results shown in the recording.",
+      "url": "https://openai.com/business/learn/codex-security-plugin-demo",
+      "publishedDate": "2026-11-19T00:00:00.000Z",
+      "tags": [
+        "Demos"
+      ]
+    },
+    {
+      "id": "deepmind-328518449",
+      "type": "blog_post",
+      "source": "deepmind",
+      "title": "Introducing Gemini 4 Neon",
+      "authors": [],
+      "summary": "",
+      "url": "https://deepmind.google/blog/introducing-gemini-4-neon/",
+      "publishedDate": "2026-11-18T21:35:43.000Z",
+      "tags": []
+    },
+    {
+      "id": "deepmind-201741074",
+      "type": "blog_post",
+      "source": "deepmind",
+      "title": "Genie 4 is now available",
+      "authors": [],
+      "summary": "",
+      "url": "https://deepmind.google/blog/genie-4-is-now-available/",
+      "publishedDate": "2026-11-18T18:13:42.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-1037324973",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "The Silent Consensus",
+      "authors": [],
+      "summary": "Dean Ball, Head of Strategic Futures at OpenAI, examines how more capable AI could reshape society and how people can retain control of their institutions.",
+      "url": "https://openai.com/index/the-silent-consensus",
+      "publishedDate": "2026-11-18T10:00:00.000Z",
+      "tags": [
+        "Intelligence Age"
+      ]
+    },
+    {
+      "id": "openai-2129179407",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Research acceleration: The jagged frontier",
+      "authors": [],
+      "summary": "OpenAI measures how coding agents are accelerating AI research, where their performance remains uneven, and what this signals about recursive self-improvement.",
+      "url": "https://openai.com/index/research-acceleration-jagged-frontier",
+      "publishedDate": "2026-11-18T08:00:00.000Z",
+      "tags": [
+        "Research"
+      ]
+    },
+    {
+      "id": "openai-162940151",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "How Sumitomo Life’s leaders helped teams adopt ChatGPT Enterprise",
+      "authors": [],
+      "summary": "Sumitomo Life uses ChatGPT Enterprise to research insurers, prepare proposals, and draft code for investment analysis. Early use by executives helped drive adoption.",
+      "url": "https://openai.com/business/customer-stories/sumitomo-life",
+      "publishedDate": "2026-11-18T08:00:00.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-859892304",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Inside the Codex sandbox",
+      "authors": [],
+      "summary": "See how Codex runs commands on your machine while enforcing the filesystem and network limits you control across macOS, Linux, and Windows.",
+      "url": "https://openai.com/index/inside-the-codex-sandbox",
+      "publishedDate": "2026-11-18T08:00:00.000Z",
+      "tags": [
+        "Engineering"
+      ]
+    },
+    {
+      "id": "openai-992322137",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Managing frontier AI risk: From training to deployment",
+      "authors": [],
+      "summary": "OpenAI explains how it manages frontier AI risk from training through deployment with model alignment, sandboxing, blocking safeguards, and monitoring.",
+      "url": "https://openai.com/index/managing-frontier-ai-risk",
+      "publishedDate": "2026-11-18T06:00:00.000Z",
+      "tags": [
+        "Safety"
+      ]
+    },
+    {
+      "id": "openai-235134850",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Advancing chip design with OpenAI models",
+      "authors": [],
+      "summary": "OpenAI models optimized circuits used in Jalapeño silicon and improved RISC‑V core designs, showing progress in AI-assisted chip design with GPT‑6 Astra.",
+      "url": "https://openai.com/index/advancing-chip-design-with-our-models",
+      "publishedDate": "2026-11-18T00:00:00.000Z",
+      "tags": [
+        "Research"
+      ]
+    },
+    {
+      "id": "openai-1682107203",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Le Groupe Figaro and OpenAI partner to bring Le Figaro journalism to ChatGPT",
+      "authors": [],
+      "summary": "Le Groupe Figaro and OpenAI partner to bring Le Figaro’s journalism to ChatGPT through summaries and excerpts, with links to original stories.",
+      "url": "https://openai.com/index/le-groupe-figaro-and-openai-announce-partnership",
+      "publishedDate": "2026-11-18T00:00:00.000Z",
+      "tags": [
+        "Company"
+      ]
+    },
+    {
+      "id": "openai-795520905",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Introducing GPT-6.2 Astra and Sol",
+      "authors": [],
+      "summary": "Introducing GPT‑6.2 Astra and Sol, with better professional outputs, coding, computer use, and efficiency at lower cost across ChatGPT Work, Codex, and the API.",
+      "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol",
+      "publishedDate": "2026-11-17T17:45:00.000Z",
+      "tags": [
+        "Product"
+      ]
+    },
+    {
+      "id": "openai-276997339",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Introducing ChatGPT for Sales",
+      "authors": [],
+      "summary": "Explore the new Sales plugin and 30+ new and expanded partner plugins in ChatGPT to research prospects, prepare pitches, update your CRM, and move deals forward.",
+      "url": "https://openai.com/index/introducing-chatgpt-for-sales",
+      "publishedDate": "2026-11-17T08:00:00.000Z",
+      "tags": [
+        "Product"
+      ]
+    },
+    {
+      "id": "openai-1728445898",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Strengthening NATO and allied cyber defenses with AI",
+      "authors": [],
+      "summary": "How OpenAI is working with NATO and allied cyber agencies to help trusted defenders find vulnerabilities, test fixes and protect essential systems.",
+      "url": "https://openai.com/index/strengthening-nato-allied-cyber-defences-ai",
+      "publishedDate": "2026-11-17T00:00:00.000Z",
+      "tags": [
+        "Global Affairs"
+      ]
+    },
+    {
+      "id": "openai-374393095",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Introducing OpenAI for Chile",
+      "authors": [],
+      "summary": "OpenAI and the Government of Chile are partnering to support responsible AI adoption, build public-sector skills and help local startups develop AI applications.",
+      "url": "https://openai.com/index/introducing-openai-for-chile",
+      "publishedDate": "2026-11-17T00:00:00.000Z",
+      "tags": [
+        "Global Affairs"
+      ]
+    },
+    {
+      "id": "openai-1979847836",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Astra for Law leads in legal intelligence",
+      "authors": [],
+      "summary": "Astra for Law ranked first in a launch evaluation spanning 24 areas of law. Every ChatGPT Enterprise customer can now request access.",
+      "url": "https://openai.com/index/astra-law-6-2",
+      "publishedDate": "2026-11-17T00:00:00.000Z",
+      "tags": [
+        "Company"
+      ]
+    },
+    {
+      "id": "openai-439508352",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Broadening access to AI for scientists",
+      "authors": [],
+      "summary": "We’re expanding our ChatGPT for Academic Researchers program to offer 200,000 researchers worldwide free access to our frontier models.",
+      "url": "https://openai.com/index/expanding-chatgpt-for-academic-researchers",
+      "publishedDate": "2026-11-16T17:00:00.000Z",
+      "tags": [
+        "Research"
+      ]
+    },
+    {
+      "id": "openai-1504420880",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Strengthening the fight against online child sexual abuse with new tools and support",
+      "authors": [],
+      "summary": "New tools, practical guidance, and partnerships will help prevent, detect and respond to online child sexual exploitation and abuse.",
+      "url": "https://openai.com/index/strengthening-online-child-safety",
+      "publishedDate": "2026-11-16T17:00:00.000Z",
+      "tags": [
+        "Safety"
+      ]
+    },
+    {
+      "id": "openai-1831856542",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Science at the Frontier: How scientists use ChatGPT",
+      "authors": [],
+      "summary": "Explore how more than 1,800 scientists use ChatGPT in research. See findings on daily workflows, reported productivity, and expectations for discovery.",
+      "url": "https://openai.com/index/science-at-the-frontier",
+      "publishedDate": "2026-11-16T12:00:00.000Z",
+      "tags": [
+        "Research"
+      ]
+    },
+    {
+      "id": "openai-326550424",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "How Revolut raises ambition without lowering the bar",
+      "authors": [],
+      "summary": "Discover how Revolut uses OpenAI models and Codex to cut coding time by 30–60%, scale financial crime investigations, and innovate without compromising security.",
+      "url": "https://openai.com/business/customer-stories/revolut",
+      "publishedDate": "2026-11-16T09:30:00.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-1963948835",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "LVMH’s Media Division announces strategic partnership with OpenAI",
+      "authors": [],
+      "summary": "LVMH’s Media Division and OpenAI announce a partnership to support journalism with AI and make its publications more accessible through ChatGPT.",
+      "url": "https://openai.com/index/lvmh-media-division-partnership",
+      "publishedDate": "2026-11-16T09:00:00.000Z",
+      "tags": [
+        "Company"
+      ]
+    },
+    {
+      "id": "openai-229644604",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Our first phase of embedded assessments",
+      "authors": [],
+      "summary": "OpenAI begins embedded assessments with Apollo Research, METR, and Transluce, and Goodfire to independently evaluate model alignment, safeguards, and monitoring systems.",
+      "url": "https://openai.com/index/our-first-phase-of-embedded-assessments",
+      "publishedDate": "2026-11-16T08:00:00.000Z",
+      "tags": [
+        "Safety"
+      ]
+    },
+    {
+      "id": "openai-1805680833",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "More ways to move care forward with ChatGPT for Healthcare",
+      "authors": [],
+      "summary": "Introducing computer-use agents, improved clinical answers, and new healthcare plugins that work across healthcare software to get real work done.",
+      "url": "https://openai.com/index/more-ways-to-move-care-forward-with-chatgpt-for-healthcare",
+      "publishedDate": "2026-11-16T06:00:00.000Z",
+      "tags": [
+        "Product"
+      ]
+    },
+    {
+      "id": "openai-1380680756",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Advancing computer-use agents for healthcare teams",
+      "authors": [],
+      "summary": "",
+      "url": "https://openai.com/index/advancing-computer-use-for-healthcare-teams",
+      "publishedDate": "2026-11-16T06:00:00.000Z",
+      "tags": [
+        "Product"
+      ]
+    },
+    {
+      "id": "openai-146182526",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "The King’s Trust and OpenAI launch £1m partnership",
+      "authors": [],
+      "summary": "The King’s Trust and OpenAI launch a £1m partnership to help up to 25,000 young people across the UK build practical AI skills for work.",
+      "url": "https://openai.com/index/the-kings-trust-and-openai",
+      "publishedDate": "2026-11-16T00:00:00.000Z",
+      "tags": [
+        "Global Affairs"
+      ]
+    },
+    {
+      "id": "openai-1232339464",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "At Holiday Extras, dots get to work before anyone asks",
+      "authors": [],
+      "summary": "Dots deliver launch reports unprompted, flag issues people might miss, and talk through upcoming meetings on the commute to work.",
+      "url": "https://openai.com/business/customer-stories/holiday-extras-dots",
+      "publishedDate": "2026-11-16T00:00:00.000Z",
+      "tags": []
+    },
+    {
+      "id": "openai-1985305347",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "A step toward defining the Standard Model on a lattice",
+      "authors": [],
+      "summary": "Explore a candidate nonperturbative lattice definition of the Standard Model and how GPT-6 Astra helped turn the idea into a detailed proof.",
+      "url": "https://openai.com/index/step-toward-defining-the-standard-model",
+      "publishedDate": "2026-11-15T22:00:01.000Z",
+      "tags": [
+        "Science"
+      ]
+    },
+    {
+      "id": "openai-609795739",
+      "type": "blog_post",
+      "source": "openai",
+      "title": "Our new blog for science",
+      "authors": [],
+      "summary": "The OpenAI science blog shares new findings, practical methods, and firsthand accounts from researchers using AI to advance scientific discovery.",
+      "url": "https://openai.com/index/our-new-blog-for-science",
+      "publishedDate": "2026-11-15T22:00:00.000Z",
+      "tags": [
+        "Science"
+      ]
+    }
+  ],
+  "stats": {
+    "totalPapersScanned": 200,
+    "totalPostsScanned": 35
+  }
+}
